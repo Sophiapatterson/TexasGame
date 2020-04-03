@@ -9,7 +9,7 @@ public class CollidePowerUpUseCase {
 
     public void performUseCase(Circle c){
         if(Shape.intersect(p1, c).getBoundsInLocal().getWidth()!=-1){
-            p1.collide(c);
+            p1.powerup();
         }
     }
 }

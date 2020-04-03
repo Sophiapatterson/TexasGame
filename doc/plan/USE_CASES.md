@@ -3,7 +3,7 @@
 #### Jeffrey's use cases
 1. Starting the tutorial: the user will click on a button on the main screen titled “Start tutorial”. This will run a pre-built level with instructions on the scene that describe the controls of the game, the obstacles of the game, as well as the objective of the game. The user can click a button to go back to the main screen, or complete the tutorial to begin the first level. 
 
-2. Jumping: when the user presses space, the character will move upwards vertically a set amount. Because the character implements the Gravity interface, the character should fall back towards the ground after reaching the apex of the jump. Furthermore, the character will be able to be controlled while in the air (right and left). If the character collides with an object while jumping, the full jump will not be done, and normal rules of collision will be applied.
+2. Jumping: when the user presses space, the character will move upwards vertically a set amount. Because the character implements the Gravity interface, the character should fall back towards the ground after reaching the apex of the jump. If the character collides with an object while jumping, the normal rules of collision will be applied.
 
 3. PowerUp: when the user runs into a specific powerup object, the user's character will obtain some special power such as slowed time, invincibility, or decreased size. The powerup will be applied for a period of 15 seconds. 
 
@@ -17,11 +17,11 @@
 
 2. Pause/Play. The user selects “pause” during any level of the game. All game movements will be paused so the user may take a break. When the user selects “play”, all game movements will resume as usual.
 
-3. The user’s character collides with a powerup: Whenever the character collides with a powerup, the powerup will be applied to the character depending on what the powerup’s effect is. We will most likely add a number of powerups, such as one that makes the character grow in size or invincible for a certain amount of time. This could be a method that would be a part of the Engine API as well, maybe as part of the Collidable class.
+3. The user collides with the top of the screen: The jump will not be fully completed, and the character will fall towards the ground with the usual gravitational speed. 
 
-4. The user's character collides with an obstacle: Whenever the character collides with an obstacle, it will lose a life. This could be a method that would be part of the Engine API, maybe as part of the Collidable class.
+4. The user's character collides with an obstacle: Whenever the character collides with an obstacle, the player loses the game. This could be a method that would be part of the Engine API, maybe as part of the Collidable class.
 
-5. The user’s character collides with an enemy: Depending on which side of the enemy the character collides with, there can be two results. If the character collides with the left or right sides of the enemy, then the character will lose a life. However, if the character collides with the top side of the enemy, then the enemy will be defeated by the character and the character will gain a certain amount of points for defeating it. This could be a method that would be a part of the Engine API as well, maybe as part of the Collidable class. 
+5. The user’s character collides with an enemy: Enemies are similar to obstacles except for the fact that enemies may move. On collision, the player loses game similar to hitting an obstacle.
 
 ###Luke's use cases
 1. User launches the program. This starts all interaction with the program. It should lead to a landing screen in an appropriate language. The player can select several options, like a tutorial of the game, credits, start the game, view the high scores, or design their own levels. Each of these options leads to other screens. The HomeScreen can be its own class. The LevelBuilder can be its own class. The HighScore can be its own class. The credits can be contained within the HomeScreen. This will be launched from the main method. 
