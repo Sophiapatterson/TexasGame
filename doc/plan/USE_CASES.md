@@ -31,9 +31,9 @@
 
 4. The user selects the tutorial. This is much like the normal levels except there’s text or pop up windows to explain different features and the key controls used to navigate the game. (See the wireframe). This Tutorial class will be separate from the levels to ensure as much customization as possible, and the tutorial text will be stored in a properties file.
 
-5. The user views the high score. This can be navigated to from the home screen that will display the data. Or it can be viewed from the WinScreen. This high score screen can be its own class. It will display scores from all users. These scores are their own class. The scores are exported to JSON data after a player completes all default levels.
+5. The user views the high score. This can be navigated to from the home screen that will display the data, and it is also displayed on the EndScreen. The scores can be its own class. It will display scores from all users but only for the specific game being played. The scores are exported to JSON data after a player dies, if they happen to be in the top five.
 
-### Sophia's use cases
+## Sophia's use cases
 
 1. Settings Button. The user will be playing the game. The user will click the “settings” button and will be presented with the option to “return home”, “switch game”, or “return to game”. 
 
@@ -41,8 +41,6 @@
 
 3. Coin System. The user will collect coins throughout the duration of any given game. A user also collects coins after the completion of a bonus round. This coin tally is synonymous with the user’s score, which will be recorded at the end of the game if the user is among the top 5 scorers. 
 
-4. Pause/Play. The user selects “pause” during any level of the game. All game movements will be paused so the user may take a break. When the user selects “play”, all game movements will resume as usual.
+4. Dark Mode. The player selects a button called “dark mode”. All aspects of the graphic user interface, including the screen background, text, and theme, will change to a darker tint. The user can change back to the original “light mode” if desired.
 
-5. Dark Mode. The player selects a button called “dark mode”. All aspects of the graphic user interface, including the screen background, text, and theme, will change to a darker tint. The user can change back to the original “light mode” if desired.
-
-6. Bonus Round. If the user successfully plays the game for a minimum of 120 seconds, the user will be given an extra opportunity to gain points via coin collection. After dying, the user will be taken to a final “Bonus Round” wherein the user will have a limited time to collect any number of coins available. The user’s final score will be a tally of their total time playing the game in addition to the number of points achieved from the coins they collect through the bonus round. 
+5. Bonus Round. If the user successfully plays the game for a minimum of 120 seconds, the user will be given an extra opportunity to gain points via coin collection. After dying, the user will be taken to a final “Bonus Round” wherein the user will have a limited time to collect any number of coins available. The user’s final score will be a tally of their total time playing the game in addition to the number of points achieved from the coins they collect through the bonus round.
