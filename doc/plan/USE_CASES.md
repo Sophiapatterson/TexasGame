@@ -7,7 +7,7 @@
 
 3. PowerUp: when the user runs into a specific powerup object, the user's character will obtain some special power such as slowed time, invincibility, or decreased size. The powerup will be applied for a period of 15 seconds. 
 
-4. Timer running out: If the timer hits zero while the user is still playing the level, the user loses the game. The user will be sent to a new screen with prompts to either restart or quit the game.
+4. Timer running out: If the timer hits zero while the user is in the bonus level, the user finishes the game. The user will be sent to the final screen, where they can view high scores and restart the game.
 
 5. Finishing the game: Upon beating the last level, the user will be presented with a high score screen with the top 5 scores and the names of the people that achieved those scores. There will also be a button to go back to the main screen, or play the game again. If the user is among the top 5 scores, they will be prompted to enter a name to display their score. 
 
