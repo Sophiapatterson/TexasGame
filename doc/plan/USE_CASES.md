@@ -22,18 +22,18 @@
 
 5. The user’s character collides with an enemy: Depending on which side of the enemy the character collides with, there can be two results. If the character collides with the left or right sides of the enemy, then the character will lose a life. However, if the character collides with the top side of the enemy, then the enemy will be defeated by the character and the character will gain a certain amount of points for defeating it. This could be a method that would be a part of the Engine API as well, maybe as part of the Collidable class. 
 
-###Luke's use cases
+### Luke's use cases
 1. User launches the program. This starts all interaction with the program. It should lead to a landing screen in an appropriate language. The player can select several options, like a tutorial of the game, credits, start the game, view the high scores, or design their own levels. Each of these options leads to other screens. The HomeScreen can be its own class. The LevelBuilder can be its own class. The HighScore can be its own class. The credits can be contained within the HomeScreen. This will be launched from the main method. 
 
 2. The user views the credits. This is done by selecting a button on the home screen. The credits for the game can appear in a pop-up. The text will be contained through a properties file to ensure easy translation. It will mention the authors, the class, link to github, etc. Closing the window returns the user to the home screen.
 
-3. The user starts level one. This makes the actual game appear in a new window. The level starts with a landing screen that has a play button along with instructions. Starting the game will make the character appear in the center of a grid landscape.
+3. The user starts one of the game. This makes the actual game appear in a new window. The level starts with a landing screen that has a play button along with instructions. Starting the game will make the character appear in the center of a profile grid landscape.
 
 4. The user selects the tutorial. This is much like the normal levels except there’s text or pop up windows to explain different features and the key controls used to navigate the game. (See the wireframe). This Tutorial class will be separate from the levels to ensure as much customization as possible, and the tutorial text will be stored in a properties file.
 
 5. The user views the high score. This can be navigated to from the home screen that will display the data. Or it can be viewed from the WinScreen. This high score screen can be its own class. It will display scores from all users. These scores are their own class. The scores are exported to JSON data after a player completes all default levels.
 
-## Sophia's use cases
+### Sophia's use cases
 
 1. Settings Button. The user will be playing the game. The user will click the “settings” button and will be presented with the option to “return home”, “switch game”, or “return to game”. 
 
