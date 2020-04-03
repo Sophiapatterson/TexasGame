@@ -5,7 +5,8 @@ package ooga.engine;
  */
 public interface Collidable {
     /**
-     * object will stop movement when colliding with another object that implements Collidable
+     * object will stop movement when colliding with another object that implements Collidable.
+     * Furthermore, any other interaction that might occur between the two objects will be performed.
      */
-    public void collide();
+    public void collide(Object o);
 }
