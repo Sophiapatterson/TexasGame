@@ -1,7 +1,7 @@
 ## Design Plan
 
 ### Introduction
-The goal of this project is to write a program that can easily implement different kinds of platform games. Where the program will be most flexible will be in the data. An example where this flexibility should show is in the ease at which new levels can be configured. The primary architecture of the design should follow the Model View Controller design pattern, and use three main APIs: Engine, Data, and Player. 
+The goal of this project is to write a program that can easily implement different kinds of platform games. Where the program will be most flexible will be in the ease at which new levels can be configured. The primary architecture of the design should follow the Model View Controller design pattern, and use three main APIs: Engine, Data, and Player. 
 
 Our design goals are to use interfaces and class hierarchies in a way such that the program is flexible and cleanly written. We plan to be able to have an easily extendable design that allows for different implementations of platform games (i.e. different level tilesets, enemies, rules, etc.).
 
