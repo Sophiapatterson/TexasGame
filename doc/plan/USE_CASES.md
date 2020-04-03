@@ -5,6 +5,7 @@
 
 2. Jumping: when the user presses space, the character will move upwards vertically a set amount. Because the character implements the Gravity interface, the character should fall back towards the ground after reaching the apex of the jump. Furthermore, the character will be able to be controlled while in the air (right and left). If the character collides with an object while jumping, the full jump will not be done, and normal rules of collision will be applied.
 
+3. PowerUp: when the user runs into a specific powerup object, the user's character will obtain some special power such as slowed time, invincibility, or decreased size. The powerup will be applied for a period of 15 seconds. 
 
 4. Timer running out: If the timer hits zero while the user is still playing the level, the user loses the game. The user will be sent to a new screen with prompts to either restart or quit the game.
 
@@ -14,7 +15,7 @@
 
 1. The user changes the game difficulty: The player will be able to choose from a number of difficulties during a level or before he/she decides to start a level. The difficulty will be increased by increasing the speed at which the enemies move, decreasing the character’s movement speed and jump distance, making the character smaller, among many other things. This could be its own class.
 
-2. The user’s character loses all lives: Whenever the character loses all of its lives, the game will be over and the player will have to start from the beginning if he/she decides to keep playing. This would stop the game and display a screen with options of either quitting the game or restarting. This could be its own class.
+2. Pause/Play. The user selects “pause” during any level of the game. All game movements will be paused so the user may take a break. When the user selects “play”, all game movements will resume as usual.
 
 3. The user’s character collides with a powerup: Whenever the character collides with a powerup, the powerup will be applied to the character depending on what the powerup’s effect is. We will most likely add a number of powerups, such as one that makes the character grow in size or invincible for a certain amount of time. This could be a method that would be a part of the Engine API as well, maybe as part of the Collidable class.
 
@@ -41,8 +42,6 @@
 
 3. Coin System. The user will collect coins throughout the duration of any given game. A user also collects coins after the completion of a bonus round. This coin tally is synonymous with the user’s score, which will be recorded at the end of the game if the user is among the top 5 scorers. 
 
-4. Pause/Play. The user selects “pause” during any level of the game. All game movements will be paused so the user may take a break. When the user selects “play”, all game movements will resume as usual.
+4. Dark Mode. The player selects a button called “dark mode”. All aspects of the graphic user interface, including the screen background, text, and theme, will change to a darker tint. The user can change back to the original “light mode” if desired.
 
-5. Dark Mode. The player selects a button called “dark mode”. All aspects of the graphic user interface, including the screen background, text, and theme, will change to a darker tint. The user can change back to the original “light mode” if desired.
-
-6. Bonus Round. If the user successfully plays the game for a minimum of 120 seconds, the user will be given an extra opportunity to gain points via coin collection. After dying, the user will be taken to a final “Bonus Round” wherein the user will have a limited time to collect any number of coins available. The user’s final score will be a tally of their total time playing the game in addition to the number of points achieved from the coins they collect through the bonus round. 
+5. Bonus Round. If the user successfully plays the game for a minimum of 120 seconds, the user will be given an extra opportunity to gain points via coin collection. After dying, the user will be taken to a final “Bonus Round” wherein the user will have a limited time to collect any number of coins available. The user’s final score will be a tally of their total time playing the game in addition to the number of points achieved from the coins they collect through the bonus round. 
