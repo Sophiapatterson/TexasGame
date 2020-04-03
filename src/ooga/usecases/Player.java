@@ -1,11 +1,13 @@
 package ooga.usecases;
 
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import ooga.engine.Collidable;
 import ooga.engine.Gravity;
+import ooga.engine.PowerUp;
 import ooga.player.Controllable;
 
-public class Player extends Rectangle implements Controllable, Gravity, Collidable {
+public class Player extends Rectangle implements Controllable, Gravity, Collidable, PowerUp {
 
     public static final double SPEED = 5;
     public static final double GRAVITY_SPEED = 10;
@@ -14,22 +16,12 @@ public class Player extends Rectangle implements Controllable, Gravity, Collidab
     private double y;
 
     private boolean facingRight;
-    private boolean isStanding;
 
     public Player() {
         facingRight = true;
         setX(100);
         setY(100);
-    }
-
-    @Override
-    public void moveLeft() {
-        setX(getX() - SPEED);
-    }
-
-    @Override
-    public void moveRight() {
-        setX(getX() + SPEED);
+        setY(getY() - GRAVITY_SPEED);
     }
 
     @Override
@@ -39,13 +31,17 @@ public class Player extends Rectangle implements Controllable, Gravity, Collidab
 
     @Override
     public void accelerate() {
-        if(!isStanding) {
-            setY(getY() - GRAVITY_SPEED);
-        }
+        setY(getY() - GRAVITY_SPEED);
     }
 
     @Override
-    public void collide() {
+    public void collide(Shape s) {
+        setY(0);
+        setX(0);
+    }
 
+    @Override
+    public void p1powerup() {
+        setX(getX() + SPEED);
     }
 }

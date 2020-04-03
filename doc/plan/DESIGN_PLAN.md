@@ -7,12 +7,14 @@ Our design goals are to use interfaces and class hierarchies in a way such that 
 
 ### Overview
 
-
+The modules that we plan to create are 
 
 ### Design Details
 
+
+
 ### Example games
-Three varying games that our program should be able to emulate are Mario, Donkey Kong, and Fireboy & Watergirl.
+Three varying games that our program should be able to emulate are Flappy Bird, Google Chrome Dinosaur game, and Jetpack Joyride.
 
 To implement any of these games, we should be able to interchange sprites in the data folder, and still have a functional game. Furthermore, to deal with different types of obstacles / enemies, we will have obstacle or enemy classes that extend from respective abstract classes. These classes will implement the Collidable interface in their own way, which will allow us to handle the different interactions that come with these various obstacles and enemies. The game should build its levels using csv files, and so creating different tilesets that work for these different games should be no problem as well.
 

@@ -15,11 +15,5 @@ public class PlayerHandler implements KeyHandler {
         if(code == KeyCode.SPACE) {
             player.jump();
         }
-        if(code == KeyCode.RIGHT) {
-            player.moveRight();
-        }
-        if(code == KeyCode.LEFT) {
-            player.moveLeft();
-        }
     }
 }
