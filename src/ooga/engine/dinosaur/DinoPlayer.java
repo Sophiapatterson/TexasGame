@@ -1,7 +1,6 @@
 package ooga.engine.dinosaur;
 
-import ooga.engine.JumpManager;
-import ooga.engine.Player;
+import ooga.engine.game.Player;
 
 public class DinoPlayer extends Player {
     public static final double GRAVITY = 2.5;
@@ -18,12 +17,12 @@ public class DinoPlayer extends Player {
     @Override
     public void jump() {
         setY(getY() - jumpStrength);
-        jumpStrength -= GRAVITY;
+        fall();
     }
 
     @Override
     public void fall() {
-        setY(getY() + GRAVITY);
+        jumpStrength -= GRAVITY;
     }
 
     public void resetJumpStrength() {
