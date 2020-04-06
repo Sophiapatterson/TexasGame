@@ -1,4 +1,4 @@
-package ooga.engine;
+package ooga.engine.game;
 
 /**
  * Objects that implement this interface will have movement that is affected by gravity.

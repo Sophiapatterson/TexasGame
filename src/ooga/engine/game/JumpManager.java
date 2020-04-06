@@ -1,5 +1,7 @@
-package ooga.engine;
+package ooga.engine.game;
 
+
+import ooga.engine.game.Player;
 
 /**
  * Handles jumping
