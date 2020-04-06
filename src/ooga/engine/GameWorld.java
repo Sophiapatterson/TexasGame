@@ -13,7 +13,8 @@ import javafx.util.Duration;
 import ooga.engine.dinosaur.DinoPlayer;
 
 /**
- * Basic game world tailored for dinosaur game at the moment for testing
+ * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
+ * into a larger game -- possibly find a way to make this game a small screen to import into our final game?
  */
 public class GameWorld extends Application {
 
