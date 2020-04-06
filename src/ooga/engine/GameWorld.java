@@ -19,6 +19,7 @@ public class GameWorld extends Application {
 
     public static final int SCREEN_WIDTH = 600;
     public static final int SCREEN_HEIGHT = 400;
+    public static final double FLOOR_HEIGHT = 300;
     public static final Paint BACKGROUND = Color.AZURE;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -59,7 +60,7 @@ public class GameWorld extends Application {
 
     // Change properties of shapes to animate them
     void step (double elapsedTime) {
-        jumpManager.handleJump(300);
+        jumpManager.handleJump(FLOOR_HEIGHT);
     }
 
     private void handleKeyInput (KeyCode code) {

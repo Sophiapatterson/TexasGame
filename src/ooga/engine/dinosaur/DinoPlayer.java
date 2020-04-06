@@ -5,7 +5,8 @@ import ooga.engine.Player;
 
 public class DinoPlayer extends Player {
     public static final double GRAVITY = 2.5;
-    private double jumpStrength = 24;
+    public static final int DEFAULT_JUMP_STRENGTH = 24;
+    private double jumpStrength = DEFAULT_JUMP_STRENGTH;
 
 
     public DinoPlayer() {
@@ -26,6 +27,6 @@ public class DinoPlayer extends Player {
     }
 
     public void resetJumpStrength() {
-        jumpStrength = 24;
+        jumpStrength = DEFAULT_JUMP_STRENGTH;
     }
 }
