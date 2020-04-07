@@ -11,8 +11,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.engine.dinosaur.DinoPlayer;
-import ooga.engine.game.JumpManager;
-import ooga.engine.game.Player;
 
 /**
  * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
