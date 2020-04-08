@@ -7,7 +7,7 @@ Player, Primary: Sophia, Secondary: Luke
 
 Data, Primary: Justin and Luke, Secondary: Jeff
 
-Screens, Primary: Luke  , Secondary: Justin
+Screens, Primary: Luke, Secondary: Justin
 
 Features to implement in this sprint: StartScreen, EndScreen (with highscores), GameSelectionScreen, GameConfiguration, Camera, Score, Character, Obstacle, Game, Coin
 
@@ -27,7 +27,7 @@ Player, Primary: Sophia, Secondary: Luke
 
 Data, Primary: Justin and Luke, Secondary: Jeff
 
-Screens, Primary: Luke  , Secondary: Justin
+Screens, Primary: Luke, Secondary: Justin
 
 Features to implement in this sprint: Credits, Tutorial, PowerUps (Coin, DeluxeCoin, Slower), Enemies (StandardEnemy), GUI Editor, High Scores, More Levels
 
