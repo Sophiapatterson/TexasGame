@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ooga.engine.dinosaur.Cactus;
 import ooga.engine.dinosaur.DinoPlayer;
 
 /**
@@ -26,6 +27,7 @@ public class GameWorld extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
     private Player myPlayer;
+    private Cactus myCactus;
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
 
@@ -49,9 +51,11 @@ public class GameWorld extends Application {
         Group root = new Group();
 
         myPlayer = new DinoPlayer();
+        myCactus = new Cactus();
         jumpManager = new JumpManager(myPlayer);
 
         root.getChildren().add(myPlayer);
+        root.getChildren().add(myCactus);
 
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
@@ -62,6 +66,7 @@ public class GameWorld extends Application {
     // Change properties of shapes to animate them
     void step (double elapsedTime) {
         jumpManager.handleJump(FLOOR_HEIGHT);
+        myCactus.move();
     }
 
     private void handleKeyInput (KeyCode code) {
