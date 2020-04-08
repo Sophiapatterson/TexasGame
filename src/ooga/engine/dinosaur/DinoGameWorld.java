@@ -55,21 +55,28 @@ public class DinoGameWorld extends Application {
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background) throws FileNotFoundException{
-        Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(HORIZON_IMAGE));
-        ImageView imageView = new ImageView(image);
-        imageView.setY(320);
-        imageView.setPreserveRatio(true);
+        ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        myPlayer = new DinoPlayer();
+        Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
+        System.out.println("Image loaded? " + !dinoImage.isError());
+        myPlayer = new DinoPlayer(dinoImage);
         enemies = new ArrayList<>();
         enemies.add(new Cactus());
         gameManager = new DinoGameManager(myPlayer, enemies);
-        root.getChildren().add(myPlayer);
+        root.getChildren().add(myPlayer.getImageView());
         root.getChildren().addAll(enemies);
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 
         return myScene;
+    }
+
+    private ImageView getImageView() {
+        Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(HORIZON_IMAGE));
+        ImageView imageView = new ImageView(image);
+        imageView.setY(320);
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
 
     public void setUpAnimation(){
