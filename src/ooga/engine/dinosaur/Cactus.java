@@ -2,6 +2,7 @@ package ooga.engine.dinosaur;
 
 import javafx.scene.paint.Color;
 import ooga.engine.game.Enemy;
+import ooga.engine.game.Player;
 
 public class Cactus extends Enemy {
     public static final int SPEED = 5;
@@ -13,8 +14,8 @@ public class Cactus extends Enemy {
     }
 
     @Override
-    public void collide() {
-        setFill(Color.BLACK);
+    public boolean collide(Player player) {
+        return (this.getBoundsInParent().intersects(player.getBoundsInParent()));
     }
 
     @Override
