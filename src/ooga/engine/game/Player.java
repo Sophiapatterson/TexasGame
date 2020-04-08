@@ -16,4 +16,6 @@ public abstract class Player extends Rectangle implements Gravity {
     public abstract void jump();
 
     public abstract void resetJumpStrength();
+
+
 }

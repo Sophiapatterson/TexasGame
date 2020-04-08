@@ -1,5 +1,6 @@
 package ooga.engine.dinosaur;
 
+import javafx.scene.paint.Color;
 import ooga.engine.game.Enemy;
 
 public class Cactus extends Enemy {
@@ -13,7 +14,7 @@ public class Cactus extends Enemy {
 
     @Override
     public void collide() {
-
+        setFill(Color.BLACK);
     }
 
     @Override

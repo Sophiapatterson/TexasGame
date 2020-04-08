@@ -13,6 +13,9 @@ import javafx.util.Duration;
 import ooga.engine.dinosaur.Cactus;
 import ooga.engine.dinosaur.DinoPlayer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
  * into a larger game -- possibly find a way to make this game a small screen to import into our final game?
@@ -27,7 +30,7 @@ public class GameWorld extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
     private Player myPlayer;
-    private Cactus myCactus;
+    private List<Enemy> enemies;
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
 
@@ -51,11 +54,12 @@ public class GameWorld extends Application {
         Group root = new Group();
 
         myPlayer = new DinoPlayer();
-        myCactus = new Cactus();
+        enemies = new ArrayList<>();
+        enemies.add(new Cactus());
         jumpManager = new JumpManager(myPlayer);
 
         root.getChildren().add(myPlayer);
-        root.getChildren().add(myCactus);
+        root.getChildren().addAll(enemies);
 
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
@@ -66,7 +70,17 @@ public class GameWorld extends Application {
     // Change properties of shapes to animate them
     void step (double elapsedTime) {
         jumpManager.handleJump(FLOOR_HEIGHT);
-        myCactus.move();
+
+        // move the enemies
+        for(Enemy enemy: enemies) {
+            enemy.move();
+        }
+        // collisions
+        for(Enemy enemy: enemies) {
+            if(enemy.getBoundsInParent().intersects(myPlayer.getBoundsInParent())) {
+                enemy.collide();
+            }
+        }
     }
 
     private void handleKeyInput (KeyCode code) {
