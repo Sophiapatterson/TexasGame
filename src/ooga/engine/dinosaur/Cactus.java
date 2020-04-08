@@ -1,6 +1,6 @@
 package ooga.engine.dinosaur;
 
-import javafx.scene.paint.Color;
+
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 

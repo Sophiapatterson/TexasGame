@@ -10,13 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.engine.dinosaur.Cactus;
-import ooga.engine.dinosaur.DinoCollisionManager;
-import ooga.engine.dinosaur.DinoPlayer;
-import ooga.engine.game.CollisionManager;
-import ooga.engine.game.Enemy;
-import ooga.engine.game.JumpManager;
-import ooga.engine.game.Player;
+import ooga.engine.game.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +19,7 @@ import java.util.List;
  * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
  * into a larger game -- possibly find a way to make this game a small screen to import into our final game?
  */
-public class GameWorld extends Application {
+public class DinoGameWorld extends Application {
 
     public static final int SCREEN_WIDTH = 600;
     public static final int SCREEN_HEIGHT = 400;
@@ -34,13 +28,12 @@ public class GameWorld extends Application {
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
-    private Player myPlayer;
+    private DinoPlayer myPlayer;
     private List<Enemy> enemies;
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
 
-    private JumpManager jumpManager;
-    private CollisionManager collisionManager;
+    private GameManager gameManager;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -62,8 +55,7 @@ public class GameWorld extends Application {
         myPlayer = new DinoPlayer();
         enemies = new ArrayList<>();
         enemies.add(new Cactus());
-        jumpManager = new JumpManager(myPlayer);
-        collisionManager = new DinoCollisionManager(myPlayer, enemies);
+        gameManager = new DinoGameManager(myPlayer, enemies);
 
         root.getChildren().add(myPlayer);
         root.getChildren().addAll(enemies);
@@ -76,14 +68,18 @@ public class GameWorld extends Application {
 
     // Change properties of shapes to animate them
     void step (double elapsedTime) {
-        jumpManager.handleJump(FLOOR_HEIGHT);
+        gameManager.handleJump(FLOOR_HEIGHT);
 
         // move the enemies
         for(Enemy enemy: enemies) {
             enemy.move();
         }
         // collisions
-        collisionManager.handleCollisions();
+        gameManager.handleCollisions();
+
+        if(gameManager.isGameOver()) {
+            System.out.println("GAME OVER");
+        }
     }
 
     private void handleKeyInput (KeyCode code) {
