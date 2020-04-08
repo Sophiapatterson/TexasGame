@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.Screens.Screens;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
