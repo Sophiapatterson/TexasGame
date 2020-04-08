@@ -18,6 +18,6 @@ public class Cactus extends Enemy {
 
     @Override
     public void scroll() {
-        setX(getX() - 5);
+        setX(getX() - SPEED);
     }
 }
