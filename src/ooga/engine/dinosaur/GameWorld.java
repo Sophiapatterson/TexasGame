@@ -1,4 +1,4 @@
-package ooga.engine.game;
+package ooga.engine.dinosaur;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,7 +11,12 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.engine.dinosaur.Cactus;
+import ooga.engine.dinosaur.DinoCollisionManager;
 import ooga.engine.dinosaur.DinoPlayer;
+import ooga.engine.game.CollisionManager;
+import ooga.engine.game.Enemy;
+import ooga.engine.game.JumpManager;
+import ooga.engine.game.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +40,7 @@ public class GameWorld extends Application {
     private Timeline myAnimation = new Timeline();
 
     private JumpManager jumpManager;
+    private CollisionManager collisionManager;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -57,6 +63,7 @@ public class GameWorld extends Application {
         enemies = new ArrayList<>();
         enemies.add(new Cactus());
         jumpManager = new JumpManager(myPlayer);
+        collisionManager = new DinoCollisionManager(myPlayer, enemies);
 
         root.getChildren().add(myPlayer);
         root.getChildren().addAll(enemies);
@@ -76,11 +83,7 @@ public class GameWorld extends Application {
             enemy.move();
         }
         // collisions
-        for(Enemy enemy: enemies) {
-            if(enemy.getBoundsInParent().intersects(myPlayer.getBoundsInParent())) {
-                enemy.collide();
-            }
-        }
+        collisionManager.handleCollisions();
     }
 
     private void handleKeyInput (KeyCode code) {
