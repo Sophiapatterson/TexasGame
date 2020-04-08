@@ -1,6 +1,7 @@
-package ooga.engine.game;
+package ooga.data;
 
 import ooga.engine.dinosaur.Cactus;
+import ooga.engine.game.Scrolling;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -53,9 +54,9 @@ public class GameConfiguration {
                 //TODO Decide between an approach below: setting locations with ratio or coordinate?
                 if(val == 1){
                     Cactus cac = new Cactus();
-                    //cac.setX(xCoord);
+                    cac.setX(xCoord);
                     //cac.setY(cac.getY()*yCoef);
-                    //scrollers.add(cac))
+                    scrollers.add(cac);
                 }
                 //TODO Implement other classes if that's ok design
 
