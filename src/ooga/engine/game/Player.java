@@ -17,5 +17,7 @@ public abstract class Player extends Rectangle implements Gravity {
 
     public abstract void resetJumpStrength();
 
-
+    public boolean isAirborne(double floorY) {
+        return (getY() < floorY);
+    }
 }
