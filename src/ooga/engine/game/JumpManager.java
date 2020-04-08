@@ -27,8 +27,8 @@ public class JumpManager {
             myPlayer.jump();
         }
         else {
-            myPlayer.setY(floorY);
             myPlayer.resetJumpStrength();
+            myPlayer.setY(floorY);
         }
     }
 }
