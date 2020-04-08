@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
 
+import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
 
 public class Screens {
@@ -71,7 +72,11 @@ public class Screens {
         Button dinosaur = new Button(changeResources.getString("DINO-MESSAGE"));
         dinosaur.setId("dino");
         dinosaur.setOnAction(e -> {
-            currenstage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND));
+            try {
+                currenstage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND));
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
             dinogame.setUpAnimation();
         });
         Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
