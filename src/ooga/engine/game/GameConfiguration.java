@@ -1,26 +1,31 @@
 package ooga.engine.game;
 
+import ooga.engine.dinosaur.Cactus;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Basic file reading for creating CSV-defined game objects to be used in a GameWorld (?)
+ */
 public class GameConfiguration {
 
-    private ArrayList<Scrolling> scrollers;
+    private List<Scrolling> scrollers;
     private int length;
-    private boolean difficulty;
 
     public GameConfiguration(Path path) throws IOException {
 
         scrollers = new ArrayList<>();
         List<String> lines = null;
 
+        //TODO implement custom exceptions
         try {
             lines = Files.readAllLines(path);
         } catch (IOException e){
-            throw new IOException("your level configuration file couldn't be read",e);
+            throw new IOException("your level configuration file couldn't be read", e);
         }
 
         String[] array;
@@ -33,6 +38,7 @@ public class GameConfiguration {
         int totalCols = 0;
         int xCoord;
         int yCoef;
+        int val;
 
         for(int i = 0; i<lines.size(); i++){
             array = lines.get(i).split(",");
@@ -40,10 +46,18 @@ public class GameConfiguration {
             totalCols = array.length;
             for(String element: array){
                 if(element.isEmpty()) break;
+                val = Integer.parseInt(element);
                 xCoord = (countCol/totalCols) * length;
                 yCoef = countRow/totalRow;
 
-                //scrollers.add(new GameObject(xCoord, yCoef))
+                //TODO Decide between an approach below: setting locations with ratio or coordinate?
+                if(val == 1){
+                    Cactus cac = new Cactus();
+                    //cac.setX(xCoord);
+                    //cac.setY(cac.getY()*yCoef);
+                    //scrollers.add(cac))
+                }
+                //TODO Implement other classes if that's ok design
 
                 countCol++;
             }
@@ -52,4 +66,8 @@ public class GameConfiguration {
 
     }
 
+    //TODO is this allowed idk
+    public List<Scrolling> getScrollers() {
+        return scrollers;
+    }
 }
