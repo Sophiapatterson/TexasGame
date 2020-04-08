@@ -5,13 +5,16 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.engine.game.*;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +30,8 @@ public class DinoGameWorld extends Application {
     public static final Paint BACKGROUND = Color.AZURE;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    public static final String DINO_IMAGE  = "dino_trex.png";
+    public static final String HORIZON_IMAGE = "dino_horizon.png";
 
     private DinoPlayer myPlayer;
     private List<Enemy> enemies;
@@ -49,17 +54,18 @@ public class DinoGameWorld extends Application {
     }
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background) {
-        Group root = new Group();
-
+    public Scene setupScene(int width, int height, Paint background) throws FileNotFoundException{
+        Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(HORIZON_IMAGE));
+        ImageView imageView = new ImageView(image);
+        imageView.setY(320);
+        imageView.setPreserveRatio(true);
+        Group root = new Group(imageView);
         myPlayer = new DinoPlayer();
         enemies = new ArrayList<>();
         enemies.add(new Cactus());
         gameManager = new DinoGameManager(myPlayer, enemies);
-
         root.getChildren().add(myPlayer);
         root.getChildren().addAll(enemies);
-
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
 
