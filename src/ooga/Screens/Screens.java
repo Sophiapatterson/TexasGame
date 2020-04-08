@@ -1,4 +1,4 @@
-package ooga;
+package ooga.Screens;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -6,26 +6,31 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.engine.dinosaur.DinoGameWorld;
 
 import java.util.ResourceBundle;
 
 public class Screens {
 
+    private DinoGameWorld dinogame;
     private Text title;
     private Button quit;
     private ResourceBundle startResources;
     private ResourceBundle endResources;
     private ResourceBundle changeResources;
-    private static final int SCREEN_WIDTH = 850;
-    private static final int SCREEN_HEIGHT = 600;
+    public static final int SCREEN_WIDTH = 850;
+    public static final int SCREEN_HEIGHT = 600;
+    public static final Paint BACKGROUND = Color.AZURE;
 
     public Screens(){
-        startResources = ResourceBundle.getBundle("ooga.Properties.StartScreen");
-        endResources = ResourceBundle.getBundle("ooga.Properties.EndScreen");
-        changeResources = ResourceBundle.getBundle("ooga.Properties.ChangeScreen");
+        dinogame = new DinoGameWorld();
+        startResources = ResourceBundle.getBundle("ooga.Screens.Properties.StartScreen");
+        endResources = ResourceBundle.getBundle("ooga.Screens.Properties.EndScreen");
+        changeResources = ResourceBundle.getBundle("ooga.Screens.Properties.ChangeScreen");
         title = new Text();
         title.setId("Title");
         quit = new Button(startResources.getString("QUIT-MESSAGE"));
@@ -66,7 +71,8 @@ public class Screens {
         Button dinosaur = new Button(changeResources.getString("DINO-MESSAGE"));
         dinosaur.setId("dino");
         dinosaur.setOnAction(e -> {
-            currenstage.setScene(placeholderScene());
+            currenstage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND));
+            dinogame.setUpAnimation();
         });
         Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
         flappy.setId("flappybird");

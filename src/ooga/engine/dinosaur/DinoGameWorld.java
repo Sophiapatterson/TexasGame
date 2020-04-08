@@ -49,7 +49,7 @@ public class DinoGameWorld extends Application {
     }
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    Scene setupScene(int width, int height, Paint background) {
+    public Scene setupScene(int width, int height, Paint background) {
         Group root = new Group();
 
         myPlayer = new DinoPlayer();
@@ -66,8 +66,14 @@ public class DinoGameWorld extends Application {
         return myScene;
     }
 
+    public void setUpAnimation(){
+        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        myAnimation.getKeyFrames().add(frame);
+        myAnimation.play();
+    }
     // Change properties of shapes to animate them
-    void step (double elapsedTime) {
+    public void step (double elapsedTime) {
         gameManager.handleJump(FLOOR_HEIGHT);
 
         // move the enemies
@@ -79,6 +85,7 @@ public class DinoGameWorld extends Application {
 
         if(gameManager.isGameOver()) {
             System.out.println("GAME OVER");
+
         }
     }
 
