@@ -12,7 +12,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ScreensTest extends DukeApplicationTest{
-    private Main game;
+    //private Main game;
     private Screens screen;
     private Stage myStage;
 
