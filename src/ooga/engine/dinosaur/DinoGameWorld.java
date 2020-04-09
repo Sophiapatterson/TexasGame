@@ -15,7 +15,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.data.GameConfiguration;
-import ooga.engine.game.*;
+import ooga.engine.game.Enemy;
+import ooga.engine.game.GameManager;
+import ooga.engine.game.Powerup;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -36,6 +38,7 @@ public class DinoGameWorld extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String DINO_IMAGE  = "dino_trexx.png";
     public static final String HORIZON_IMAGE = "dino_horizon.png";
+    public static final String SMALLCACTUS_IMAGE = "dino_smallcactusgroup.png";
     private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
@@ -84,8 +87,11 @@ public class DinoGameWorld extends Application {
 
     private void addEnemies(Group root) throws IOException {
         enemies = new ArrayList<>(gameConfig.getEnemies());
-        enemies.add(new Cactus());
-        root.getChildren().addAll(enemies);
+        enemies.add(new Cactus(SMALLCACTUS_IMAGE));
+        System.out.println(enemies);
+        for (Enemy myEnemy : enemies){
+            root.getChildren().add(myEnemy.getEnemyImage());
+        }
     }
 
     private void addPowerups(Group root) throws IOException {
