@@ -25,11 +25,11 @@ public class DinoGameWorld extends Application {
 
     public static final int SCREEN_WIDTH = 600;
     public static final int SCREEN_HEIGHT = 400;
-    public static final double FLOOR_HEIGHT = 300;
+    public static final double FLOOR_HEIGHT = 275;
     public static final Paint BACKGROUND = Color.AZURE;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String DINO_IMAGE  = "dino_trex.png";
+    public static final String DINO_IMAGE  = "dino_trexx.png";
     public static final String HORIZON_IMAGE = "dino_horizon.png";
     private DinoPlayer myPlayer;
     private List<Enemy> enemies;

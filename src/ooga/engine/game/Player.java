@@ -6,9 +6,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public abstract class Player implements Gravity {
-    public static final double PLAYER_WIDTH = 10;
-    public static final double PLAYER_HEIGHT = 20;
-    public static final Paint PLAYER_COLOR = Color.GREEN;
+//    public static final double PLAYER_WIDTH = 10;
+//    public static final double PLAYER_HEIGHT = 20;
+//    public static final Paint PLAYER_COLOR = Color.GREEN;
     protected ImageView playerImage;
     protected double x;
     protected double y;
