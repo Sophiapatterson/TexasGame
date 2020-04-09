@@ -8,27 +8,24 @@ public class DinoPlayer extends Player {
     public static final double GRAVITY = 2.5;
     public static final int DEFAULT_JUMP_STRENGTH = 24;
     private double jumpStrength = DEFAULT_JUMP_STRENGTH;
-    private ImageView imageView;
 
 
     public DinoPlayer(Image image) {
         super();
-        this.imageView = new ImageView(image);
-        this.imageView.setFitWidth(100);
-        this.imageView.setFitHeight(300);
-        setX(100);
-        setY(300);
-        this.imageView.setPreserveRatio(true);
-        this.imageView.visibleProperty();
-    }
-
-    public ImageView getImageView(){
-        return imageView;
+        this.playerImage = new ImageView(image);
+        this.playerImage.setFitWidth(100);
+        this.playerImage.setFitHeight(300);
+        this.playerImage.setX(100);
+        this.playerImage.setY(300);
+        x = 100;
+        y = 300;
+        this.playerImage.setPreserveRatio(true);
+        this.playerImage.visibleProperty();
     }
 
     @Override
     public void jump() {
-        setY(getY() - jumpStrength);
+        this.setyPos(getyPos() - jumpStrength);
         fall();
     }
 

@@ -58,16 +58,15 @@ public class DinoGameWorld extends Application {
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
         Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-        System.out.println("Image loaded? " + !dinoImage.isError());
+       // System.out.println("Image loaded? " + !dinoImage.isError());
         myPlayer = new DinoPlayer(dinoImage);
         enemies = new ArrayList<>();
         enemies.add(new Cactus());
         gameManager = new DinoGameManager(myPlayer, enemies);
-        root.getChildren().add(myPlayer.getImageView());
+        root.getChildren().add(myPlayer.getPlayerImage());
         root.getChildren().addAll(enemies);
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
-
         return myScene;
     }
 

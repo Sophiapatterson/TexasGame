@@ -15,7 +15,7 @@ public class Cactus extends Enemy {
 
     @Override
     public boolean collide(Player player) {
-        return (this.getBoundsInParent().intersects(player.getBoundsInParent()));
+        return (this.getBoundsInParent().intersects(player.getPlayerImage().getBoundsInParent()));
     }
 
     @Override
