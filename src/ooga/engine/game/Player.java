@@ -22,23 +22,21 @@ public abstract class Player implements Gravity {
 
     public abstract void resetJumpStrength();
 
-    public boolean isAirborne(double floorY) {
-        return (y < floorY);
+    public abstract boolean isAirborne(double floorY);
 
-    }
     public ImageView getPlayerImage(){ return playerImage; }
 
-    public void setxPos(double x) {
+    public void setXPos(double x) {
         this.x = x;
         this.playerImage.setX(x);
     }
 
-    public void setyPos(double y){
+    public void setYPos(double y){
         this.y = y;
         this.playerImage.setY(y);
     }
 
-    public double getxPos(){ return this.x; }
-    public double getyPos(){ return this.y; }
+    public double getXPos(){ return this.x; }
+    public double getYPos(){ return this.y; }
 
 }

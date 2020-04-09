@@ -13,7 +13,7 @@ public class DinoPlayer extends Player {
     public DinoPlayer(Image image) {
         super();
         x = 100;
-        y = 270;
+        y = DinoGameWorld.FLOOR_HEIGHT;
         initializePlayerImage(image);
     }
 
@@ -22,14 +22,14 @@ public class DinoPlayer extends Player {
         this.playerImage.setFitWidth(50);
         this.playerImage.setFitHeight(50);
         this.playerImage.setX(100);
-        this.playerImage.setY(270);
+        this.playerImage.setY(DinoGameWorld.FLOOR_HEIGHT);
         this.playerImage.setPreserveRatio(true);
         this.playerImage.visibleProperty();
     }
 
     @Override
     public void jump() {
-        this.setyPos(getyPos() - jumpStrength);
+        this.setYPos(getYPos() - jumpStrength);
         fall();
     }
 
@@ -40,5 +40,10 @@ public class DinoPlayer extends Player {
 
     public void resetJumpStrength() {
         jumpStrength = DEFAULT_JUMP_STRENGTH;
+    }
+
+    @Override
+    public boolean isAirborne(double floorY) {
+        return (y < floorY && y - jumpStrength - GRAVITY < floorY);
     }
 }
