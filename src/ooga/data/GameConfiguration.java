@@ -16,7 +16,7 @@ import java.util.List;
  * Basic file reading for creating CSV-defined game objects to be used in a GameWorld (?)
  */
 public class GameConfiguration {
-
+    public static final String SMALLCACTUS_IMAGE = "dino_smallcactusgroup.png";
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;
     private List<Powerup> allPU;
@@ -60,8 +60,8 @@ public class GameConfiguration {
 
                 //TODO Decide between an approach below: setting locations with ratio or coordinate?
                 if(val == 1){
-                    Cactus cac = new Cactus();
-                    cac.setX(xCoef*length);
+                    Cactus cac = new Cactus(SMALLCACTUS_IMAGE);
+                    cac.setXPos(xCoef*length);
                     //cac.setY(cac.getY()*yCoef);
                     scrollers.add(cac);
                     allEnemies.add(cac);
