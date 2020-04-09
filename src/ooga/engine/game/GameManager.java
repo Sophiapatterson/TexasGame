@@ -10,5 +10,11 @@ public abstract class GameManager {
 
     public abstract void handleCollisions();
 
+    public abstract void handlePowerups();
+
+    public abstract void tick();
+
+    public abstract int getScore();
+
     public abstract void handleJump(double floorY);
 }

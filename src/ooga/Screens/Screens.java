@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class Screens {
@@ -74,7 +75,7 @@ public class Screens {
         dinosaur.setOnAction(e -> {
             try {
                 currenstage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND));
-            } catch (FileNotFoundException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
             dinogame.setUpAnimation();

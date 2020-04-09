@@ -1,6 +1,9 @@
 package ooga.data;
 
 import ooga.engine.dinosaur.Cactus;
+import ooga.engine.game.Coin;
+import ooga.engine.game.Enemy;
+import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
 
 import java.io.IOException;
@@ -15,11 +18,15 @@ import java.util.List;
 public class GameConfiguration {
 
     private List<Scrolling> scrollers;
+    private List<Enemy> allEnemies;
+    private List<Powerup> allPU;
     private int length;
 
     public GameConfiguration(Path path) throws IOException {
 
         scrollers = new ArrayList<>();
+        allEnemies = new ArrayList<>();
+        allPU = new ArrayList<>();
         List<String> lines = null;
 
         //TODO implement custom exceptions
@@ -37,7 +44,7 @@ public class GameConfiguration {
         int totalRow = lines.size();
         int countRow = 0;
         int totalCols = 0;
-        int xCoord;
+        double xCoef;
         int yCoef;
         int val;
 
@@ -48,20 +55,30 @@ public class GameConfiguration {
             for(String element: array){
                 if(element.isEmpty()) break;
                 val = Integer.parseInt(element);
-                xCoord = (countCol/totalCols) * length;
+                xCoef= (double)countCol/totalCols;
                 yCoef = countRow/totalRow;
 
                 //TODO Decide between an approach below: setting locations with ratio or coordinate?
                 if(val == 1){
                     Cactus cac = new Cactus();
-                    cac.setX(xCoord);
+                    cac.setX(xCoef*length);
                     //cac.setY(cac.getY()*yCoef);
                     scrollers.add(cac);
+                    allEnemies.add(cac);
+                }
+
+                if(val == 3){
+                    Coin coin = new Coin();
+                    coin.setX(xCoef*length);
+                    //cac.setY(cac.getY()*yCoef);
+                    scrollers.add(coin);
+                    allPU.add(coin);
                 }
                 //TODO Implement other classes if that's ok design
 
                 countCol++;
             }
+            countCol=0;
             countRow++;
         }
 
@@ -70,5 +87,13 @@ public class GameConfiguration {
     //TODO is this allowed idk
     public List<Scrolling> getScrollers() {
         return scrollers;
+    }
+
+    public List<Enemy> getEnemies() {
+        return allEnemies;
+    }
+
+    public List<Powerup> getPowerups() {
+        return allPU;
     }
 }
