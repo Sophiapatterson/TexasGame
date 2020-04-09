@@ -37,7 +37,7 @@ public class DinoGameManager extends GameManager {
         }
         else {
             dino.resetJumpStrength();
-            dino.setyPos(floorY);
+            dino.setYPos(floorY);
         }
     }
 }
