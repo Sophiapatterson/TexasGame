@@ -10,8 +10,6 @@ public abstract class Enemy implements Collidable, Scrolling {
     public static final double ENEMY_HEIGHT = 10;
     public static final javafx.scene.paint.Paint ENEMY_COLOR = Color.RED;
     protected ImageView enemyImage;
-    protected double x;
-    protected double y;
 
 //    public Enemy() {
 //        super(ENEMY_WIDTH, ENEMY_HEIGHT, ENEMY_COLOR);
@@ -23,18 +21,12 @@ public abstract class Enemy implements Collidable, Scrolling {
 
     public ImageView getEnemyImage(){ return enemyImage; }
 
-    public void setXPos(double x) {
-        this.x = x;
-        this.enemyImage.setX(x);
-    }
+    public abstract void setXPos(double x);
 
-    public void setYPos(double y){
-        this.y = y;
-        this.enemyImage.setY(y);
-    }
+    public abstract void setYPos(double y);
 
-    public double getXPos(){ return this.x; }
-    public double getYPos(){ return this.y; }
+    public abstract double getXPos();
+    public abstract double getYPos();
 
 
 }

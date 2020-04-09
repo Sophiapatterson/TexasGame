@@ -8,6 +8,8 @@ public class DinoPlayer extends Player {
     public static final double GRAVITY = 2.5;
     public static final int DEFAULT_JUMP_STRENGTH = 24;
     private double jumpStrength = DEFAULT_JUMP_STRENGTH;
+    private double x;
+    private double y;
 
 
     public DinoPlayer(Image image) {
@@ -46,4 +48,20 @@ public class DinoPlayer extends Player {
     public boolean isAirborne(double floorY) {
         return (y < floorY && y - jumpStrength - GRAVITY < floorY);
     }
+
+    @Override
+    public void setXPos(double x) {
+        this.x = x;
+        this.playerImage.setX(x);
+
+    }
+
+    @Override
+    public void setYPos(double y) {
+        this.y = y;
+        this.playerImage.setY(y);
+    }
+
+    public double getXPos(){ return this.x; }
+    public double getYPos(){ return this.y; }
 }
