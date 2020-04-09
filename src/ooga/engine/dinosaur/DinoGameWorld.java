@@ -13,7 +13,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.engine.game.*;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +31,10 @@ public class DinoGameWorld extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String DINO_IMAGE  = "dino_trex.png";
     public static final String HORIZON_IMAGE = "dino_horizon.png";
-
     private DinoPlayer myPlayer;
     private List<Enemy> enemies;
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
-
     private GameManager gameManager;
 
     @Override
@@ -46,7 +43,6 @@ public class DinoGameWorld extends Application {
         stage.setScene(myScene);
         stage.setTitle("Dinosaur Game");
         stage.show();
-
         KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
         myAnimation.setCycleCount(Timeline.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
@@ -57,17 +53,28 @@ public class DinoGameWorld extends Application {
     public Scene setupScene(int width, int height, Paint background) throws FileNotFoundException{
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-       // System.out.println("Image loaded? " + !dinoImage.isError());
-        myPlayer = new DinoPlayer(dinoImage);
-        enemies = new ArrayList<>();
-        enemies.add(new Cactus());
+        addDino(root);
+        addEnemies(root);
         gameManager = new DinoGameManager(myPlayer, enemies);
-        root.getChildren().add(myPlayer.getPlayerImage());
-        root.getChildren().addAll(enemies);
+        return getScene(width, height, background, root);
+    }
+
+    private Scene getScene(int width, int height, Paint background, Group root) {
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
         return myScene;
+    }
+
+    private void addEnemies(Group root) {
+        enemies = new ArrayList<>();
+        enemies.add(new Cactus());
+        root.getChildren().addAll(enemies);
+    }
+
+    private void addDino(Group root) {
+        Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
+        myPlayer = new DinoPlayer(dinoImage);
+        root.getChildren().add(myPlayer.getPlayerImage());
     }
 
     private ImageView getImageView() {

@@ -13,6 +13,7 @@ public abstract class Player implements Gravity {
     protected double x;
     protected double y;
 
+    //commented out constructor for now.
 //    public Player() {
 //        super(PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_COLOR);
 //    }
@@ -25,24 +26,19 @@ public abstract class Player implements Gravity {
         return (y < floorY);
 
     }
-    public ImageView getPlayerImage(){
-        return playerImage;
-    }
+    public ImageView getPlayerImage(){ return playerImage; }
 
     public void setxPos(double x) {
         this.x = x;
         this.playerImage.setX(x);
     }
+
     public void setyPos(double y){
         this.y = y;
         this.playerImage.setY(y);
     }
 
-    public double getxPos(){
-        return this.x;
-    }
-    public double getyPos(){
-        return this.y;
-    }
+    public double getxPos(){ return this.x; }
+    public double getyPos(){ return this.y; }
 
 }
