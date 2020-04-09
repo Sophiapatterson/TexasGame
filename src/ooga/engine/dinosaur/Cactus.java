@@ -9,7 +9,7 @@ import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
 public class Cactus extends Enemy {
-    public static final int SPEED = 5;
+    public static final int SPEED = 10;
     private ObjectProperty<javafx.scene.image.Image> imageProperty = new SimpleObjectProperty<>();
     public Cactus(String filename) {
         super();
