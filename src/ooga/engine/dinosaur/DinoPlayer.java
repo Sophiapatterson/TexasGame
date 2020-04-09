@@ -12,13 +12,17 @@ public class DinoPlayer extends Player {
 
     public DinoPlayer(Image image) {
         super();
+        x = 100;
+        y = 300;
+        initializePlayerImage(image);
+    }
+
+    private void initializePlayerImage(Image image) {
         this.playerImage = new ImageView(image);
         this.playerImage.setFitWidth(100);
         this.playerImage.setFitHeight(300);
         this.playerImage.setX(100);
         this.playerImage.setY(300);
-        x = 100;
-        y = 300;
         this.playerImage.setPreserveRatio(true);
         this.playerImage.visibleProperty();
     }
