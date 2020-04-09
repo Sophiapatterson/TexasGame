@@ -10,7 +10,11 @@ import ooga.engine.game.Player;
 
 public class Cactus extends Enemy {
     public static final int SPEED = 5;
-    private ObjectProperty<javafx.scene.image.Image> imageProperty = new SimpleObjectProperty<>();
+    private double x;
+    private double y;
+    //using this private property for binding *later
+    //private ObjectProperty<javafx.scene.image.Image> imageProperty = new SimpleObjectProperty<>();
+
     public Cactus(String filename) {
         super();
         initializeCactusImage(new Image(filename));
@@ -38,4 +42,22 @@ public class Cactus extends Enemy {
     public void scroll() {
         setXPos(getXPos() - SPEED);
     }
+
+    @Override
+    public void setXPos(double x) {
+        this.x = x;
+        this.enemyImage.setX(x);
+    }
+
+    @Override
+    public void setYPos(double y){
+        this.y = y;
+        this.enemyImage.setY(y);
+    }
+
+    @Override
+    public double getXPos(){ return this.x; }
+
+    @Override
+    public double getYPos(){ return this.y; }
 }
