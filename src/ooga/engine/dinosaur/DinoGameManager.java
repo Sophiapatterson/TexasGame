@@ -18,7 +18,7 @@ public class DinoGameManager extends GameManager {
         this.dino = dino;
         this.enemies = enemies;
         this.powerups = powerups;
-        score = 0;
+        score = -4500;
     }
 
     @Override

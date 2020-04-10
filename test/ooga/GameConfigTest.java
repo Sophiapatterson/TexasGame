@@ -23,6 +23,6 @@ public class GameConfigTest {
     @Test
     void testCacti() throws IOException {
         testSetUp();
-        assertEquals(34, scroll.size());
+        assertEquals(33, scroll.size());
     }
 }

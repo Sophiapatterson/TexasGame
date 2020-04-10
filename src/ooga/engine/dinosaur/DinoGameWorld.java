@@ -11,9 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.Screens.EnemyView;
 import ooga.Screens.DinoPlayerView;
+import ooga.Screens.Screens;
 import ooga.data.GameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
@@ -60,13 +62,13 @@ public class DinoGameWorld {
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
         gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
-        myScoreText = new Text(SCORE_X, SCORE_Y, "0");
-        myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
-        root.getChildren().add(myScoreText);
         addDino(root);
         addEnemies(root);
         addPowerups(root);
         gameManager = new DinoGameManager(myPlayer, enemies, powerups);
+        myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
+        myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
+        root.getChildren().add(myScoreText);
         return getScene(width, height, background, root);
     }
 
