@@ -1,6 +1,7 @@
 package ooga.data;
 
 import ooga.engine.dinosaur.Cactus;
+import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
@@ -60,7 +61,7 @@ public class GameConfiguration {
 
                 //TODO Decide between an approach below: setting locations with ratio or coordinate?
                 if(val == 1){
-                    Cactus cac = new Cactus(SMALLCACTUS_IMAGE);
+                    Cactus cac = new Cactus(500, DinoGameWorld.FLOOR_HEIGHT + 15);
                     cac.setXPos(xCoef*length);
                     //cac.setY(cac.getY()*yCoef);
                     scrollers.add(cac);

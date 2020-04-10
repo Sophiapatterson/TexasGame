@@ -6,15 +6,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public abstract class Player implements Gravity {
-    protected ImageView playerImage;
 
     public abstract void jump();
 
     public abstract void resetJumpStrength();
 
     public abstract boolean isAirborne(double floorY);
-
-    public ImageView getPlayerImage(){ return playerImage; }
 
     public abstract void setXPos(double x);
 

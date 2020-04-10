@@ -1,63 +1,66 @@
 package ooga.engine.dinosaur;
 
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
 public class Cactus extends Enemy {
-    public static final int SPEED = 5;
-    private double x;
-    private double y;
-    //using this private property for binding *later
-    //private ObjectProperty<javafx.scene.image.Image> imageProperty = new SimpleObjectProperty<>();
+    public static final int SPEED = 10;
+    private DoubleProperty x = new SimpleDoubleProperty();
+    private DoubleProperty y = new SimpleDoubleProperty();
+    public static final double X_OFFSET = 40;
+    public static final double Y_OFFSET = 50;
 
-    public Cactus(String filename) {
+    public Cactus(double x, double y) {
         super();
-        initializeCactusImage(new Image(filename));
-        setXPos(500);
-        setYPos(DinoGameWorld.FLOOR_HEIGHT + 15);
+        this.x.setValue(x);
+        this.y.setValue(y);
+//        initializeCactusImage(new Image(filename));
+//        setXPos(500);
+//        setYPos(DinoGameWorld.FLOOR_HEIGHT + 15);
     }
 
-    private void initializeCactusImage(Image image) {
-        this.enemyImage = new ImageView(image);
-        this.enemyImage.setFitWidth(50);
-        this.enemyImage.setFitHeight(50);
-        this.enemyImage.setX(100);
-        this.enemyImage.setY(DinoGameWorld.FLOOR_HEIGHT + 15);
-        this.enemyImage.setPreserveRatio(true);
-        this.enemyImage.visibleProperty();
-    }
-
-
-    @Override
     public boolean collide(Player player) {
-        return (this.getEnemyImage().getBoundsInParent().intersects(player.getPlayerImage().getBoundsInParent()));
+        boolean xTouch = ((player.getXPos() >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET) || (player.getXPos()+X_OFFSET >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET));
+        boolean yTouch = player.getYPos()+Y_OFFSET >= this.getYPos();
+        return (xTouch && yTouch);
     }
 
     @Override
+
     public void scroll() {
         setXPos(getXPos() - SPEED);
     }
 
     @Override
     public void setXPos(double x) {
-        this.x = x;
-        this.enemyImage.setX(x);
+        this.x.setValue(x);
     }
 
     @Override
     public void setYPos(double y){
-        this.y = y;
-        this.enemyImage.setY(y);
+        this.y.setValue(y);
     }
 
     @Override
-    public double getXPos(){ return this.x; }
+    public double getXPos(){ return x.getValue(); }
 
     @Override
-    public double getYPos(){ return this.y; }
+    public double getYPos(){ return y.getValue(); }
+
+    @Override
+    public DoubleProperty getXProperty(){
+        return x;
+    }
+
+    @Override
+    public DoubleProperty getYProperty(){
+        return y;
+    }
+
+
 }
