@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ooga.Screens.Screens;
 import ooga.data.GameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
@@ -28,12 +29,9 @@ import java.util.List;
  * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
  * into a larger game -- possibly find a way to make this game a small screen to import into our final game?
  */
-public class DinoGameWorld extends Application {
+public class DinoGameWorld{
 
-    public static final int SCREEN_WIDTH = 600;
-    public static final int SCREEN_HEIGHT = 400;
     public static final double FLOOR_HEIGHT = 275;
-    public static final Paint BACKGROUND = Color.AZURE;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String DINO_IMAGE  = "dino_trexx.png";
@@ -51,21 +49,13 @@ public class DinoGameWorld extends Application {
     private GameManager gameManager;
     private GameConfiguration gameConfig;
     private Text myScoreText = new Text();
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        myScene = setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
-        stage.setScene(myScene);
-        stage.setTitle("Dinosaur Game");
-        stage.show();
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-    }
+    private Screens myScreen;
+    private Stage myStage;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
+        myScreen = new Screens();
+        myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
         gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
@@ -88,7 +78,7 @@ public class DinoGameWorld extends Application {
     private void addEnemies(Group root) throws IOException {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemies.add(new Cactus(SMALLCACTUS_IMAGE));
-        System.out.println(enemies);
+        //System.out.println(enemies);
         for (Enemy myEnemy : enemies){
             root.getChildren().add(myEnemy.getEnemyImage());
         }
@@ -144,8 +134,8 @@ public class DinoGameWorld extends Application {
         myScoreText.setText(""+gameManager.getScore());
 
         if(gameManager.isGameOver()) {
-            System.out.println("GAME OVER");
-
+            myAnimation.stop();
+            myStage.setScene(myScreen.createEndScreen(myStage));
         }
     }
 
@@ -153,13 +143,5 @@ public class DinoGameWorld extends Application {
         if(code == KeyCode.SPACE) {
             myPlayer.jump();
         }
-    }
-
-    /**
-     * We don't want to be launching in the game world later on. This is just to get things working for now.
-     * @param args
-     */
-    public static void main (String[] args) {
-        launch(args);
     }
 }

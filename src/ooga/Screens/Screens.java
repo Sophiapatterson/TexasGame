@@ -28,8 +28,10 @@ public class Screens {
     public static final int SCREEN_WIDTH = 850;
     public static final int SCREEN_HEIGHT = 600;
     public static final Paint BACKGROUND = Color.AZURE;
+    private Stage myStage;
 
     public Screens(){
+        myStage = new Stage();
         dinogame = new DinoGameWorld();
         startResources = ResourceBundle.getBundle("ooga.Screens.Properties.StartScreen");
         endResources = ResourceBundle.getBundle("ooga.Screens.Properties.EndScreen");
@@ -50,17 +52,18 @@ public class Screens {
     }
 
     public Scene createStartScreen(Stage currentStage){
+        myStage = currentStage;
         VBox startlayout = new VBox();
         initLayout(startlayout);
         Button start = new Button(startResources.getString("START-MESSAGE"));
         start.setId("startbutton");
         start.setOnAction(e -> {
-            currentStage.setScene(createChangeScreen(currentStage));
+            myStage.setScene(createChangeScreen(myStage));
         });
         Button end = new Button(startResources.getString("END-MESSAGE"));
         end.setId("endbutton");
         end.setOnAction(e -> {
-            currentStage.setScene(createEndScreen(currentStage));
+            myStage.setScene(createEndScreen(myStage));
         });
         title.setText("Welcome to TEXAS");
         startlayout.getChildren().addAll(title, start,quit, end);
@@ -68,28 +71,30 @@ public class Screens {
         return StartScreen;
     }
 
-    public Scene createChangeScreen(Stage currenstage){
+    public Scene createChangeScreen(Stage currentstage){
+        myStage = currentstage;
         VBox changerlayout = new VBox();
         initLayout(changerlayout);
         Button dinosaur = new Button(changeResources.getString("DINO-MESSAGE"));
         dinosaur.setId("dino");
         dinosaur.setOnAction(e -> {
             try {
-                currenstage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND));
+                myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
             dinogame.setUpAnimation();
+            //dinogame.
         });
         Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
         flappy.setId("flappybird");
         flappy.setOnAction(e -> {
-            currenstage.setScene(placeholderScene());
+            myStage.setScene(placeholderScene());
         });
         Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
         jetpack.setId("jet");
         jetpack.setOnAction(e -> {
-            currenstage.setScene(placeholderScene());
+            myStage.setScene(placeholderScene());
         });
         title.setText(changeResources.getString("CHOOSE-MESSAGE"));
         changerlayout.getChildren().addAll(title, dinosaur, flappy, jetpack);
@@ -98,12 +103,13 @@ public class Screens {
     }
 
     public Scene createEndScreen(Stage currentStage){
+        myStage = currentStage;
         VBox endlayout = new VBox();
         initLayout(endlayout);
         Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
         playagain.setId("again");
         playagain.setOnAction(e -> {
-            currentStage.setScene(createChangeScreen(currentStage));
+            myStage.setScene(createChangeScreen(myStage));
         });
         title.setText(endResources.getString("GAME-OVER"));
         endlayout.getChildren().addAll(title, playagain, quit);
@@ -121,4 +127,7 @@ public class Screens {
         return PlaceHolder;
     }
 
+    public void toGameOver(){
+        myStage.setScene(createEndScreen(myStage));
+    }
 }
