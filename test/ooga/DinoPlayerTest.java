@@ -1,6 +1,8 @@
-package ooga.engine.dinosaur;
+package ooga;
 
 import javafx.scene.image.Image;
+import ooga.engine.dinosaur.DinoGameWorld;
+import ooga.engine.dinosaur.DinoPlayer;
 import ooga.engine.game.Player;
 import org.junit.jupiter.api.Test;
 
