@@ -50,9 +50,13 @@ public class DinoGameWorld {
     private GameManager gameManager;
     private GameConfiguration gameConfig;
     private Text myScoreText = new Text();
+    private Screens myScreen;
+    private Stage myStage;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
+        myScreen = new Screens();
+        myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
         gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
@@ -137,8 +141,7 @@ public class DinoGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            System.out.println("GAME OVER");
-
+            myStage.setScene(myScreen.createEndScreen(myStage));
         }
     }
 
@@ -147,5 +150,4 @@ public class DinoGameWorld {
             myPlayer.jump();
         }
     }
-
 }

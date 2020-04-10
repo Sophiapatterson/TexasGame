@@ -32,17 +32,7 @@ public class Main extends Application {
         Scene firstscene = startMenu.createStartScreen(myStage);
         myStage.setScene(firstscene);
         myStage.show();
-        //dinogame = new DinoGameWorld();
-        //dinogame.setUpAnimation();
     }
 
-    /**public void startGame(){
-        dinogame = new DinoGameWorld();
-        myAnimation = new Timeline();
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> dinogame.step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-    }*/
 
 }
