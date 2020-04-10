@@ -2,7 +2,6 @@ package ooga.engine.dinosaur;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,9 +11,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.Screens.Screens;
+import ooga.Screens.EnemyView;
+import ooga.Screens.DinoPlayerView;
 import ooga.data.GameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
@@ -29,7 +28,7 @@ import java.util.List;
  * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
  * into a larger game -- possibly find a way to make this game a small screen to import into our final game?
  */
-public class DinoGameWorld{
+public class DinoGameWorld {
 
     public static final double FLOOR_HEIGHT = 275;
     public static final int FRAMES_PER_SECOND = 30;
@@ -42,7 +41,9 @@ public class DinoGameWorld{
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
     private DinoPlayer myPlayer;
+    private DinoPlayerView myPlayerView;
     private List<Enemy> enemies;
+    private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
@@ -77,10 +78,13 @@ public class DinoGameWorld{
 
     private void addEnemies(Group root) throws IOException {
         enemies = new ArrayList<>(gameConfig.getEnemies());
-        enemies.add(new Cactus(SMALLCACTUS_IMAGE));
-        //System.out.println(enemies);
-        for (Enemy myEnemy : enemies){
-            root.getChildren().add(myEnemy.getEnemyImage());
+        enemiesView = new ArrayList<>();
+        for (Enemy cactus : enemies){
+            EnemyView tempCacView = new EnemyView(new Image(SMALLCACTUS_IMAGE), cactus.getXPos(), FLOOR_HEIGHT);
+            tempCacView.setProperties(cactus);
+            enemiesView.add(tempCacView);
+            root.getChildren().add(tempCacView.getEnemyImage());
+
         }
     }
 
@@ -91,8 +95,10 @@ public class DinoGameWorld{
 
     private void addDino(Group root) {
         Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-        myPlayer = new DinoPlayer(dinoImage);
-        root.getChildren().add(myPlayer.getPlayerImage());
+        myPlayer = new DinoPlayer(100, FLOOR_HEIGHT);
+        myPlayerView = new DinoPlayerView(dinoImage, 100, FLOOR_HEIGHT);
+        myPlayerView.setProperties(myPlayer);
+        root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
     private ImageView getImageView() {

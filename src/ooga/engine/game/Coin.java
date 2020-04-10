@@ -1,5 +1,7 @@
 package ooga.engine.game;
 
+import ooga.Screens.DinoPlayerView;
+
 public class Coin extends Powerup {
 
     private static final int SPEED = 5;
@@ -10,7 +12,7 @@ public class Coin extends Powerup {
 
     @Override
     public boolean collide(Player player) {
-        return (this.getBoundsInParent().intersects(player.getPlayerImage().getBoundsInParent()));
+        return (true);
     }
 
     @Override

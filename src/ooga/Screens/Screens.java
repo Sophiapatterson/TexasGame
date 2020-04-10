@@ -11,7 +11,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
-import org.testfx.framework.junit5.Start;
+//import org.testfx.framework.junit5.Start;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
