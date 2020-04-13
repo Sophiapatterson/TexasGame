@@ -1,6 +1,5 @@
 package ooga.Screens;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,64 +10,25 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
-//import org.testfx.framework.junit5.Start;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class Screens {
-
-    private DinoGameWorld dinogame;
-    private Text title;
-    private Button quit;
-    private ResourceBundle startResources;
-    private ResourceBundle endResources;
+public class ChangeScreen extends Screen {
     private ResourceBundle changeResources;
     public static final int SCREEN_WIDTH = 850;
     public static final int SCREEN_HEIGHT = 600;
     public static final Paint BACKGROUND = Color.AZURE;
+    private Text title;
     private Stage myStage;
+    private DinoGameWorld dinogame;
 
-    public Screens(){
+    public ChangeScreen(){
         myStage = new Stage();
         dinogame = new DinoGameWorld();
-        startResources = ResourceBundle.getBundle("ooga.Screens.Properties.StartScreen");
-        endResources = ResourceBundle.getBundle("ooga.Screens.Properties.EndScreen");
         changeResources = ResourceBundle.getBundle("ooga.Screens.Properties.ChangeScreen");
         title = new Text();
         title.setId("Title");
-        quit = new Button(startResources.getString("QUIT-MESSAGE"));
-        quit.setId("quitbutton");
-        quit.setOnAction(e -> {
-            Platform.exit();
-        });
-    }
-
-    private void initLayout(VBox layout){
-        layout.setPadding(new Insets(10, 50, 50, 50));
-        layout.setSpacing(25);
-        layout.setAlignment(Pos.CENTER);
-    }
-
-    public Scene createStartScreen(Stage currentStage){
-        myStage = currentStage;
-        VBox startlayout = new VBox();
-        initLayout(startlayout);
-        Button start = new Button(startResources.getString("START-MESSAGE"));
-        start.setId("startbutton");
-        start.setOnAction(e -> {
-            myStage.setScene(createChangeScreen(myStage));
-        });
-        Button end = new Button(startResources.getString("END-MESSAGE"));
-        end.setId("endbutton");
-        end.setOnAction(e -> {
-            myStage.setScene(createEndScreen(myStage));
-        });
-        title.setText("Welcome to TEXAS");
-        startlayout.getChildren().addAll(title, start,quit, end);
-        Scene StartScreen = new Scene(startlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
-        return StartScreen;
     }
 
     public Scene createChangeScreen(Stage currentstage){
@@ -84,7 +44,6 @@ public class Screens {
                 ex.printStackTrace();
             }
             dinogame.setUpAnimation();
-            //dinogame.
         });
         Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
         flappy.setId("flappybird");
@@ -102,21 +61,6 @@ public class Screens {
         return ChangeScreen;
     }
 
-    public Scene createEndScreen(Stage currentStage){
-        myStage = currentStage;
-        VBox endlayout = new VBox();
-        initLayout(endlayout);
-        Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
-        playagain.setId("again");
-        playagain.setOnAction(e -> {
-            myStage.setScene(createChangeScreen(myStage));
-        });
-        title.setText(endResources.getString("GAME-OVER"));
-        endlayout.getChildren().addAll(title, playagain, quit);
-        Scene EndScreen = new Scene(endlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
-        return EndScreen;
-    }
-
     public Scene placeholderScene(){
         VBox placeholder = new VBox();
         initLayout(placeholder);
@@ -126,8 +70,10 @@ public class Screens {
         Scene PlaceHolder = new Scene(placeholder, SCREEN_WIDTH, SCREEN_HEIGHT);
         return PlaceHolder;
     }
-
-    public void toGameOver(){
-        myStage.setScene(createEndScreen(myStage));
+    @Override
+    public void initLayout(VBox layout) {
+        layout.setPadding(new Insets(10, 50, 50, 50));
+        layout.setSpacing(25);
+        layout.setAlignment(Pos.CENTER);
     }
 }
