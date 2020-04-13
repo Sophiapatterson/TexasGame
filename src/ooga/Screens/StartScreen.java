@@ -21,6 +21,7 @@ public class StartScreen extends Screen {
     public static final int SCREEN_HEIGHT = 600;
     private Stage myStage;
     private Text title;
+    private final String screenCSS = "Styling/Screen.css";
 
     public StartScreen(){
         changescreen = new ChangeScreen();
@@ -59,6 +60,7 @@ public class StartScreen extends Screen {
         layout.setPadding(new Insets(10, 50, 50, 50));
         layout.setSpacing(25);
         layout.setAlignment(Pos.CENTER);
+        layout.getStylesheets().add(screenCSS);
     }
 
     @Override
