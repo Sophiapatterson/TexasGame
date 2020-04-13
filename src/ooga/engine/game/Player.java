@@ -1,5 +1,6 @@
 package ooga.engine.game;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -21,4 +22,7 @@ public abstract class Player implements Gravity {
 
     public abstract double getYPos();
 
+    public abstract DoubleProperty getXProperty();
+
+    public abstract DoubleProperty getYProperty();
 }

@@ -26,7 +26,6 @@ public class DinoGameManager extends GameManager {
         return gameOver;
     }
 
-    //TODO: should this iterate through Collidables? the PU effects could be coded in their collide()
     @Override
     public void handleCollisions() {
         for(Enemy enemy: enemies) {
