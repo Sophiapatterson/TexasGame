@@ -8,8 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.ChangeScreen;
-import ooga.Screens.Screen;
 
 import java.util.ResourceBundle;
 
@@ -36,6 +34,16 @@ public class StartScreen extends Screen {
             Platform.exit();
         });
         return quit;
+    }
+
+    public Button darkModeButton(){
+        Button darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
+        darkMode.setId("darkmodebutton");
+        darkMode.setOnAction(e -> {
+            //setUserAgentStylesheet("dark-theme.css");
+            myStage.getScene().getStylesheets().add("dark-theme.css");
+        });
+        return darkMode;
     }
 
     public Scene createStartScreen(Stage currentStage){
