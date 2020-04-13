@@ -20,20 +20,7 @@ public class DinoPlayer extends Player {
         super();
         this.x.setValue(x);
         this.y.setValue(y);
-//        x.setValue(100);
-//        y.setValue(DinoGameWorld.FLOOR_HEIGHT);
-//        initializePlayerImage(image);
     }
-
-//    private void initializePlayerImage(Image image) {
-//        this.playerImage = new ImageView(image);
-//        this.playerImage.setFitWidth(50);
-//        this.playerImage.setFitHeight(50);
-//        this.playerImage.setX(100);
-//        this.playerImage.setY(DinoGameWorld.FLOOR_HEIGHT);
-//        this.playerImage.setPreserveRatio(true);
-//        this.playerImage.visibleProperty();
-//    }
 
     @Override
     public void jump() {
