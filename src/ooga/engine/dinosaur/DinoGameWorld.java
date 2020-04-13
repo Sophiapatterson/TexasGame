@@ -13,9 +13,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.DinoPlayerView;
-import ooga.Screens.Screens;
 import ooga.data.GameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
@@ -52,12 +52,12 @@ public class DinoGameWorld {
     private GameManager gameManager;
     private GameConfiguration gameConfig;
     private Text myScoreText = new Text();
-    private Screens myScreen;
+    private EndScreen endScreen;
     private Stage myStage;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
-        myScreen = new Screens();
+        endScreen = new EndScreen();
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
@@ -143,7 +143,7 @@ public class DinoGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(myScreen.createEndScreen(myStage));
+            myStage.setScene(endScreen.createEndScreen(myStage));
         }
     }
 
