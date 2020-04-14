@@ -8,8 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.ChangeScreen;
-import ooga.Screens.Screen;
 
 import java.util.ResourceBundle;
 
@@ -38,6 +36,16 @@ public class StartScreen extends Screen {
         return quit;
     }
 
+    public Button darkModeButton(){
+        Button darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
+        darkMode.setId("darkmodebutton");
+        darkMode.setOnAction(e -> {
+            //setUserAgentStylesheet("dark-theme.css");
+            myStage.getScene().getStylesheets().add("dark-theme.css");
+        });
+        return darkMode;
+    }
+
     public Scene createStartScreen(Stage currentStage){
         myStage = currentStage;
         VBox startlayout = new VBox();
@@ -48,8 +56,9 @@ public class StartScreen extends Screen {
             myStage.setScene(changescreen.createChangeScreen(myStage));
         });
         Button quit = quitButton();
+        Button darkMode = darkModeButton();
         title.setText("Welcome to TEXAS");
-        startlayout.getChildren().addAll(title, start,quit);
+        startlayout.getChildren().addAll(title, start,quit,darkMode);
         Scene StartScreen = new Scene(startlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return StartScreen;
     }

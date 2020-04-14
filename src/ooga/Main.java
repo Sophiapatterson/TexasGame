@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ooga.Screens.StartScreen;
-import org.testfx.framework.junit5.Start;
 
 
 import java.io.IOException;
