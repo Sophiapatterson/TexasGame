@@ -10,6 +10,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
+import ooga.engine.flappy.FlappyGameWorld;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -22,10 +23,12 @@ public class ChangeScreen extends Screen {
     private Text title;
     private Stage myStage;
     private DinoGameWorld dinogame;
+    private FlappyGameWorld flappygame;
 
     public ChangeScreen(){
         myStage = new Stage();
         dinogame = new DinoGameWorld();
+        flappygame = new FlappyGameWorld();
         changeResources = ResourceBundle.getBundle("ooga.Screens.Properties.ChangeScreen");
         title = new Text();
         title.setId("Title");
@@ -48,7 +51,12 @@ public class ChangeScreen extends Screen {
         Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
         flappy.setId("flappybird");
         flappy.setOnAction(e -> {
-            myStage.setScene(placeholderScene());
+            try {
+                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            dinogame.setUpAnimation();
         });
         Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
         jetpack.setId("jet");
