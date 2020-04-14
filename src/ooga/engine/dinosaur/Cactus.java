@@ -19,9 +19,6 @@ public class Cactus extends Enemy {
         super();
         this.x.setValue(x);
         this.y.setValue(y);
-//        initializeCactusImage(new Image(filename));
-//        setXPos(500);
-//        setYPos(DinoGameWorld.FLOOR_HEIGHT + 15);
     }
 
     public boolean collide(Player player) {

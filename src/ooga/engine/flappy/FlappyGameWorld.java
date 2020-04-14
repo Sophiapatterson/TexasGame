@@ -1,4 +1,4 @@
-package ooga.engine.dinosaur;
+package ooga.engine.flappy;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,37 +12,31 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ooga.Screens.BirdPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
-import ooga.Screens.DinoPlayerView;
 import ooga.data.GameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
- * into a larger game -- possibly find a way to make this game a small screen to import into our final game?
- */
-public class DinoGameWorld {
+public class FlappyGameWorld {
 
     public static final double FLOOR_HEIGHT = 275;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String DINO_IMAGE  = "dino_trexx.png";
-    public static final String HORIZON_IMAGE = "dino_horizon.png";
-    public static final String SMALLCACTUS_IMAGE = "dino_smallcactusgroup.png";
-    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
+    public static final String BIRD_IMAGE  = "flappy_yellowbird.jpg";
+    public static final String BACKGROUND_IMAGE = "flappy_background.png";
+    public static final String PIPE_IMAGE = "flappy_pipe.png";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
-    private DinoPlayer myPlayer;
-    private DinoPlayerView myPlayerView;
+    private BirdPlayer myPlayer;
+    private BirdPlayerView myPlayerView;
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
@@ -60,11 +54,11 @@ public class DinoGameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
-        addDino(root);
+        //gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
+        addBird(root);
         addEnemies(root);
         addPowerups(root);
-        gameManager = new DinoGameManager(myPlayer, enemies, powerups);
+        gameManager = new FlappyGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
         root.getChildren().add(myScoreText);
@@ -80,11 +74,11 @@ public class DinoGameWorld {
     private void addEnemies(Group root) throws IOException {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
-        for (Enemy cactus : enemies){
-            EnemyView tempCacView = new EnemyView(new Image(SMALLCACTUS_IMAGE), cactus.getXPos(), FLOOR_HEIGHT);
-            tempCacView.setProperties(cactus);
-            enemiesView.add(tempCacView);
-            root.getChildren().add(tempCacView.getEnemyImage());
+        for (Enemy pipe : enemies){
+            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), FLOOR_HEIGHT);
+            tempPipeView.setProperties(pipe);
+            enemiesView.add(tempPipeView);
+            root.getChildren().add(tempPipeView.getEnemyImage());
 
         }
     }
@@ -94,16 +88,16 @@ public class DinoGameWorld {
         root.getChildren().addAll(powerups);
     }
 
-    private void addDino(Group root) {
-        Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-        myPlayer = new DinoPlayer(100, FLOOR_HEIGHT);
-        myPlayerView = new DinoPlayerView(dinoImage, 100, FLOOR_HEIGHT);
+    private void addBird(Group root) {
+        Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
+        myPlayer = new BirdPlayer(100, FLOOR_HEIGHT);
+        myPlayerView = new BirdPlayerView(birdImage, 100, FLOOR_HEIGHT);
         myPlayerView.setProperties(myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
     private ImageView getImageView() {
-        Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(HORIZON_IMAGE));
+        Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(320);
         imageView.setPreserveRatio(true);
@@ -148,6 +142,7 @@ public class DinoGameWorld {
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
+            myPlayer.resetJumpStrength();
             myPlayer.jump();
         }
     }

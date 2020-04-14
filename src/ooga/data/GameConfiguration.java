@@ -17,7 +17,6 @@ import java.util.List;
  * Basic file reading for creating CSV-defined game objects to be used in a GameWorld (?)
  */
 public class GameConfiguration {
-    public static final String SMALLCACTUS_IMAGE = "dino_smallcactusgroup.png";
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;
     private List<Powerup> allPU;
