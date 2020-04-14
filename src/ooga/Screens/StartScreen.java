@@ -59,6 +59,7 @@ public class StartScreen extends Screen {
         Button quit = quitButton();
         Button darkMode = darkModeButton();
         title.setText("Welcome to TEXAS");
+        title.getStyleClass().add("titletxt");
         startlayout.getChildren().addAll(title, start,quit,darkMode);
         Scene StartScreen = new Scene(startlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return StartScreen;

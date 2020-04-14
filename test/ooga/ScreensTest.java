@@ -68,12 +68,12 @@ public class ScreensTest extends DukeApplicationTest{
                 assertEquals("Flappy Bird",flappy.getText());
                 assertEquals("Jetpack Joyride",jetpack.getText());
                 assertEquals("Choose A Game",title.getText());
-                flappy.fire();
-                Parent phscreen = changescreen.placeholderScene().getRoot();
+                /**flappy.fire();
                 for(int i = 0; i<phscreen.getChildrenUnmodifiable().size(); i++){
                     assertEquals(phscreen.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
-                }
+                }*/
                 jetpack.fire();
+                Parent phscreen = changescreen.placeholderScene().getRoot();
                 for(int i = 0; i<phscreen.getChildrenUnmodifiable().size(); i++){
                     assertEquals(phscreen.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
                 }
@@ -94,7 +94,6 @@ public class ScreensTest extends DukeApplicationTest{
             @Override
             public void run() {
                 changescreen = new ChangeScreen();
-                //screen = new Screens();
                 Parent change = changescreen.createChangeScreen(myStage).getRoot();
                 showEndScreen();
                 Button playagain = lookup("#again").query();
@@ -116,6 +115,35 @@ public class ScreensTest extends DukeApplicationTest{
         endscreen = new EndScreen();
         Scene endscene = endscreen.createEndScreen(myStage);
         myStage.setScene(endscene);
+        myStage.show();
+    }
+
+    @Test
+    void testCreditScreen(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showCreditsScreen();
+                Text producers = lookup("#producers").query();
+                Text luke = lookup("#luke").query();
+                Text jeff = lookup("#jeff").query();
+                Text sophia = lookup("#sophia").query();
+                Text justin = lookup("#justin").query();
+                Text title = lookup("#Title").query();
+                assertEquals("Credits",title.getText());
+                assertEquals("Producers/Designers",producers.getText());
+                assertEquals("Luke Evans",luke.getText());
+                assertEquals("Jeffrey Luo",jeff.getText());
+                assertEquals("Sophia Patterson",sophia.getText());
+                assertEquals("Justin Wu",justin.getText());
+            }
+        });
+    }
+
+    private void showCreditsScreen(){
+        endscreen = new EndScreen();
+        Scene credits = endscreen.createCredits(myStage);
+        myStage.setScene(credits);
         myStage.show();
     }
 }

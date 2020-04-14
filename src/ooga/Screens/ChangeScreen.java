@@ -65,6 +65,7 @@ public class ChangeScreen extends Screen {
             myStage.setScene(placeholderScene());
         });
         title.setText(changeResources.getString("CHOOSE-MESSAGE"));
+        title.getStyleClass().add("titletxt");
         changerlayout.getChildren().addAll(title, dinosaur, flappy, jetpack);
         Scene ChangeScreen = new Scene(changerlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return ChangeScreen;
