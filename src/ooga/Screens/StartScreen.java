@@ -56,8 +56,9 @@ public class StartScreen extends Screen {
             myStage.setScene(changescreen.createChangeScreen(myStage));
         });
         Button quit = quitButton();
+        Button darkMode = darkModeButton();
         title.setText("Welcome to TEXAS");
-        startlayout.getChildren().addAll(title, start,quit);
+        startlayout.getChildren().addAll(title, start,quit,darkMode);
         Scene StartScreen = new Scene(startlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return StartScreen;
     }
