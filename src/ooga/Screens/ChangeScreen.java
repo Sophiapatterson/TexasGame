@@ -23,6 +23,7 @@ public class ChangeScreen extends Screen {
     private Text title;
     private Stage myStage;
     private DinoGameWorld dinogame;
+    private final String screenCSS = "Styling/Screen.css";
     private FlappyGameWorld flappygame;
 
     public ChangeScreen(){
@@ -83,5 +84,6 @@ public class ChangeScreen extends Screen {
         layout.setPadding(new Insets(10, 50, 50, 50));
         layout.setSpacing(25);
         layout.setAlignment(Pos.CENTER);
+        layout.getStylesheets().add(screenCSS);
     }
 }
