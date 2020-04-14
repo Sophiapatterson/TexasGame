@@ -55,7 +55,7 @@ public class FlappyGameWorld {
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
         //gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
-        addDino(root);
+        addBird(root);
         addEnemies(root);
         addPowerups(root);
         gameManager = new FlappyGameManager(myPlayer, enemies, powerups);
@@ -74,9 +74,9 @@ public class FlappyGameWorld {
     private void addEnemies(Group root) throws IOException {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
-        for (Enemy cactus : enemies){
-            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), cactus.getXPos(), FLOOR_HEIGHT);
-            tempPipeView.setProperties(cactus);
+        for (Enemy pipe : enemies){
+            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), FLOOR_HEIGHT);
+            tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
             root.getChildren().add(tempPipeView.getEnemyImage());
 
@@ -88,7 +88,7 @@ public class FlappyGameWorld {
         root.getChildren().addAll(powerups);
     }
 
-    private void addDino(Group root) {
+    private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         myPlayer = new BirdPlayer(100, FLOOR_HEIGHT);
         myPlayerView = new BirdPlayerView(birdImage, 100, FLOOR_HEIGHT);
@@ -142,6 +142,7 @@ public class FlappyGameWorld {
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
+            myPlayer.resetJumpStrength();
             myPlayer.jump();
         }
     }
