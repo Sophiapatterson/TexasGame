@@ -49,7 +49,7 @@ public class JetpackGameWorld {
     private Scene myScene;
 
     public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
-        endScreen = new EndScreen();
+        endScreen = new EndScreen("Jetpack");
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);

@@ -112,8 +112,8 @@ public class ScreensTest extends DukeApplicationTest{
     }
 
     private void showEndScreen(){
-        endscreen = new EndScreen();
-        Scene endscene = endscreen.createEndScreen(myStage, 400, "DINOSAUR");
+        endscreen = new EndScreen("Dinosaur");
+        Scene endscene = endscreen.createEndScreen(myStage, 400);
         myStage.setScene(endscene);
         myStage.show();
     }
@@ -141,7 +141,7 @@ public class ScreensTest extends DukeApplicationTest{
     }
 
     private void showCreditsScreen(){
-        endscreen = new EndScreen();
+        endscreen = new EndScreen("Dinosaur");
         Scene credits = endscreen.createCredits(myStage);
         myStage.setScene(credits);
         myStage.show();

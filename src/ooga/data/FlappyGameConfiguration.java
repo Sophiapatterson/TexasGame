@@ -53,7 +53,6 @@ public class FlappyGameConfiguration extends GameConfiguration {
     public void makeEnemy(double xCoef){
         Random rand = new Random();
         int pipeNum = rand.nextInt(3);
-        System.out.println(pipeNum);
         Enemy p;
         if(pipeNum == 0) {
             p = new Pipe(500, -61);
