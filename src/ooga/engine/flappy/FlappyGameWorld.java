@@ -139,7 +139,7 @@ public class FlappyGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage));
+            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "FLAPPY"));
         }
     }
 
