@@ -60,7 +60,7 @@ public class DinoGameConfiguration {
 
                 //TODO Decide between an approach below: setting locations with ratio or coordinate?
                 if(val == 1){
-                    Cactus cac = new Cactus(500, DinoGameWorld.FLOOR_HEIGHT + 15);
+                    Cactus cac = new Cactus(500, DinoGameWorld.FLOOR_HEIGHT);
                     cac.setXPos(xCoef*length);
                     //cac.setY(cac.getY()*yCoef);
                     scrollers.add(cac);
