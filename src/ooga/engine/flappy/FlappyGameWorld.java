@@ -93,7 +93,7 @@ public class FlappyGameWorld {
 
     private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        myPlayer = new BirdPlayer(100, FLOOR_HEIGHT);
+        myPlayer = new BirdPlayer(100, 250);
         myPlayerView = new BirdPlayerView(birdImage, 100, FLOOR_HEIGHT);
         myPlayerView.setProperties(myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());

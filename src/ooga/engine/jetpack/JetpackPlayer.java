@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import ooga.engine.game.Player;
 
 public class JetpackPlayer extends Player {
-    public static final double GRAVITY = 2.5;
+    public static final double GRAVITY = 1.5;
     public static final int DEFAULT_JUMP_STRENGTH = 10;
     private double jumpStrength = DEFAULT_JUMP_STRENGTH;
     private DoubleProperty x = new SimpleDoubleProperty();

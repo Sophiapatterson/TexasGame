@@ -22,13 +22,27 @@ public class JetpackGameManager extends GameManager {
     }
 
     @Override
-    public void handleCollisions() {
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
+    @Override
+    public void handleCollisions() {
+        for(Enemy enemy: enemies) {
+            if(enemy.collide(player)) {
+                gameOver = true;
+            }
+        }
     }
 
     @Override
     public void handlePowerups() {
-
+        for(Powerup pu: powerups){
+            if(pu.collide(player) && pu.isVisible()){
+                score+=pu.scoreBonus();
+                pu.setVisible(false);
+            }
+        }
     }
 
     @Override
