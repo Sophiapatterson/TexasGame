@@ -4,11 +4,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
+import ooga.data.Score;
 
 import java.util.ResourceBundle;
 
@@ -85,8 +88,25 @@ public class EndScreen extends Screen {
         Button newScore = new Button("Add Your Score");
         newScore.setId("newscore");
         newScore.setOnAction( e -> {
-
+            Stage enterData = new Stage();
+            VBox dataBox = new VBox();
+            initLayout(dataBox);
+            enterData.setTitle("Enter your name");
+            Label name = new Label("Enter your name");
+            name.getStyleClass().add("medtxt");
+            TextField nameTextField = new TextField();
+            Button submit = new Button("submit");
+            submit.setId("submit");
+            submit.setOnAction( f -> {
+                highscores.addScore(new Score(nameTextField.getText(), score, v));
+                enterData.close();
+            });
+            dataBox.getChildren().addAll(name, nameTextField, submit);
+            Scene scene = new Scene(dataBox, 500, 475);
+            enterData.setScene(scene);
+            enterData.show();
         });
+        layout.getChildren().add(newScore);
         Scene Leaderboard = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return Leaderboard;
     }
