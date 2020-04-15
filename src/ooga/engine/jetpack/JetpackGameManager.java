@@ -47,7 +47,7 @@ public class JetpackGameManager extends GameManager {
 
     @Override
     public void tick() {
-
+        score += 5;
     }
 
     @Override
