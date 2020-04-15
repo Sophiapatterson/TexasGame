@@ -48,6 +48,8 @@ public class EndScreen extends Screen {
         changescreen = new ChangeScreen();
         title = initTitle();
         quit = startscreen.quitButton();
+       // this.setisDarkMode(Screen.getIsDarkMode());
+        //currently does not work ^ TODO fix @Sophia
     }
 
     @Override

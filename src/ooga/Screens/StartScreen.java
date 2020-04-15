@@ -1,6 +1,8 @@
 package ooga.Screens;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,6 +27,7 @@ public class StartScreen extends Screen {
     public static final Color SCREEN_COLOR = Color.GOLD;
     private Stage myStage;
     private Text title;
+    private Button darkMode;
     private final String screenCSS = "Styling/Screen.css";
 
     public StartScreen(){
@@ -45,13 +48,13 @@ public class StartScreen extends Screen {
     }
 
     public Button darkModeButton(){
-        Button darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
+        darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
         darkMode.setId("darkmodebutton");
-        darkMode.setOnAction(e -> {
-            //setUserAgentStylesheet("dark-theme.css");
-            myStage.getScene().getStylesheets().add("Styling/dark-theme.css");
-        });
         return darkMode;
+    }
+
+    public void setOnDarkMode(EventHandler<ActionEvent> e){
+        darkMode.setOnAction(event -> e.handle(event));
     }
 
     public Scene createStartScreen(Stage currentStage){
