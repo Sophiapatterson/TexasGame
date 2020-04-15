@@ -55,7 +55,7 @@ public class DinoGameWorld {
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
-        endScreen = new EndScreen();
+        endScreen = new EndScreen("Dinosaur");
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
@@ -141,7 +141,7 @@ public class DinoGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "DINOSAUR"));
+            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
 

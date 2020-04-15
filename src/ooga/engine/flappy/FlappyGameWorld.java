@@ -53,7 +53,7 @@ public class FlappyGameWorld {
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
-        endScreen = new EndScreen();
+        endScreen = new EndScreen("Flappy");
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
@@ -140,7 +140,7 @@ public class FlappyGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-//            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "DINOSAUR"));
+//            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
 
