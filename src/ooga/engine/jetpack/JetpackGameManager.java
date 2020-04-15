@@ -47,16 +47,21 @@ public class JetpackGameManager extends GameManager {
 
     @Override
     public void tick() {
-
+        score += 5;
     }
 
     @Override
     public int getScore() {
-        return 0;
+        return score;
     }
 
     @Override
     public void handleJump(double floorY) {
-
+        if(player.isAirborne(floorY)) {
+            player.jump();
+        }
+        else {
+            player.setYPos(floorY);
+        }
     }
 }
