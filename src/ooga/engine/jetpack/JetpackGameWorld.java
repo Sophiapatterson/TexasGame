@@ -15,10 +15,13 @@ import javafx.util.Duration;
 import ooga.Screens.JetpackPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
+import ooga.data.config.GameConfiguration;
+import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,7 @@ public class JetpackGameWorld {
     public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
     public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
+    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -44,6 +48,7 @@ public class JetpackGameWorld {
     private GameManager gameManager;
     private Text myScoreText = new Text();
     private JetpackPlayerView myPlayerView;
+    private GameConfiguration gameConfig;
     private EndScreen endScreen;
     private Stage myStage;
     private Scene myScene;
@@ -53,7 +58,7 @@ public class JetpackGameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        //gameConfig = new DinoGameConfiguration(Paths.get(CSVfilepath)); add gameconfig for jetpack here
+        gameConfig = new JetpackGameConfiguration(Paths.get(CSVfilepath));
         addBarry(root);
         addEnemies(root);
         addPowerups(root);

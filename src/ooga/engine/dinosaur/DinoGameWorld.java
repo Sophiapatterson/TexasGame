@@ -16,8 +16,10 @@ import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.DinoPlayerView;
 import ooga.data.config.DinoGameConfiguration;
+import ooga.data.config.GameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
+import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
 
 import java.io.IOException;
@@ -41,7 +43,7 @@ public class DinoGameWorld {
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
-    private DinoPlayer myPlayer;
+    private Player myPlayer;
     private DinoPlayerView myPlayerView;
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
@@ -49,7 +51,7 @@ public class DinoGameWorld {
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
-    private DinoGameConfiguration gameConfig;
+    private GameConfiguration gameConfig;
     private Text myScoreText = new Text();
     private EndScreen endScreen;
     private Stage myStage;
@@ -98,7 +100,7 @@ public class DinoGameWorld {
         Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         myPlayer = new DinoPlayer(100, FLOOR_HEIGHT);
         myPlayerView = new DinoPlayerView(dinoImage, 100, FLOOR_HEIGHT);
-        myPlayerView.setProperties(myPlayer);
+        myPlayerView.setProperties((DinoPlayer) myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
