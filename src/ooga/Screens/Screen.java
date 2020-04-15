@@ -28,4 +28,11 @@ public abstract class Screen {
         return title;
     }
 
+    public ImageView createButtonImage(Image gameimage){
+        ImageView imageview = new ImageView(gameimage);
+        imageview.setFitHeight(50);
+        imageview.setFitWidth(50);
+        return imageview;
+    };
+
 }

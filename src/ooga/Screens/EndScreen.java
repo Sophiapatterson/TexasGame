@@ -7,7 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
@@ -72,6 +76,7 @@ public class EndScreen extends Screen {
             myStage.setScene(createLeaderboard(myStage));
         });
         title.setText(endResources.getString("GAME-OVER"));
+        title.getStyleClass().add("titletxt");
         layout.getChildren().addAll(title, playagain, credits, scores, quit);
         Scene EndScreen = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return EndScreen;
@@ -167,11 +172,12 @@ public class EndScreen extends Screen {
         returnedtext.getStyleClass().add("smalltxt");
         return returnedtext;
     }
-
-    //public void initLayout(VBox layout) {
-    //    layout.setPadding(new Insets(10, 50, 50, 50));
-    //    layout.setSpacing(25);
-    //    layout.setAlignment(Pos.CENTER);
-    //    layout.getStylesheets().add(screenCSS);
-   // }
+    @Override
+    public void initLayout(VBox layout) {
+        layout.setPadding(new Insets(10, 50, 50, 50));
+        layout.setSpacing(25);
+        layout.setAlignment(Pos.CENTER);
+        layout.setBackground(new Background(new BackgroundFill(SCREEN_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
+        layout.getStylesheets().add(screenCSS);
+    }
 }
