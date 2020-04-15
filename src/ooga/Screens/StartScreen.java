@@ -1,6 +1,8 @@
 package ooga.Screens;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
@@ -75,13 +77,8 @@ public class StartScreen extends Screen {
         return StartScreen;
     }
 
-    @Override
     public void initLayout(VBox layout) {
-        layout.setPadding(new Insets(10, 50, 50, 50));
-        layout.setSpacing(25);
-        layout.setAlignment(Pos.CENTER);
-        layout.setBackground(new Background(new BackgroundFill(SCREEN_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
-        layout.getStylesheets().add(screenCSS);
+        super.initLayout(layout);
     }
 
     @Override

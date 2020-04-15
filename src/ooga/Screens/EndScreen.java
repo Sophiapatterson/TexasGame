@@ -28,6 +28,7 @@ public class EndScreen extends Screen {
     public static final int SCREEN_HEIGHT = 600;
     public static final int POPUP_WIDTH = 500;
     public static final int POPUP_HEIGHT = 475;
+    public static final Color SCREEN_COLOR = Color.GOLD;
     private ResourceBundle endResources;
     private ResourceBundle creditsResources;
     private boolean allowSubmissions;
@@ -172,12 +173,8 @@ public class EndScreen extends Screen {
         returnedtext.getStyleClass().add("smalltxt");
         return returnedtext;
     }
-    @Override
+
     public void initLayout(VBox layout) {
-        layout.setPadding(new Insets(10, 50, 50, 50));
-        layout.setSpacing(25);
-        layout.setAlignment(Pos.CENTER);
-        layout.setBackground(new Background(new BackgroundFill(SCREEN_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
-        layout.getStylesheets().add(screenCSS);
+        super.initLayout(layout);
     }
 }

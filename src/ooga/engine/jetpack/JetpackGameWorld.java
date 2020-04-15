@@ -33,7 +33,7 @@ public class JetpackGameWorld {
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     //placeholder for images
-    public static final String BARRY_IMAGE  = "jetpack_normalBarry.png";
+    public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
