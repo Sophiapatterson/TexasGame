@@ -4,9 +4,7 @@ import java.util.List;
 
 public abstract class GameManager {
 
-    public boolean isGameOver() {
-        return false;
-    }
+    public abstract boolean isGameOver();
 
     public abstract void handleCollisions();
 

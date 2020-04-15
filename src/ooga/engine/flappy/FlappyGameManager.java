@@ -18,21 +18,31 @@ public class FlappyGameManager extends GameManager {
         this.bird = bird;
         this.pipes = pipes;
         this.powerups = powerups;
-        score = -4500;
+        score = 0;
+    }
+
+    @Override
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     @Override
     public void handleCollisions() {
-        for(Enemy pipe: pipes) {
-            if(pipe.collide(bird)) {
-                gameOver = true;
-            }
-        }
+//        for(Enemy pipe: pipes) {
+//            if(pipe.collide(bird)) {
+//                gameOver = true;
+//            }
+//        }
     }
 
     @Override
     public void handlePowerups() {
-
+//        for(Powerup pu: powerups){
+//            if(pu.collide(bird) && pu.isVisible()){
+//                score+=pu.scoreBonus();
+//                pu.setVisible(false);
+//            }
+//        }
     }
 
     @Override
@@ -46,8 +56,7 @@ public class FlappyGameManager extends GameManager {
     }
 
     @Override
-    // if the bird falls onto the floor, we also end the game -- I will place the reset jump strength into the game
-    // world when the user presses space.
+    // if the bird falls onto the floor, we also end the game
     public void handleJump(double floorY) {
         if(bird.isAirborne(floorY)) {
             bird.jump();

@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.Screens.BirdPlayerView;
+import ooga.Screens.ChangeScreen;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.data.GameConfiguration;
@@ -21,17 +22,19 @@ import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FlappyGameWorld {
 
-    public static final double FLOOR_HEIGHT = 275;
+    public static final double FLOOR_HEIGHT = 550;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String BIRD_IMAGE  = "flappy_yellowbird.jpg";
     public static final String BACKGROUND_IMAGE = "flappy_background.png";
     public static final String PIPE_IMAGE = "flappy_pipe.png";
+    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -54,7 +57,7 @@ public class FlappyGameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        //gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
+        gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
         addBird(root);
         addEnemies(root);
         addPowerups(root);
@@ -90,7 +93,7 @@ public class FlappyGameWorld {
 
     private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        myPlayer = new BirdPlayer(100, FLOOR_HEIGHT);
+        myPlayer = new BirdPlayer(100, 250);
         myPlayerView = new BirdPlayerView(birdImage, 100, FLOOR_HEIGHT);
         myPlayerView.setProperties(myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
