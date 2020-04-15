@@ -12,7 +12,7 @@ public class Coin extends Powerup {
 
     @Override
     public boolean collide(Player player) {
-        return (true);
+        return false;
     }
 
     @Override
