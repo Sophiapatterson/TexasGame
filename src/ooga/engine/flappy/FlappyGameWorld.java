@@ -17,8 +17,10 @@ import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.StartScreen;
 import ooga.data.config.FlappyGameConfiguration;
+import ooga.data.config.GameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
+import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
 
 import java.io.IOException;
@@ -33,12 +35,13 @@ public class FlappyGameWorld {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String BIRD_IMAGE  = "Sprites/flappy_yellowbird.png";
     public static final String BACKGROUND_IMAGE = "Sprites/flappy_background.png";
+    public static final int IMAGE_HEIGHT = 695;
     private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final String VERSION_NAME = "Flappy";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
-    private BirdPlayer myPlayer;
+    private Player myPlayer;
     private BirdPlayerView myPlayerView;
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
@@ -46,7 +49,7 @@ public class FlappyGameWorld {
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
-    private FlappyGameConfiguration gameConfig;
+    private GameConfiguration gameConfig;
     private Text myScoreText = new Text();
     private EndScreen endScreen;
     private Stage myStage;
@@ -95,7 +98,7 @@ public class FlappyGameWorld {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         myPlayer = new BirdPlayer(100, 250);
         myPlayerView = new BirdPlayerView(birdImage, 100, FLOOR_HEIGHT);
-        myPlayerView.setProperties(myPlayer);
+        myPlayerView.setProperties((BirdPlayer) myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
@@ -103,7 +106,7 @@ public class FlappyGameWorld {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(0);
-        imageView.setFitHeight(StartScreen.SCREEN_HEIGHT);
+        imageView.setFitHeight(IMAGE_HEIGHT);
         imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
         return imageView;
     }
