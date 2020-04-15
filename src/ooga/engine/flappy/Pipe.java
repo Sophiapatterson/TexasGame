@@ -7,18 +7,28 @@ import ooga.engine.game.Player;
 
 public class Pipe extends Enemy {
     public static final int SPEED = 9;
-    private String image = "flappy_pipe.png";
+    private String image = "Sprites/flappy_pipe.png";
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     private int lowerHalfY = 245;
     private int upperHalfY = 135;
     private int xOffset = 100;
     private int playerOffset = 40;
+    private final int standardY = -61;
 
     public Pipe(double x, double y) {
         super();
         this.x.setValue(x);
         this.y.setValue(y);
+    }
+
+    public Pipe() {
+        super();
+    }
+
+    @Override
+    public void setStandardY(){
+        setYPos(standardY);
     }
 
     @Override

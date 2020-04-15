@@ -1,8 +1,6 @@
 package ooga.Screens;
 
 import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -42,7 +40,7 @@ public class StartScreen extends Screen {
         darkMode.setId("darkmodebutton");
         darkMode.setOnAction(e -> {
             //setUserAgentStylesheet("dark-theme.css");
-            myStage.getScene().getStylesheets().add("dark-theme.css");
+            myStage.getScene().getStylesheets().add("Styling/dark-theme.css");
         });
         return darkMode;
     }
