@@ -1,8 +1,7 @@
 package ooga;
 
-import ooga.data.DinoGameConfiguration;
+import ooga.data.config.DinoGameConfiguration;
 import ooga.engine.game.Enemy;
-import ooga.engine.game.Scrolling;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

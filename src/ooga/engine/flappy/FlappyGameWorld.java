@@ -16,7 +16,7 @@ import ooga.Screens.BirdPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.StartScreen;
-import ooga.data.FlappyGameConfiguration;
+import ooga.data.config.FlappyGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;

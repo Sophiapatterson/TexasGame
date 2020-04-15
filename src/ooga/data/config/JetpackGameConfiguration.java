@@ -1,8 +1,5 @@
-package ooga.data;
+package ooga.data.config;
 
-import ooga.engine.dinosaur.Cactus;
-import ooga.engine.dinosaur.DinoGameWorld;
-import ooga.engine.flappy.Pipe;
 import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
@@ -14,29 +11,26 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DinoGameConfiguration extends GameConfiguration {
+public class JetpackGameConfiguration extends GameConfiguration {
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;
     private List<Powerup> allPU;
     private int length;
 
-    public DinoGameConfiguration(Path path) throws IOException {
+    public JetpackGameConfiguration(Path path) throws IOException {
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
         List<String> lines = null;
-
         //TODO implement custom exceptions
         try {
             lines = Files.readAllLines(path);
         } catch (IOException e){
             throw new IOException("your level configuration file couldn't be read", e);
         }
-
         String[] array;
         length = Integer.parseInt(lines.get(0));
         lines.remove(0);
-
         parseCSV(lines);
     }
 
@@ -50,11 +44,7 @@ public class DinoGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeEnemy(double xCoef){
-        Cactus c = new Cactus();
-        c.setStandardY();
-        c.setXPos(xCoef*length);
-        scrollers.add(c);
-        allEnemies.add(c);
+
     }
 
     //TODO is this allowed idk
