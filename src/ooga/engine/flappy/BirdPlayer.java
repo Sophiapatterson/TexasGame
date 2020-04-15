@@ -6,7 +6,7 @@ import ooga.engine.game.Player;
 
 public class BirdPlayer extends Player {
     public static final double GRAVITY = 2;
-    public static final int DEFAULT_JUMP_STRENGTH = 20;
+    public static final int DEFAULT_JUMP_STRENGTH = 18;
     private double jumpStrength = 0;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
