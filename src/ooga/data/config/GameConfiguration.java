@@ -1,16 +1,8 @@
-package ooga.data;
+package ooga.data.config;
 
-import ooga.engine.dinosaur.Cactus;
-import ooga.engine.flappy.Pipe;
-import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GameConfiguration {

@@ -1,7 +1,5 @@
-package ooga.data;
+package ooga.data.config;
 
-import ooga.engine.dinosaur.Cactus;
-import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.Pipe;
 import ooga.engine.flappy.Pipe2;
 import ooga.engine.flappy.Pipe3;
