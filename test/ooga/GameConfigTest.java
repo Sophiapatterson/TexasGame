@@ -1,6 +1,7 @@
 package ooga;
 
 import ooga.data.DinoGameConfiguration;
+import ooga.engine.game.Enemy;
 import ooga.engine.game.Scrolling;
 import org.junit.jupiter.api.Test;
 
@@ -11,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameConfigTest {
     DinoGameConfiguration config;
-    List<Scrolling> scroll;
+    List<Enemy> enemies;
 
     public void testSetUp() throws IOException {
         config = new DinoGameConfiguration(Paths.get("data/CSV configurations/levelOne.csv"));
-        scroll = config.getScrollers();
+        enemies = config.getEnemies();
     }
 
     @Test
     void testCacti() throws IOException {
         testSetUp();
-        assertEquals(33, scroll.size());
+        assertEquals(23, enemies.size());
     }
 }

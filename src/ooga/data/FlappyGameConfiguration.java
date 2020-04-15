@@ -22,6 +22,7 @@ public class FlappyGameConfiguration extends GameConfiguration {
     private List<Enemy> allEnemies;
     private List<Powerup> allPU;
     private int length;
+    private final int COUNT_OF_PIPES = 3;
 
     public FlappyGameConfiguration(Path path) throws IOException {
         scrollers = new ArrayList<>();
@@ -44,7 +45,6 @@ public class FlappyGameConfiguration extends GameConfiguration {
     public void makeCoin(double xCoef) {
         Coin pu = new Coin();
         pu.setX(xCoef*length);
-        //cac.setY(cac.getY()*yCoef);
         scrollers.add(pu);
         allPU.add(pu);
     }
@@ -52,18 +52,18 @@ public class FlappyGameConfiguration extends GameConfiguration {
     @Override
     public void makeEnemy(double xCoef){
         Random rand = new Random();
-        int pipeNum = rand.nextInt(3);
-        System.out.println(pipeNum);
+        int pipeNum = rand.nextInt(COUNT_OF_PIPES);
         Enemy p;
         if(pipeNum == 0) {
-            p = new Pipe(500, -61);
+            p = new Pipe();
         }
         else if(pipeNum == 1) {
-            p = new Pipe2(500, -61);
+            p = new Pipe2();
         }
         else {
-            p = new Pipe3(500, -61);
+            p = new Pipe3();
         }
+        p.setStandardY();
         p.setXPos(xCoef*length);
         scrollers.add(p);
         allEnemies.add(p);

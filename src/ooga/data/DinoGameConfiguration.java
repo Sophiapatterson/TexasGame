@@ -44,14 +44,14 @@ public class DinoGameConfiguration extends GameConfiguration {
     public void makeCoin(double xCoef) {
         Coin pu = new Coin();
         pu.setX(xCoef*length);
-        //cac.setY(cac.getY()*yCoef);
         scrollers.add(pu);
         allPU.add(pu);
     }
 
     @Override
     public void makeEnemy(double xCoef){
-        Cactus c = new Cactus(500, DinoGameWorld.FLOOR_HEIGHT);
+        Cactus c = new Cactus();
+        c.setStandardY();
         c.setXPos(xCoef*length);
         scrollers.add(c);
         allEnemies.add(c);
