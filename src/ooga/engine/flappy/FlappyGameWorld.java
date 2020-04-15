@@ -31,7 +31,7 @@ public class FlappyGameWorld {
     public static final double FLOOR_HEIGHT = 550;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String BIRD_IMAGE  = "flappy_yellowbird.jpg";
+    public static final String BIRD_IMAGE  = "flappy_yellowbird.png";
     public static final String BACKGROUND_IMAGE = "flappy_background.png";
     public static final String PIPE_IMAGE = "flappy_pipe.png";
     private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
