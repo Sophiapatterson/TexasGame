@@ -29,7 +29,7 @@ import java.util.List;
 
 public class FlappyGameWorld {
 
-    public static final double FLOOR_HEIGHT = 550;
+    public static final double FLOOR_HEIGHT = 450;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String BIRD_IMAGE  = "flappy_yellowbird.png";
@@ -79,8 +79,8 @@ public class FlappyGameWorld {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
-            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), -500);
-            tempPipeView.setWidthAndHeight(600, 525);
+            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), pipe.getYPos());
+            tempPipeView.setWidthAndHeight(100, 550);
             tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
             root.getChildren().add(tempPipeView.getEnemyImage());
