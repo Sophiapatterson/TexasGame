@@ -11,6 +11,12 @@ public class JetpackPlayer extends Player {
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
 
+    public JetpackPlayer(double x, double y) {
+        super();
+        this.x.setValue(x);
+        this.y.setValue(y);
+    }
+
     @Override
     public void jump() {
         this.setYPos(getYPos() - jumpStrength);

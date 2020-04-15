@@ -12,18 +12,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.Screens.DinoPlayerView;
+import ooga.Screens.JetpackPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
-import ooga.data.DinoGameConfiguration;
-import ooga.engine.dinosaur.DinoGameManager;
-import ooga.engine.dinosaur.DinoPlayer;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;
-
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +40,7 @@ public class JetpackGameWorld {
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private Text myScoreText = new Text();
+    private JetpackPlayerView myPlayerView;
     private EndScreen endScreen;
     private Stage myStage;
     private Scene myScene;
@@ -55,10 +51,10 @@ public class JetpackGameWorld {
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
         //gameConfig = new DinoGameConfiguration(Paths.get(CSVfilepath)); add gameconfig for jetpack here
-        addDino(root);
+        addBarry(root);
         addEnemies(root);
         addPowerups(root);
-        gameManager = new DinoGameManager(myPlayer, enemies, powerups);
+        gameManager = new JetpackGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
         root.getChildren().add(myScoreText);
@@ -88,12 +84,12 @@ public class JetpackGameWorld {
         root.getChildren().addAll(powerups);
     }
 
-    private void addDino(Group root) {
-        //Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE)); Use images once they're added
-        //myPlayer = new DinoPlayer(100, FLOOR_HEIGHT); use jetpack player once implemented
-        //myPlayerView = new DinoPlayerView(dinoImage, 100, FLOOR_HEIGHT); use jetpack player view once implemented
-        //myPlayerView.setProperties(myPlayer); use jetpack player view once implemented
-        //root.getChildren().add(myPlayerView.getPlayerImage()); use jetpack player view once implemented
+    private void addBarry(Group root) {
+        Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
+        myPlayer = new JetpackPlayer(100, 250);
+        myPlayerView = new JetpackPlayerView(barryImage, 100, FLOOR_HEIGHT);
+        myPlayerView.setProperties(myPlayer);
+        root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
     private ImageView getImageView() {
