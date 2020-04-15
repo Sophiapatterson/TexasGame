@@ -137,6 +137,7 @@ public class JetpackGameWorld {
         if(gameManager.isGameOver()) {
             myAnimation.stop();
             myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "JETPACK"));
+            endScreen.checkandSetDarkMode(myStage);
         }
     }
 

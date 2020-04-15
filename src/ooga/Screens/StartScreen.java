@@ -1,6 +1,8 @@
 package ooga.Screens;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,6 +21,7 @@ public class StartScreen extends Screen {
     public static final int SCREEN_HEIGHT = 600;
     private Stage myStage;
     private Text title;
+    private Button darkMode;
     private final String screenCSS = "Styling/Screen.css";
 
     public StartScreen(){
@@ -38,14 +41,13 @@ public class StartScreen extends Screen {
     }
 
     public Button darkModeButton(){
-        Button darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
+        darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
         darkMode.setId("darkmodebutton");
-        darkMode.setOnAction(e -> {
-            setisDarkMode(true);
-            checkandSetDarkMode(myStage);
-            System.out.println(getIsDarkMode());
-        });
         return darkMode;
+    }
+
+    public void setOnDarkMode(EventHandler<ActionEvent> e){
+        darkMode.setOnAction(event -> e.handle(event));
     }
 
     public Scene createStartScreen(Stage currentStage){
@@ -56,8 +58,6 @@ public class StartScreen extends Screen {
         start.setId("startbutton");
         start.setOnAction(e -> {
             myStage.setScene(changescreen.createChangeScreen(myStage));
-            checkandSetDarkMode(myStage);
-            System.out.println(getIsDarkMode());
         });
         Button quit = quitButton();
         Button darkMode = darkModeButton();

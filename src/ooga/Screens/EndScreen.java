@@ -36,7 +36,7 @@ public class EndScreen extends Screen {
         changescreen = new ChangeScreen();
         title = initTitle();
         quit = startscreen.quitButton();
-        this.setisDarkMode(startscreen.getIsDarkMode());
+       // this.setisDarkMode(Screen.getIsDarkMode());
         //currently does not work ^ TODO fix @Sophia
     }
 
@@ -54,19 +54,16 @@ public class EndScreen extends Screen {
         playagain.setId("again");
         playagain.setOnAction(e -> {
             myStage.setScene(changescreen.createChangeScreen(myStage));
-            checkandSetDarkMode(myStage);
         });
         Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
         credits.setId("credits");
         credits.setOnAction( e -> {
             myStage.setScene(createCredits(myStage));
-            checkandSetDarkMode(myStage);
         });
         Button scores = new Button("Leaderboard");
         scores.setId("scores");
         scores.setOnAction( e -> {
             myStage.setScene(createLeaderboard(myStage, gamescore, true));
-            checkandSetDarkMode(myStage);
         });
         title.setText(endResources.getString("GAME-OVER"));
         layout.getChildren().addAll(title, playagain, credits, scores, quit);
@@ -94,7 +91,6 @@ public class EndScreen extends Screen {
         newScore.setId("newscore");
         newScore.setOnAction( e -> {
             submitScore(score);
-            checkandSetDarkMode(myStage);
         });
         if(allowSubmission){
             layout.getChildren().add(newScore);
@@ -159,6 +155,5 @@ public class EndScreen extends Screen {
         layout.setSpacing(25);
         layout.setAlignment(Pos.CENTER);
         layout.getStylesheets().add(screenCSS);
-        checkandSetDarkMode(myStage);
     }
 }

@@ -145,6 +145,7 @@ public class DinoGameWorld {
             myAnimation.stop();
             myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "DINOSAUR"));
             endScreen.checkandSetDarkMode(myStage);
+            System.out.println(endScreen.getIsDarkMode());
         }
     }
 
