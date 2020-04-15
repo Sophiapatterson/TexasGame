@@ -15,6 +15,10 @@ import java.util.List;
 
 public abstract class GameConfiguration {
 
+    public static final String ENEMY_VALUE = "1";
+    public static final String COIN_VALUE = "3";
+    public static final String DATA_FILE_REGEX = ",";
+
     protected void parseCSV(List<String> lines) {
         String[] array;
         int countCol = 0;
@@ -23,23 +27,23 @@ public abstract class GameConfiguration {
         int totalCols = 0;
         double xCoef;
         int yCoef;
-        int val;
+        String val;
 
         for(int i = 0; i<lines.size(); i++){
-            array = lines.get(i).split(",");
+            array = lines.get(i).split(DATA_FILE_REGEX);
             if(array.length == 0) break;
             totalCols = array.length;
             for(String element: array){
                 if(element.isEmpty()) break;
-                val = Integer.parseInt(element);
+                val = element;
                 xCoef= (double)countCol/totalCols;
                 yCoef = countRow/totalRow;
 
-                if(val == 1){
+                if(val.equals(ENEMY_VALUE)){
                     makeEnemy(xCoef);
                 }
 
-                if(val == 3){
+                if(val.equals(COIN_VALUE)){
                     makeCoin(xCoef);
                 }
 

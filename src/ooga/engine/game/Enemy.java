@@ -32,4 +32,5 @@ public abstract class Enemy implements Collidable, Scrolling {
 
     public abstract String getImage();
 
+    public abstract void setStandardY();
 }

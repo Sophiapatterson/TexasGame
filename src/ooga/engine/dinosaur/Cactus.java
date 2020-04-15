@@ -8,11 +8,12 @@ import ooga.engine.game.Player;
 
 public class Cactus extends Enemy {
     public static final int SPEED = 10;
-    private String image = "dino_smallcactusgroup.png";
+    private String image = "Sprites/dino_smallcactusgroup.png";
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     public static final double X_OFFSET = 40;
     public static final double Y_OFFSET = 50;
+    private double standardY = DinoGameWorld.FLOOR_HEIGHT;
 
     public Cactus(double x, double y) {
         super();
@@ -20,10 +21,19 @@ public class Cactus extends Enemy {
         this.y.setValue(y);
     }
 
+    public Cactus() {
+        super();
+    }
+
     public boolean collide(Player player) {
         boolean xTouch = ((player.getXPos() >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET) || (player.getXPos()+X_OFFSET >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET));
         boolean yTouch = player.getYPos()+Y_OFFSET >= this.getYPos();
         return (xTouch && yTouch);
+    }
+
+    @Override
+    public void setStandardY(){
+        setYPos(standardY);
     }
 
     @Override
