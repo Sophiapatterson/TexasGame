@@ -4,11 +4,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
+import ooga.data.Score;
 
 import java.util.ResourceBundle;
 
@@ -40,8 +43,9 @@ public class EndScreen extends Screen {
         return super.initTitle();
     }
 
-    public Scene createEndScreen(Stage currentstage){
+    public Scene createEndScreen(Stage currentstage, int gamescore, String version){
         myStage = currentstage;
+        highscores = new HighScores(version);
         VBox layout = new VBox();
         initLayout(layout);
         Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
@@ -54,10 +58,64 @@ public class EndScreen extends Screen {
         credits.setOnAction( e -> {
             myStage.setScene(createCredits(myStage));
         });
+        Button scores = new Button("Leaderboard");
+        scores.setId("scores");
+        scores.setOnAction( e -> {
+            myStage.setScene(createLeaderboard(myStage, gamescore, true));
+        });
         title.setText(endResources.getString("GAME-OVER"));
-        layout.getChildren().addAll(title, playagain, credits, quit);
+        layout.getChildren().addAll(title, playagain, credits, scores, quit);
         Scene EndScreen = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return EndScreen;
+    }
+
+    public Scene createLeaderboard(Stage currentstage, int score, boolean allowSubmission) {
+        myStage = currentstage;
+        VBox layout = new VBox();
+        initLayout(layout);
+        title.setText("Leaderboards");
+        title.getStyleClass().add("titletxt");
+        layout.getChildren().add(title);
+        int i = 0;
+        for(String s: highscores.getHighScoresAsStrings()) {
+            Text currScore = new Text();
+            currScore.setId("scoreNumber"+i);
+            currScore.setText(s);
+            currScore.getStyleClass().add("medtxt");
+            i++;
+            layout.getChildren().add(currScore);
+        }
+        Button newScore = new Button("Add Your Score");
+        newScore.setId("newscore");
+        newScore.setOnAction( e -> {
+            submitScore(score);
+        });
+        if(allowSubmission){
+            layout.getChildren().add(newScore);
+        }
+        Scene Leaderboard = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
+        return Leaderboard;
+    }
+
+    private void submitScore(int score) {
+        Stage enterData = new Stage();
+        VBox dataBox = new VBox();
+        initLayout(dataBox);
+        enterData.setTitle("Enter your name");
+        Label name = new Label("Enter your name");
+        name.getStyleClass().add("medtxt");
+        TextField nameTextField = new TextField();
+        Button submit = new Button("submit");
+        submit.setId("submit");
+        submit.setOnAction( f -> {
+            highscores.addScore(new Score(nameTextField.getText(), score));
+            enterData.close();
+            myStage.setScene(createLeaderboard(myStage, score, false));
+        });
+        dataBox.getChildren().addAll(name, nameTextField, submit);
+        Scene scene = new Scene(dataBox, 500, 475);
+        enterData.setScene(scene);
+        enterData.show();
     }
 
     public Scene createCredits(Stage currentstage){
