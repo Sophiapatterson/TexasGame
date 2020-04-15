@@ -21,6 +21,7 @@ import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class FlappyGameWorld {
     public static final String BIRD_IMAGE  = "flappy_yellowbird.jpg";
     public static final String BACKGROUND_IMAGE = "flappy_background.png";
     public static final String PIPE_IMAGE = "flappy_pipe.png";
+    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -54,7 +56,7 @@ public class FlappyGameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        //gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
+        gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
         addBird(root);
         addEnemies(root);
         addPowerups(root);

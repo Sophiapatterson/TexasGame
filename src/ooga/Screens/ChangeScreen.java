@@ -57,7 +57,7 @@ public class ChangeScreen extends Screen {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            dinogame.setUpAnimation();
+            flappygame.setUpAnimation();
         });
         Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
         jetpack.setId("jet");
