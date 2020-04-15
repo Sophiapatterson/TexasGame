@@ -40,7 +40,7 @@ public class EndScreen extends Screen {
         return super.initTitle();
     }
 
-    public Scene createEndScreen(Stage currentstage){
+    public Scene createEndScreen(Stage currentstage, int gamescore, String version){
         myStage = currentstage;
         VBox layout = new VBox();
         initLayout(layout);
@@ -54,10 +54,41 @@ public class EndScreen extends Screen {
         credits.setOnAction( e -> {
             myStage.setScene(createCredits(myStage));
         });
+        Button scores = new Button("Leaderboard");
+        scores.setId("scores");
+        scores.setOnAction( e -> {
+            myStage.setScene(createLeaderboard(myStage, gamescore, version));
+        });
         title.setText(endResources.getString("GAME-OVER"));
-        layout.getChildren().addAll(title, playagain, credits, quit);
+        layout.getChildren().addAll(title, playagain, credits, scores, quit);
         Scene EndScreen = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return EndScreen;
+    }
+
+    public Scene createLeaderboard(Stage currentstage, int score, String v) {
+        myStage = currentstage;
+        VBox layout = new VBox();
+        initLayout(layout);
+        highscores = new HighScores(v);
+        title.setText("Leaderboards");
+        title.getStyleClass().add("titletxt");
+        layout.getChildren().add(title);
+        int i = 0;
+        for(String s: highscores.getHighScoresAsStrings()) {
+            Text currScore = new Text();
+            currScore.setId("scoreNumber"+i);
+            currScore.setText(s);
+            currScore.getStyleClass().add("medtxt");
+            i++;
+            layout.getChildren().add(currScore);
+        }
+        Button newScore = new Button("Add Your Score");
+        newScore.setId("newscore");
+        newScore.setOnAction( e -> {
+
+        });
+        Scene Leaderboard = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
+        return Leaderboard;
     }
 
     public Scene createCredits(Stage currentstage){
