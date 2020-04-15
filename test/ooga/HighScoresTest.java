@@ -1,19 +1,13 @@
 package ooga;
 
-import ooga.data.GameConfiguration;
 import ooga.data.HighScores;
 import ooga.data.Score;
-import ooga.engine.game.Scrolling;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
