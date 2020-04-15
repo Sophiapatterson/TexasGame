@@ -5,17 +5,17 @@ import javafx.beans.property.SimpleDoubleProperty;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
-public class Pipe extends Enemy {
+public class Pipe3 extends Enemy {
     public static final int SPEED = 9;
-    private String image = "flappy_pipe.png";
+    private String image = "flappy_pipe_3.png";
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
-    private int lowerHalfY = 245;
-    private int upperHalfY = 135;
+    private int lowerHalfY = 205;
+    private int upperHalfY = 95;
     private int xOffset = 100;
     private int playerOffset = 40;
 
-    public Pipe(double x, double y) {
+    public Pipe3(double x, double y) {
         super();
         this.x.setValue(x);
         this.y.setValue(y);

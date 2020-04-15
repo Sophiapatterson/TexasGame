@@ -34,7 +34,6 @@ public class FlappyGameWorld {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String BIRD_IMAGE  = "flappy_yellowbird.png";
     public static final String BACKGROUND_IMAGE = "flappy_background.png";
-    public static final String PIPE_IMAGE = "flappy_pipe.png";
     private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
@@ -79,7 +78,7 @@ public class FlappyGameWorld {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
-            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), pipe.getYPos());
+            EnemyView tempPipeView = new EnemyView(new Image(pipe.getImage()), pipe.getXPos(), pipe.getYPos());
             tempPipeView.setWidthAndHeight(100, 550);
             tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
@@ -141,7 +140,7 @@ public class FlappyGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "DINOSAUR"));
+//            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "DINOSAUR"));
         }
     }
 
