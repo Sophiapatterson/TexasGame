@@ -8,6 +8,7 @@ import ooga.engine.game.Player;
 
 public class Cactus extends Enemy {
     public static final int SPEED = 10;
+    private String image = "dino_smallcactusgroup.png";
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     public static final double X_OFFSET = 40;
@@ -45,6 +46,11 @@ public class Cactus extends Enemy {
 
     @Override
     public double getYPos(){ return y.getValue(); }
+
+    @Override
+    public String getImage() {
+        return image;
+    }
 
     @Override
     public DoubleProperty getXProperty(){

@@ -21,12 +21,37 @@ public class DinoGameConfiguration extends GameConfiguration {
     private int length;
 
     public DinoGameConfiguration(Path path) throws IOException {
-        super(path);
+        scrollers = new ArrayList<>();
+        allEnemies = new ArrayList<>();
+        allPU = new ArrayList<>();
+        List<String> lines = null;
+
+        //TODO implement custom exceptions
+        try {
+            lines = Files.readAllLines(path);
+        } catch (IOException e){
+            throw new IOException("your level configuration file couldn't be read", e);
+        }
+
+        String[] array;
+        length = Integer.parseInt(lines.get(0));
+        lines.remove(0);
+
+        parseCSV(lines);
     }
 
     @Override
-    protected void makeEnemy(double xCoef){
-        Cactus c = new Cactus(500, DinoGameWorld.FLOOR_HEIGHT + 15);
+    public void makeCoin(double xCoef) {
+        Coin pu = new Coin();
+        pu.setX(xCoef*length);
+        //cac.setY(cac.getY()*yCoef);
+        scrollers.add(pu);
+        allPU.add(pu);
+    }
+
+    @Override
+    public void makeEnemy(double xCoef){
+        Cactus c = new Cactus(500, DinoGameWorld.FLOOR_HEIGHT);
         c.setXPos(xCoef*length);
         scrollers.add(c);
         allEnemies.add(c);
