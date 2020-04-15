@@ -18,7 +18,7 @@ public class FlappyGameManager extends GameManager {
         this.bird = bird;
         this.pipes = pipes;
         this.powerups = powerups;
-        score = -4500;
+        score = 0;
     }
 
     @Override

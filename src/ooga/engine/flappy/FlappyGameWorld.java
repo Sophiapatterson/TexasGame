@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.Screens.BirdPlayerView;
+import ooga.Screens.ChangeScreen;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.data.GameConfiguration;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class FlappyGameWorld {
 
-    public static final double FLOOR_HEIGHT = 275;
+    public static final double FLOOR_HEIGHT = 550;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String BIRD_IMAGE  = "flappy_yellowbird.jpg";
