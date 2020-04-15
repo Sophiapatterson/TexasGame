@@ -80,7 +80,7 @@ public class FlappyGameWorld {
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
             EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), -500);
-            tempPipeView.setWidthAndHeight(600, 400);
+            tempPipeView.setWidthAndHeight(600, 525);
             tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
             root.getChildren().add(tempPipeView.getEnemyImage());

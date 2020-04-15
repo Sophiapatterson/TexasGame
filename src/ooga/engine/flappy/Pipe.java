@@ -6,11 +6,9 @@ import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
 public class Pipe extends Enemy {
-    public static final int SPEED = 10;
+    public static final int SPEED = 9;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
-    public static final double X_OFFSET = 40;
-    public static final double Y_OFFSET = 50;
 
     public Pipe(double x, double y) {
         super();
