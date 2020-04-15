@@ -65,13 +65,13 @@ public class StartScreen extends Screen {
         return StartScreen;
     }
 
-    @Override
-    public void initLayout(VBox layout) {
-        layout.setPadding(new Insets(10, 50, 50, 50));
-        layout.setSpacing(25);
-        layout.setAlignment(Pos.CENTER);
-        layout.getStylesheets().add(screenCSS);
-    }
+//    @Override
+//    public void initLayout(VBox layout) {
+//        layout.setPadding(new Insets(10, 50, 50, 50));
+//        layout.setSpacing(25);
+//        layout.setAlignment(Pos.CENTER);
+//        layout.getStylesheets().add(screenCSS);
+//    }
 
     @Override
     public Text initTitle() {
