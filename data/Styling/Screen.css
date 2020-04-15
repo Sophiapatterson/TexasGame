@@ -1,8 +1,7 @@
 .button {
-
     -fx-padding: 10px;
     -fx-min-width: 120px;
-    -fx-background-color: #F0F8FF;
+    -fx-background-color: #90ee90;
     -fx-background-radius: 0px;
     -fx-border-radius: 0px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 10, 0, 2, 2);
