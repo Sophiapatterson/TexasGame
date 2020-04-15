@@ -58,7 +58,7 @@ public class FlappyGameConfiguration {
 
                 //TODO Decide between an approach below: setting locations with ratio or coordinate?
                 if(val == 1){
-                    Pipe pipe = new Pipe(500, 0);
+                    Pipe pipe = new Pipe(500, -61);
                     pipe.setXPos(xCoef*length);
                     //cac.setY(cac.getY()*yCoef);
                     scrollers.add(pipe);
