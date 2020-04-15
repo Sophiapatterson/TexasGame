@@ -37,7 +37,7 @@ public class HighScoresTest {
         assertEquals(true, Files.exists(Paths.get("data/Properties/DINOSAUR.properties")));
         List<String> lines = Files.readAllLines(Paths.get("data/Properties/DINOSAUR.properties"));
         assertEquals("1=Sophia - 1234", lines.get(0));
-        hs.addScore(new Score("tester", 10000, "Dinosaur"));
+        hs.addScore(new Score("tester", 10000));
         assertEquals(10000, hs.getHighScores().get(0).getScore());
         hs.saveHighScores();
         lines = Files.readAllLines(Paths.get("data/Properties/DINOSAUR.properties"));

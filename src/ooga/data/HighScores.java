@@ -22,7 +22,7 @@ public class HighScores {
         for(int i = 1; i<= scores.keySet().size(); i++){
             String key = String.format("%d", i);
             String value = scores.getString(key);
-            list.add(new Score(value, version));
+            list.add(new Score(value));
         }
         list.sort(Score.SCORE_COMPARATOR);
     }
