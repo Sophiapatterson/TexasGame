@@ -136,7 +136,7 @@ public class JetpackGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage));
+            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "JETPACK"));
         }
     }
 

@@ -142,6 +142,7 @@ public class FlappyGameWorld {
         if(gameManager.isGameOver()) {
             myAnimation.stop();
             myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "FLAPPY"));
+            endScreen.checkandSetDarkMode(myStage);
         }
     }
 

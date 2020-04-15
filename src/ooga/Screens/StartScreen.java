@@ -41,8 +41,9 @@ public class StartScreen extends Screen {
         Button darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
         darkMode.setId("darkmodebutton");
         darkMode.setOnAction(e -> {
-            //setUserAgentStylesheet("dark-theme.css");
-            myStage.getScene().getStylesheets().add("dark-theme.css");
+            setisDarkMode(true);
+            checkandSetDarkMode(myStage);
+            System.out.println(getIsDarkMode());
         });
         return darkMode;
     }
@@ -55,6 +56,8 @@ public class StartScreen extends Screen {
         start.setId("startbutton");
         start.setOnAction(e -> {
             myStage.setScene(changescreen.createChangeScreen(myStage));
+            checkandSetDarkMode(myStage);
+            System.out.println(getIsDarkMode());
         });
         Button quit = quitButton();
         Button darkMode = darkModeButton();

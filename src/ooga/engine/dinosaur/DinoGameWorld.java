@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.DinoPlayerView;
+import ooga.Screens.Screen;
 import ooga.data.DinoGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
@@ -143,6 +144,7 @@ public class DinoGameWorld {
         if(gameManager.isGameOver()) {
             myAnimation.stop();
             myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "DINOSAUR"));
+            endScreen.checkandSetDarkMode(myStage);
         }
     }
 
