@@ -28,11 +28,11 @@ public class FlappyGameManager extends GameManager {
 
     @Override
     public void handleCollisions() {
-//        for(Enemy pipe: pipes) {
-//            if(pipe.collide(bird)) {
-//                gameOver = true;
-//            }
-//        }
+        for(Enemy pipe: pipes) {
+            if(pipe.collide(bird)) {
+                gameOver = true;
+            }
+        }
     }
 
     @Override

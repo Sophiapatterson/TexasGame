@@ -28,4 +28,9 @@ public class EnemyView {
     public ImageView getEnemyImage(){
         return enemyImage;
     }
+
+    public void setWidthAndHeight(double width, double height) {
+        enemyImage.setFitWidth(width);
+        enemyImage.setFitHeight(height);
+    }
 }

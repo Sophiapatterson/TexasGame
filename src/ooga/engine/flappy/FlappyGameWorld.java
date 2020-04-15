@@ -13,10 +13,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.Screens.BirdPlayerView;
-import ooga.Screens.ChangeScreen;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
-import ooga.data.GameConfiguration;
+import ooga.data.DinoGameConfiguration;
+import ooga.data.FlappyGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;
@@ -46,7 +46,7 @@ public class FlappyGameWorld {
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
-    private GameConfiguration gameConfig;
+    private FlappyGameConfiguration gameConfig;
     private Text myScoreText = new Text();
     private EndScreen endScreen;
     private Stage myStage;
@@ -57,7 +57,7 @@ public class FlappyGameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
+        gameConfig = new FlappyGameConfiguration(Paths.get(CSVfilepath));
         addBird(root);
         addEnemies(root);
         addPowerups(root);
@@ -78,11 +78,11 @@ public class FlappyGameWorld {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
-            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), FLOOR_HEIGHT);
+            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), -500);
+            tempPipeView.setWidthAndHeight(500, 500);
             tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
             root.getChildren().add(tempPipeView.getEnemyImage());
-
         }
     }
 

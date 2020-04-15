@@ -15,7 +15,7 @@ import javafx.util.Duration;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.DinoPlayerView;
-import ooga.data.GameConfiguration;
+import ooga.data.DinoGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Powerup;
@@ -49,7 +49,7 @@ public class DinoGameWorld {
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
-    private GameConfiguration gameConfig;
+    private DinoGameConfiguration gameConfig;
     private Text myScoreText = new Text();
     private EndScreen endScreen;
     private Stage myStage;
@@ -60,7 +60,7 @@ public class DinoGameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        gameConfig = new GameConfiguration(Paths.get(CSVfilepath));
+        gameConfig = new DinoGameConfiguration(Paths.get(CSVfilepath));
         addDino(root);
         addEnemies(root);
         addPowerups(root);
