@@ -2,8 +2,6 @@ package ooga.engine.game;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 
 public abstract class Enemy implements Collidable, Scrolling {
@@ -32,5 +30,7 @@ public abstract class Enemy implements Collidable, Scrolling {
     public abstract double getXPos();
     public abstract double getYPos();
 
+    public abstract String getImage();
 
+    public abstract void setStandardY();
 }

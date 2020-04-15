@@ -11,93 +11,59 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.engine.dinosaur.DinoGameWorld;
-import ooga.engine.flappy.FlappyGameWorld;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.dinosaur.DinoGameWorld.DINO_IMAGE;
 import static ooga.engine.jetpack.JetpackGameWorld.BARRY_IMAGE;
 
-public class ChangeScreen extends Screen {
-    //private static final String DINO_IMAGE = "dino_trexx.png";
-    private ResourceBundle changeResources;
+public class TutorialScreen extends Screen {
+
     public static final int SCREEN_WIDTH = 850;
     public static final int SCREEN_HEIGHT = 600;
-    public static final Paint BACKGROUND = Color.AZURE;
     public static final Color SCREEN_COLOR = Color.GOLD;
-    private Text title;
     private Stage myStage;
-    private DinoGameWorld dinogame;
+    private Text title;
     private final String screenCSS = "Styling/Screen.css";
-    private FlappyGameWorld flappygame;
 
-    public ChangeScreen(){
+    public TutorialScreen(){
         myStage = new Stage();
-        dinogame = new DinoGameWorld();
-        flappygame = new FlappyGameWorld();
-        changeResources = ResourceBundle.getBundle("ooga.Screens.Properties.ChangeScreen");
         title = initTitle();
     }
 
-    public Scene createChangeScreen(Stage currentstage){
+    public Scene createTutorial(Stage currentstage){
         myStage = currentstage;
-        VBox changerlayout = new VBox();
-        initLayout(changerlayout);
-        Button dinosaur = new Button(changeResources.getString("DINO-MESSAGE"));
+        VBox tutoriallayout = new VBox();
+        initLayout(tutoriallayout);
+        Button dinosaur = new Button("Dinosaur Tutorial");
         dinosaur.setId("dino");
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         dinosaur.setGraphic(createButtonImage(dinoimage));
         dinosaur.setOnAction(e -> {
-            try {
-                myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            dinogame.setUpAnimation();
+            myStage.setScene(placeholderScene());
         });
-        Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
+        Button flappy = new Button("Flappy Tutorial");
         flappy.setId("flappybird");
         Image flappyimage = new Image(getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         flappy.setGraphic(createButtonImage(flappyimage));
         flappy.setOnAction(e -> {
-            try {
-                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            flappygame.setUpAnimation();
+            myStage.setScene(placeholderScene());
         });
-        Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
+        Button jetpack = new Button("Jetpack Tutorial");
         jetpack.setId("jet");
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
         jetpack.setGraphic(createButtonImage(jetimage));
         jetpack.setOnAction(e -> {
             myStage.setScene(placeholderScene());
         });
-        title.setText(changeResources.getString("CHOOSE-MESSAGE"));
+        title.setText("Tutorial Chooser");
         title.getStyleClass().add("titletxt");
-        changerlayout.getChildren().addAll(title, dinosaur, flappy, jetpack);
-        Scene ChangeScreen = new Scene(changerlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
-        return ChangeScreen;
-    }
-
-    public ImageView createButtonImage(Image gameimage){
-        return super.createButtonImage(gameimage);
-    }
-    public Scene placeholderScene(){
-        VBox placeholder = new VBox();
-        initLayout(placeholder);
-        Text holdertext = new Text();
-        holdertext.setText("This is a placeholder for the game screens");
-        placeholder.getChildren().add(holdertext);
-        Scene PlaceHolder = new Scene(placeholder, SCREEN_WIDTH, SCREEN_HEIGHT);
-        return PlaceHolder;
+        tutoriallayout.getChildren().addAll(title, dinosaur, flappy, jetpack);
+        Scene TutorialScreen = new Scene(tutoriallayout, SCREEN_WIDTH, SCREEN_HEIGHT);
+        return TutorialScreen;
     }
 
     public void initLayout(VBox layout) {
@@ -107,5 +73,21 @@ public class ChangeScreen extends Screen {
     @Override
     public Text initTitle() {
         return super.initTitle();
+    }
+
+    @Override
+    public ImageView createButtonImage(Image gameimage) {
+        return super.createButtonImage(gameimage);
+    }
+
+    //Delete once we have the tutorials
+    public Scene placeholderScene(){
+        VBox placeholder = new VBox();
+        initLayout(placeholder);
+        Text holdertext = new Text();
+        holdertext.setText("This is a placeholder for the tutorial screens");
+        placeholder.getChildren().add(holdertext);
+        Scene PlaceHolder = new Scene(placeholder, SCREEN_WIDTH, SCREEN_HEIGHT);
+        return PlaceHolder;
     }
 }

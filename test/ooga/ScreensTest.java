@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import ooga.Screens.ChangeScreen;
 import ooga.Screens.EndScreen;
 import ooga.Screens.StartScreen;
+import ooga.Screens.TutorialScreen;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.matcher.base.WindowMatchers;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ScreensTest extends DukeApplicationTest{
+    private TutorialScreen tutorialscreen;
     private ChangeScreen changescreen;
     private EndScreen endscreen;
     private Stage myStage;
@@ -39,10 +41,13 @@ public class ScreensTest extends DukeApplicationTest{
             @Override
             public void run() {
                 changescreen = new ChangeScreen();
+                tutorialscreen = new TutorialScreen();
                 Button start = lookup("#startbutton").query();
+                Button tutorial = lookup("#tutorial").query();
                 Button quit = lookup("#quitbutton").query();
                 Text title = lookup("#Title").query();
                 assertEquals("Start Game",start.getText());
+                assertEquals("Tutorial",tutorial.getText());
                 assertEquals("Quit Game",quit.getText());
                 assertEquals("Welcome to TEXAS",title.getText());
                 Parent change = changescreen.createChangeScreen(myStage).getRoot();
@@ -50,8 +55,44 @@ public class ScreensTest extends DukeApplicationTest{
                 for(int i = 0; i<change.getChildrenUnmodifiable().size(); i++){
                     assertEquals(change.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
                 }
+                tutorial.fire();
+                Parent tutorialroot = tutorialscreen.createTutorial(myStage).getRoot();
+                for(int i = 0; i<tutorialroot.getChildrenUnmodifiable().size(); i++){
+                    assertEquals(tutorialroot.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
+                }
             }
         });
+    }
+
+    @Test
+    void testTutorialScreen(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showTutorialScreen();
+                tutorialscreen = new TutorialScreen();
+                Button dinosaur = lookup("#dino").query();
+                Button flappy = lookup("#flappybird").query();
+                Button jetpack = lookup("#jet").query();
+                Text title = lookup("#Title").query();
+                assertEquals("Dinosaur Tutorial",dinosaur.getText());
+                assertEquals("Flappy Tutorial",flappy.getText());
+                assertEquals("Jetpack Tutorial",jetpack.getText());
+                assertEquals("Tutorial Chooser",title.getText());
+                Parent placeholder = tutorialscreen.placeholderScene().getRoot();
+                dinosaur.fire();
+                for(int i = 0; i<placeholder.getChildrenUnmodifiable().size(); i++){
+                    assertEquals(placeholder.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
+                }
+            }
+        });
+    }
+
+    private void showTutorialScreen(){
+        tutorialscreen = new TutorialScreen();
+        Scene tutorialscene = tutorialscreen.createTutorial(myStage);
+        myStage.setScene(tutorialscene);
+        myStage.show();
     }
 
     @Test
@@ -68,10 +109,7 @@ public class ScreensTest extends DukeApplicationTest{
                 assertEquals("Flappy Bird",flappy.getText());
                 assertEquals("Jetpack Joyride",jetpack.getText());
                 assertEquals("Choose A Game",title.getText());
-                /**flappy.fire();
-                for(int i = 0; i<phscreen.getChildrenUnmodifiable().size(); i++){
-                    assertEquals(phscreen.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
-                }*/
+
                 jetpack.fire();
                 Parent phscreen = changescreen.placeholderScene().getRoot();
                 for(int i = 0; i<phscreen.getChildrenUnmodifiable().size(); i++){
@@ -112,8 +150,8 @@ public class ScreensTest extends DukeApplicationTest{
     }
 
     private void showEndScreen(){
-        endscreen = new EndScreen();
-        Scene endscene = endscreen.createEndScreen(myStage, 400, "DINOSAUR");
+        endscreen = new EndScreen("Dinosaur");
+        Scene endscene = endscreen.createEndScreen(myStage, 400);
         myStage.setScene(endscene);
         myStage.show();
     }
@@ -141,7 +179,7 @@ public class ScreensTest extends DukeApplicationTest{
     }
 
     private void showCreditsScreen(){
-        endscreen = new EndScreen();
+        endscreen = new EndScreen("Dinosaur");
         Scene credits = endscreen.createCredits(myStage);
         myStage.setScene(credits);
         myStage.show();

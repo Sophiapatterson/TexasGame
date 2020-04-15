@@ -33,6 +33,7 @@ public class JetpackGameWorld {
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     //placeholder for images
+    public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -49,7 +50,7 @@ public class JetpackGameWorld {
     private Scene myScene;
 
     public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
-        endScreen = new EndScreen();
+        endScreen = new EndScreen("Jetpack");
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
@@ -136,8 +137,7 @@ public class JetpackGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "JETPACK"));
-            endScreen.checkandSetDarkMode(myStage);
+//            myStage.setScene(endScreen.createEndScreen(myStage));
         }
     }
 

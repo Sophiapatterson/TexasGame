@@ -16,7 +16,6 @@ import ooga.Screens.BirdPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.StartScreen;
-import ooga.data.DinoGameConfiguration;
 import ooga.data.FlappyGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
@@ -32,10 +31,10 @@ public class FlappyGameWorld {
     public static final double FLOOR_HEIGHT = 450;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String BIRD_IMAGE  = "flappy_yellowbird.png";
-    public static final String BACKGROUND_IMAGE = "flappy_background.png";
-    public static final String PIPE_IMAGE = "flappy_pipe.png";
+    public static final String BIRD_IMAGE  = "Sprites/flappy_yellowbird.png";
+    public static final String BACKGROUND_IMAGE = "Sprites/flappy_background.png";
     private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
+    private static final String VERSION_NAME = "Flappy";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -54,7 +53,7 @@ public class FlappyGameWorld {
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
-        endScreen = new EndScreen();
+        endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
@@ -79,7 +78,7 @@ public class FlappyGameWorld {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
-            EnemyView tempPipeView = new EnemyView(new Image(PIPE_IMAGE), pipe.getXPos(), pipe.getYPos());
+            EnemyView tempPipeView = new EnemyView(new Image(pipe.getImage()), pipe.getXPos(), pipe.getYPos());
             tempPipeView.setWidthAndHeight(100, 550);
             tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
@@ -141,8 +140,7 @@ public class FlappyGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "FLAPPY"));
-            endScreen.checkandSetDarkMode(myStage);
+            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
 

@@ -35,9 +35,9 @@ public class DinoGameWorld {
     public static final double FLOOR_HEIGHT = 275;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String DINO_IMAGE  = "dino_trexx.png";
-    public static final String HORIZON_IMAGE = "dino_horizon.png";
-    public static final String SMALLCACTUS_IMAGE = "dino_smallcactusgroup.png";
+    private static final String VERSION_NAME = "Dinosaur";
+    public static final String DINO_IMAGE  = "Sprites/dino_trexx.png";
+    public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
     private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
@@ -57,7 +57,7 @@ public class DinoGameWorld {
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
-        endScreen = new EndScreen();
+        endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
@@ -82,7 +82,7 @@ public class DinoGameWorld {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy cactus : enemies){
-            EnemyView tempCacView = new EnemyView(new Image(SMALLCACTUS_IMAGE), cactus.getXPos(), FLOOR_HEIGHT);
+            EnemyView tempCacView = new EnemyView(new Image(cactus.getImage()), cactus.getXPos(), FLOOR_HEIGHT);
             tempCacView.setProperties(cactus);
             enemiesView.add(tempCacView);
             root.getChildren().add(tempCacView.getEnemyImage());
@@ -143,9 +143,7 @@ public class DinoGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore(), "DINOSAUR"));
-            endScreen.checkandSetDarkMode(myStage);
-            System.out.println(endScreen.getIsDarkMode());
+            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
 

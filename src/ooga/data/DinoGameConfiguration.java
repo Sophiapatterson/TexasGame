@@ -2,6 +2,7 @@ package ooga.data;
 
 import ooga.engine.dinosaur.Cactus;
 import ooga.engine.dinosaur.DinoGameWorld;
+import ooga.engine.flappy.Pipe;
 import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
@@ -13,17 +14,13 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Basic file reading for creating CSV-defined game objects to be used in a GameWorld (?)
- */
-public class DinoGameConfiguration {
+public class DinoGameConfiguration extends GameConfiguration {
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;
     private List<Powerup> allPU;
     private int length;
 
     public DinoGameConfiguration(Path path) throws IOException {
-
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
@@ -40,48 +37,24 @@ public class DinoGameConfiguration {
         length = Integer.parseInt(lines.get(0));
         lines.remove(0);
 
-        int countCol = 0;
-        int totalRow = lines.size();
-        int countRow = 0;
-        int totalCols = 0;
-        double xCoef;
-        int yCoef;
-        int val;
+        parseCSV(lines);
+    }
 
-        for(int i = 0; i<lines.size(); i++){
-            array = lines.get(i).split(",");
-            if(array.length == 0) break;
-            totalCols = array.length;
-            for(String element: array){
-                if(element.isEmpty()) break;
-                val = Integer.parseInt(element);
-                xCoef= (double)countCol/totalCols;
-                yCoef = countRow/totalRow;
+    @Override
+    public void makeCoin(double xCoef) {
+        Coin pu = new Coin();
+        pu.setX(xCoef*length);
+        scrollers.add(pu);
+        allPU.add(pu);
+    }
 
-                //TODO Decide between an approach below: setting locations with ratio or coordinate?
-                if(val == 1){
-                    Cactus cac = new Cactus(500, DinoGameWorld.FLOOR_HEIGHT + 15);
-                    cac.setXPos(xCoef*length);
-                    //cac.setY(cac.getY()*yCoef);
-                    scrollers.add(cac);
-                    allEnemies.add(cac);
-                }
-
-                if(val == 3){
-                    Coin coin = new Coin();
-                    coin.setX(xCoef*length);
-                    //cac.setY(cac.getY()*yCoef);
-                    scrollers.add(coin);
-                    allPU.add(coin);
-                }
-                //TODO Implement other classes if that's ok design
-
-                countCol++;
-            }
-            countCol=0;
-            countRow++;
-        }
-
+    @Override
+    public void makeEnemy(double xCoef){
+        Cactus c = new Cactus();
+        c.setStandardY();
+        c.setXPos(xCoef*length);
+        scrollers.add(c);
+        allEnemies.add(c);
     }
 
     //TODO is this allowed idk
