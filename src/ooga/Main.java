@@ -13,7 +13,6 @@ import static javafx.application.Application.launch;
 public class Main extends Application {
 
     private Stage myStage;
-    private boolean isDarkMode;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static void main (String[] args) {
@@ -28,7 +27,6 @@ public class Main extends Application {
         Scene firstscene = startScreen.createStartScreen(myStage);
         myStage.setScene(firstscene);
         startScreen.setOnDarkMode(e -> {
-            isDarkMode = true;
             Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
             com.sun.javafx.css.StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/dark-theme.css").toString());
         });

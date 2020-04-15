@@ -27,13 +27,16 @@ public class JetpackGameWorld {
     public static final double FLOOR_HEIGHT = 275;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    //placeholder for images
+    public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
+    public static final String AIRBORNE_BARRY_IMAGE = "Sprites/jetpack_airbornBarry.png";
+    public static final String LASER_IMAGE = "Sprites/jetpack_laser.png";
+    public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
+    public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
     private JetpackPlayer myPlayer;
-    //placeholder for jetpackplayerview
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
@@ -85,7 +88,7 @@ public class JetpackGameWorld {
     }
 
     private void addBarry(Group root) {
-        Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
+        Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));
         myPlayer = new JetpackPlayer(100, 250);
         myPlayerView = new JetpackPlayerView(barryImage, 100, FLOOR_HEIGHT);
         myPlayerView.setProperties(myPlayer);
