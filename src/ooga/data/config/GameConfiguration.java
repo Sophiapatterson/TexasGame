@@ -18,7 +18,7 @@ public abstract class GameConfiguration {
         int countRow = 0;
         int totalCols = 0;
         double xCoef;
-        int yCoef;
+        double yCoef;
         String val;
 
         for(int i = 0; i<lines.size(); i++){
@@ -29,14 +29,14 @@ public abstract class GameConfiguration {
                 if(element.isEmpty()) break;
                 val = element;
                 xCoef= (double)countCol/totalCols;
-                yCoef = countRow/totalRow;
+                yCoef = (double)countRow/totalRow;
 
                 if(val.equals(ENEMY_VALUE)){
-                    makeEnemy(xCoef);
+                    makeEnemy(xCoef, yCoef);
                 }
 
                 if(val.equals(COIN_VALUE)){
-                    makeCoin(xCoef);
+                    makeCoin(xCoef, yCoef);
                 }
 
                 countCol++;
@@ -46,8 +46,8 @@ public abstract class GameConfiguration {
         }
     }
 
-    public abstract void makeCoin(double xCoef);
-    public abstract void makeEnemy(double xCoef);
+    public abstract void makeCoin(double xCoef, double yCoef);
+    public abstract void makeEnemy(double xCoef, double yCoef);
 
     //TODO is this allowed idk
     public abstract List<Scrolling> getScrollers();

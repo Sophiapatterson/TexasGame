@@ -61,6 +61,7 @@ public class JetpackGameManager extends GameManager {
             player.jump();
         }
         else {
+            player.resetJumpStrength();
             player.setYPos(floorY);
         }
     }

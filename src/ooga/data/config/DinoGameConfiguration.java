@@ -39,7 +39,7 @@ public class DinoGameConfiguration extends GameConfiguration {
     }
 
     @Override
-    public void makeCoin(double xCoef) {
+    public void makeCoin(double xCoef, double yCoef) {
         Coin pu = new Coin();
         pu.setX(xCoef*length);
         scrollers.add(pu);
@@ -47,7 +47,7 @@ public class DinoGameConfiguration extends GameConfiguration {
     }
 
     @Override
-    public void makeEnemy(double xCoef){
+    public void makeEnemy(double xCoef, double yCoef){
         Cactus c = new Cactus();
         c.setStandardY();
         c.setXPos(xCoef*length);
