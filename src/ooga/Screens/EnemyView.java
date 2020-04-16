@@ -32,4 +32,5 @@ public class EnemyView {
         enemyImage.setFitWidth(width);
         enemyImage.setFitHeight(height);
     }
+
 }

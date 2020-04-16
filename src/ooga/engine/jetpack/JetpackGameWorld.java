@@ -86,6 +86,7 @@ public class JetpackGameWorld {
         for (Enemy enemy : enemies){
             EnemyView tempEnemyView = new EnemyView(new Image(ZAPPER_IMAGE), enemy.getXPos(), enemy.getYPos());
             tempEnemyView.setProperties(enemy);
+            tempEnemyView.setWidthAndHeight(40, 180);
             enemiesView.add(tempEnemyView);
             root.getChildren().add(tempEnemyView.getEnemyImage());
         }

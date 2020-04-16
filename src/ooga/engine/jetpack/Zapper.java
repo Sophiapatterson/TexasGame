@@ -12,8 +12,11 @@ public class Zapper extends Enemy {
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     public static final double X_OFFSET = 40;
-    public static final double Y_OFFSET = 50;
+    public static final double Y_OFFSET = 180;
+    //public static final double X_OFFSET = 40;
+    //public static final double Y_OFFSET = 50;
     private double standardY = 0;
+    private int playerOffset = 40;
 
     public Zapper(double x, double y) {
         super();
@@ -27,7 +30,7 @@ public class Zapper extends Enemy {
 
     public boolean collide(Player player) {
         boolean xTouch = ((player.getXPos() >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET) || (player.getXPos()+X_OFFSET >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET));
-        boolean yTouch = ((player.getYPos() >= this.getYPos() && player.getYPos() <= this.getYPos()+Y_OFFSET) || (player.getYPos()+Y_OFFSET >= this.getYPos() && player.getYPos() <= this.getYPos()+Y_OFFSET));
+        boolean yTouch = ((player.getYPos() >= this.getYPos() && player.getYPos() <= this.getYPos()+Y_OFFSET) || (player.getYPos()+playerOffset >= this.getYPos() && player.getYPos() <= this.getYPos()+Y_OFFSET));
         return (xTouch && yTouch);
     }
 
