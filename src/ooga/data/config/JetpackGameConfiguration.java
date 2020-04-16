@@ -39,7 +39,7 @@ public class JetpackGameConfiguration extends GameConfiguration {
     public void makeCoin(double xCoef, double yCoef) {
         Coin pu = new Coin();
         pu.setX(xCoef*length);
-        pu.setX(yCoef*600);
+        pu.setY(yCoef*600);
         scrollers.add(pu);
         allPU.add(pu);
     }
