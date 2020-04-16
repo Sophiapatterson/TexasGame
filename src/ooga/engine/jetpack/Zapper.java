@@ -27,7 +27,7 @@ public class Zapper extends Enemy {
 
     public boolean collide(Player player) {
         boolean xTouch = ((player.getXPos() >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET) || (player.getXPos()+X_OFFSET >= this.getXPos() && player.getXPos() <= this.getXPos()+X_OFFSET));
-        boolean yTouch = player.getYPos()+Y_OFFSET >= this.getYPos();
+        boolean yTouch = ((player.getYPos() >= this.getYPos() && player.getYPos() <= this.getYPos()+Y_OFFSET) || (player.getYPos()+Y_OFFSET >= this.getYPos() && player.getYPos() <= this.getYPos()+Y_OFFSET));
         return (xTouch && yTouch);
     }
 

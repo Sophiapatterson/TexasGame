@@ -39,7 +39,7 @@ public class JetpackGameConfiguration extends GameConfiguration {
     public void makeCoin(double xCoef, double yCoef) {
         Coin pu = new Coin();
         pu.setX(xCoef*length);
-        pu.setX(yCoef*length);
+        pu.setX(yCoef*600);
         scrollers.add(pu);
         allPU.add(pu);
     }
@@ -49,7 +49,6 @@ public class JetpackGameConfiguration extends GameConfiguration {
         Zapper z = new Zapper();
         z.setXPos(xCoef*length);
         z.setYPos(yCoef*600);
-        //System.out.println("made enemy at x: "+z.getXPos()+" and y: "+z.getYPos());
         scrollers.add(z);
         allEnemies.add(z);
     }
