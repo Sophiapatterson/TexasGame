@@ -76,7 +76,7 @@ public class JetpackGameWorld {
     }
 
     private void addEnemies(Group root) throws IOException {
-        //enemies = new ArrayList<>(gameConfig.getEnemies()); use jetpack gameconfig once implemented
+        enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         //Add for loop for the enemies once images are added
         /**for (Enemy cactus : enemies){
