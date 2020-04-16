@@ -65,7 +65,7 @@ public class JetpackGameWorld {
         gameConfig = new JetpackGameConfiguration(Paths.get(CSVfilepath));
         addBarry(root);
         addEnemies(root);
-       // addPowerups(root);
+        addPowerups(root);
         gameManager = new JetpackGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
@@ -110,7 +110,7 @@ public class JetpackGameWorld {
         imageView.setY(0);
         imageView.setFitHeight(IMAGE_HEIGHT);
         imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
-        //imageView.setPreserveRatio(true);
+        imageView.setPreserveRatio(true);
         return imageView;
     }
 
@@ -131,16 +131,16 @@ public class JetpackGameWorld {
         }
 
         //move the powerups
-       // for(Powerup pu: powerups) {
-       //     pu.move();
-       // }
+        for(Powerup pu: powerups) {
+            pu.move();
+        }
 
         //increment score
         gameManager.tick();
 
         // collisions
         gameManager.handleCollisions();
-       // gameManager.handlePowerups();
+        gameManager.handlePowerups();
 
         //update score
         myScoreText.setText(""+gameManager.getScore());
@@ -153,6 +153,7 @@ public class JetpackGameWorld {
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
+            myPlayer.resetJumpStrength();
             myPlayer.jump();
         }
     }
