@@ -25,4 +25,5 @@ public abstract class Player implements Gravity {
     public abstract DoubleProperty getXProperty();
 
     public abstract DoubleProperty getYProperty();
+
 }

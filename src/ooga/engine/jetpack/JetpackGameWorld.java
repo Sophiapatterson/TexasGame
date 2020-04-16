@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import ooga.Screens.JetpackPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
+import ooga.Screens.StartScreen;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
@@ -27,16 +28,19 @@ import java.util.List;
 
 public class JetpackGameWorld {
 
-    public static final double FLOOR_HEIGHT = 275;
+    public static final double FLOOR_HEIGHT =400;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
+    public static final String BACKGROUND_IMAGE = "Sprites/jetpack_background.png";
+    public static final String FLAPPY_BG_IMAGE = "Sprites/flappy_background.png";
     public static final String AIRBORNE_BARRY_IMAGE = "Sprites/jetpack_airbornBarry.png";
     public static final String LASER_IMAGE = "Sprites/jetpack_laser.png";
     public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
     public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
+    public static final int IMAGE_HEIGHT = 695;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
-    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
+    private static final String CSVfilepath = "data/CSV configurations/Jetpack_Level.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -76,37 +80,39 @@ public class JetpackGameWorld {
     }
 
     private void addEnemies(Group root) throws IOException {
-        //enemies = new ArrayList<>(gameConfig.getEnemies()); use jetpack gameconfig once implemented
+        enemies = new ArrayList<>(gameConfig.getEnemies()); //use jetpack gameconfig once implemented
         enemiesView = new ArrayList<>();
         //Add for loop for the enemies once images are added
-        /**for (Enemy cactus : enemies){
-            EnemyView tempCacView = new EnemyView(new Image(SMALLCACTUS_IMAGE), cactus.getXPos(), FLOOR_HEIGHT);
-            tempCacView.setProperties(cactus);
-            enemiesView.add(tempCacView);
-            root.getChildren().add(tempCacView.getEnemyImage());
-        }*/
+        for (Enemy enemy : enemies){
+            EnemyView tempEnemyView = new EnemyView(new Image(ZAPPER_IMAGE), enemy.getXPos(), enemy.getYPos());
+            tempEnemyView.setProperties(enemy);
+            tempEnemyView.setWidthAndHeight(40, 180);
+            enemiesView.add(tempEnemyView);
+            root.getChildren().add(tempEnemyView.getEnemyImage());
+        }
     }
 
     private void addPowerups(Group root) throws IOException {
-        //powerups = new ArrayList<>(gameConfig.getPowerups()); use jetpack gameconfig once implemented
+        powerups = new ArrayList<>(gameConfig.getPowerups()); //use jetpack gameconfig once implemented
         root.getChildren().addAll(powerups);
     }
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));
-        myPlayer = new JetpackPlayer(100, 250);
-        myPlayerView = new JetpackPlayerView(barryImage, 100, FLOOR_HEIGHT);
+        myPlayer = new JetpackPlayer(10, FLOOR_HEIGHT);
+        myPlayerView = new JetpackPlayerView(barryImage, 10, FLOOR_HEIGHT);
         myPlayerView.setProperties(myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
     private ImageView getImageView() {
-        //Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(HORIZON_IMAGE)); use background image once added
-        //ImageView imageView = new ImageView(image);
-        //imageView.setY(320);
-        //imageView.setPreserveRatio(true);
-        //return imageView;
-        return null; //remove once method is complete
+        Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BACKGROUND_IMAGE));
+        ImageView imageView = new ImageView(image);
+        imageView.setY(0);
+        imageView.setFitHeight(IMAGE_HEIGHT);
+        imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
 
     public void setUpAnimation(){
@@ -117,6 +123,7 @@ public class JetpackGameWorld {
     }
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
+
         gameManager.handleJump(FLOOR_HEIGHT);
 
         // move the enemies
@@ -147,6 +154,7 @@ public class JetpackGameWorld {
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
+            myPlayer.resetJumpStrength();
             myPlayer.jump();
         }
     }
