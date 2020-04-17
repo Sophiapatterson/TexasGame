@@ -109,12 +109,6 @@ public class ScreensTest extends DukeApplicationTest{
                 assertEquals("Flappy Bird",flappy.getText());
                 assertEquals("Jetpack Joyride",jetpack.getText());
                 assertEquals("Choose A Game",title.getText());
-
-                jetpack.fire();
-                Parent phscreen = changescreen.placeholderScene().getRoot();
-                for(int i = 0; i<phscreen.getChildrenUnmodifiable().size(); i++){
-                    assertEquals(phscreen.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
-                }
             }
         });
     }

@@ -12,10 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.Screens.EndScreen;
-import ooga.Screens.EnemyView;
-import ooga.Screens.DinoPlayerView;
-import ooga.Screens.PowerupView;
+import ooga.Screens.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.game.Enemy;
@@ -41,7 +38,8 @@ public class DinoGameWorld {
     private static final String VERSION_NAME = "Dinosaur";
     public static final String DINO_IMAGE  = "Sprites/dino_trexx.png";
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
-    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String LevelOne = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -56,17 +54,29 @@ public class DinoGameWorld {
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private GameConfiguration gameConfig;
+    private TutorialScreen tutorialscreen;
     private Text myScoreText = new Text();
     private EndScreen endScreen;
     private Stage myStage;
+    private List<Text> tutorialtext;
+    private boolean tutorialcheck;
+    private Group root;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
+        tutorialcheck = tutorial;
+        tutorialscreen = new TutorialScreen();
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
-        Group root = new Group(imageView);
-        gameConfig = new DinoGameConfiguration(Paths.get(CSVfilepath));
+        root = new Group(imageView);
+        if(tutorialcheck){
+            gameConfig = new DinoGameConfiguration(Paths.get(TutorialCSV));
+            addText(root);
+        }
+        else{
+            gameConfig = new DinoGameConfiguration(Paths.get(LevelOne));
+        }
         addDino(root);
         addEnemies(root);
         addPowerups(root);
@@ -92,7 +102,6 @@ public class DinoGameWorld {
             tempCacView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             enemiesView.add(tempCacView);
             root.getChildren().add(tempCacView.getEnemyImage());
-
         }
     }
 
@@ -114,6 +123,17 @@ public class DinoGameWorld {
         myPlayerView = new DinoPlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setProperties((DinoPlayer) myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
+    }
+
+    private void addText(Group root){
+        tutorialtext = new ArrayList<>();
+        Text first = new Text(50, 100, "Press Space to jump over the cactus!");
+        Text second = new Text(50, 100, "Good job! Try that again!");
+        Text third = new Text(50, 100, "Great! Now try to get that coin!");
+        tutorialtext.add(first);
+        tutorialtext.add(second);
+        tutorialtext.add(third);
+        root.getChildren().add(first);
     }
 
     private ImageView getImageView() {
@@ -139,6 +159,25 @@ public class DinoGameWorld {
             enemy.move();
         }
 
+        if(tutorialcheck){
+            if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
+                if(root.getChildren().contains(tutorialtext.get(0))){
+                    root.getChildren().remove(tutorialtext.get(0));
+                }
+                if(!root.getChildren().contains(tutorialtext.get(1))){
+                    root.getChildren().add(tutorialtext.get(1));
+                }
+            }
+            else if(myPlayer.getXPos()>enemies.get(1).getXPos()){
+                if(root.getChildren().contains(tutorialtext.get(1))){
+                    root.getChildren().remove(tutorialtext.get(1));
+                }
+                if(!root.getChildren().contains(tutorialtext.get(2))){
+                    root.getChildren().add(tutorialtext.get(2));
+                }
+            }
+        }
+
 //        move the powerups
         for(Powerup pu: powerups) {
             pu.move();
@@ -155,8 +194,14 @@ public class DinoGameWorld {
         myScoreText.setText(""+gameManager.getScore());
 
         if(gameManager.isGameOver()) {
-            myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            if(tutorialcheck){
+                myAnimation.stop();
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
+            }
+            else{
+                myAnimation.stop();
+                myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            }
         }
     }
 
