@@ -70,9 +70,8 @@ public class DinoGameWorld {
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
-        //Group root = new Group(imageView);
         root = new Group(imageView);
-        if(tutorial){
+        if(tutorialcheck){
             gameConfig = new DinoGameConfiguration(Paths.get(TutorialCSV));
             addText(root);
         }
@@ -104,7 +103,6 @@ public class DinoGameWorld {
             tempCacView.setWidthAndHeight(CACTUS_VIEW_SIZE, CACTUS_VIEW_SIZE);
             enemiesView.add(tempCacView);
             root.getChildren().add(tempCacView.getEnemyImage());
-
         }
     }
 
@@ -131,20 +129,12 @@ public class DinoGameWorld {
     private void addText(Group root){
         tutorialtext = new ArrayList<>();
         Text first = new Text(50, 100, "Press Space to jump over the cactus!");
+        Text second = new Text(50, 100, "Good job! Try that again!");
+        Text third = new Text(50, 100, "Great! Now try to get that coin!");
         tutorialtext.add(first);
+        tutorialtext.add(second);
+        tutorialtext.add(third);
         root.getChildren().add(first);
-    }
-
-    private void tutorialAddRemove(int i){
-        if(i == 1){
-            Text second = new Text(50, 100, "Good job! Try that again!");
-            tutorialtext.add(second);
-        }
-        if(i == 2){
-            Text third = new Text(50, 100, "Great! Now try to get that coin!");
-            tutorialtext.add(third);
-        }
-        root.getChildren().add(tutorialtext.get(i));
     }
 
     private ImageView getImageView() {
@@ -170,10 +160,20 @@ public class DinoGameWorld {
             enemy.move();
         }
         if(tutorialcheck){
-            for(int i = 0; i<enemies.size(); i++){
-                if(myPlayer.getXPos()>enemies.get(i).getXPos()){
-                    root.getChildren().remove(tutorialtext.get(i));
-                    tutorialAddRemove(i+1);
+            if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
+                if(root.getChildren().contains(tutorialtext.get(0))){
+                    root.getChildren().remove(tutorialtext.get(0));
+                }
+                if(!root.getChildren().contains(tutorialtext.get(1))){
+                    root.getChildren().add(tutorialtext.get(1));
+                }
+            }
+            else if(myPlayer.getXPos()>enemies.get(1).getXPos()){
+                if(root.getChildren().contains(tutorialtext.get(1))){
+                    root.getChildren().remove(tutorialtext.get(1));
+                }
+                if(!root.getChildren().contains(tutorialtext.get(2))){
+                    root.getChildren().add(tutorialtext.get(2));
                 }
             }
         }
