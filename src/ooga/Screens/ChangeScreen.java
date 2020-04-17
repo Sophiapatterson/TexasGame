@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.FlappyGameWorld;
+import ooga.engine.jetpack.JetpackGameWorld;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -36,11 +37,13 @@ public class ChangeScreen extends Screen {
     private DinoGameWorld dinogame;
     private final String screenCSS = "Styling/Screen.css";
     private FlappyGameWorld flappygame;
+    private JetpackGameWorld jetpackgame;
 
     public ChangeScreen(){
         myStage = new Stage();
         dinogame = new DinoGameWorld();
         flappygame = new FlappyGameWorld();
+        jetpackgame = new JetpackGameWorld();
         changeResources = ResourceBundle.getBundle("ooga.Screens.Properties.ChangeScreen");
         title = initTitle();
     }
@@ -78,7 +81,12 @@ public class ChangeScreen extends Screen {
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
         jetpack.setGraphic(createButtonImage(jetimage));
         jetpack.setOnAction(e -> {
-            myStage.setScene(placeholderScene());
+            try {
+                myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            jetpackgame.setUpAnimation();
         });
         title.setText(changeResources.getString("CHOOSE-MESSAGE"));
         title.getStyleClass().add("titletxt");

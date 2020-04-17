@@ -4,6 +4,7 @@ import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
+import ooga.engine.jetpack.Zapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,7 +44,11 @@ public class JetpackGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeEnemy(double xCoef, double yCoef){
-
+        Zapper z = new Zapper();
+        z.setXPos(xCoef*length);
+        z.setYPos(yCoef*600);
+        scrollers.add(z);
+        allEnemies.add(z);
     }
 
     //TODO is this allowed idk
