@@ -73,7 +73,7 @@ public class ChangeScreen extends Screen {
         flappy.setGraphic(createButtonImage(flappyimage));
         flappy.setOnAction(e -> {
             try {
-                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, Flappyfilepath));
+                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -100,15 +100,6 @@ public class ChangeScreen extends Screen {
 
     public ImageView createButtonImage(Image gameimage){
         return super.createButtonImage(gameimage);
-    }
-    public Scene placeholderScene(){
-        VBox placeholder = new VBox();
-        initLayout(placeholder);
-        Text holdertext = new Text();
-        holdertext.setText("This is a placeholder for the game screens");
-        placeholder.getChildren().add(holdertext);
-        Scene PlaceHolder = new Scene(placeholder, SCREEN_WIDTH, SCREEN_HEIGHT);
-        return PlaceHolder;
     }
 
     public void initLayout(VBox layout) {

@@ -12,10 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.Screens.EndScreen;
-import ooga.Screens.EnemyView;
-import ooga.Screens.DinoPlayerView;
-import ooga.Screens.PowerupView;
+import ooga.Screens.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.game.Enemy;
@@ -57,6 +54,7 @@ public class DinoGameWorld {
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private GameConfiguration gameConfig;
+    private TutorialScreen tutorialscreen;
     private Text myScoreText = new Text();
     private EndScreen endScreen;
     private Stage myStage;
@@ -67,6 +65,7 @@ public class DinoGameWorld {
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
         tutorialcheck = tutorial;
+        tutorialscreen = new TutorialScreen();
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
@@ -159,6 +158,7 @@ public class DinoGameWorld {
         for(Enemy enemy: enemies) {
             enemy.move();
         }
+
         if(tutorialcheck){
             if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
                 if(root.getChildren().contains(tutorialtext.get(0))){
@@ -194,8 +194,14 @@ public class DinoGameWorld {
         myScoreText.setText(""+gameManager.getScore());
 
         if(gameManager.isGameOver()) {
-            myAnimation.stop();
-            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            if(tutorialcheck){
+                myAnimation.stop();
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
+            }
+            else{
+                myAnimation.stop();
+                myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            }
         }
     }
 
