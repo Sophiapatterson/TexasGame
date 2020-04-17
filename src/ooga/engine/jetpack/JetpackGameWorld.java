@@ -81,7 +81,7 @@ public class JetpackGameWorld {
     }
 
     private void addEnemies(Group root) throws IOException {
-        enemies = new ArrayList<>(gameConfig.getEnemies()); //use jetpack gameconfig once implemented
+        enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         //Add for loop for the enemies once images are added
         for (Enemy enemy : enemies){
@@ -162,8 +162,9 @@ public class JetpackGameWorld {
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
-            myPlayer.resetJumpStrength();
+
             myPlayer.jump();
+            myPlayer.resetJumpStrength();
         }
     }
 }
