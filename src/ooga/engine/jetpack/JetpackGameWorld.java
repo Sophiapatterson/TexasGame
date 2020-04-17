@@ -154,8 +154,9 @@ public class JetpackGameWorld {
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
-            myPlayer.resetJumpStrength();
+
             myPlayer.jump();
+            myPlayer.resetJumpStrength();
         }
     }
 }
