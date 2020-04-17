@@ -20,10 +20,6 @@ public class Coin extends Powerup {
         this.y.setValue(y);
     }
 
-//    public Coin() {
-//        super();
-//    }
-
     @Override
     public boolean collide(Player player) {
         return false;
