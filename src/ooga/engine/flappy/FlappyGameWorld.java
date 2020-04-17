@@ -12,12 +12,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.Screens.BirdPlayerView;
-import ooga.Screens.EndScreen;
-import ooga.Screens.EnemyView;
-import ooga.Screens.StartScreen;
+import ooga.Screens.*;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
+import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Player;
@@ -46,6 +44,7 @@ public class FlappyGameWorld {
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
+    private List<PowerupView> powerupsView;
     private Scene myScene;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
@@ -91,13 +90,20 @@ public class FlappyGameWorld {
 
     private void addPowerups(Group root) throws IOException {
         powerups = new ArrayList<>(gameConfig.getPowerups());
-        root.getChildren().addAll(powerups);
+        powerupsView = new ArrayList<>();
+        for (Powerup coin : powerups){
+            PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            tempCoinView.setWidthAndHeight(50,50);
+            tempCoinView.setProperties(coin);
+            powerupsView.add(tempCoinView);
+            root.getChildren().add(tempCoinView.getPowerupImage());
+        }
     }
 
     private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        myPlayer = new BirdPlayer(100, 250);
-        myPlayerView = new BirdPlayerView(birdImage, 100, FLOOR_HEIGHT);
+        myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, 250);
+        myPlayerView = new BirdPlayerView(birdImage, DinoGameWorld.INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setProperties((BirdPlayer) myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }

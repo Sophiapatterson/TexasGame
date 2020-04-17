@@ -48,6 +48,7 @@ public class JetpackGameWorld {
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
+    private  List<PowerupView> powerupsView;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private Text myScoreText = new Text();
@@ -93,9 +94,16 @@ public class JetpackGameWorld {
     }
 
     private void addPowerups(Group root) throws IOException {
-        powerups = new ArrayList<>(gameConfig.getPowerups()); //use jetpack gameconfig once implemented
-        root.getChildren().addAll(powerups);
-    }
+        powerups = new ArrayList<>(gameConfig.getPowerups());
+        powerupsView = new ArrayList<>();
+        for (Powerup coin : powerups){
+            PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            tempCoinView.setProperties(coin);
+            //tempCoinView.setWidthAndHeight();
+            tempCoinView.setProperties(coin);
+            powerupsView.add(tempCoinView);
+            root.getChildren().add(tempCoinView.getPowerupImage());
+        }    }
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));

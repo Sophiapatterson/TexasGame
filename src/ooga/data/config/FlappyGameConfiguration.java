@@ -41,8 +41,7 @@ public class FlappyGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeCoin(double xCoef, double yCoef) {
-        Coin pu = new Coin();
-        pu.setX(xCoef*length);
+        Coin pu = new Coin(xCoef*length, yCoef*600);
         scrollers.add(pu);
         allPU.add(pu);
     }

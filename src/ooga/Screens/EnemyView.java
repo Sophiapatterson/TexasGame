@@ -12,8 +12,6 @@ public class EnemyView {
 
     public EnemyView(Image playerImage, double x, double y){
         this.enemyImage = new ImageView(playerImage);
-        this.enemyImage.setFitWidth(50);
-        this.enemyImage.setFitHeight(50);
         this.enemyImage.visibleProperty();
         this.enemyImage.xProperty().bind(this.x);
         this.enemyImage.yProperty().bind(this.y);
