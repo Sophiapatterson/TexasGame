@@ -96,6 +96,30 @@ public class ScreensTest extends DukeApplicationTest{
     }
 
     @Test
+    void testTutorialEndScreen(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showTutorialEndScreen();
+                Button tutorial = lookup("#tutorial").query();
+                Button gamechooser = lookup("#gamechooser").query();
+                Text title = lookup("#Title").query();
+                assertEquals("Go back to tutorials",tutorial.getText());
+                assertEquals("Go to game chooser",gamechooser.getText());
+                assertEquals("Are you ready to play, or do you need another tutorial?",title.getText());
+            }
+        });
+    }
+
+    private void showTutorialEndScreen(){
+        tutorialscreen = new TutorialScreen();
+        Scene tutorialend = tutorialscreen.TutorialorGameChooser(myStage);
+        myStage.setScene(tutorialend);
+        myStage.show();
+    }
+
+
+    @Test
     void testChangeScreen(){
         Platform.runLater(new Runnable() {
             @Override
