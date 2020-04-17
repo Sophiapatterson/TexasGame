@@ -1,9 +1,11 @@
 package ooga.data.config;
 
+import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
+import ooga.engine.jetpack.JetpackGameWorld;
 import ooga.engine.jetpack.Zapper;
 
 import java.io.IOException;
@@ -37,7 +39,8 @@ public class JetpackGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeCoin(double xCoef, double yCoef) {
-        Coin pu = new Coin(xCoef*length, yCoef*600);
+        Coin pu = new Coin(xCoef*length, yCoef*1000);
+        pu.setYPos(JetpackGameWorld.FLOOR_HEIGHT);
         scrollers.add(pu);
         allPU.add(pu);
     }

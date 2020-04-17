@@ -1,5 +1,7 @@
 package ooga.data.config;
 
+import ooga.engine.dinosaur.DinoGameWorld;
+import ooga.engine.flappy.FlappyGameWorld;
 import ooga.engine.flappy.Pipe;
 import ooga.engine.flappy.Pipe2;
 import ooga.engine.flappy.Pipe3;
@@ -41,7 +43,8 @@ public class FlappyGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeCoin(double xCoef, double yCoef) {
-        Coin pu = new Coin(xCoef*length, yCoef*600);
+        Coin pu = new Coin(xCoef*length, yCoef*1000);
+        pu.setYPos(FlappyGameWorld.FLOOR_HEIGHT/2);
         scrollers.add(pu);
         allPU.add(pu);
     }
