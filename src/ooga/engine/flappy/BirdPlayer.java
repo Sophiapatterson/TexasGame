@@ -30,7 +30,7 @@ public class BirdPlayer extends Player {
 
     @Override
     public boolean isAirborne(double floorY) {
-        return y.getValue() < floorY && y.getValue() - jumpStrength - GRAVITY < floorY;
+        return y.getValue() < floorY || y.getValue() - jumpStrength - GRAVITY < floorY;
     }
 
     @Override
