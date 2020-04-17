@@ -43,7 +43,7 @@ public class DinoGameWorld {
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
-    private static final double CACTUS_VIEW_SIZE = 50;
+    private static final double OBJECT_VIEW_SIZE = 50;
     private Player myPlayer;
     private DinoPlayerView myPlayerView;
     private List<Enemy> enemies;
@@ -99,7 +99,7 @@ public class DinoGameWorld {
         for (Enemy cactus : enemies){
             EnemyView tempCacView = new EnemyView(new Image(cactus.getImage()), cactus.getXPos(), FLOOR_HEIGHT);
             tempCacView.setProperties(cactus);
-            tempCacView.setWidthAndHeight(CACTUS_VIEW_SIZE, CACTUS_VIEW_SIZE);
+            tempCacView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             enemiesView.add(tempCacView);
             root.getChildren().add(tempCacView.getEnemyImage());
         }
@@ -111,7 +111,7 @@ public class DinoGameWorld {
         for (Powerup coin : powerups){
             PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setProperties(coin);
-            tempCoinView.setWidthAndHeight(50,50);
+            tempCoinView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             powerupsView.add(tempCoinView);
             root.getChildren().add(tempCoinView.getPowerupImage());
         }

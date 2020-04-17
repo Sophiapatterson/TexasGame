@@ -12,11 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.Screens.JetpackPlayerView;
-import ooga.Screens.EndScreen;
-import ooga.Screens.EnemyView;
-import ooga.Screens.StartScreen;
-import ooga.Screens.PowerupView;
+import ooga.Screens.*;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
@@ -40,6 +36,7 @@ public class JetpackGameWorld {
     public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
     public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
     public static final int IMAGE_HEIGHT = 695;
+    public static final int SMALL_COIN_SIZE = 35;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
@@ -99,7 +96,7 @@ public class JetpackGameWorld {
         for (Powerup coin : powerups){
             PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setProperties(coin);
-            //tempCoinView.setWidthAndHeight();
+            tempCoinView.setWidthAndHeight(SMALL_COIN_SIZE,SMALL_COIN_SIZE);
             tempCoinView.setProperties(coin);
             powerupsView.add(tempCoinView);
             root.getChildren().add(tempCoinView.getPowerupImage());
