@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import ooga.Screens.JetpackPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
+import ooga.Screens.PowerupView;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
@@ -30,7 +31,7 @@ public class JetpackGameWorld {
     public static final double FLOOR_HEIGHT = 275;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
+    public static final String COIN_IMAGE = "Sprites/general_coin.png";
     public static final String AIRBORNE_BARRY_IMAGE = "Sprites/jetpack_airbornBarry.png";
     public static final String LASER_IMAGE = "Sprites/jetpack_laser.png";
     public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
@@ -44,6 +45,7 @@ public class JetpackGameWorld {
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
+    private  List<PowerupView> powerupsView;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private Text myScoreText = new Text();
@@ -88,9 +90,16 @@ public class JetpackGameWorld {
     }
 
     private void addPowerups(Group root) throws IOException {
-        //powerups = new ArrayList<>(gameConfig.getPowerups()); use jetpack gameconfig once implemented
-        root.getChildren().addAll(powerups);
-    }
+        powerups = new ArrayList<>(gameConfig.getPowerups());
+        powerupsView = new ArrayList<>();
+        for (Powerup coin : powerups){
+            PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            tempCoinView.setProperties(coin);
+            //tempCoinView.setWidthAndHeight();
+            tempCoinView.setProperties(coin);
+            powerupsView.add(tempCoinView);
+            root.getChildren().add(tempCoinView.getPowerupImage());
+        }    }
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));

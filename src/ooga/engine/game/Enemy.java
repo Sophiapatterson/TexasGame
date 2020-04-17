@@ -1,11 +1,9 @@
 package ooga.engine.game;
 
 import javafx.beans.property.DoubleProperty;
-import javafx.scene.image.ImageView;
 
 
 public abstract class Enemy implements Collidable, Scrolling {
-    protected ImageView enemyImage;
 
     public DoubleProperty getXProperty(){
         return null;
@@ -20,8 +18,6 @@ public abstract class Enemy implements Collidable, Scrolling {
     public void move() {
         scroll();
     }
-
-    public ImageView getEnemyImage(){ return enemyImage; }
 
     public abstract void setXPos(double x);
 

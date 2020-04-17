@@ -40,15 +40,16 @@ public class FlappyGameConfiguration extends GameConfiguration {
     }
 
     @Override
-    public void makeCoin(double xCoef) {
-        Coin pu = new Coin();
-        pu.setX(xCoef*length);
+    public void makeCoin(double xCoef, double yCoef) {
+        Coin pu = new Coin(xCoef*length, yCoef*600);
+//        pu.setXPos(xCoef*length);
+//        pu.setYPos(yCoef*600);
         scrollers.add(pu);
         allPU.add(pu);
     }
 
     @Override
-    public void makeEnemy(double xCoef){
+    public void makeEnemy(double xCoef, double yCoef){
         Random rand = new Random();
         int pipeNum = rand.nextInt(COUNT_OF_PIPES);
         Enemy p;

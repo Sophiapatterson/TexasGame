@@ -37,12 +37,12 @@ public class JetpackGameManager extends GameManager {
 
     @Override
     public void handlePowerups() {
-        for(Powerup pu: powerups){
-            if(pu.collide(player) && pu.isVisible()){
-                score+=pu.scoreBonus();
-                pu.setVisible(false);
-            }
-        }
+//        for(Powerup pu: powerups){
+//            if(pu.collide(player) && pu.isVisible()){
+//                score+=pu.scoreBonus();
+//                pu.setVisible(false);
+//            }
+//        }
     }
 
     @Override
