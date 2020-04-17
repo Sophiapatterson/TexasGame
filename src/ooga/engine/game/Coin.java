@@ -2,12 +2,10 @@ package ooga.engine.game;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import ooga.Screens.DinoPlayerView;
-import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.jetpack.JetpackGameWorld;
 
 public class Coin extends Powerup {
-    private static final int SPEED = 5;
+    private static final int SPEED = 10;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     private double standardY = JetpackGameWorld.FLOOR_HEIGHT;
