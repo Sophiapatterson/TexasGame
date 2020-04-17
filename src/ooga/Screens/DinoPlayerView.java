@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ooga.engine.dinosaur.DinoPlayer;
 
 public class DinoPlayerView {
     private ImageView playerImage;
@@ -20,7 +21,7 @@ public class DinoPlayerView {
         this.playerImage.yProperty().bind(this.y);
     }
 
-    public void setProperties(ooga.engine.dinosaur.DinoPlayer dino){
+    public void setProperties(DinoPlayer dino){
         x.bindBidirectional(dino.getXProperty());
         y.bindBidirectional(dino.getYProperty());
     }

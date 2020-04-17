@@ -1,6 +1,5 @@
 package ooga;
 
-import javafx.scene.image.Image;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.dinosaur.DinoPlayer;
 import ooga.engine.game.Player;
@@ -24,7 +23,12 @@ class DinoPlayerTest {
 
     @Test
     void fallTest() {
-
+        Player dino = new DinoPlayer(100, DinoGameWorld.FLOOR_HEIGHT);
+        double oldPos = dino.getYPos();
+        dino.fall();
+        dino.jump();
+        double newPos = dino.getYPos();
+        assertEquals(DinoPlayer.DEFAULT_JUMP_STRENGTH - DinoPlayer.GRAVITY , oldPos - newPos);
     }
 
     @Test
