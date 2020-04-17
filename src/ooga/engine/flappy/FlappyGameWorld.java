@@ -34,7 +34,6 @@ public class FlappyGameWorld {
     public static final String BIRD_IMAGE  = "Sprites/flappy_yellowbird.png";
     public static final String BACKGROUND_IMAGE = "Sprites/flappy_background.png";
     public static final int IMAGE_HEIGHT = 695;
-    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
     private static final String VERSION_NAME = "Flappy";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
@@ -54,12 +53,12 @@ public class FlappyGameWorld {
     private Stage myStage;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, String CSVFile) throws IOException {
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        gameConfig = new FlappyGameConfiguration(Paths.get(CSVfilepath));
+        gameConfig = new FlappyGameConfiguration(Paths.get(CSVFile));
         addBird(root);
         addEnemies(root);
         addPowerups(root);

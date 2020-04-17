@@ -11,8 +11,11 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.engine.dinosaur.DinoGameTutorial;
+import ooga.engine.dinosaur.DinoGameWorld;
 
 import java.io.IOException;
 
@@ -25,13 +28,19 @@ public class TutorialScreen extends Screen {
     public static final int SCREEN_WIDTH = 850;
     public static final int SCREEN_HEIGHT = 600;
     public static final Color SCREEN_COLOR = Color.GOLD;
+    public static final Paint BACKGROUND = Color.AZURE;
     private Stage myStage;
     private Text title;
+    private DinoGameTutorial dinotutorial;
+    private DinoGameWorld dinogame;
     private final String screenCSS = "Styling/Screen.css";
+    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
 
     public TutorialScreen(){
+        dinotutorial = new DinoGameTutorial();
         myStage = new Stage();
         title = initTitle();
+        dinogame = new DinoGameWorld();
     }
 
     public Scene createTutorial(Stage currentstage){
@@ -43,7 +52,13 @@ public class TutorialScreen extends Screen {
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         dinosaur.setGraphic(createButtonImage(dinoimage));
         dinosaur.setOnAction(e -> {
-            myStage.setScene(placeholderScene());
+            //myStage.setScene(placeholderScene());
+            try {
+                myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            dinogame.setUpAnimation();
         });
         Button flappy = new Button("Flappy Tutorial");
         flappy.setId("flappybird");

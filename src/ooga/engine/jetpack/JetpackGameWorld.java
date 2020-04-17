@@ -16,6 +16,7 @@ import ooga.Screens.JetpackPlayerView;
 import ooga.Screens.EndScreen;
 import ooga.Screens.EnemyView;
 import ooga.Screens.StartScreen;
+import ooga.Screens.PowerupView;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
@@ -40,7 +41,6 @@ public class JetpackGameWorld {
     public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
     public static final int IMAGE_HEIGHT = 695;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
-    private static final String CSVfilepath = "data/CSV configurations/Jetpack_Level.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -58,12 +58,12 @@ public class JetpackGameWorld {
     private Stage myStage;
     private Scene myScene;
 
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, String CSVFile) throws IOException {
         endScreen = new EndScreen("Jetpack");
         myStage = currentstage;
         ImageView imageView = getImageView();
         Group root = new Group(imageView);
-        gameConfig = new JetpackGameConfiguration(Paths.get(CSVfilepath));
+        gameConfig = new JetpackGameConfiguration(Paths.get(CSVFile));
         addBarry(root);
         addEnemies(root);
         addPowerups(root);

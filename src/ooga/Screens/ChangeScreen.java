@@ -21,8 +21,8 @@ import ooga.engine.jetpack.JetpackGameWorld;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.dinosaur.DinoGameWorld.DINO_IMAGE;
+import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.jetpack.JetpackGameWorld.BARRY_IMAGE;
 
 public class ChangeScreen extends Screen {
@@ -31,7 +31,9 @@ public class ChangeScreen extends Screen {
     public static final int SCREEN_WIDTH = 850;
     public static final int SCREEN_HEIGHT = 600;
     public static final Paint BACKGROUND = Color.AZURE;
-    public static final Color SCREEN_COLOR = Color.GOLD;
+    private static final String Dinofilepath = "data/CSV configurations/levelOne.csv";
+    private static final String Flappyfilepath = "data/CSV configurations/levelOne.csv";
+    private static final String Jetfilepath = "data/CSV configurations/Jetpack_Level.csv";
     private Text title;
     private Stage myStage;
     private DinoGameWorld dinogame;
@@ -40,6 +42,7 @@ public class ChangeScreen extends Screen {
     private JetpackGameWorld jetpackgame;
 
     public ChangeScreen(){
+
         myStage = new Stage();
         dinogame = new DinoGameWorld();
         flappygame = new FlappyGameWorld();
@@ -58,7 +61,7 @@ public class ChangeScreen extends Screen {
         dinosaur.setGraphic(createButtonImage(dinoimage));
         dinosaur.setOnAction(e -> {
             try {
-                myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
+                myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -70,7 +73,7 @@ public class ChangeScreen extends Screen {
         flappy.setGraphic(createButtonImage(flappyimage));
         flappy.setOnAction(e -> {
             try {
-                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
+                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, Flappyfilepath));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -82,7 +85,7 @@ public class ChangeScreen extends Screen {
         jetpack.setGraphic(createButtonImage(jetimage));
         jetpack.setOnAction(e -> {
             try {
-                myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage));
+                myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, Jetfilepath));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

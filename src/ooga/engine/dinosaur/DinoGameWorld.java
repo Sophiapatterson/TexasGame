@@ -41,7 +41,8 @@ public class DinoGameWorld {
     private static final String VERSION_NAME = "Dinosaur";
     public static final String DINO_IMAGE  = "Sprites/dino_trexx.png";
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
-    private static final String CSVfilepath = "data/CSV configurations/levelOne.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String LevelOne = "data/CSV configurations/levelOne.csv";
     private static final int SCORE_X = 30;
     private static final int SCORE_Y = 30;
     private static final int SCORE_TEXT_SIZE = 30;
@@ -59,14 +60,25 @@ public class DinoGameWorld {
     private Text myScoreText = new Text();
     private EndScreen endScreen;
     private Stage myStage;
+    private List<Text> tutorialtext;
+    private boolean tutorialcheck;
+    private Group root;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
+        tutorialcheck = tutorial;
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
-        Group root = new Group(imageView);
-        gameConfig = new DinoGameConfiguration(Paths.get(CSVfilepath));
+        //Group root = new Group(imageView);
+        root = new Group(imageView);
+        if(tutorial){
+            gameConfig = new DinoGameConfiguration(Paths.get(TutorialCSV));
+            addText(root);
+        }
+        else{
+            gameConfig = new DinoGameConfiguration(Paths.get(LevelOne));
+        }
         addDino(root);
         addEnemies(root);
         addPowerups(root);
@@ -116,6 +128,25 @@ public class DinoGameWorld {
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
+    private void addText(Group root){
+        tutorialtext = new ArrayList<>();
+        Text first = new Text(50, 100, "Press Space to jump over the cactus!");
+        tutorialtext.add(first);
+        root.getChildren().add(first);
+    }
+
+    private void tutorialAddRemove(int i){
+        if(i == 1){
+            Text second = new Text(50, 100, "Good job! Try that again!");
+            tutorialtext.add(second);
+        }
+        if(i == 2){
+            Text third = new Text(50, 100, "Great! Now try to get that coin!");
+            tutorialtext.add(third);
+        }
+        root.getChildren().add(tutorialtext.get(i));
+    }
+
     private ImageView getImageView() {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(HORIZON_IMAGE));
         ImageView imageView = new ImageView(image);
@@ -137,6 +168,14 @@ public class DinoGameWorld {
         // move the enemies
         for(Enemy enemy: enemies) {
             enemy.move();
+        }
+        if(tutorialcheck){
+            for(int i = 0; i<enemies.size(); i++){
+                if(myPlayer.getXPos()>enemies.get(i).getXPos()){
+                    root.getChildren().remove(tutorialtext.get(i));
+                    tutorialAddRemove(i+1);
+                }
+            }
         }
 
 //        move the powerups
