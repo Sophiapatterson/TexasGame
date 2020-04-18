@@ -118,7 +118,6 @@ public class ScreensTest extends DukeApplicationTest{
         myStage.show();
     }
 
-
     @Test
     void testChangeScreen(){
         Platform.runLater(new Runnable() {

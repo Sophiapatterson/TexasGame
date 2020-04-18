@@ -18,6 +18,7 @@ import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.FlappyGameWorld;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.dinosaur.DinoGameWorld.DINO_IMAGE;
@@ -31,6 +32,7 @@ public class TutorialScreen extends Screen {
     private Stage myStage;
     private Text title;
     private DinoGameWorld dinogame;
+    private ResourceBundle tutorialResources;
     private FlappyGameWorld flappygame;
     private ChangeScreen changescreen;
     private final String screenCSS = "Styling/Screen.css";
@@ -42,13 +44,14 @@ public class TutorialScreen extends Screen {
         dinogame = new DinoGameWorld();
         flappygame = new FlappyGameWorld();
         changescreen = new ChangeScreen();
+        tutorialResources = ResourceBundle.getBundle("ooga.Screens.Properties.TutorialScreen");
     }
 
     public Scene createTutorial(Stage currentstage){
         myStage = currentstage;
         VBox tutoriallayout = new VBox();
         initLayout(tutoriallayout);
-        Button dinosaur = new Button("Dinosaur Tutorial");
+        Button dinosaur = new Button(tutorialResources.getString("DINO-TUTORIAL"));
         dinosaur.setId("dino");
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         dinosaur.setGraphic(createButtonImage(dinoimage));
@@ -60,7 +63,7 @@ public class TutorialScreen extends Screen {
             }
             dinogame.setUpAnimation();
         });
-        Button flappy = new Button("Flappy Tutorial");
+        Button flappy = new Button(tutorialResources.getString("FLAPPY-TUTORIAL"));
         flappy.setId("flappybird");
         Image flappyimage = new Image(getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         flappy.setGraphic(createButtonImage(flappyimage));
@@ -72,14 +75,14 @@ public class TutorialScreen extends Screen {
             }
             flappygame.setUpAnimation();
         });
-        Button jetpack = new Button("Jetpack Tutorial");
+        Button jetpack = new Button(tutorialResources.getString("JET-TUTORIAL"));
         jetpack.setId("jet");
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
         jetpack.setGraphic(createButtonImage(jetimage));
         jetpack.setOnAction(e -> {
             myStage.setScene(placeholderScene());
         });
-        title.setText("Tutorial Chooser");
+        title.setText(tutorialResources.getString("TUTORIAL-CHOOSER"));
         title.getStyleClass().add("titletxt");
         tutoriallayout.getChildren().addAll(title, dinosaur, flappy, jetpack);
         Scene TutorialScreen = new Scene(tutoriallayout, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -90,17 +93,17 @@ public class TutorialScreen extends Screen {
         myStage = currentstage;
         VBox tutoriallayout = new VBox();
         initLayout(tutoriallayout);
-        Button tutorial = new Button("Go back to tutorials");
+        Button tutorial = new Button(tutorialResources.getString("GO-TUTORIAL"));
         tutorial.setId("tutorial");
         tutorial.setOnAction(e -> {
             myStage.setScene(createTutorial(myStage));
         });
-        Button gamechooser = new Button("Go to game chooser");
+        Button gamechooser = new Button(tutorialResources.getString("GO-GAMECHOOSER"));
         gamechooser.setId("gamechooser");
         gamechooser.setOnAction(e -> {
             myStage.setScene(changescreen.createChangeScreen(myStage));
         });
-        title.setText("Are you ready to play, or do you need another tutorial?");
+        title.setText(tutorialResources.getString("READY-ORNOT"));
         title.getStyleClass().add("titletxt");
         tutoriallayout.getChildren().addAll(title, tutorial, gamechooser);
         Scene TutorialGame = new Scene(tutoriallayout, SCREEN_WIDTH, SCREEN_HEIGHT);
