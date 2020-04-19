@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class JetpackGameWorld {
 
-    public static final double FLOOR_HEIGHT =400;
+    public static final double FLOOR_HEIGHT = 400;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
@@ -40,14 +40,14 @@ public class JetpackGameWorld {
     public static final int IMAGE_HEIGHT = 695;
     public static final int SMALL_COIN_SIZE = 35;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
-    private static final int SCORE_X = 30;
-    private static final int SCORE_Y = 30;
-    private static final int SCORE_TEXT_SIZE = 30;
+    public static final int SCORE_X = 30;
+    public static final int SCORE_Y = 30;
+    public static final int SCORE_TEXT_SIZE = 30;
     private JetpackPlayer myPlayer;
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
-    private  List<PowerupView> powerupsView;
+    private List<PowerupView> powerupsView;
     private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private Text myScoreText = new Text();
@@ -163,7 +163,7 @@ public class JetpackGameWorld {
 
         if(gameManager.isGameOver()) {
             myAnimation.stop();
-//            myStage.setScene(endScreen.createEndScreen(myStage));
+//            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
 
