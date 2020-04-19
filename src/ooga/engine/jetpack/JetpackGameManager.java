@@ -5,6 +5,7 @@ import ooga.engine.game.GameManager;
 import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JetpackGameManager extends GameManager {
@@ -13,6 +14,7 @@ public class JetpackGameManager extends GameManager {
     private List<Powerup> powerups;
     private boolean gameOver = false;
     private int score;
+    private List<Powerup> removePowerups;
 
     public JetpackGameManager(Player player, List<Enemy> enemies, List<Powerup> powerups) {
         this.player = player;
@@ -36,13 +38,15 @@ public class JetpackGameManager extends GameManager {
     }
 
     @Override
-    public void handlePowerups() {
-//        for(Powerup pu: powerups){
-//            if(pu.collide(player) && pu.isVisible()){
-//                score+=pu.scoreBonus();
-//                pu.setVisible(false);
-//            }
-//        }
+    public List<Powerup> handlePowerups() {
+        removePowerups = new ArrayList<>();
+        for(Powerup pu: powerups){
+            if (pu.collide(player)){
+                score+=pu.scoreBonus();
+                removePowerups.add(pu);
+            }
+        }
+        return removePowerups;
     }
 
     @Override

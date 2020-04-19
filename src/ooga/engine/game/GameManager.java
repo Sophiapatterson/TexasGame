@@ -8,7 +8,7 @@ public abstract class GameManager {
 
     public abstract void handleCollisions();
 
-    public abstract void handlePowerups();
+    public abstract List<Powerup> handlePowerups();
 
     public abstract void tick();
 

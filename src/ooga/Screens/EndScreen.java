@@ -48,8 +48,6 @@ public class EndScreen extends Screen {
         changescreen = new ChangeScreen();
         title = initTitle();
         quit = startscreen.quitButton();
-       // this.setisDarkMode(Screen.getIsDarkMode());
-        //currently does not work ^ TODO fix @Sophia
     }
 
     @Override
@@ -82,6 +80,9 @@ public class EndScreen extends Screen {
         title.getStyleClass().add("titletxt");
         layout.getChildren().addAll(title, playagain, credits, scores, quit);
         Scene EndScreen = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
+//        if (Screen.isDarkMode){
+//            this.setDarkModeTrue();
+//        }
         return EndScreen;
     }
 

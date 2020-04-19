@@ -6,6 +6,8 @@ import ooga.engine.jetpack.JetpackGameWorld;
 
 public class Coin extends Powerup {
     private static final int SPEED = 10;
+    private static final int COIN_OFFSET = 30;
+    private static final int PLAYER_OFFSET = 30;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     private double standardY = JetpackGameWorld.FLOOR_HEIGHT;
@@ -20,7 +22,9 @@ public class Coin extends Powerup {
 
     @Override
     public boolean collide(Player player) {
-        return false;
+        boolean xTouch = (player.getXPos() <= this.getXPos() + COIN_OFFSET && player.getXPos() + PLAYER_OFFSET >= this.getXPos());
+        boolean yTouch = (player.getYPos() <= this.getYPos() + COIN_OFFSET && player.getYPos() + PLAYER_OFFSET >= this.getYPos());
+        return (xTouch && yTouch);
     }
 
     @Override

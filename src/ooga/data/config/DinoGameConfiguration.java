@@ -41,10 +41,11 @@ public class DinoGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeCoin(double xCoef, double yCoef) {
-        Coin pu = new Coin(xCoef*length, yCoef*1000);
-        pu.setYPos(DinoGameWorld.FLOOR_HEIGHT);
-        scrollers.add(pu);
-        allPU.add(pu);
+        //commented out coins because we don't need coins in dino game
+//        Coin pu = new Coin(xCoef*length, yCoef*1000);
+//        pu.setYPos(DinoGameWorld.FLOOR_HEIGHT);
+//        scrollers.add(pu);
+//        allPU.add(pu);
     }
 
     @Override
