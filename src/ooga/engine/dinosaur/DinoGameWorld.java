@@ -40,10 +40,10 @@ public class DinoGameWorld {
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
     public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
     public static final String LevelOne = "data/CSV configurations/levelOne.csv";
-    private static final int SCORE_X = 30;
-    private static final int SCORE_Y = 30;
-    private static final int SCORE_TEXT_SIZE = 30;
-    private static final double OBJECT_VIEW_SIZE = 50;
+    public static final int SCORE_X = 30;
+    public static final int SCORE_Y = 30;
+    public static final int SCORE_TEXT_SIZE = 30;
+    public static final double OBJECT_VIEW_SIZE = 50;
     private Player myPlayer;
     private DinoPlayerView myPlayerView;
     private List<Enemy> enemies;

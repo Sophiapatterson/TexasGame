@@ -34,12 +34,12 @@ public class FlappyGameWorld {
     public static final String BIRD_IMAGE  = "Sprites/flappy_yellowbird.png";
     public static final String BACKGROUND_IMAGE = "Sprites/flappy_background.png";
     public static final int IMAGE_HEIGHT = 695;
-    private static final String VERSION_NAME = "Flappy";
-    private static final String LevelOne = "data/CSV configurations/levelOne.csv";
-    private static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
-    private static final int SCORE_X = 30;
-    private static final int SCORE_Y = 30;
-    private static final int SCORE_TEXT_SIZE = 30;
+    public static final String VERSION_NAME = "Flappy";
+    public static final String LevelOne = "data/CSV configurations/levelOne.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final int SCORE_X = 30;
+    public static final int SCORE_Y = 30;
+    public static final int SCORE_TEXT_SIZE = 30;
     private Player myPlayer;
     private BirdPlayerView myPlayerView;
     private List<Enemy> enemies;
