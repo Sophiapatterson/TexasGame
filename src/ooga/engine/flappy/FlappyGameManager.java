@@ -36,7 +36,8 @@ public class FlappyGameManager extends GameManager {
     }
 
     @Override
-    public void handlePowerups() {
+    public List<Powerup> handlePowerups() {
+        return null;
 //        for(Powerup pu: powerups){
 //            if(pu.collide(bird) && pu.isVisible()){
 //                score+=pu.scoreBonus();

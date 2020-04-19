@@ -6,6 +6,8 @@ import ooga.engine.jetpack.JetpackGameWorld;
 
 public class Coin extends Powerup {
     private static final int SPEED = 10;
+    private static final int COIN_OFFSET = 30;
+    private static final int PLAYER_OFFSET = 30;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     private double standardY = JetpackGameWorld.FLOOR_HEIGHT;
@@ -20,16 +22,9 @@ public class Coin extends Powerup {
 
     @Override
     public boolean collide(Player player) {
-        System.out.println(this.getXPos());
-        System.out.println(player.getXPos());
-        boolean xTouch = (player.getXPos() >= this.getXPos()&& player.getXPos() <= this.getXPos());
-        System.out.println(xTouch);
-        boolean yTouch = (player.getYPos() == this.getYPos());
-        System.out.println(yTouch);
+        boolean xTouch = (player.getXPos() <= this.getXPos() + COIN_OFFSET && player.getXPos() + PLAYER_OFFSET >= this.getXPos());
+        boolean yTouch = (player.getYPos() <= this.getYPos() + COIN_OFFSET && player.getYPos() + PLAYER_OFFSET >= this.getYPos());
         return (xTouch && yTouch);
-//        boolean xTouch = ((player.getXPos() >= this.getXPos() && player.getXPos() <= this.getXPos()) || (player.getXPos()>= this.getXPos() && player.getXPos() <= this.getXPos()));
-//        boolean yTouch = ((player.getYPos() >= this.getYPos() && player.getYPos() <= this.getYPos()) || (player.getYPos() >= this.getYPos() && player.getYPos() <= this.getYPos()));
-//        return (xTouch && yTouch);
     }
 
     @Override

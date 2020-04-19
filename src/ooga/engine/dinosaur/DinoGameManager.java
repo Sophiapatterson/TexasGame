@@ -36,7 +36,8 @@ public class DinoGameManager extends GameManager {
     }
 
     @Override
-    public void handlePowerups(){
+    public List<Powerup> handlePowerups(){
+        return null;
 //        for(Powerup pu: powerups){
 //            if(pu.collide(dino) && pu.isVisible()){
 //                score+=pu.scoreBonus();
