@@ -40,6 +40,7 @@ public class JetpackGameConfiguration extends GameConfiguration {
     @Override
     public void makeCoin(double xCoef, double yCoef) {
         Coin pu = new Coin(xCoef*length, yCoef*1000);
+        pu.setXPos(JetpackGameWorld.FLOOR_HEIGHT);
         scrollers.add(pu);
         allPU.add(pu);
     }

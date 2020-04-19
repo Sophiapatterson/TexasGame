@@ -53,9 +53,9 @@ public class StartScreen extends Screen {
         return darkMode;
     }
 
-    public void setOnDarkMode(EventHandler<ActionEvent> e){
-        darkMode.setOnAction(event -> e.handle(event));
-    }
+//    public void setOnDarkMode(EventHandler<ActionEvent> e){
+//        darkMode.setOnAction(event -> e.handle(event));
+//    }
 
     public Scene createStartScreen(Stage currentStage){
         myStage = currentStage;
@@ -73,6 +73,13 @@ public class StartScreen extends Screen {
         });
         Button quit = quitButton();
         Button darkMode = darkModeButton();
+        darkMode.setOnAction(event -> {
+            this.setDarkModeTrue();
+            startlayout.getStylesheets().remove("Styling/Screen.css");
+            startlayout.getStylesheets().add("Styling/dark-theme.css");
+            changescreen.setDarkModeTrue();
+            tutorialscreen.setDarkModeTrue();
+        });
         title.setText("Welcome to TEXAS");
         title.getStyleClass().add("titletxt");
         startlayout.getChildren().addAll(title, start,tutorial,quit,darkMode);

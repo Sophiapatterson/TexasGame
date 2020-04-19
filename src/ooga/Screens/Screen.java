@@ -15,12 +15,14 @@ import javafx.stage.Stage;
 public abstract class Screen {
 
     public static final String DEFAULT_STYLING = "Styling/Screen.css";
+    public static final String DARK_STYLING = "Styling/dark-theme.css";
     public static final int DEFAULT_NODE_SPACING = 25;
     public static final int DEFAULT_TOP_PADDING = 10;
     public static final int DEFAULT_BOTTOM_PADDING = 50;
     public static final int DEFAULT_LEFT_PADDING = 50;
     public static final int DEFAULT_RIGHT_PADDING = 50;
     public static final Color SCREEN_COLOR = Color.GOLD;
+    private boolean isDarkMode;
 
 
     public void initLayout(VBox layout){
@@ -28,7 +30,11 @@ public abstract class Screen {
         layout.setSpacing(DEFAULT_NODE_SPACING);
         layout.setAlignment(Pos.CENTER);
         layout.setBackground(new Background(new BackgroundFill(SCREEN_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));
-        layout.getStylesheets().add(DEFAULT_STYLING);
+        if (isDarkMode){
+            layout.getStylesheets().add(DARK_STYLING);
+        } else {
+            layout.getStylesheets().add(DEFAULT_STYLING);
+        }
     };
 
     public Text initTitle(){
@@ -44,4 +50,11 @@ public abstract class Screen {
         return imageview;
     };
 
+    public void setDarkModeTrue() {
+        isDarkMode = true;
+    }
+
+    public boolean getisDarkMode(){
+        return isDarkMode;
+    }
 }

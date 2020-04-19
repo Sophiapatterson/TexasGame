@@ -26,12 +26,13 @@ public class Main extends Application {
         StartScreen startScreen = new StartScreen();
         Scene firstscene = startScreen.createStartScreen(myStage);
         myStage.setScene(firstscene);
-        startScreen.setOnDarkMode(e -> {
-            Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-            com.sun.javafx.css.StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/dark-theme.css").toString());
-        });
         myStage.show();
+
+//        startScreen.setOnDarkMode(e -> {
+//            Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+//            com.sun.javafx.css.StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/dark-theme.css").toString());
+//        });}
+
     }
-
-
 }
+

@@ -20,7 +20,16 @@ public class Coin extends Powerup {
 
     @Override
     public boolean collide(Player player) {
-        return false;
+        System.out.println(this.getXPos());
+        System.out.println(player.getXPos());
+        boolean xTouch = (player.getXPos() >= this.getXPos()&& player.getXPos() <= this.getXPos());
+        System.out.println(xTouch);
+        boolean yTouch = (player.getYPos() == this.getYPos());
+        System.out.println(yTouch);
+        return (xTouch && yTouch);
+//        boolean xTouch = ((player.getXPos() >= this.getXPos() && player.getXPos() <= this.getXPos()) || (player.getXPos()>= this.getXPos() && player.getXPos() <= this.getXPos()));
+//        boolean yTouch = ((player.getYPos() >= this.getYPos() && player.getYPos() <= this.getYPos()) || (player.getYPos() >= this.getYPos() && player.getYPos() <= this.getYPos()));
+//        return (xTouch && yTouch);
     }
 
     @Override
