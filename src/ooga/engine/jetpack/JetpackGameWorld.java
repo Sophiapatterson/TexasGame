@@ -133,7 +133,7 @@ public class JetpackGameWorld {
         myAnimation.play();
     }
     // Change properties of shapes to animate them
-    public void step (double elapsedTime) {
+    protected void step (double elapsedTime) {
 
         gameManager.handleJump(FLOOR_HEIGHT);
 
@@ -169,7 +169,6 @@ public class JetpackGameWorld {
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
-
             myPlayer.jump();
             myPlayer.resetJumpStrength();
         }

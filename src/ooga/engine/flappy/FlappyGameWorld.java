@@ -16,10 +16,7 @@ import ooga.Screens.*;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.dinosaur.DinoGameWorld;
-import ooga.engine.game.Enemy;
-import ooga.engine.game.GameManager;
-import ooga.engine.game.Player;
-import ooga.engine.game.Powerup;
+import ooga.engine.game.*;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -104,7 +101,7 @@ public class FlappyGameWorld {
     private void addPowerups(Group root) throws IOException {
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
-        for (Powerup coin : powerups){
+        for (Powerup coin : powerups) {
             PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setWidthAndHeight(50,50);
             tempCoinView.setProperties(coin);
@@ -154,12 +151,10 @@ public class FlappyGameWorld {
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
         gameManager.handleJump(FLOOR_HEIGHT);
-
         // move the enemies
         for(Enemy enemy: enemies) {
             enemy.move();
         }
-
         //move the powerups
         for(Powerup pu: powerups) {
             pu.move();
