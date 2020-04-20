@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlappyGameWorld {
+public class FlappyGameWorld extends GameWorld {
 
     public static final double FLOOR_HEIGHT = 450;
     public static final int FRAMES_PER_SECOND = 30;
@@ -44,7 +44,6 @@ public class FlappyGameWorld {
     private List<Powerup> powerups;
     private List<PowerupView> powerupsView;
     private Scene myScene;
-    private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private GameConfiguration gameConfig;
     private TutorialScreen tutorialscreen;
@@ -142,12 +141,6 @@ public class FlappyGameWorld {
         return imageView;
     }
 
-    public void setUpAnimation(){
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-    }
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
         gameManager.handleJump(FLOOR_HEIGHT);
@@ -191,11 +184,11 @@ public class FlappyGameWorld {
 
         if(gameManager.isGameOver()) {
             if(tutorialcheck){
-                myAnimation.stop();
+                stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
             else {
-                myAnimation.stop();
+                stopAnimation();
                 myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
             }
         }

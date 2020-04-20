@@ -50,7 +50,6 @@ public class JetpackGameWorld extends GameWorld {
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
     private List<PowerupView> powerupsView;
-    private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private Text myScoreText = new Text();
     private JetpackPlayerView myPlayerView;
@@ -129,13 +128,6 @@ public class JetpackGameWorld extends GameWorld {
         return imageView;
     }
 
-
-    public void setUpAnimation(){
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-    }
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
 
@@ -166,7 +158,7 @@ public class JetpackGameWorld extends GameWorld {
         myScoreText.setText(""+gameManager.getScore());
 
         if(gameManager.isGameOver()) {
-            myAnimation.stop();
+            stopAnimation();
 //            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
