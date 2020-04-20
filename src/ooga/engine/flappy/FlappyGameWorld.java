@@ -16,17 +16,14 @@ import ooga.Screens.*;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.dinosaur.DinoGameWorld;
-import ooga.engine.game.Enemy;
-import ooga.engine.game.GameManager;
-import ooga.engine.game.Player;
-import ooga.engine.game.Powerup;
+import ooga.engine.game.*;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlappyGameWorld {
+public class FlappyGameWorld extends GameWorld {
 
     public static final double FLOOR_HEIGHT = 450;
     public static final int FRAMES_PER_SECOND = 30;
@@ -47,7 +44,6 @@ public class FlappyGameWorld {
     private List<Powerup> powerups;
     private List<PowerupView> powerupsView;
     private Scene myScene;
-    private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private GameConfiguration gameConfig;
     private TutorialScreen tutorialscreen;
@@ -104,7 +100,7 @@ public class FlappyGameWorld {
     private void addPowerups(Group root) throws IOException {
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
-        for (Powerup coin : powerups){
+        for (Powerup coin : powerups) {
             PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setWidthAndHeight(50,50);
             tempCoinView.setProperties(coin);
@@ -145,21 +141,13 @@ public class FlappyGameWorld {
         return imageView;
     }
 
-    public void setUpAnimation(){
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-    }
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
         gameManager.handleJump(FLOOR_HEIGHT);
-
         // move the enemies
         for(Enemy enemy: enemies) {
             enemy.move();
         }
-
         //move the powerups
         for(Powerup pu: powerups) {
             pu.move();
@@ -196,11 +184,11 @@ public class FlappyGameWorld {
 
         if(gameManager.isGameOver()) {
             if(tutorialcheck){
-                myAnimation.stop();
+                stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
             else {
-                myAnimation.stop();
+                stopAnimation();
                 myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
             }
         }

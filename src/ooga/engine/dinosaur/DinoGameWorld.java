@@ -1,7 +1,5 @@
 package ooga.engine.dinosaur;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,26 +9,17 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import ooga.Screens.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
-import ooga.engine.game.Enemy;
-import ooga.engine.game.GameManager;
-import ooga.engine.game.Player;
-import ooga.engine.game.Powerup;
-
+import ooga.engine.game.*;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Basic game world tailored for dinosaur game at the moment for testing. Need to figure out a way to move this game
- * into a larger game -- possibly find a way to make this game a small screen to import into our final game?
- */
-public class DinoGameWorld {
 
+public class DinoGameWorld extends GameWorld {
     public static final double FLOOR_HEIGHT = 275;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -51,7 +40,6 @@ public class DinoGameWorld {
     private List<Powerup> powerups;
     private List<PowerupView> powerupsView;
     private Scene myScene;
-    private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private GameConfiguration gameConfig;
     private TutorialScreen tutorialscreen;
@@ -61,6 +49,10 @@ public class DinoGameWorld {
     private List<Text> tutorialtext;
     private boolean tutorialcheck;
     private Group root;
+
+    public DinoGameWorld() {
+        super();
+    }
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
@@ -144,21 +136,13 @@ public class DinoGameWorld {
         return imageView;
     }
 
-    public void setUpAnimation(){
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-    }
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
         gameManager.handleJump(FLOOR_HEIGHT);
-
         // move the enemies
         for(Enemy enemy: enemies) {
             enemy.move();
         }
-
         if(tutorialcheck){
             if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
                 if(root.getChildren().contains(tutorialtext.get(0))){
@@ -177,29 +161,24 @@ public class DinoGameWorld {
                 }
             }
         }
-
-//        move the powerups
+//      move the powerups
         for(Powerup pu: powerups) {
             pu.move();
         }
-
         //increment score
         gameManager.tick();
-
         // collisions
         gameManager.handleCollisions();
         gameManager.handlePowerups();
-
         //update score
         myScoreText.setText(""+gameManager.getScore());
-
         if(gameManager.isGameOver()) {
             if(tutorialcheck){
-                myAnimation.stop();
+                stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
             else{
-                myAnimation.stop();
+                stopAnimation();
                 myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
             }
         }

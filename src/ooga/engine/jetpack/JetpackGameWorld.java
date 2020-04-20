@@ -17,6 +17,7 @@ import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
+import ooga.engine.game.GameWorld;
 import ooga.engine.game.Powerup;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JetpackGameWorld {
+public class JetpackGameWorld extends GameWorld {
 
     public static final double FLOOR_HEIGHT = 400;
     public static final int FRAMES_PER_SECOND = 30;
@@ -43,12 +44,12 @@ public class JetpackGameWorld {
     public static final int SCORE_X = 30;
     public static final int SCORE_Y = 30;
     public static final int SCORE_TEXT_SIZE = 30;
+    public static final String LevelOne = "data/CSV configurations/Jetpack_Level.csv";
     private JetpackPlayer myPlayer;
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
     private List<PowerupView> powerupsView;
-    private Timeline myAnimation = new Timeline();
     private GameManager gameManager;
     private Text myScoreText = new Text();
     private JetpackPlayerView myPlayerView;
@@ -59,12 +60,13 @@ public class JetpackGameWorld {
     private Group myRoot;
     private Map<Powerup, PowerupView> myPowerupMap;
 
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage, String CSVFile) throws IOException {
+    @Override
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
         endScreen = new EndScreen("Jetpack");
         myStage = currentstage;
         ImageView imageView = getImageView();
         myRoot = new Group(imageView);
-        gameConfig = new JetpackGameConfiguration(Paths.get(CSVFile));
+        gameConfig = new JetpackGameConfiguration(Paths.get(LevelOne));
         addBarry(myRoot);
         addEnemies(myRoot);
         addPowerups(myRoot);
@@ -126,12 +128,6 @@ public class JetpackGameWorld {
         return imageView;
     }
 
-    public void setUpAnimation(){
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-    }
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
 
@@ -162,14 +158,13 @@ public class JetpackGameWorld {
         myScoreText.setText(""+gameManager.getScore());
 
         if(gameManager.isGameOver()) {
-            myAnimation.stop();
+            stopAnimation();
 //            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
 
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
-
             myPlayer.jump();
             myPlayer.resetJumpStrength();
         }

@@ -85,7 +85,7 @@ public class ChangeScreen extends Screen {
         jetpack.setGraphic(createButtonImage(jetimage));
         jetpack.setOnAction(e -> {
             try {
-                myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, Jetfilepath));
+                myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
