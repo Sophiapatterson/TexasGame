@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import ooga.data.LevelFileException;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.FlappyGameWorld;
+import ooga.engine.generic.GenericGameWorld;
 import ooga.engine.jetpack.JetpackGameWorld;
 
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class ChangeScreen extends Screen {
     private final String screenCSS = "Styling/Screen.css";
     private FlappyGameWorld flappygame;
     private JetpackGameWorld jetpackgame;
+    private GenericGameWorld genericgame;
 
     public ChangeScreen(){
 
@@ -48,6 +50,7 @@ public class ChangeScreen extends Screen {
         dinogame = new DinoGameWorld();
         flappygame = new FlappyGameWorld();
         jetpackgame = new JetpackGameWorld();
+        genericgame = new GenericGameWorld();
         changeResources = ResourceBundle.getBundle("ooga.Screens.Properties.ChangeScreen");
         title = initTitle();
     }
@@ -80,9 +83,17 @@ public class ChangeScreen extends Screen {
             myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             jetpackgame.setUpAnimation();
         });
+        Button generic = new Button(changeResources.getString("GENERIC-MESSAGE"));
+        generic.setId("generic");
+        Image dinoimage2 = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
+        generic.setGraphic(createButtonImage(dinoimage2));
+        generic.setOnAction(e -> {
+            myStage.setScene(genericgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
+            genericgame.setUpAnimation();
+        });
         title.setText(changeResources.getString("CHOOSE-MESSAGE"));
         title.getStyleClass().add("titletxt");
-        changerlayout.getChildren().addAll(title, dinosaur, flappy, jetpack);
+        changerlayout.getChildren().addAll(title, dinosaur, flappy, jetpack, generic);
         Scene ChangeScreen = new Scene(changerlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return ChangeScreen;
     }

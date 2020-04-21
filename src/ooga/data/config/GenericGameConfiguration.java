@@ -1,10 +1,13 @@
 package ooga.data.config;
 
 import ooga.data.LevelFileException;
-import ooga.engine.dinosaur.Cactus;
+import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
+import ooga.engine.generic.GameRules;
+import ooga.engine.generic.GenericEnemy;
+import ooga.engine.generic.GenericGameWorld;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,17 +15,19 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DinoGameConfiguration extends GameConfiguration {
+public class GenericGameConfiguration extends GameConfiguration {
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;
     private List<Powerup> allPU;
     private int length;
+    private GameRules rules;
 
-    public DinoGameConfiguration(Path path) throws LevelFileException {
+    public GenericGameConfiguration(Path path) throws LevelFileException {
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
         List<String> lines = null;
+        rules = new GameRules();
 
         try {
             lines = Files.readAllLines(path);
@@ -39,16 +44,17 @@ public class DinoGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeCoin(double xCoef, double yCoef) {
-        //commented out coins because we don't need coins in dino game
-//        Coin pu = new Coin(xCoef*length, yCoef*600);
-//        pu.setYPos(DinoGameWorld.FLOOR_HEIGHT);
-//        scrollers.add(pu);
-//        allPU.add(pu);
+        if(rules.ALLOW_COINS) {
+            Coin pu = new Coin(xCoef * length, yCoef * 600);
+            pu.setYPos(rules.FLOOR_HEIGHT);
+            scrollers.add(pu);
+            allPU.add(pu);
+        }
     }
 
     @Override
     public void makeEnemy(double xCoef, double yCoef){
-        Cactus c = new Cactus();
+        GenericEnemy c = new GenericEnemy();
         c.setStandardY();
         c.setXPos(xCoef*length);
         scrollers.add(c);
