@@ -56,11 +56,7 @@ public class TutorialScreen extends Screen {
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         dinosaur.setGraphic(createButtonImage(dinoimage));
         dinosaur.setOnAction(e -> {
-            try {
-                myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             dinogame.setUpAnimation();
         });
         Button flappy = new Button(tutorialResources.getString("FLAPPY-TUTORIAL"));
@@ -68,11 +64,7 @@ public class TutorialScreen extends Screen {
         Image flappyimage = new Image(getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         flappy.setGraphic(createButtonImage(flappyimage));
         flappy.setOnAction(e -> {
-            try {
-                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             flappygame.setUpAnimation();
         });
         Button jetpack = new Button(tutorialResources.getString("JET-TUTORIAL"));

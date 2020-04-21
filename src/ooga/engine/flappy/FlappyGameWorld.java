@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.Screens.*;
+import ooga.data.LevelFileException;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.dinosaur.DinoGameWorld;
@@ -55,7 +56,7 @@ public class FlappyGameWorld extends GameWorld {
     private Group root;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
         tutorialcheck = tutorial;
         tutorialscreen = new TutorialScreen();
         endScreen = new EndScreen(VERSION_NAME);
@@ -85,7 +86,7 @@ public class FlappyGameWorld extends GameWorld {
         return myScene;
     }
 
-    private void addEnemies(Group root) throws IOException {
+    private void addEnemies(Group root) {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
@@ -97,7 +98,7 @@ public class FlappyGameWorld extends GameWorld {
         }
     }
 
-    private void addPowerups(Group root) throws IOException {
+    private void addPowerups(Group root) {
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
         for (Powerup coin : powerups) {

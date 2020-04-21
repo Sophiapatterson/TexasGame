@@ -1,8 +1,7 @@
 package ooga.data.config;
 
+import ooga.data.LevelFileException;
 import ooga.engine.dinosaur.Cactus;
-import ooga.engine.dinosaur.DinoGameWorld;
-import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
@@ -19,17 +18,16 @@ public class DinoGameConfiguration extends GameConfiguration {
     private List<Powerup> allPU;
     private int length;
 
-    public DinoGameConfiguration(Path path) throws IOException {
+    public DinoGameConfiguration(Path path) throws LevelFileException {
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
         List<String> lines = null;
 
-        //TODO implement custom exceptions
         try {
             lines = Files.readAllLines(path);
         } catch (IOException e){
-            throw new IOException("your level configuration file couldn't be read", e);
+            throw new LevelFileException(e);
         }
 
         String[] array;
@@ -57,7 +55,6 @@ public class DinoGameConfiguration extends GameConfiguration {
         allEnemies.add(c);
     }
 
-    //TODO is this allowed idk
     public List<Scrolling> getScrollers() {
         return scrollers;
     }
