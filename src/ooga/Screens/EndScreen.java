@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import ooga.data.HighScores;
 import ooga.data.Score;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class EndScreen extends Screen {
@@ -136,6 +137,7 @@ public class EndScreen extends Screen {
         submit.setId("submit");
         submit.setOnAction( f -> {
             highscores.addScore(new Score(nameTextField.getText(), score));
+            highscores.saveHighScores();
             enterData.close();
             allowSubmissions = false;
             myStage.setScene(createLeaderboard(myStage));

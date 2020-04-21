@@ -7,15 +7,32 @@ public class HighScores {
     private ResourceBundle scores;
     private List<Score> list;
     private String version;
-    private String filepath;
 
-    public HighScores(String version){
+    public HighScores(String version) {
         this.version = version;
-        //TODO write and access at same location
-        filepath = "ooga.data.Properties."+this.version.toUpperCase()+"-HighScores";
-        scores = ResourceBundle.getBundle(filepath);
+
+        try{
+            scores = fromFile("data/Properties/"+this.version.toUpperCase()+"-SCORES.properties");
+        } catch (IOException e){
+            this.version = "default";
+            try{
+                scores = fromFile("data/Properties/DEFAULT-SCORES.properties");
+            } catch (IOException e2){
+                System.out.println("Couldn't load game scores or default scores. Resources may be corrupted");
+            }
+        }
         list = new ArrayList<>();
         makeList();
+    }
+
+    //sourced from https://gist.github.com/mobleyc/73f1a0036d9ef3fdc7ab
+    private static ResourceBundle fromFile(String fileName) throws IOException {
+        FileInputStream fis = new FileInputStream(fileName);
+        try {
+            return new PropertyResourceBundle(fis);
+        } finally {
+            fis.close();
+        }
     }
 
     private void makeList(){
@@ -46,8 +63,7 @@ public class HighScores {
 
     public void saveHighScores(){
         try {
-            //TODO write and access at same location
-            PrintWriter output = new PrintWriter("data/Properties/DINOSAUR.properties");
+            PrintWriter output = new PrintWriter("data/Properties/"+this.version.toUpperCase()+"-SCORES.properties");
             for(int i = 0; i < getHighScores().size(); i++){
                 String str = getHighScores().get(i).toString();
                 output.write(""+(i+1)+"="+str+"\n");
@@ -55,8 +71,7 @@ public class HighScores {
             output.close();
         }
         catch(IOException e){
-            //TODO replace with custom exceptions
-            throw new RuntimeException("prop files couldn't be saved at IV filepath", e);
+            System.out.println("New leaderboard score couldn't be added. Sorry!");
         }
     }
 }

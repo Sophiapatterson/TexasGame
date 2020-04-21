@@ -1,11 +1,9 @@
 package ooga.data.config;
 
-import ooga.engine.dinosaur.DinoGameWorld;
-import ooga.engine.flappy.FlappyGameWorld;
+import ooga.data.LevelFileException;
 import ooga.engine.flappy.Pipe;
 import ooga.engine.flappy.Pipe2;
 import ooga.engine.flappy.Pipe3;
-import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
@@ -24,17 +22,18 @@ public class FlappyGameConfiguration extends GameConfiguration {
     private int length;
     private final int COUNT_OF_PIPES = 3;
 
-    public FlappyGameConfiguration(Path path) throws IOException {
+    public FlappyGameConfiguration(Path path) throws LevelFileException{
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
         List<String> lines = null;
-        //TODO implement custom exceptions
+
         try {
             lines = Files.readAllLines(path);
         } catch (IOException e){
-            throw new IOException("your level configuration file couldn't be read", e);
+            throw new LevelFileException(e);
         }
+
         String[] array;
         length = Integer.parseInt(lines.get(0));
         lines.remove(0);
@@ -70,7 +69,6 @@ public class FlappyGameConfiguration extends GameConfiguration {
         allEnemies.add(p);
     }
 
-    //TODO is this allowed idk
     public List<Scrolling> getScrollers() {
         return scrollers;
     }

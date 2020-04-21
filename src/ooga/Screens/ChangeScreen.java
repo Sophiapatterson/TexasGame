@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.data.LevelFileException;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.FlappyGameWorld;
 import ooga.engine.jetpack.JetpackGameWorld;
@@ -51,7 +52,7 @@ public class ChangeScreen extends Screen {
         title = initTitle();
     }
 
-    public Scene createChangeScreen(Stage currentstage){
+    public Scene createChangeScreen(Stage currentstage) throws RuntimeException {
         myStage = currentstage;
         VBox changerlayout = new VBox();
         initLayout(changerlayout);
@@ -60,11 +61,7 @@ public class ChangeScreen extends Screen {
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         dinosaur.setGraphic(createButtonImage(dinoimage));
         dinosaur.setOnAction(e -> {
-            try {
-                myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             dinogame.setUpAnimation();
         });
         Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
@@ -72,11 +69,7 @@ public class ChangeScreen extends Screen {
         Image flappyimage = new Image(getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         flappy.setGraphic(createButtonImage(flappyimage));
         flappy.setOnAction(e -> {
-            try {
-                myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             flappygame.setUpAnimation();
         });
         Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
@@ -84,11 +77,7 @@ public class ChangeScreen extends Screen {
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
         jetpack.setGraphic(createButtonImage(jetimage));
         jetpack.setOnAction(e -> {
-            try {
-                myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             jetpackgame.setUpAnimation();
         });
         title.setText(changeResources.getString("CHOOSE-MESSAGE"));

@@ -2,7 +2,6 @@ package ooga.engine.jetpack;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
