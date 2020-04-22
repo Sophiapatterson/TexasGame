@@ -159,7 +159,7 @@ public class JetpackGameWorld extends GameWorld {
 
         if(gameManager.isGameOver()) {
             stopAnimation();
-//            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
         }
     }
 
