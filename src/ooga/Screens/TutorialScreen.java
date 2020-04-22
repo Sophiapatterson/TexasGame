@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.FlappyGameWorld;
+import ooga.engine.jetpack.JetpackGameWorld;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -34,6 +35,7 @@ public class TutorialScreen extends Screen {
     private DinoGameWorld dinogame;
     private ResourceBundle tutorialResources;
     private FlappyGameWorld flappygame;
+    private JetpackGameWorld jetpackgame;
     private ChangeScreen changescreen;
 
     public TutorialScreen(){
@@ -41,6 +43,7 @@ public class TutorialScreen extends Screen {
         title = initTitle();
         dinogame = new DinoGameWorld();
         flappygame = new FlappyGameWorld();
+        jetpackgame = new JetpackGameWorld();
         changescreen = new ChangeScreen();
         tutorialResources = ResourceBundle.getBundle("ooga.Screens.Properties.TutorialScreen");
     }
@@ -70,7 +73,9 @@ public class TutorialScreen extends Screen {
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
         jetpack.setGraphic(createButtonImage(jetimage));
         jetpack.setOnAction(e -> {
-            myStage.setScene(placeholderScene());
+            //myStage.setScene(placeholderScene());
+            myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
+            jetpackgame.setUpAnimation();
         });
         title.setText(tutorialResources.getString("TUTORIAL-CHOOSER"));
         title.getStyleClass().add("titletxt");
