@@ -73,11 +73,9 @@ public class StartScreen extends Screen {
         Button quit = quitButton();
         Button darkMode = darkModeButton();
         darkMode.setOnAction(event -> {
-            this.setDarkModeTrue();
+            setDarkModeTrue();
             startlayout.getStylesheets().remove("Styling/Screen.css");
             startlayout.getStylesheets().add("Styling/dark-theme.css");
-            changescreen.setDarkModeTrue();
-            tutorialscreen.setDarkModeTrue();
         });
         title.setText("Welcome to TEXAS");
         title.getStyleClass().add("titletxt");
