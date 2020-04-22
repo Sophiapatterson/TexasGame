@@ -29,14 +29,12 @@ public class EndScreen extends Screen {
     public static final int SCREEN_HEIGHT = 600;
     public static final int POPUP_WIDTH = 500;
     public static final int POPUP_HEIGHT = 475;
-    public static final Color SCREEN_COLOR = Color.GOLD;
     private ResourceBundle endResources;
     private ResourceBundle creditsResources;
     private boolean allowSubmissions;
     private Stage myStage;
     private int score;
     private String version;
-    private final String screenCSS = "Styling/Screen.css";
     private HighScores highscores;
 
     public EndScreen(String version){
@@ -49,11 +47,6 @@ public class EndScreen extends Screen {
         changescreen = new ChangeScreen();
         title = initTitle();
         quit = startscreen.quitButton();
-    }
-
-    @Override
-    public Text initTitle() {
-        return super.initTitle();
     }
 
     public Scene createEndScreen(Stage currentstage, int gamescore){
@@ -179,7 +172,4 @@ public class EndScreen extends Screen {
         return returnedtext;
     }
 
-    public void initLayout(VBox layout) {
-        super.initLayout(layout);
-    }
 }

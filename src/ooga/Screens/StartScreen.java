@@ -28,7 +28,6 @@ public class StartScreen extends Screen {
     private Stage myStage;
     private Text title;
     private Button darkMode;
-    private final String screenCSS = "Styling/Screen.css";
 
     public StartScreen(){
         changescreen = new ChangeScreen();
@@ -85,14 +84,5 @@ public class StartScreen extends Screen {
         startlayout.getChildren().addAll(title, start,tutorial,quit,darkMode);
         Scene StartScreen = new Scene(startlayout, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR);
         return StartScreen;
-    }
-
-    public void initLayout(VBox layout) {
-        super.initLayout(layout);
-    }
-
-    @Override
-    public Text initTitle() {
-        return super.initTitle();
     }
 }

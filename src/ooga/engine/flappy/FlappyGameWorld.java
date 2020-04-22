@@ -1,7 +1,5 @@
 package ooga.engine.flappy;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,18 +9,16 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import ooga.Screens.*;
-import ooga.data.LevelFileException;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.game.*;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class FlappyGameWorld extends GameWorld {
 
@@ -54,10 +50,12 @@ public class FlappyGameWorld extends GameWorld {
     private List<Text> tutorialtext;
     private boolean tutorialcheck;
     private Group root;
+    private Tutorial myTutorial;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
         tutorialcheck = tutorial;
+        myTutorial = new Tutorial();
         tutorialscreen = new TutorialScreen();
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
@@ -118,19 +116,14 @@ public class FlappyGameWorld extends GameWorld {
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
 
-    //Still have to implement
     private void addText(Group root){
-        tutorialtext = new ArrayList<>();
-        Text first = new Text(50, 100, "Press Space to keep flying and go through the pipes!");
-        Text second = new Text(50, 100, "Good job! Try that again!");
-        Text third = new Text(50, 100, "Great! Now try to get that coin!");
-        first.getStyleClass().add("titletxt");
-        second.getStyleClass().add("titletxt");
-        third.getStyleClass().add("titletxt");
-        tutorialtext.add(first);
-        tutorialtext.add(second);
-        tutorialtext.add(third);
-        root.getChildren().add(first);
+        List<String> tutorialstring = new ArrayList<>();
+        ResourceBundle tutorialResources = ResourceBundle.getBundle("Properties.FLAPPY-TUTORIAL");
+        tutorialstring.add(tutorialResources.getString("FLAPPY1-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("FLAPPY2-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("FLAPPY3-MESSAGE"));
+        tutorialtext = myTutorial.createTutorialText(tutorialstring);
+        root.getChildren().add(tutorialtext.get(0));
     }
 
     private ImageView getImageView() {
@@ -155,21 +148,10 @@ public class FlappyGameWorld extends GameWorld {
         }
 
         if(tutorialcheck){
-            if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
-                if(root.getChildren().contains(tutorialtext.get(0))){
-                    root.getChildren().remove(tutorialtext.get(0));
-                }
-                if(!root.getChildren().contains(tutorialtext.get(1))){
-                    root.getChildren().add(tutorialtext.get(1));
-                }
-            }
-            else if(myPlayer.getXPos()>enemies.get(1).getXPos()){
-                if(root.getChildren().contains(tutorialtext.get(1))){
-                    root.getChildren().remove(tutorialtext.get(1));
-                }
-                if(!root.getChildren().contains(tutorialtext.get(2))){
-                    root.getChildren().add(tutorialtext.get(2));
-                }
+            myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
+            if(myPlayer.getXPos()>enemies.get(1).getXPos()+700){
+                stopAnimation();
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
         }
 
@@ -184,12 +166,11 @@ public class FlappyGameWorld extends GameWorld {
         myScoreText.setText(""+gameManager.getScore());
 
         if(gameManager.isGameOver()) {
+            stopAnimation();
             if(tutorialcheck){
-                stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
             else {
-                stopAnimation();
                 myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
             }
         }
