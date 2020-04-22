@@ -18,7 +18,7 @@ public class HighScores {
             try{
                 scores = fromFile("data/Properties/DEFAULT-SCORES.properties");
             } catch (IOException e2){
-                System.out.println("Couldn't load game scores or default scores. Resources may be corrupted");
+                throw new LevelFileException("Couldn't load game scores or default scores. Resources may be corrupted", e2);
             }
         }
         list = new ArrayList<>();
@@ -46,6 +46,12 @@ public class HighScores {
 
     public void addScore(Score newScore){
         list.add(newScore);
+        list.sort(Score.SCORE_COMPARATOR);
+    }
+
+    public void removeScore(int zeroIndex){
+        list.sort(Score.SCORE_COMPARATOR);
+        list.remove(zeroIndex);
         list.sort(Score.SCORE_COMPARATOR);
     }
 
