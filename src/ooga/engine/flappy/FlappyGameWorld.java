@@ -30,7 +30,7 @@ public class FlappyGameWorld extends GameWorld {
     public static final int IMAGE_HEIGHT = 695;
     public static final String VERSION_NAME = "Flappy";
     public static final String LevelOne = "data/CSV configurations/levelOne.csv";
-    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
     public static final int SCORE_X = 30;
     public static final int SCORE_Y = 30;
     public static final int SCORE_TEXT_SIZE = 30;
