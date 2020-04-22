@@ -35,8 +35,6 @@ public class TutorialScreen extends Screen {
     private ResourceBundle tutorialResources;
     private FlappyGameWorld flappygame;
     private ChangeScreen changescreen;
-    private final String screenCSS = "Styling/Screen.css";
-    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
 
     public TutorialScreen(){
         myStage = new Stage();
@@ -100,20 +98,6 @@ public class TutorialScreen extends Screen {
         tutoriallayout.getChildren().addAll(title, tutorial, gamechooser);
         Scene TutorialGame = new Scene(tutoriallayout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return TutorialGame;
-    }
-
-    public void initLayout(VBox layout) {
-        super.initLayout(layout);
-    }
-
-    @Override
-    public Text initTitle() {
-        return super.initTitle();
-    }
-
-    @Override
-    public ImageView createButtonImage(Image gameimage) {
-        return super.createButtonImage(gameimage);
     }
 
     //Delete once we have the tutorials

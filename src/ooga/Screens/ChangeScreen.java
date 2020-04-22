@@ -27,18 +27,13 @@ import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.jetpack.JetpackGameWorld.BARRY_IMAGE;
 
 public class ChangeScreen extends Screen {
-    //private static final String DINO_IMAGE = "dino_trexx.png";
     private ResourceBundle changeResources;
     public static final int SCREEN_WIDTH = 850;
     public static final int SCREEN_HEIGHT = 600;
     public static final Paint BACKGROUND = Color.AZURE;
-    private static final String Dinofilepath = "data/CSV configurations/levelOne.csv";
-    private static final String Flappyfilepath = "data/CSV configurations/levelOne.csv";
-    private static final String Jetfilepath = "data/CSV configurations/Jetpack_Level.csv";
     private Text title;
     private Stage myStage;
     private DinoGameWorld dinogame;
-    private final String screenCSS = "Styling/Screen.css";
     private FlappyGameWorld flappygame;
     private JetpackGameWorld jetpackgame;
 
@@ -91,12 +86,4 @@ public class ChangeScreen extends Screen {
         return super.createButtonImage(gameimage);
     }
 
-    public void initLayout(VBox layout) {
-        super.initLayout(layout);
-    }
-
-    @Override
-    public Text initTitle() {
-        return super.initTitle();
-    }
 }
