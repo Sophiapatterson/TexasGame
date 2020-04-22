@@ -22,7 +22,7 @@ public abstract class Screen {
     public static final int DEFAULT_LEFT_PADDING = 50;
     public static final int DEFAULT_RIGHT_PADDING = 50;
     public static final Color SCREEN_COLOR = Color.GOLD;
-    private boolean isDarkMode;
+    private static boolean isDarkMode;
 
 
     public void initLayout(VBox layout){
