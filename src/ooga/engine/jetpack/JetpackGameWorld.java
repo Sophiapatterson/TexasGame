@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class JetpackGameWorld extends GameWorld {
 
-    public static final double FLOOR_HEIGHT = 400;
+    public static final double FLOOR_HEIGHT = 500;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
@@ -35,7 +35,7 @@ public class JetpackGameWorld extends GameWorld {
     public static final String LASER_IMAGE = "Sprites/jetpack_laser.png";
     public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
     public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
-    public static final int IMAGE_HEIGHT = 695;
+    public static final int IMAGE_HEIGHT = 600;
     public static final int SMALL_COIN_SIZE = 35;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
     public static final int SCORE_X = 30;
@@ -123,8 +123,8 @@ public class JetpackGameWorld extends GameWorld {
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));
-        myPlayer = new JetpackPlayer(10, FLOOR_HEIGHT);
-        myPlayerView = new JetpackPlayerView(barryImage, 10, FLOOR_HEIGHT);
+        myPlayer = new JetpackPlayer(100, FLOOR_HEIGHT);
+        myPlayerView = new JetpackPlayerView(barryImage, 100, FLOOR_HEIGHT);
         myPlayerView.setProperties(myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
@@ -133,9 +133,8 @@ public class JetpackGameWorld extends GameWorld {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(0);
-        imageView.setFitHeight(IMAGE_HEIGHT);
         imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
-        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(IMAGE_HEIGHT);
         return imageView;
     }
 
