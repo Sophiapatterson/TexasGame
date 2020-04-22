@@ -42,7 +42,7 @@ public class JetpackGameWorld extends GameWorld {
     public static final int SCORE_Y = 30;
     public static final int SCORE_TEXT_SIZE = 30;
     public static final String LevelOne = "data/CSV configurations/Jetpack_Level.csv";
-    public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
     private static final String VERSION_NAME = "Jetpack";
     private JetpackPlayer myPlayer;
     private List<Enemy> enemies;
