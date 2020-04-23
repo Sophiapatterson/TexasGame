@@ -18,7 +18,7 @@ public class FlappyGameManager extends GameManager {
         this.bird = bird;
         this.pipes = pipes;
         this.powerups = powerups;
-        score = 0;
+        score = INIT_SCORE;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class FlappyGameManager extends GameManager {
 
     @Override
     public void tick() {
-        score += 5;
+        score += SCORE_TICK;
     }
 
     @Override

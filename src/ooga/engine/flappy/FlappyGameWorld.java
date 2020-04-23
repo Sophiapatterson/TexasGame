@@ -32,6 +32,8 @@ public class FlappyGameWorld extends GameWorld {
     public static final String LevelOne = "data/CSV configurations/Flappy_Level.csv";
     public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
     public static final int INITIAL_PLAYER_YPOS = 250;
+    public static final int PIPE_WIDTH = 100;
+    public static final int PIPE_HEIGHT = 550;
     private Player myPlayer;
     private BirdPlayerView myPlayerView;
     private List<Enemy> enemies;
@@ -87,7 +89,7 @@ public class FlappyGameWorld extends GameWorld {
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
             EnemyView tempPipeView = new EnemyView(new Image(pipe.getImage()), pipe.getXPos(), pipe.getYPos());
-            tempPipeView.setWidthAndHeight(100, 550);
+            tempPipeView.setWidthAndHeight(PIPE_WIDTH, PIPE_HEIGHT);
             tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
             root.getChildren().add(tempPipeView.getEnemyImage());
