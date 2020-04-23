@@ -80,4 +80,5 @@ public class FlappyGameConfiguration extends GameConfiguration {
     public List<Powerup> getPowerups() {
         return allPU;
     }
+
 }

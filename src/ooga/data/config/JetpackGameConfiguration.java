@@ -64,4 +64,5 @@ public class JetpackGameConfiguration extends GameConfiguration {
     public List<Powerup> getPowerups() {
         return allPU;
     }
+
 }

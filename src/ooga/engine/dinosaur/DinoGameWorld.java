@@ -13,10 +13,11 @@ import ooga.Screens.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.game.*;
-import java.io.IOException;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class DinoGameWorld extends GameWorld {
@@ -28,7 +29,7 @@ public class DinoGameWorld extends GameWorld {
     public static final String DINO_IMAGE  = "Sprites/dino_trexx.png";
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
     public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
-    public static final String LevelOne = "data/CSV configurations/levelOne.csv";
+    public static final String LevelOne = "data/CSV configurations/Dinosaur_Level.csv";
     public static final int SCORE_X = 30;
     public static final int SCORE_Y = 30;
     public static final int SCORE_TEXT_SIZE = 30;
@@ -49,6 +50,7 @@ public class DinoGameWorld extends GameWorld {
     private List<Text> tutorialtext;
     private boolean tutorialcheck;
     private Group root;
+    private Tutorial myTutorial;
 
     public DinoGameWorld() {
         super();
@@ -56,6 +58,7 @@ public class DinoGameWorld extends GameWorld {
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
+        myTutorial = new Tutorial();
         tutorialcheck = tutorial;
         tutorialscreen = new TutorialScreen();
         endScreen = new EndScreen(VERSION_NAME);
@@ -118,14 +121,13 @@ public class DinoGameWorld extends GameWorld {
     }
 
     private void addText(Group root){
-        tutorialtext = new ArrayList<>();
-        Text first = new Text(50, 100, "Press Space to jump over the cactus!");
-        Text second = new Text(50, 100, "Good job! Try that again!");
-        Text third = new Text(50, 100, "Great! Now try to get that coin!");
-        tutorialtext.add(first);
-        tutorialtext.add(second);
-        tutorialtext.add(third);
-        root.getChildren().add(first);
+        List<String> tutorialstring = new ArrayList<>();
+        ResourceBundle tutorialResources = ResourceBundle.getBundle("Properties.DINO-TUTORIAL");
+        tutorialstring.add(tutorialResources.getString("DINO1-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("DINO2-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("DINO3-MESSAGE"));
+        tutorialtext = myTutorial.createTutorialText(tutorialstring);
+        root.getChildren().add(tutorialtext.get(0));
     }
 
     private ImageView getImageView() {
@@ -144,21 +146,10 @@ public class DinoGameWorld extends GameWorld {
             enemy.move();
         }
         if(tutorialcheck){
-            if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
-                if(root.getChildren().contains(tutorialtext.get(0))){
-                    root.getChildren().remove(tutorialtext.get(0));
-                }
-                if(!root.getChildren().contains(tutorialtext.get(1))){
-                    root.getChildren().add(tutorialtext.get(1));
-                }
-            }
-            else if(myPlayer.getXPos()>enemies.get(1).getXPos()){
-                if(root.getChildren().contains(tutorialtext.get(1))){
-                    root.getChildren().remove(tutorialtext.get(1));
-                }
-                if(!root.getChildren().contains(tutorialtext.get(2))){
-                    root.getChildren().add(tutorialtext.get(2));
-                }
+            myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
+            if(myPlayer.getXPos()>enemies.get(1).getXPos()+700){
+                stopAnimation();
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
         }
 //      move the powerups
@@ -173,12 +164,11 @@ public class DinoGameWorld extends GameWorld {
         //update score
         myScoreText.setText(""+gameManager.getScore());
         if(gameManager.isGameOver()) {
+            stopAnimation();
             if(tutorialcheck){
-                stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
             else{
-                stopAnimation();
                 myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
             }
         }

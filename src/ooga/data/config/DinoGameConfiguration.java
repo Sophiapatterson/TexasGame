@@ -66,4 +66,5 @@ public class DinoGameConfiguration extends GameConfiguration {
     public List<Powerup> getPowerups() {
         return allPU;
     }
+
 }

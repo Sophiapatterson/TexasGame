@@ -1,7 +1,5 @@
 package ooga.engine.jetpack;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,15 +9,11 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import ooga.Screens.*;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
-import ooga.engine.game.Enemy;
-import ooga.engine.game.GameManager;
-import ooga.engine.game.GameWorld;
-import ooga.engine.game.Powerup;
-import java.io.IOException;
+import ooga.engine.game.*;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +22,7 @@ import java.util.Map;
 
 public class JetpackGameWorld extends GameWorld {
 
-    public static final double FLOOR_HEIGHT = 400;
+    public static final double FLOOR_HEIGHT = 500;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
     public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
@@ -44,6 +38,7 @@ public class JetpackGameWorld extends GameWorld {
     public static final int SCORE_Y = 30;
     public static final int SCORE_TEXT_SIZE = 30;
     public static final String LevelOne = "data/CSV configurations/Jetpack_Level.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
     private static final String VERSION_NAME = "Jetpack";
     private JetpackPlayer myPlayer;
     private List<Enemy> enemies;
@@ -55,18 +50,30 @@ public class JetpackGameWorld extends GameWorld {
     private JetpackPlayerView myPlayerView;
     private GameConfiguration gameConfig;
     private EndScreen endScreen;
+    private TutorialScreen tutorialscreen;
     private Stage myStage;
     private Scene myScene;
     private Group myRoot;
     private Map<Powerup, PowerupView> myPowerupMap;
+    private Tutorial myTutorial;
+    private boolean tutorialcheck;
+    private List<Text> tutorialtext;
 
     @Override
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
+        myTutorial = new Tutorial();
+        tutorialcheck = tutorial;
+        tutorialscreen = new TutorialScreen();
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
         myRoot = new Group(imageView);
-        gameConfig = new JetpackGameConfiguration(Paths.get(LevelOne));
+        if(tutorialcheck){
+            gameConfig = new JetpackGameConfiguration(Paths.get(TutorialCSV));
+        }
+        else{
+            gameConfig = new JetpackGameConfiguration(Paths.get(LevelOne));
+        }
         addBarry(myRoot);
         addEnemies(myRoot);
         addPowerups(myRoot);
@@ -122,7 +129,6 @@ public class JetpackGameWorld extends GameWorld {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(0);
-        //imageView.setPreserveRatio(false);
         imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
         imageView.setFitHeight(IMAGE_HEIGHT);
         return imageView;
@@ -151,7 +157,6 @@ public class JetpackGameWorld extends GameWorld {
         List<Powerup> removePowerups = gameManager.handlePowerups();
         for (Powerup each : removePowerups){
             myRoot.getChildren().remove(myPowerupMap.get(each).getPowerupImage());
-
         }
 
         //update score
@@ -159,7 +164,13 @@ public class JetpackGameWorld extends GameWorld {
 
         if(gameManager.isGameOver()) {
             stopAnimation();
-//            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            if(tutorialcheck){
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
+            }
+
+            else{
+                myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            }
         }
     }
 

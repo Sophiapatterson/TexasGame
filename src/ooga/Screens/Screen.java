@@ -2,6 +2,7 @@ package ooga.Screens;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -22,8 +23,11 @@ public abstract class Screen {
     public static final int DEFAULT_LEFT_PADDING = 50;
     public static final int DEFAULT_RIGHT_PADDING = 50;
     public static final Color SCREEN_COLOR = Color.GOLD;
-    private boolean isDarkMode;
+    private static boolean isDarkMode;
 
+    public Scene createMainScreen(Stage currentstage){
+        return null;
+    }
 
     public void initLayout(VBox layout){
         layout.setPadding(new Insets(DEFAULT_TOP_PADDING, DEFAULT_RIGHT_PADDING, DEFAULT_BOTTOM_PADDING, DEFAULT_LEFT_PADDING));
@@ -54,7 +58,4 @@ public abstract class Screen {
         isDarkMode = true;
     }
 
-    public boolean getisDarkMode(){
-        return isDarkMode;
-    }
 }
