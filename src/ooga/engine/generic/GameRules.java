@@ -17,11 +17,13 @@ public class GameRules {
     public String ENEMY_PNG;
     public String ENEMY_PNG2;
     public String ENEMY_PNG3;
+    public String ENEMY_PNG4;
     public int SCREEN_HEIGHT;
     public int COUNT_OF_ENEMY;
     public int TICK_SCORE_AMOUNT;
     public int BACKGROUND_HEIGHT;
     public double ENEMY_SPEED;
+    public double OBJECT_VIEW_SIZE;
     public double PLAYER_X_OFFSET;
     public double PLAYER_Y_OFFSET;
     public double ENEMY_X_OFFSET;
@@ -32,9 +34,10 @@ public class GameRules {
     public boolean START_FALLING;
     public boolean PROPULSION;
     public boolean ALLOW_COINS;
+    public boolean IMMORTAL;
 
     public GameRules(){
-        String path = "ooga.engine.generic.GameRules";
+        String path = "ooga.engine.generic.CREDITS_GameRules";
         props = ResourceBundle.getBundle(path);
 
         FLOOR_HEIGHT = Double.parseDouble(props.getString("FLOOR-HEIGHT"));
@@ -49,6 +52,8 @@ public class GameRules {
         ENEMY_PNG = props.getString("ENEMY-PNG");
         ENEMY_PNG2 = props.getString("ENEMY-PNG2");
         ENEMY_PNG3 = props.getString("ENEMY-PNG3");
+        ENEMY_PNG4 = props.getString("ENEMY-PNG4");
+        OBJECT_VIEW_SIZE = Double.parseDouble(props.getString("OBJECT-VIEW-SIZE"));
         SCREEN_HEIGHT = Integer.parseInt(props.getString("SCREEN-HEIGHT"));
         COUNT_OF_ENEMY = Integer.parseInt(props.getString("COUNT-OF-ENEMY"));
         TICK_SCORE_AMOUNT = Integer.parseInt(props.getString("TICK-SCORE-AMOUNT"));
@@ -64,6 +69,7 @@ public class GameRules {
         START_FALLING = Boolean.parseBoolean(props.getString("START-FALLING"));
         PROPULSION = Boolean.parseBoolean(props.getString("PROPULSION"));
         ALLOW_COINS = Boolean.parseBoolean(props.getString("ALLOW-COINS"));
+        IMMORTAL = Boolean.parseBoolean(props.getString("IMMORTAL"));
     }
 
 }
