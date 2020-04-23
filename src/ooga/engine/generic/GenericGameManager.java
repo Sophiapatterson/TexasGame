@@ -15,8 +15,8 @@ public class GenericGameManager extends GameManager {
     private int score;
     private GameRules rules;
 
-    public GenericGameManager(Player player, List<Enemy> enemies, List<Powerup> powerups) {
-        rules = new GameRules();
+    public GenericGameManager(Player player, List<Enemy> enemies, List<Powerup> powerups, String rulesPath) {
+        rules = new GameRules(rulesPath);
         this.player = player;
         this.enemies = enemies;
         this.powerups = powerups;

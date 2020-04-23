@@ -36,8 +36,7 @@ public class GameRules {
     public boolean ALLOW_COINS;
     public boolean IMMORTAL;
 
-    public GameRules(){
-        String path = "ooga.engine.generic.CREDITS_GameRules";
+    public GameRules(String path){
         props = ResourceBundle.getBundle(path);
 
         FLOOR_HEIGHT = Double.parseDouble(props.getString("FLOOR-HEIGHT"));
