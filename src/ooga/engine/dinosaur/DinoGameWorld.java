@@ -13,7 +13,7 @@ import ooga.Screens.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.game.*;
-import java.io.IOException;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;

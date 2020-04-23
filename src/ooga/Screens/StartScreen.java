@@ -1,15 +1,8 @@
 package ooga.Screens;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -37,38 +30,20 @@ public class StartScreen extends Screen {
         title = initTitle();
     }
 
-    public Button quitButton(){
-        Button quit = new Button(startResources.getString("QUIT-MESSAGE"));
-        quit.setId("quitbutton");
-        quit.setOnAction(e -> {
-            Platform.exit();
-        });
-        return quit;
-    }
-
-    public Button darkModeButton(){
-        darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
-        darkMode.setId("darkmodebutton");
-        return darkMode;
-    }
-
-//    public void setOnDarkMode(EventHandler<ActionEvent> e){
-//        darkMode.setOnAction(event -> e.handle(event));
-//    }
-
-    public Scene createStartScreen(Stage currentStage){
+    @Override
+    public Scene createMainScreen(Stage currentStage) {
         myStage = currentStage;
         VBox startlayout = new VBox();
         initLayout(startlayout);
         Button start = new Button(startResources.getString("START-MESSAGE"));
         start.setId("startbutton");
         start.setOnAction(e -> {
-            myStage.setScene(changescreen.createChangeScreen(myStage));
+            myStage.setScene(changescreen.createMainScreen(myStage));
         });
         Button tutorial = new Button(startResources.getString("TUTORIAL-MESSAGE"));
         tutorial.setId("tutorial");
         tutorial.setOnAction(e -> {
-            myStage.setScene(tutorialscreen.createTutorial(myStage));
+            myStage.setScene(tutorialscreen.createMainScreen(myStage));
         });
         Button quit = quitButton();
         Button darkMode = darkModeButton();
@@ -82,5 +57,20 @@ public class StartScreen extends Screen {
         startlayout.getChildren().addAll(title, start,tutorial,quit,darkMode);
         Scene StartScreen = new Scene(startlayout, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR);
         return StartScreen;
+    }
+
+    public Button quitButton(){
+        Button quit = new Button(startResources.getString("QUIT-MESSAGE"));
+        quit.setId("quitbutton");
+        quit.setOnAction(e -> {
+            Platform.exit();
+        });
+        return quit;
+    }
+
+    public Button darkModeButton(){
+        darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
+        darkMode.setId("darkmodebutton");
+        return darkMode;
     }
 }
