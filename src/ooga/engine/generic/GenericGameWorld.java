@@ -26,7 +26,6 @@ public class GenericGameWorld extends GameWorld {
 
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final double OBJECT_VIEW_SIZE = 50;
 
     private Player myPlayer;
     private GenericPlayerView myPlayerView;
@@ -76,7 +75,7 @@ public class GenericGameWorld extends GameWorld {
         for (Enemy enemy : enemies){
             EnemyView tempView = new EnemyView(new Image(enemy.getImage()), enemy.getXPos(), rules.FLOOR_HEIGHT);
             tempView.setProperties(enemy);
-            tempView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
+            tempView.setWidthAndHeight(rules.OBJECT_VIEW_SIZE, rules.OBJECT_VIEW_SIZE);
             enemiesView.add(tempView);
             root.getChildren().add(tempView.getEnemyImage());
         }
@@ -88,7 +87,7 @@ public class GenericGameWorld extends GameWorld {
         for (Powerup coin : powerups){
             PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setProperties(coin);
-            tempCoinView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
+            tempCoinView.setWidthAndHeight(rules.OBJECT_VIEW_SIZE, rules.OBJECT_VIEW_SIZE);
             powerupsView.add(tempCoinView);
             root.getChildren().add(tempCoinView.getPowerupImage());
         }

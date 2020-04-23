@@ -10,9 +10,12 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import ooga.data.LevelFileException;
 import ooga.engine.dinosaur.DinoGameWorld;
@@ -20,6 +23,7 @@ import ooga.engine.flappy.FlappyGameWorld;
 import ooga.engine.generic.GenericGameWorld;
 import ooga.engine.jetpack.JetpackGameWorld;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -81,8 +85,8 @@ public class ChangeScreen extends Screen {
         });
         Button generic = new Button(changeResources.getString("GENERIC-MESSAGE"));
         generic.setId("generic");
-        Image dinoimage2 = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-        generic.setGraphic(createButtonImage(dinoimage2));
+        //Image dinoimage2 = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
+        generic.setGraphic(makeStar());
         generic.setOnAction(e -> {
             myStage.setScene(genericgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             genericgame.setUpAnimation();
@@ -96,6 +100,25 @@ public class ChangeScreen extends Screen {
 
     public ImageView createButtonImage(Image gameimage){
         return super.createButtonImage(gameimage);
+    }
+
+    private Polygon makeStar(){
+        Double[] points = {205.0/3,150.0/3, 217.0/3,186.0/3, 259.0/3,186.0/3,
+                223.0/3,204.0/3, 233.0/3,246.0/3, 205.0/3,222.0/3, 177.0/3,246.0/3, 187.0/3,204.0/3,
+                151.0/3,186.0/3, 193.0/3,186.0/3};
+        Polygon star = new Polygon();
+        star.getPoints().addAll(points);
+        star.setStroke(Color.BLACK);
+        LinearGradient gradient =  new LinearGradient(0f, 1f, 1f, 0f, true, CycleMethod.NO_CYCLE,
+                new Stop[]{
+                new Stop(0, Color.RED),
+                new Stop(0.4, Color.YELLOW),
+                new Stop(0.5, Color.CHARTREUSE),
+                new Stop(0.7, Color.DEEPSKYBLUE),
+                new Stop(1, Color.DARKORCHID),});
+        //star.getTransforms().add(new Scale(0.5, 0.5));
+        star.setFill(gradient);
+        return star;
     }
 
 }

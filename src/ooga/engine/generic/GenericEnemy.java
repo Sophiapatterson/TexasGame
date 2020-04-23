@@ -22,6 +22,7 @@ public class GenericEnemy extends Enemy {
     }
 
     public boolean collide(Player player) {
+        if(rules.IMMORTAL) return false;
         return (inXBounds(player) && inYBounds(player));
     }
 
@@ -70,8 +71,10 @@ public class GenericEnemy extends Enemy {
             return rules.ENEMY_PNG;
         } else if(pngNum == 1) {
             return rules.ENEMY_PNG2;
-        } else
+        } else if(pngNum == 2) {
             return rules.ENEMY_PNG3;
+        } else
+            return rules.ENEMY_PNG4;
     }
 
     @Override
