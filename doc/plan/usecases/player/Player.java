@@ -4,10 +4,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import ooga.engine.Collidable;
 import ooga.engine.Gravity;
-import ooga.engine.PowerUp;
+import ooga.engine.Upgradeable;
 import ooga.player.Controllable;
 
-public class Player extends Rectangle implements Controllable, Gravity, Collidable, PowerUp {
+public class Player extends Rectangle implements Controllable, Gravity, Collidable, Upgradeable {
 
     public static final double SPEED = 5;
     public static final double GRAVITY_SPEED = 10;
@@ -16,6 +16,7 @@ public class Player extends Rectangle implements Controllable, Gravity, Collidab
     private double y;
 
     private boolean facingRight;
+    private boolean isAlive;
 
     public Player() {
         facingRight = true;
@@ -36,12 +37,11 @@ public class Player extends Rectangle implements Controllable, Gravity, Collidab
 
     @Override
     public void collide(Shape s) {
-        setY(0);
-        setX(0);
+        isAlive = false;
     }
 
     @Override
-    public void p1powerup() {
+    public void powerup() {
         setX(getX() + SPEED);
     }
 }

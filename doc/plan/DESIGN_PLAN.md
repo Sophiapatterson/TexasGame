@@ -1,18 +1,25 @@
 ## Design Plan
 
 ### Introduction
-The goal of this project is to write a program that can easily implement different kinds of platform games. Where the program will be most flexible will be in the data. An example where this flexibility should show is in the ease at which new levels can be configured. The primary architecture of the design should follow the Model View Controller design pattern, and use three main APIs: Engine, Data, and Player. 
+The goal of this project is to write a program that can easily implement different kinds of platform games. Where the program will be most flexible will be in the ease at which new levels can be configured. The primary architecture of the design should follow the Model View Controller design pattern, and use three main APIs: Engine, Data, and Player. 
 
 Our design goals are to use interfaces and class hierarchies in a way such that the program is flexible and cleanly written. We plan to be able to have an easily extendable design that allows for different implementations of platform games (i.e. different level tilesets, enemies, rules, etc.).
 
 ### Overview
 
-The modules that we plan to create are 
+Here is the link to our [wireframe](https://www.figma.com/file/i72GP8WoHcQ4AnpWEi8hJI/FlappyJetpackDinosaur?node-id=0%3A1).
+
+The modules that we plan to create are outlined the UML diagram that can be found [here](https://drive.google.com/file/d/1FxACb8vv95d4I6dGwxJku202AjngJOSu/view?usp=sharing).
 
 ### Design Details
 
+The Data API involves setting up the games. It will rely on properties files in the data folder to achieve this goal. Because of its reliance on data files, the Data API will allow the program to be extendable towards different kinds of games and game layouts. The Data API will also be involved in keeping track of score and sending and receiving score data in order to display high scores. Data will collaborate with the Player API and Screen APIS in order to send these APIs the information that they must display.
+  
+The Engine module includes the objects and logic that comprise the game, including several submodule class hierarchies. There are two interfaces for managing these components, the Gravity and Collidable interfaces. Gravity provides a centralized method for moving down all elements subject to gravity. Collidable’s collision() method tests for intersections between game elements like Obstacles and Characters. The many game objects are organized in class hierarchies. The Enemy abstract class, for instance, provides methods moveLeft(), moveDown(), kill(), etc for moving and removing “enemies” like pterodactyls in the Dinosaur game. The Obstacles and Powerup classes are sparser in methods. They correspond to visual elements in the game. When collided with, they trigger method calls on the game and character. For instance, Game’s setSpeed() method will be called to slow down the gamespeed when the player collects a Slower Powerup. When the Character collects a Coin, it will increase the score, and the DeluxeCoin will increase the score a lot. The Camera object is used to calculate and return the correct data for the corresponding zone of the moving level. The Game object will get data with the GameManager and GameConfiguration in the Data module and will pass the game elements to be displayed in the Screen APIs. 
 
+The Player module includes everything that deals with the player, but it will probably not need to include class hierarchies. Classes within this module will deal with everything to do with the player, such as the key inputs that control the player, as well as all of the behaviors for the player when colliding with enemies and obstacles, such as ending the game if the player collides with these. The classes within the player module will also deal with changes that the player will experience whenever it collides with the powerups, depending on which powerup it collides with. 
 
+The Screen module includes everything that deals with the screens for the game. This comprises the majority of the JavaFX code. The EndScreen will interact with the backend to get data for the high scores. The level screens will get data to display the game from the Engine and Data modules. These classes (including the main FlappyJetpackDinosaur class) contain the driving methods like step() that support animation for JavaFX. The Screen superclass in this hierarchy will include a method to setNightMode that will allow the screens to switch between night and day GUI modes. They will have significant amounts of text that will be drawn from properties files in the program’s data. 
 ### Example games
 Three varying games that our program should be able to emulate are Flappy Bird, Google Chrome Dinosaur game, and Jetpack Joyride.
 
