@@ -15,6 +15,12 @@ public class GameRules {
     public String BACKGROUND_IMAGE;
     public String LEVEL_CSV;
     public String ENEMY_PNG;
+    public String ENEMY_PNG2;
+    public String ENEMY_PNG3;
+    public int SCREEN_HEIGHT;
+    public int COUNT_OF_ENEMY;
+    public int TICK_SCORE_AMOUNT;
+    public int BACKGROUND_HEIGHT;
     public double ENEMY_SPEED;
     public double PLAYER_X_OFFSET;
     public double PLAYER_Y_OFFSET;
@@ -41,6 +47,12 @@ public class GameRules {
         BACKGROUND_IMAGE = props.getString("BACKGROUND-PNG");
         LEVEL_CSV = props.getString("CSV-PATH");
         ENEMY_PNG = props.getString("ENEMY-PNG");
+        ENEMY_PNG2 = props.getString("ENEMY-PNG2");
+        ENEMY_PNG3 = props.getString("ENEMY-PNG3");
+        SCREEN_HEIGHT = Integer.parseInt(props.getString("SCREEN-HEIGHT"));
+        COUNT_OF_ENEMY = Integer.parseInt(props.getString("COUNT-OF-ENEMY"));
+        TICK_SCORE_AMOUNT = Integer.parseInt(props.getString("TICK-SCORE-AMOUNT"));
+        BACKGROUND_HEIGHT = Integer.parseInt(props.getString("BACKGROUND-HEIGHT"));
         ENEMY_SPEED = Double.parseDouble(props.getString("ENEMY-SPEED"));
         PLAYER_X_OFFSET = Double.parseDouble(props.getString("PLAYER-X-OFFSET"));
         PLAYER_Y_OFFSET = Double.parseDouble(props.getString("PLAYER-Y-OFFSET"));

@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
+import java.util.Random;
+
 public class GenericEnemy extends Enemy {
 
     private DoubleProperty x = new SimpleDoubleProperty();
@@ -62,7 +64,14 @@ public class GenericEnemy extends Enemy {
 
     @Override
     public String getImage() {
-        return rules.ENEMY_PNG;
+        Random r = new Random();
+        int pngNum = r.nextInt(rules.COUNT_OF_ENEMY);
+        if(pngNum == 0) {
+            return rules.ENEMY_PNG;
+        } else if(pngNum == 1) {
+            return rules.ENEMY_PNG2;
+        } else
+            return rules.ENEMY_PNG3;
     }
 
     @Override

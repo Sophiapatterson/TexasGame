@@ -45,7 +45,7 @@ public class GenericGameConfiguration extends GameConfiguration {
     @Override
     public void makeCoin(double xCoef, double yCoef) {
         if(rules.ALLOW_COINS) {
-            Coin pu = new Coin(xCoef * length, yCoef * 600);
+            Coin pu = new Coin(xCoef * length, yCoef * rules.SCREEN_HEIGHT);
             pu.setYPos(rules.FLOOR_HEIGHT);
             scrollers.add(pu);
             allPU.add(pu);

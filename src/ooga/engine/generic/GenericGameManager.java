@@ -16,6 +16,7 @@ public class GenericGameManager extends GameManager {
     private GameRules rules;
 
     public GenericGameManager(Player player, List<Enemy> enemies, List<Powerup> powerups) {
+        rules = new GameRules();
         this.player = player;
         this.enemies = enemies;
         this.powerups = powerups;
@@ -54,7 +55,7 @@ public class GenericGameManager extends GameManager {
 
     @Override
     public void tick(){
-        score+=5;
+        score+= rules.TICK_SCORE_AMOUNT;
     }
 
     @Override

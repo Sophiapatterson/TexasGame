@@ -109,7 +109,7 @@ public class GenericGameWorld extends GameWorld {
     private ImageView getImageView() {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(rules.BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
-        imageView.setY(320);
+        imageView.setY(rules.BACKGROUND_HEIGHT);
         imageView.setPreserveRatio(true);
         return imageView;
     }
