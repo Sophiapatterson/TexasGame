@@ -10,10 +10,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.Screens.*;
-import ooga.View.BirdPlayerView;
-import ooga.View.EnemyView;
-import ooga.View.ObjectView;
-import ooga.View.PowerupView;
+import ooga.view.*;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.dinosaur.DinoGameWorld;
@@ -39,11 +36,11 @@ public class FlappyGameWorld extends GameWorld {
     public static final int SCORE_Y = 30;
     public static final int SCORE_TEXT_SIZE = 30;
     private Player myPlayer;
-    private BirdPlayerView myPlayerView;
+    private View myPlayerView;
     private List<Enemy> enemies;
-    private List<EnemyView> enemiesView;
+    private List<View> enemiesView;
     private List<Powerup> powerups;
-    private List<ObjectView> powerupsView;
+    private List<View> powerupsView;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -94,28 +91,29 @@ public class FlappyGameWorld extends GameWorld {
             tempPipeView.setWidthAndHeight(100, 550);
             tempPipeView.setProperties(pipe);
             enemiesView.add(tempPipeView);
-            root.getChildren().add(tempPipeView.getEnemyImage());
+            root.getChildren().add(tempPipeView.getView());
         }
     }
 
     private void addPowerups(Group root) throws IOException {
         powerups = new ArrayList<>(gameConfig.getPowerups());
-        powerupsView = new ArrayList<ObjectView>();
+        powerupsView = new ArrayList<>();
         for (Powerup coin : powerups) {
-            ObjectView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            View tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setWidthAndHeight(50,50);
             tempCoinView.setProperties(coin);
             powerupsView.add(tempCoinView);
-            root.getChildren().add(tempCoinView.getObjectView());
+            root.getChildren().add(tempCoinView.getView());
         }
     }
 
     private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, 250);
-        myPlayerView = new BirdPlayerView(birdImage, DinoGameWorld.INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
-        myPlayerView.setProperties((BirdPlayer) myPlayer);
-        root.getChildren().add(myPlayerView.getPlayerImage());
+        myPlayerView = new PlayerView(birdImage, DinoGameWorld.INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
+        //here is hwere the problem lies...
+        myPlayerView.setProperties(myPlayer);
+        root.getChildren().add(myPlayerView.getView());
     }
 
     //Still have to implement

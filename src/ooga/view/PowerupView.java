@@ -1,4 +1,4 @@
-package ooga.View;
+package ooga.view;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -10,19 +10,21 @@ public class PowerupView extends View {
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
 
-    public PowerupView(Image image, double x, double y) {
-        super();
-        this.powerupImage = new ImageView(image);
-        this.powerupImage.setPreserveRatio(true);
-        this.powerupImage.visibleProperty();
+    public PowerupView(Image powerupImage, double x, double y) {
+        //what is the purpose of this
+//        super();
+        initializeView(powerupImage);
         this.powerupImage.xProperty().bind(this.x);
         this.powerupImage.yProperty().bind(this.y);
     }
 
-//    @Override
     public void setProperties(ooga.engine.game.Powerup powerup){
         x.bindBidirectional(powerup.getXProperty());
         y.bindBidirectional(powerup.getYProperty());
     }
 
+    @Override
+    public ImageView getView() {
+        return powerupImage;
+    }
 }

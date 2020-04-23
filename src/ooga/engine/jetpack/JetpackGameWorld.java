@@ -10,16 +10,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.Screens.*;
-import ooga.View.EnemyView;
-import ooga.View.JetpackPlayerView;
-import ooga.View.ObjectView;
-import ooga.View.PowerupView;
+import ooga.view.*;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.GameWorld;
 import ooga.engine.game.Powerup;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -48,18 +46,18 @@ public class JetpackGameWorld extends GameWorld {
     public static final String LevelOne = "data/CSV configurations/Jetpack_Level.csv";
     private JetpackPlayer myPlayer;
     private List<Enemy> enemies;
-    private List<EnemyView> enemiesView;
+    private List<View> enemiesView;
     private List<Powerup> powerups;
-    private List<ObjectView> powerupsView;
+    private List<View> powerupsView;
     private GameManager gameManager;
     private Text myScoreText = new Text();
-    private JetpackPlayerView myPlayerView;
+    private PlayerView myPlayerView;
     private GameConfiguration gameConfig;
     private EndScreen endScreen;
     private Stage myStage;
     private Scene myScene;
     private Group myRoot;
-    private Map<Powerup, ObjectView> myPowerupMap;
+    private Map<Powerup, View> myPowerupMap;
 
     @Override
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
@@ -93,7 +91,7 @@ public class JetpackGameWorld extends GameWorld {
             tempEnemyView.setProperties(enemy);
             tempEnemyView.setWidthAndHeight(40, 180);
             enemiesView.add(tempEnemyView);
-            root.getChildren().add(tempEnemyView.getEnemyImage());
+            root.getChildren().add(tempEnemyView.getView());
         }
     }
 
@@ -102,21 +100,22 @@ public class JetpackGameWorld extends GameWorld {
         powerupsView = new ArrayList<>();
         myPowerupMap = new HashMap<>();
         for (Powerup coin : powerups){
-            ObjectView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            View tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             myPowerupMap.put(coin, tempCoinView);
             tempCoinView.setProperties(coin);
             tempCoinView.setWidthAndHeight(SMALL_COIN_SIZE,SMALL_COIN_SIZE);
             tempCoinView.setProperties(coin);
             powerupsView.add(tempCoinView);
-            root.getChildren().add(tempCoinView.getObjectView());
+            root.getChildren().add(tempCoinView.getView());
         }    }
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));
         myPlayer = new JetpackPlayer(10, FLOOR_HEIGHT);
-        myPlayerView = new JetpackPlayerView(barryImage, 10, FLOOR_HEIGHT);
+        myPlayerView = new PlayerView(barryImage, 10, FLOOR_HEIGHT);
+        //here too
         myPlayerView.setProperties(myPlayer);
-        root.getChildren().add(myPlayerView.getPlayerImage());
+        root.getChildren().add(myPlayerView.getView());
     }
 
     private ImageView getImageView() {
@@ -151,7 +150,7 @@ public class JetpackGameWorld extends GameWorld {
         gameManager.handleCollisions();
         List<Powerup> removePowerups = gameManager.handlePowerups();
         for (Powerup each : removePowerups){
-            myRoot.getChildren().remove(myPowerupMap.get(each).getObjectView());
+            myRoot.getChildren().remove(myPowerupMap.get(each).getView());
 
         }
 

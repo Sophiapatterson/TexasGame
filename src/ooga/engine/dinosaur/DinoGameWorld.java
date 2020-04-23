@@ -10,13 +10,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.Screens.*;
-import ooga.View.DinoPlayerView;
-import ooga.View.EnemyView;
-import ooga.View.ObjectView;
-import ooga.View.PowerupView;
+import ooga.view.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.game.*;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -38,11 +36,11 @@ public class DinoGameWorld extends GameWorld {
     public static final int SCORE_TEXT_SIZE = 30;
     public static final double OBJECT_VIEW_SIZE = 50;
     private Player myPlayer;
-    private DinoPlayerView myPlayerView;
+    private PlayerView myPlayerView;
     private List<Enemy> enemies;
-    private List<EnemyView> enemiesView;
+    private List<View> enemiesView;
     private List<Powerup> powerups;
-    private List<ObjectView> powerupsView;
+    private List<View> powerupsView;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -97,28 +95,28 @@ public class DinoGameWorld extends GameWorld {
             tempCacView.setProperties(cactus);
             tempCacView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             enemiesView.add(tempCacView);
-            root.getChildren().add(tempCacView.getEnemyImage());
+            root.getChildren().add(tempCacView.getView());
         }
     }
 
     private void addPowerups(Group root) throws IOException {
         powerups = new ArrayList<>(gameConfig.getPowerups());
-        powerupsView = new ArrayList<ObjectView>();
+        powerupsView = new ArrayList<>();
         for (Powerup coin : powerups){
-            ObjectView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            View tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setProperties(coin);
             tempCoinView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             powerupsView.add(tempCoinView);
-            root.getChildren().add(tempCoinView.getObjectView());
+            root.getChildren().add(tempCoinView.getView());
         }
     }
 
     private void addDino(Group root) {
         Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         myPlayer = new DinoPlayer(INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
-        myPlayerView = new DinoPlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
+        myPlayerView = new PlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setProperties((DinoPlayer) myPlayer);
-        root.getChildren().add(myPlayerView.getPlayerImage());
+        root.getChildren().add(myPlayerView.getView());
     }
 
     private void addText(Group root){
