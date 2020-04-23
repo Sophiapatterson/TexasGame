@@ -90,7 +90,7 @@ public class FlappyGameWorld extends GameWorld {
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
             EnemyView tempPipeView = new EnemyView(new Image(pipe.getImage()), pipe.getXPos(), pipe.getYPos());
-            tempPipeView.setWidthAndHeight(100, 550);
+            tempPipeView.setWidthAndHeight(PIPE_WIDTH, PIPE_HEIGHT);
             tempPipeView.setEnemyProperties(pipe);
             enemiesView.add(tempPipeView);
             root.getChildren().add(tempPipeView.getView());
@@ -111,9 +111,8 @@ public class FlappyGameWorld extends GameWorld {
 
     private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, 250);
+        myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, INITIAL_PLAYER_YPOS);
         myPlayerView = new PlayerView(birdImage, DinoGameWorld.INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
-        //here is hwere the problem lies...
         myPlayerView.setPlayerProperties(myPlayer);
         root.getChildren().add(myPlayerView.getView());
     }
