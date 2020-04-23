@@ -62,7 +62,7 @@ public class Pipe2 extends Enemy {
     }
 
     private boolean inYBounds(Player player) {
-        return player.getYPos() < upperHalfY || player.getYPos() > lowerHalfY;
+        return (player.getYPos() < upperHalfY || player.getYPos() > lowerHalfY);
     }
 
     public String getImage() {
