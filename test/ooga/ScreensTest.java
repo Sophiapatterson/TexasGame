@@ -172,7 +172,7 @@ public class ScreensTest extends DukeApplicationTest{
         myStage.show();
     }
 
-    /**@Test
+    @Test
     void testLeaderboards(){
         Platform.runLater(new Runnable() {
             @Override
@@ -186,13 +186,13 @@ public class ScreensTest extends DukeApplicationTest{
                 assertEquals("Leaderboard",title.getText());
             }
         });
-    }*/
+    }
 
     private void showLeaderboards(){
         endscreen = new EndScreen("Dinosaur");
-        Scene leaderboards = endscreen.createLeaderboard(myStage);
+        Scene leaderboards = endscreen.createLeaderboard(myStage, 500);
         myStage.setScene(leaderboards);
-        myStage.show();
+        //myStage.show();
     }
 
     @Test

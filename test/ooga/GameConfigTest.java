@@ -1,10 +1,8 @@
 package ooga;
 
+import ooga.data.HighScores;
 import ooga.data.LevelFileException;
-import ooga.data.config.DinoGameConfiguration;
-import ooga.data.config.FlappyGameConfiguration;
-import ooga.data.config.GameConfiguration;
-import ooga.data.config.JetpackGameConfiguration;
+import ooga.data.config.*;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import org.junit.jupiter.api.Test;
@@ -16,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameConfigTest {
@@ -70,6 +69,33 @@ public class GameConfigTest {
         assertEquals(coinLocations.get(1), powerups.get(0).getXPos(), 0.1);
         assertEquals(coinLocations.get(11), powerups.get(10).getXPos(), 0.1);
         assertEquals(coinLocations.get(81), powerups.get(80).getXPos(), 0.1);
+    }
+
+    @Test
+    void testGenericConfig(){
+        config = new GenericGameConfiguration("ooga.engine.generic.DINO_GameRules");
+        enemies = config.getEnemies();
+        parse("data/CSV configurations/Dinosaur_Level.csv");
+        assertEquals(enemyLocations.size(), enemies.size());
+        assertEquals(enemyLocations.get(1), enemies.get(0).getXPos(), 0.1);
+        assertEquals(enemyLocations.get(2), enemies.get(1).getXPos(), 0.1);
+        assertEquals(enemyLocations.get(3), enemies.get(2).getXPos(), 0.1);
+    }
+
+    @Test
+    void testConfigErrors(){
+        assertDoesNotThrow(() -> {
+            new JetpackGameConfiguration(Paths.get("NOT-A-REAL-PATH"));
+        });
+        assertDoesNotThrow(() -> {
+            new JetpackGameConfiguration(Paths.get("data/CSV configurations/Empty_Level.csv"));
+        });
+        assertDoesNotThrow(() -> {
+            new JetpackGameConfiguration(Paths.get("data/CSV configurations/Empty_Elements_Level.csv"));
+        });
+        assertDoesNotThrow(() -> {
+            new JetpackGameConfiguration(Paths.get("data/CSV configurations/No_Length_Level.csv"));
+        });
     }
 
 
