@@ -28,17 +28,9 @@ public abstract class View {
     }
 
     public abstract void setPlayerProperties(Player player);
-//        x.bindBidirectional(player.getXProperty());
-//        y.bindBidirectional(player.getYProperty());
-//    }
 
     public abstract void setPowerupProperties(Powerup powerup);
-//        x.bindBidirectional(powerup.getXProperty());
-//        y.bindBidirectional(powerup.getYProperty());
-//    }
-//
+
     public abstract void setEnemyProperties(ooga.engine.game.Enemy enemy);
-//        x.bindBidirectional(enemy.getXProperty());
-//        y.bindBidirectional(enemy.getYProperty());
-//    }
+
 }

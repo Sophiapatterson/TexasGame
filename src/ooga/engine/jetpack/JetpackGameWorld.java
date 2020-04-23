@@ -53,6 +53,8 @@ public class JetpackGameWorld extends GameWorld {
     private Scene myScene;
     private Group myRoot;
     private Map<Powerup, View> myPowerupMap;
+    private Tutorial myTutorial;
+    private boolean tutorialcheck;
 
     @Override
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
@@ -92,7 +94,7 @@ public class JetpackGameWorld extends GameWorld {
         for (Enemy enemy : enemies){
             EnemyView tempEnemyView = new EnemyView(new Image(ZAPPER_IMAGE), enemy.getXPos(), enemy.getYPos());
             tempEnemyView.setEnemyProperties(enemy);
-            tempEnemyView.setWidthAndHeight(40, 180);
+            tempEnemyView.setWidthAndHeight(ENEMY_WIDTH, ENEMY_HEIGHT);
             enemiesView.add(tempEnemyView);
             root.getChildren().add(tempEnemyView.getView());
         }
@@ -113,9 +115,8 @@ public class JetpackGameWorld extends GameWorld {
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));
-        myPlayer = new JetpackPlayer(10, FLOOR_HEIGHT);
-        myPlayerView = new PlayerView(barryImage, 10, FLOOR_HEIGHT);
-        //here too
+        myPlayer = new JetpackPlayer(PLAYER_XPOS, FLOOR_HEIGHT);
+        myPlayerView = new PlayerView(barryImage, PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setPlayerProperties(myPlayer);
         root.getChildren().add(myPlayerView.getView());
     }
