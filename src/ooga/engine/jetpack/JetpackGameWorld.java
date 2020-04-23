@@ -1,7 +1,5 @@
 package ooga.engine.jetpack;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,8 +9,11 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import ooga.Screens.*;
+import ooga.View.EnemyView;
+import ooga.View.JetpackPlayerView;
+import ooga.View.ObjectView;
+import ooga.View.PowerupView;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.Enemy;
@@ -49,7 +50,7 @@ public class JetpackGameWorld extends GameWorld {
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
-    private List<PowerupView> powerupsView;
+    private List<ObjectView> powerupsView;
     private GameManager gameManager;
     private Text myScoreText = new Text();
     private JetpackPlayerView myPlayerView;
@@ -58,7 +59,7 @@ public class JetpackGameWorld extends GameWorld {
     private Stage myStage;
     private Scene myScene;
     private Group myRoot;
-    private Map<Powerup, PowerupView> myPowerupMap;
+    private Map<Powerup, ObjectView> myPowerupMap;
 
     @Override
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
@@ -101,13 +102,13 @@ public class JetpackGameWorld extends GameWorld {
         powerupsView = new ArrayList<>();
         myPowerupMap = new HashMap<>();
         for (Powerup coin : powerups){
-            PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            ObjectView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             myPowerupMap.put(coin, tempCoinView);
             tempCoinView.setProperties(coin);
             tempCoinView.setWidthAndHeight(SMALL_COIN_SIZE,SMALL_COIN_SIZE);
             tempCoinView.setProperties(coin);
             powerupsView.add(tempCoinView);
-            root.getChildren().add(tempCoinView.getPowerupImage());
+            root.getChildren().add(tempCoinView.getObjectView());
         }    }
 
     private void addBarry(Group root) {
@@ -150,7 +151,7 @@ public class JetpackGameWorld extends GameWorld {
         gameManager.handleCollisions();
         List<Powerup> removePowerups = gameManager.handlePowerups();
         for (Powerup each : removePowerups){
-            myRoot.getChildren().remove(myPowerupMap.get(each).getPowerupImage());
+            myRoot.getChildren().remove(myPowerupMap.get(each).getObjectView());
 
         }
 

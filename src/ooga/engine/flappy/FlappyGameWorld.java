@@ -1,7 +1,5 @@
 package ooga.engine.flappy;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,8 +9,11 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import ooga.Screens.*;
+import ooga.View.BirdPlayerView;
+import ooga.View.EnemyView;
+import ooga.View.ObjectView;
+import ooga.View.PowerupView;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.dinosaur.DinoGameWorld;
@@ -42,7 +43,7 @@ public class FlappyGameWorld extends GameWorld {
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
     private List<Powerup> powerups;
-    private List<PowerupView> powerupsView;
+    private List<ObjectView> powerupsView;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -99,13 +100,13 @@ public class FlappyGameWorld extends GameWorld {
 
     private void addPowerups(Group root) throws IOException {
         powerups = new ArrayList<>(gameConfig.getPowerups());
-        powerupsView = new ArrayList<>();
+        powerupsView = new ArrayList<ObjectView>();
         for (Powerup coin : powerups) {
-            PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            ObjectView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setWidthAndHeight(50,50);
             tempCoinView.setProperties(coin);
             powerupsView.add(tempCoinView);
-            root.getChildren().add(tempCoinView.getPowerupImage());
+            root.getChildren().add(tempCoinView.getObjectView());
         }
     }
 

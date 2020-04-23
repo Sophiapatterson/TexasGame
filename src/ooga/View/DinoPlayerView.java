@@ -1,4 +1,4 @@
-package ooga.Screens;
+package ooga.View;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ooga.engine.dinosaur.DinoPlayer;
 
-public class DinoPlayerView {
+public class DinoPlayerView extends PlayerView{
     private ImageView playerImage;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
