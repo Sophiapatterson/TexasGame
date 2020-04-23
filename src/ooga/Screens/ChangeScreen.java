@@ -47,7 +47,8 @@ public class ChangeScreen extends Screen {
         title = initTitle();
     }
 
-    public Scene createChangeScreen(Stage currentstage) throws RuntimeException {
+    @Override
+    public Scene createMainScreen(Stage currentstage) throws RuntimeException {
         myStage = currentstage;
         VBox changerlayout = new VBox();
         initLayout(changerlayout);

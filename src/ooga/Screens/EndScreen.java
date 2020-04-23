@@ -1,23 +1,15 @@
 package ooga.Screens;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
 import ooga.data.Score;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class EndScreen extends Screen {
@@ -58,7 +50,7 @@ public class EndScreen extends Screen {
         Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
         playagain.setId("again");
         playagain.setOnAction(e -> {
-            myStage.setScene(changescreen.createChangeScreen(myStage));
+            myStage.setScene(changescreen.createMainScreen(myStage));
         });
         Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
         credits.setId("credits");
@@ -74,9 +66,6 @@ public class EndScreen extends Screen {
         title.getStyleClass().add("titletxt");
         layout.getChildren().addAll(title, playagain, credits, scores, quit);
         Scene EndScreen = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
-//        if (Screen.isDarkMode){
-//            this.setDarkModeTrue();
-//        }
         return EndScreen;
     }
 
