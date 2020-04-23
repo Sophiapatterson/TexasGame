@@ -13,12 +13,8 @@ import ooga.Screens.*;
 import ooga.view.*;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
-import ooga.engine.game.Enemy;
-import ooga.engine.game.GameManager;
-import ooga.engine.game.GameWorld;
-import ooga.engine.game.Powerup;
+import ooga.engine.game.*;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,23 +23,21 @@ import java.util.Map;
 
 public class JetpackGameWorld extends GameWorld {
 
-    public static final double FLOOR_HEIGHT = 400;
+    public static final double FLOOR_HEIGHT = 500;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
     public static final String BACKGROUND_IMAGE = "Sprites/jetpack_background.png";
-    public static final String FLAPPY_BG_IMAGE = "Sprites/flappy_background.png";
     public static final String AIRBORNE_BARRY_IMAGE = "Sprites/jetpack_airbornBarry.png";
-    public static final String LASER_IMAGE = "Sprites/jetpack_laser.png";
-    public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
     public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
-    public static final int IMAGE_HEIGHT = 695;
+    public static final int IMAGE_HEIGHT = 600;
     public static final int SMALL_COIN_SIZE = 35;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
-    public static final int SCORE_X = 30;
-    public static final int SCORE_Y = 30;
-    public static final int SCORE_TEXT_SIZE = 30;
     public static final String LevelOne = "data/CSV configurations/Jetpack_Level.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String VERSION_NAME = "Jetpack";
+    public static final int ENEMY_WIDTH = 40;
+    public static final int ENEMY_HEIGHT = 180;
+    public static final int PLAYER_XPOS = 100;
     private JetpackPlayer myPlayer;
     private List<Enemy> enemies;
     private List<View> enemiesView;
@@ -54,18 +48,27 @@ public class JetpackGameWorld extends GameWorld {
     private PlayerView myPlayerView;
     private GameConfiguration gameConfig;
     private EndScreen endScreen;
+    private TutorialScreen tutorialscreen;
     private Stage myStage;
     private Scene myScene;
     private Group myRoot;
     private Map<Powerup, View> myPowerupMap;
 
     @Override
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
-        endScreen = new EndScreen("Jetpack");
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
+        myTutorial = new Tutorial();
+        tutorialcheck = tutorial;
+        tutorialscreen = new TutorialScreen();
+        endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
         myRoot = new Group(imageView);
-        gameConfig = new JetpackGameConfiguration(Paths.get(LevelOne));
+        if(tutorialcheck){
+            gameConfig = new JetpackGameConfiguration(Paths.get(TutorialCSV));
+        }
+        else{
+            gameConfig = new JetpackGameConfiguration(Paths.get(LevelOne));
+        }
         addBarry(myRoot);
         addEnemies(myRoot);
         addPowerups(myRoot);
@@ -82,7 +85,7 @@ public class JetpackGameWorld extends GameWorld {
         return myScene;
     }
 
-    private void addEnemies(Group root) throws IOException {
+    private void addEnemies(Group root){
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         //Add for loop for the enemies once images are added
@@ -95,7 +98,7 @@ public class JetpackGameWorld extends GameWorld {
         }
     }
 
-    private void addPowerups(Group root) throws IOException {
+    private void addPowerups(Group root){
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
         myPowerupMap = new HashMap<>();
@@ -121,9 +124,8 @@ public class JetpackGameWorld extends GameWorld {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(0);
-        imageView.setFitHeight(IMAGE_HEIGHT);
         imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
-        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(IMAGE_HEIGHT);
         return imageView;
     }
 
@@ -158,7 +160,13 @@ public class JetpackGameWorld extends GameWorld {
 
         if(gameManager.isGameOver()) {
             stopAnimation();
-//            myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            if(tutorialcheck){
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
+            }
+
+            else{
+                myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            }
         }
     }
 

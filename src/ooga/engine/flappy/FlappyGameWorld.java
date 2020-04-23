@@ -16,10 +16,10 @@ import ooga.data.config.GameConfiguration;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.game.*;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class FlappyGameWorld extends GameWorld {
 
@@ -30,11 +30,11 @@ public class FlappyGameWorld extends GameWorld {
     public static final String BACKGROUND_IMAGE = "Sprites/flappy_background.png";
     public static final int IMAGE_HEIGHT = 695;
     public static final String VERSION_NAME = "Flappy";
-    public static final String LevelOne = "data/CSV configurations/levelOne.csv";
+    public static final String LevelOne = "data/CSV configurations/Flappy_Level.csv";
     public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
-    public static final int SCORE_X = 30;
-    public static final int SCORE_Y = 30;
-    public static final int SCORE_TEXT_SIZE = 30;
+    public static final int INITIAL_PLAYER_YPOS = 250;
+    public static final int PIPE_WIDTH = 100;
+    public static final int PIPE_HEIGHT = 550;
     private Player myPlayer;
     private View myPlayerView;
     private List<Enemy> enemies;
@@ -51,10 +51,12 @@ public class FlappyGameWorld extends GameWorld {
     private List<Text> tutorialtext;
     private boolean tutorialcheck;
     private Group root;
+    private Tutorial myTutorial;
 
     // Create the game's "scene": what shapes will be in the game and their starting properties
-    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws IOException {
+    public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
         tutorialcheck = tutorial;
+        myTutorial = new Tutorial();
         tutorialscreen = new TutorialScreen();
         endScreen = new EndScreen(VERSION_NAME);
         myStage = currentstage;
@@ -83,7 +85,7 @@ public class FlappyGameWorld extends GameWorld {
         return myScene;
     }
 
-    private void addEnemies(Group root) throws IOException {
+    private void addEnemies(Group root) {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy pipe : enemies){
@@ -95,7 +97,7 @@ public class FlappyGameWorld extends GameWorld {
         }
     }
 
-    private void addPowerups(Group root) throws IOException {
+    private void addPowerups(Group root) {
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
         for (Powerup coin : powerups) {
@@ -116,19 +118,14 @@ public class FlappyGameWorld extends GameWorld {
         root.getChildren().add(myPlayerView.getView());
     }
 
-    //Still have to implement
     private void addText(Group root){
-        tutorialtext = new ArrayList<>();
-        Text first = new Text(50, 100, "Press Space to keep flying and go through the pipes!");
-        Text second = new Text(50, 100, "Good job! Try that again!");
-        Text third = new Text(50, 100, "Great! Now try to get that coin!");
-        first.getStyleClass().add("titletxt");
-        second.getStyleClass().add("titletxt");
-        third.getStyleClass().add("titletxt");
-        tutorialtext.add(first);
-        tutorialtext.add(second);
-        tutorialtext.add(third);
-        root.getChildren().add(first);
+        List<String> tutorialstring = new ArrayList<>();
+        ResourceBundle tutorialResources = ResourceBundle.getBundle("Properties.FLAPPY-TUTORIAL");
+        tutorialstring.add(tutorialResources.getString("FLAPPY1-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("FLAPPY2-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("FLAPPY3-MESSAGE"));
+        tutorialtext = myTutorial.createTutorialText(tutorialstring);
+        root.getChildren().add(tutorialtext.get(0));
     }
 
     private ImageView getImageView() {
@@ -153,21 +150,10 @@ public class FlappyGameWorld extends GameWorld {
         }
 
         if(tutorialcheck){
-            if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
-                if(root.getChildren().contains(tutorialtext.get(0))){
-                    root.getChildren().remove(tutorialtext.get(0));
-                }
-                if(!root.getChildren().contains(tutorialtext.get(1))){
-                    root.getChildren().add(tutorialtext.get(1));
-                }
-            }
-            else if(myPlayer.getXPos()>enemies.get(1).getXPos()){
-                if(root.getChildren().contains(tutorialtext.get(1))){
-                    root.getChildren().remove(tutorialtext.get(1));
-                }
-                if(!root.getChildren().contains(tutorialtext.get(2))){
-                    root.getChildren().add(tutorialtext.get(2));
-                }
+            myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
+            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+                stopAnimation();
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
         }
 
@@ -182,12 +168,11 @@ public class FlappyGameWorld extends GameWorld {
         myScoreText.setText(""+gameManager.getScore());
 
         if(gameManager.isGameOver()) {
+            stopAnimation();
             if(tutorialcheck){
-                stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
             else {
-                stopAnimation();
                 myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
             }
         }

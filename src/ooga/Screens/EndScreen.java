@@ -1,21 +1,15 @@
 package ooga.Screens;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
 import ooga.data.Score;
+import ooga.engine.generic.GenericGameWorld;
 
 import java.util.ResourceBundle;
 
@@ -28,14 +22,12 @@ public class EndScreen extends Screen {
     public static final int SCREEN_HEIGHT = 600;
     public static final int POPUP_WIDTH = 500;
     public static final int POPUP_HEIGHT = 475;
-    public static final Color SCREEN_COLOR = Color.GOLD;
     private ResourceBundle endResources;
     private ResourceBundle creditsResources;
     private boolean allowSubmissions;
     private Stage myStage;
     private int score;
     private String version;
-    private final String screenCSS = "Styling/Screen.css";
     private HighScores highscores;
 
     public EndScreen(String version){
@@ -50,11 +42,6 @@ public class EndScreen extends Screen {
         quit = startscreen.quitButton();
     }
 
-    @Override
-    public Text initTitle() {
-        return super.initTitle();
-    }
-
     public Scene createEndScreen(Stage currentstage, int gamescore){
         score = gamescore;
         myStage = currentstage;
@@ -64,7 +51,7 @@ public class EndScreen extends Screen {
         Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
         playagain.setId("again");
         playagain.setOnAction(e -> {
-            myStage.setScene(changescreen.createChangeScreen(myStage));
+            myStage.setScene(changescreen.createMainScreen(myStage));
         });
         Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
         credits.setId("credits");
@@ -80,9 +67,6 @@ public class EndScreen extends Screen {
         title.getStyleClass().add("titletxt");
         layout.getChildren().addAll(title, playagain, credits, scores, quit);
         Scene EndScreen = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
-//        if (Screen.isDarkMode){
-//            this.setDarkModeTrue();
-//        }
         return EndScreen;
     }
 
@@ -136,6 +120,7 @@ public class EndScreen extends Screen {
         submit.setId("submit");
         submit.setOnAction( f -> {
             highscores.addScore(new Score(nameTextField.getText(), score));
+            highscores.saveHighScores();
             enterData.close();
             allowSubmissions = false;
             myStage.setScene(createLeaderboard(myStage));
@@ -177,7 +162,4 @@ public class EndScreen extends Screen {
         return returnedtext;
     }
 
-    public void initLayout(VBox layout) {
-        super.initLayout(layout);
-    }
 }

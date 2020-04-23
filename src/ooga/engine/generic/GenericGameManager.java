@@ -1,26 +1,26 @@
-package ooga.engine.jetpack;
+package ooga.engine.generic;
 
 import ooga.engine.game.Enemy;
 import ooga.engine.game.GameManager;
 import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class JetpackGameManager extends GameManager {
+public class GenericGameManager extends GameManager {
     private Player player;
     private List<Enemy> enemies;
     private List<Powerup> powerups;
     private boolean gameOver = false;
     private int score;
-    private List<Powerup> removePowerups;
+    private GameRules rules;
 
-    public JetpackGameManager(Player player, List<Enemy> enemies, List<Powerup> powerups) {
+    public GenericGameManager(Player player, List<Enemy> enemies, List<Powerup> powerups, String rulesPath) {
+        rules = new GameRules(rulesPath);
         this.player = player;
         this.enemies = enemies;
         this.powerups = powerups;
-        score = INIT_SCORE;
+        score = 0;
     }
 
     @Override
@@ -38,25 +38,8 @@ public class JetpackGameManager extends GameManager {
     }
 
     @Override
-    public List<Powerup> handlePowerups() {
-        removePowerups = new ArrayList<>();
-        for(Powerup pu: powerups){
-            if (pu.collide(player)){
-                score+=pu.scoreBonus();
-                removePowerups.add(pu);
-            }
-        }
-        return removePowerups;
-    }
-
-    @Override
-    public void tick() {
-        score += SCORE_TICK;
-    }
-
-    @Override
-    public int getScore() {
-        return score;
+    public List<Powerup> handlePowerups(){
+        return null;
     }
 
     @Override
@@ -65,7 +48,18 @@ public class JetpackGameManager extends GameManager {
             player.jump();
         }
         else {
+            player.resetJumpStrength();
             player.setYPos(floorY);
         }
+    }
+
+    @Override
+    public void tick(){
+        score+= rules.TICK_SCORE_AMOUNT;
+    }
+
+    @Override
+    public int getScore() {
+        return score;
     }
 }

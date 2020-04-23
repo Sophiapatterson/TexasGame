@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.Screens.ChangeScreen;
@@ -12,10 +11,9 @@ import ooga.Screens.EndScreen;
 import ooga.Screens.StartScreen;
 import ooga.Screens.TutorialScreen;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxAssert;
-import org.testfx.matcher.base.WindowMatchers;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,13 +22,15 @@ public class ScreensTest extends DukeApplicationTest{
     private ChangeScreen changescreen;
     private EndScreen endscreen;
     private Stage myStage;
+    private ResourceBundle creditsResources;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        creditsResources = ResourceBundle.getBundle("ooga.Screens.Properties.Credits");
         myStage = primaryStage;
         myStage.setTitle("Texas");
         StartScreen startMenu = new StartScreen();
-        Scene firstscene = startMenu.createStartScreen(myStage);
+        Scene firstscene = startMenu.createMainScreen(myStage);
         myStage.setScene(firstscene);
         myStage.show();
     }
@@ -50,16 +50,17 @@ public class ScreensTest extends DukeApplicationTest{
                 assertEquals("Tutorial",tutorial.getText());
                 assertEquals("Quit Game",quit.getText());
                 assertEquals("Welcome to TEXAS",title.getText());
-                Parent change = changescreen.createChangeScreen(myStage).getRoot();
+                Parent change = changescreen.createMainScreen(myStage).getRoot();
                 start.fire();
                 for(int i = 0; i<change.getChildrenUnmodifiable().size(); i++){
                     assertEquals(change.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
                 }
                 tutorial.fire();
-                Parent tutorialroot = tutorialscreen.createTutorial(myStage).getRoot();
+                Parent tutorialroot = tutorialscreen.createMainScreen(myStage).getRoot();
                 for(int i = 0; i<tutorialroot.getChildrenUnmodifiable().size(); i++){
                     assertEquals(tutorialroot.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
                 }
+                System.out.println(creditsResources.keySet());
             }
         });
     }
@@ -79,18 +80,13 @@ public class ScreensTest extends DukeApplicationTest{
                 assertEquals("Flappy Tutorial",flappy.getText());
                 assertEquals("Jetpack Tutorial",jetpack.getText());
                 assertEquals("Tutorial Chooser",title.getText());
-                Parent placeholder = tutorialscreen.placeholderScene().getRoot();
-                dinosaur.fire();
-                for(int i = 0; i<placeholder.getChildrenUnmodifiable().size(); i++){
-                    assertEquals(placeholder.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
-                }
             }
         });
     }
 
     private void showTutorialScreen(){
         tutorialscreen = new TutorialScreen();
-        Scene tutorialscene = tutorialscreen.createTutorial(myStage);
+        Scene tutorialscene = tutorialscreen.createMainScreen(myStage);
         myStage.setScene(tutorialscene);
         myStage.show();
     }
@@ -138,7 +134,7 @@ public class ScreensTest extends DukeApplicationTest{
 
     private void showChangeScreen(){
         changescreen = new ChangeScreen();
-        Scene changescene = changescreen.createChangeScreen(myStage);
+        Scene changescene = changescreen.createMainScreen(myStage);
         myStage.setScene(changescene);
         myStage.show();
     }
@@ -149,18 +145,21 @@ public class ScreensTest extends DukeApplicationTest{
             @Override
             public void run() {
                 changescreen = new ChangeScreen();
-                Parent change = changescreen.createChangeScreen(myStage).getRoot();
+                Parent change = changescreen.createMainScreen(myStage).getRoot();
                 showEndScreen();
                 Button playagain = lookup("#again").query();
+                Button credits = lookup("#credits").query();
                 Button quit = lookup("#quitbutton").query();
+                Button scores = lookup("#scores").query();
                 Text title = lookup("#Title").query();
                 assertEquals("Play Again",playagain.getText());
+                assertEquals("Credits",credits.getText());
                 assertEquals("Quit Game",quit.getText());
+                assertEquals("Leaderboard",scores.getText());
                 assertEquals("Game Over",title.getText());
                 playagain.fire();
                 for(int i = 0; i<change.getChildrenUnmodifiable().size(); i++){
                    assertEquals(change.getChildrenUnmodifiable().get(i).getId(),myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
-                   System.out.println(myStage.getScene().getRoot().getChildrenUnmodifiable().get(i).getId());
                 }
             }
         });
@@ -171,6 +170,29 @@ public class ScreensTest extends DukeApplicationTest{
         Scene endscene = endscreen.createEndScreen(myStage, 400);
         myStage.setScene(endscene);
         myStage.show();
+    }
+
+    @Test
+    void testLeaderboards(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                showLeaderboards();
+                Button newscore = lookup("#newscore").query();
+                Button back = lookup("#back").query();
+                Text title = lookup("#Title").query();
+                assertEquals("Add your score",newscore.getText());
+                assertEquals("Back",back.getText());
+                assertEquals("Leaderboard",title.getText());
+            }
+        });
+    }
+
+    private void showLeaderboards(){
+        endscreen = new EndScreen("Dinosaur");
+        Scene leaderboards = endscreen.createLeaderboard(myStage, 500);
+        myStage.setScene(leaderboards);
+        //myStage.show();
     }
 
     @Test

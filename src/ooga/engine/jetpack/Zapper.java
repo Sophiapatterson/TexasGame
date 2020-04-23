@@ -2,7 +2,6 @@ package ooga.engine.jetpack;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
@@ -13,8 +12,6 @@ public class Zapper extends Enemy {
     private DoubleProperty y = new SimpleDoubleProperty();
     public static final double X_OFFSET = 40;
     public static final double Y_OFFSET = 180;
-    //public static final double X_OFFSET = 40;
-    //public static final double Y_OFFSET = 50;
     private double standardY = 0;
     private int playerOffset = 40;
 

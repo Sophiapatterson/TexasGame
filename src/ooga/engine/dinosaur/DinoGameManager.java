@@ -18,7 +18,7 @@ public class DinoGameManager extends GameManager {
         this.dino = dino;
         this.enemies = enemies;
         this.powerups = powerups;
-        score = 0;
+        score = INIT_SCORE;
     }
 
     @Override
@@ -38,12 +38,6 @@ public class DinoGameManager extends GameManager {
     @Override
     public List<Powerup> handlePowerups(){
         return null;
-//        for(Powerup pu: powerups){
-//            if(pu.collide(dino) && pu.isVisible()){
-//                score+=pu.scoreBonus();
-//                pu.setVisible(false);
-//            }
-//        }
     }
 
     @Override
@@ -59,7 +53,7 @@ public class DinoGameManager extends GameManager {
 
     @Override
     public void tick(){
-        score+=5;
+        score+=SCORE_TICK;
     }
 
     @Override

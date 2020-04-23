@@ -1,32 +1,35 @@
 package ooga.data.config;
 
 import ooga.data.LevelFileException;
-import ooga.engine.flappy.Pipe;
-import ooga.engine.flappy.Pipe2;
-import ooga.engine.flappy.Pipe3;
+import ooga.engine.game.Coin;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
+import ooga.engine.generic.GameRules;
+import ooga.engine.generic.GenericEnemy;
+import ooga.engine.generic.GenericGameWorld;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class FlappyGameConfiguration extends GameConfiguration {
+public class GenericGameConfiguration extends GameConfiguration {
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;
     private List<Powerup> allPU;
     private int length;
-    private final int COUNT_OF_PIPES = 3;
+    private GameRules rules;
+    private String rulesPath;
 
-    public FlappyGameConfiguration(Path path) throws LevelFileException{
+    public GenericGameConfiguration(Path path, String rulesPath) throws LevelFileException {
+        this.rulesPath = rulesPath;
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
         List<String> lines = null;
+        rules = new GameRules(rulesPath);
 
         try {
             lines = Files.readAllLines(path);
@@ -37,36 +40,27 @@ public class FlappyGameConfiguration extends GameConfiguration {
         String[] array;
         length = Integer.parseInt(lines.get(0));
         lines.remove(0);
+
         parseCSV(lines);
     }
 
     @Override
     public void makeCoin(double xCoef, double yCoef) {
-        //commented out coins because we don't need coins in flappy game
-//        Coin pu = new Coin(xCoef*length, yCoef*600);
-//        pu.setYPos(FlappyGameWorld.FLOOR_HEIGHT/2);
-//        scrollers.add(pu);
-//        allPU.add(pu);
+        if(rules.ALLOW_COINS) {
+            Coin pu = new Coin(xCoef * length, yCoef * rules.SCREEN_HEIGHT);
+            pu.setYPos(rules.FLOOR_HEIGHT);
+            scrollers.add(pu);
+            allPU.add(pu);
+        }
     }
 
     @Override
     public void makeEnemy(double xCoef, double yCoef){
-        Random rand = new Random();
-        int pipeNum = rand.nextInt(COUNT_OF_PIPES);
-        Enemy p;
-        if(pipeNum == 0) {
-            p = new Pipe();
-        }
-        else if(pipeNum == 1) {
-            p = new Pipe2();
-        }
-        else {
-            p = new Pipe3();
-        }
-        p.setStandardY();
-        p.setXPos(xCoef*length);
-        scrollers.add(p);
-        allEnemies.add(p);
+        GenericEnemy c = new GenericEnemy(rulesPath);
+        c.setStandardY();
+        c.setXPos(xCoef*length);
+        scrollers.add(c);
+        allEnemies.add(c);
     }
 
     public List<Scrolling> getScrollers() {
@@ -80,5 +74,4 @@ public class FlappyGameConfiguration extends GameConfiguration {
     public List<Powerup> getPowerups() {
         return allPU;
     }
-
 }

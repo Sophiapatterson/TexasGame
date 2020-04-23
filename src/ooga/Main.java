@@ -24,7 +24,7 @@ public class Main extends Application {
         myStage = primaryStage;
         myStage.setTitle("Texas");
         StartScreen startScreen = new StartScreen();
-        Scene firstscene = startScreen.createStartScreen(myStage);
+        Scene firstscene = startScreen.createMainScreen(myStage);
         myStage.setScene(firstscene);
         myStage.show();
 
