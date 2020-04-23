@@ -21,13 +21,15 @@ public class GenericGameConfiguration extends GameConfiguration {
     private List<Powerup> allPU;
     private int length;
     private GameRules rules;
+    private String rulesPath;
 
-    public GenericGameConfiguration(Path path) throws LevelFileException {
+    public GenericGameConfiguration(Path path, String rulesPath) throws LevelFileException {
+        this.rulesPath = rulesPath;
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
         List<String> lines = null;
-        rules = new GameRules();
+        rules = new GameRules(rulesPath);
 
         try {
             lines = Files.readAllLines(path);
@@ -54,7 +56,7 @@ public class GenericGameConfiguration extends GameConfiguration {
 
     @Override
     public void makeEnemy(double xCoef, double yCoef){
-        GenericEnemy c = new GenericEnemy();
+        GenericEnemy c = new GenericEnemy(rulesPath);
         c.setStandardY();
         c.setXPos(xCoef*length);
         scrollers.add(c);

@@ -11,9 +11,9 @@ public class GenericPlayer extends Player {
     private DoubleProperty y = new SimpleDoubleProperty();
     private GameRules rules;
 
-    public GenericPlayer(double x, double y) {
+    public GenericPlayer(double x, double y, String rulesPath) {
         super();
-        rules = new GameRules();
+        rules = new GameRules(rulesPath);
         this.x.setValue(x);
         this.y.setValue(y);
 
