@@ -34,7 +34,7 @@ public class DinoGameWorld extends GameWorld {
     public static final int SCORE_X = 30;
     public static final int SCORE_Y = 30;
     public static final int SCORE_TEXT_SIZE = 30;
-    public static final double OBJECT_VIEW_SIZE = 50;
+    public static final double OBJECT_VIEW_SIZE = 65;
     private Player myPlayer;
     private PlayerView myPlayerView;
     private List<Enemy> enemies;
@@ -91,8 +91,8 @@ public class DinoGameWorld extends GameWorld {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy cactus : enemies){
-            EnemyView tempCacView = new EnemyView(new Image(cactus.getImage()), cactus.getXPos(), FLOOR_HEIGHT);
-            tempCacView.setProperties(cactus);
+            View tempCacView = new EnemyView(new Image(cactus.getImage()), cactus.getXPos(), FLOOR_HEIGHT);
+            tempCacView.setEnemyProperties(cactus);
             tempCacView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             enemiesView.add(tempCacView);
             root.getChildren().add(tempCacView.getView());
@@ -104,7 +104,7 @@ public class DinoGameWorld extends GameWorld {
         powerupsView = new ArrayList<>();
         for (Powerup coin : powerups){
             View tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
-            tempCoinView.setProperties(coin);
+            tempCoinView.setPowerupProperties(coin);
             tempCoinView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             powerupsView.add(tempCoinView);
             root.getChildren().add(tempCoinView.getView());
@@ -115,7 +115,8 @@ public class DinoGameWorld extends GameWorld {
         Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         myPlayer = new DinoPlayer(INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView = new PlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
-        myPlayerView.setProperties((DinoPlayer) myPlayer);
+        myPlayerView.setPlayerProperties(myPlayer);
+        System.out.println(myPlayer.getXPos());
         root.getChildren().add(myPlayerView.getView());
     }
 

@@ -89,7 +89,7 @@ public class FlappyGameWorld extends GameWorld {
         for (Enemy pipe : enemies){
             EnemyView tempPipeView = new EnemyView(new Image(pipe.getImage()), pipe.getXPos(), pipe.getYPos());
             tempPipeView.setWidthAndHeight(100, 550);
-            tempPipeView.setProperties(pipe);
+            tempPipeView.setEnemyProperties(pipe);
             enemiesView.add(tempPipeView);
             root.getChildren().add(tempPipeView.getView());
         }
@@ -101,7 +101,7 @@ public class FlappyGameWorld extends GameWorld {
         for (Powerup coin : powerups) {
             View tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             tempCoinView.setWidthAndHeight(50,50);
-            tempCoinView.setProperties(coin);
+            tempCoinView.setPowerupProperties(coin);
             powerupsView.add(tempCoinView);
             root.getChildren().add(tempCoinView.getView());
         }
@@ -112,7 +112,7 @@ public class FlappyGameWorld extends GameWorld {
         myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, 250);
         myPlayerView = new PlayerView(birdImage, DinoGameWorld.INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         //here is hwere the problem lies...
-        myPlayerView.setProperties(myPlayer);
+        myPlayerView.setPlayerProperties(myPlayer);
         root.getChildren().add(myPlayerView.getView());
     }
 

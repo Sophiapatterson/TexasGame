@@ -88,7 +88,7 @@ public class JetpackGameWorld extends GameWorld {
         //Add for loop for the enemies once images are added
         for (Enemy enemy : enemies){
             EnemyView tempEnemyView = new EnemyView(new Image(ZAPPER_IMAGE), enemy.getXPos(), enemy.getYPos());
-            tempEnemyView.setProperties(enemy);
+            tempEnemyView.setEnemyProperties(enemy);
             tempEnemyView.setWidthAndHeight(40, 180);
             enemiesView.add(tempEnemyView);
             root.getChildren().add(tempEnemyView.getView());
@@ -102,9 +102,8 @@ public class JetpackGameWorld extends GameWorld {
         for (Powerup coin : powerups){
             View tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
             myPowerupMap.put(coin, tempCoinView);
-            tempCoinView.setProperties(coin);
+            tempCoinView.setPowerupProperties(coin);
             tempCoinView.setWidthAndHeight(SMALL_COIN_SIZE,SMALL_COIN_SIZE);
-            tempCoinView.setProperties(coin);
             powerupsView.add(tempCoinView);
             root.getChildren().add(tempCoinView.getView());
         }    }
@@ -114,7 +113,7 @@ public class JetpackGameWorld extends GameWorld {
         myPlayer = new JetpackPlayer(10, FLOOR_HEIGHT);
         myPlayerView = new PlayerView(barryImage, 10, FLOOR_HEIGHT);
         //here too
-        myPlayerView.setProperties(myPlayer);
+        myPlayerView.setPlayerProperties(myPlayer);
         root.getChildren().add(myPlayerView.getView());
     }
 

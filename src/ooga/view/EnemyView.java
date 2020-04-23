@@ -4,34 +4,35 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
 
 public class EnemyView extends View{
-    private ImageView enemyImage;
+    private ImageView myImage;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
 
     public EnemyView(Image enemyImage, double x, double y){
-        initializeView(enemyImage);
-        setWidthAndHeight(PlayerView.PLAYER_SIZE,PlayerView.PLAYER_SIZE);
-        this.enemyImage.xProperty().bind(this.x);
-        this.enemyImage.yProperty().bind(this.y);
+        super();
+        this.myImage = initializeView(enemyImage);
+        this.myImage.xProperty().bind(this.x);
+        this.myImage.yProperty().bind(this.y);
     }
 
-    public void setProperties(ooga.engine.game.Enemy enemy){
+    public void setEnemyProperties(ooga.engine.game.Enemy enemy){
         x.bindBidirectional(enemy.getXProperty());
         y.bindBidirectional(enemy.getYProperty());
     }
 
     @Override
     public ImageView getView() {
-        return enemyImage;
+        return myImage;
     }
 
     @Override
-    public void setProperties(Powerup coin) {
+    public void setPlayerProperties(Player player) { }
 
-    }
-
+    @Override
+    public void setPowerupProperties(Powerup powerup) { }
 
 }
