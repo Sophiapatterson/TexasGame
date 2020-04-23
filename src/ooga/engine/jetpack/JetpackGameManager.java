@@ -20,7 +20,7 @@ public class JetpackGameManager extends GameManager {
         this.player = player;
         this.enemies = enemies;
         this.powerups = powerups;
-        score = 0;
+        score = INIT_SCORE;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class JetpackGameManager extends GameManager {
 
     @Override
     public void tick() {
-        score += 5;
+        score += SCORE_TICK;
     }
 
     @Override

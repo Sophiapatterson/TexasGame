@@ -30,9 +30,6 @@ public class DinoGameWorld extends GameWorld {
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
     public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
     public static final String LevelOne = "data/CSV configurations/Dinosaur_Level.csv";
-    public static final int SCORE_X = 30;
-    public static final int SCORE_Y = 30;
-    public static final int SCORE_TEXT_SIZE = 30;
     public static final double OBJECT_VIEW_SIZE = 50;
     private Player myPlayer;
     private DinoPlayerView myPlayerView;
@@ -147,7 +144,7 @@ public class DinoGameWorld extends GameWorld {
         }
         if(tutorialcheck){
             myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
-            if(myPlayer.getXPos()>enemies.get(1).getXPos()+700){
+            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }

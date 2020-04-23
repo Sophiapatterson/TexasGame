@@ -25,21 +25,18 @@ public class JetpackGameWorld extends GameWorld {
     public static final double FLOOR_HEIGHT = 500;
     public static final int FRAMES_PER_SECOND = 30;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    public static final String COIN_IMAGE = "Sprites/jetpack_coin.png";
     public static final String BACKGROUND_IMAGE = "Sprites/jetpack_background.png";
     public static final String AIRBORNE_BARRY_IMAGE = "Sprites/jetpack_airbornBarry.png";
-    public static final String LASER_IMAGE = "Sprites/jetpack_laser.png";
-    public static final String MISSILE_IMAGE = "Sprites/jetpack_missile.png";
     public static final String ZAPPER_IMAGE = "Sprites/jetpack_zapper.png";
     public static final int IMAGE_HEIGHT = 600;
     public static final int SMALL_COIN_SIZE = 35;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
-    public static final int SCORE_X = 30;
-    public static final int SCORE_Y = 30;
-    public static final int SCORE_TEXT_SIZE = 30;
     public static final String LevelOne = "data/CSV configurations/Jetpack_Level.csv";
     public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
-    private static final String VERSION_NAME = "Jetpack";
+    public static final String VERSION_NAME = "Jetpack";
+    public static final int ENEMY_WIDTH = 40;
+    public static final int ENEMY_HEIGHT = 180;
+    public static final int PLAYER_XPOS = 100;
     private JetpackPlayer myPlayer;
     private List<Enemy> enemies;
     private List<EnemyView> enemiesView;
@@ -97,7 +94,7 @@ public class JetpackGameWorld extends GameWorld {
         for (Enemy enemy : enemies){
             EnemyView tempEnemyView = new EnemyView(new Image(ZAPPER_IMAGE), enemy.getXPos(), enemy.getYPos());
             tempEnemyView.setProperties(enemy);
-            tempEnemyView.setWidthAndHeight(40, 180);
+            tempEnemyView.setWidthAndHeight(ENEMY_WIDTH, ENEMY_HEIGHT);
             enemiesView.add(tempEnemyView);
             root.getChildren().add(tempEnemyView.getEnemyImage());
         }
@@ -119,8 +116,8 @@ public class JetpackGameWorld extends GameWorld {
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));
-        myPlayer = new JetpackPlayer(100, FLOOR_HEIGHT);
-        myPlayerView = new JetpackPlayerView(barryImage, 100, FLOOR_HEIGHT);
+        myPlayer = new JetpackPlayer(PLAYER_XPOS, FLOOR_HEIGHT);
+        myPlayerView = new JetpackPlayerView(barryImage, PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setProperties(myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }

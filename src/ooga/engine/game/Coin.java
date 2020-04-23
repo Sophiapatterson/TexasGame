@@ -5,9 +5,10 @@ import javafx.beans.property.SimpleDoubleProperty;
 import ooga.engine.jetpack.JetpackGameWorld;
 
 public class Coin extends Powerup {
-    private static final int SPEED = 10;
-    private static final int COIN_OFFSET = 30;
-    private static final int PLAYER_OFFSET = 30;
+    public static final int SPEED = 10;
+    public static final int COIN_OFFSET = 30;
+    public static final int PLAYER_OFFSET = 30;
+    public static final int COIN_BONUS = 1500;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
     private double standardY = JetpackGameWorld.FLOOR_HEIGHT;
@@ -52,7 +53,7 @@ public class Coin extends Powerup {
 
     @Override
     public int scoreBonus(){
-        return 1500;
+        return COIN_BONUS;
     }
 
     @Override

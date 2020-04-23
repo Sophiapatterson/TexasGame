@@ -4,6 +4,8 @@ import javafx.beans.property.DoubleProperty;
 
 public abstract class Powerup implements Collidable, Scrolling {
 
+    public static final int BONUS = 1000;
+
     public abstract DoubleProperty getXProperty();
 
     public abstract boolean collide(Player player);
@@ -22,7 +24,7 @@ public abstract class Powerup implements Collidable, Scrolling {
     public abstract void setStandardY();
 
     public int scoreBonus(){
-        return 1000;
+        return BONUS;
     }
 
     public void move() {

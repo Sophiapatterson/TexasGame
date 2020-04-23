@@ -31,9 +31,7 @@ public class FlappyGameWorld extends GameWorld {
     public static final String VERSION_NAME = "Flappy";
     public static final String LevelOne = "data/CSV configurations/Flappy_Level.csv";
     public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
-    public static final int SCORE_X = 30;
-    public static final int SCORE_Y = 30;
-    public static final int SCORE_TEXT_SIZE = 30;
+    public static final int INITIAL_PLAYER_YPOS = 250;
     private Player myPlayer;
     private BirdPlayerView myPlayerView;
     private List<Enemy> enemies;
@@ -110,7 +108,7 @@ public class FlappyGameWorld extends GameWorld {
 
     private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, 250);
+        myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, INITIAL_PLAYER_YPOS);
         myPlayerView = new BirdPlayerView(birdImage, DinoGameWorld.INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setProperties((BirdPlayer) myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
@@ -149,7 +147,7 @@ public class FlappyGameWorld extends GameWorld {
 
         if(tutorialcheck){
             myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
-            if(myPlayer.getXPos()>enemies.get(1).getXPos()+700){
+            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
