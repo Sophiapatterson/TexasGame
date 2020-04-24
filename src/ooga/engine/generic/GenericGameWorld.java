@@ -58,7 +58,7 @@ public class GenericGameWorld extends GameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         root = new Group(imageView);
-        gameConfig = new GenericGameConfiguration(Paths.get(rules.LEVEL_CSV), rulesPath);
+        gameConfig = new GenericGameConfiguration(rulesPath);
         addPlayer(root);
         addEnemies(root);
         addPowerups(root);
