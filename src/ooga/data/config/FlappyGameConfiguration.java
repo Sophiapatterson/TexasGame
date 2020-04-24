@@ -8,13 +8,15 @@ import ooga.engine.game.Enemy;
 import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * FlappyGameConfiguration extends parent GameConfiguration class.
+ * Reads in CSV file and sets up game model accordingly for FlappyGame.
+ * Initializes three different variants of pipes, scrolling objects.
+ */
 public class FlappyGameConfiguration extends GameConfiguration {
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;

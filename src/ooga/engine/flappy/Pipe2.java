@@ -5,6 +5,10 @@ import javafx.beans.property.SimpleDoubleProperty;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 
+/**
+ * Pipe class extends parent class Enemy.
+ * This class houses the Pipe Version 2 object constructor.
+ */
 public class Pipe2 extends Enemy {
     public static final int SPEED = 9;
     private String image = "Sprites/flappy_pipe_2.png";

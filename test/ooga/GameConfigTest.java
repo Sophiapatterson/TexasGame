@@ -1,6 +1,5 @@
 package ooga;
 
-import ooga.data.HighScores;
 import ooga.data.LevelFileException;
 import ooga.data.config.*;
 import ooga.engine.game.Enemy;
@@ -74,7 +73,7 @@ public class GameConfigTest {
 
     @Test
     void testGenericConfig(){
-        config = new GenericGameConfiguration(Paths.get("data/CSV configurations/Dinosaur_Level.csv"),"ooga.engine.generic.DINO_GameRules");
+//        config = new GenericGameConfiguration(Paths.get("data/CSV configurations/Dinosaur_Level.csv"),"ooga.engine.generic.DINO_GameRules");
         enemies = config.getEnemies();
         parse("data/CSV configurations/Dinosaur_Level.csv");
         assertEquals(enemyLocations.size(), enemies.size());

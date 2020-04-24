@@ -10,7 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
+/**
+ * GameConfiguration is the parent GameConfiguration class.
+ * Reads in CSV file.
+ * Includes abstract methods to initialize enemies, powerups, scrolling objects.
+ */
 public abstract class GameConfiguration {
 
     public static final String ENEMY_VALUE = "1";

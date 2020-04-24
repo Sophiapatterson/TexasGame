@@ -7,15 +7,16 @@ import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
 import ooga.engine.generic.GameRules;
 import ooga.engine.generic.GenericEnemy;
-import ooga.engine.generic.GenericGameWorld;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * GenericGameConfiguration extends parent GameConfiguration class.
+ * Reads in CSV file and sets up game model accordingly for a Generic Game.
+ * Initializes enemies, powerups, scrolling objects.
+ * Customizable for any scrolling platform game.
+ */
 public class GenericGameConfiguration extends GameConfiguration {
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;

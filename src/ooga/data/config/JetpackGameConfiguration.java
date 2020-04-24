@@ -7,12 +7,14 @@ import ooga.engine.game.Powerup;
 import ooga.engine.game.Scrolling;
 import ooga.engine.jetpack.Zapper;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * JetpackGameConfiguration extends parent GameConfiguration class.
+ * Reads in CSV file and sets up game model accordingly for JetpackGame.
+ * Initializes zappers, coins, scrolling objects.
+ */
 public class JetpackGameConfiguration extends GameConfiguration {
     private List<Scrolling> scrollers;
     private List<Enemy> allEnemies;
