@@ -29,7 +29,7 @@ public class DinoGameWorld extends GameWorld {
     private static final String VERSION_NAME = "Dinosaur";
     public static final String DINO_IMAGE  = "Sprites/dino_trexx.png";
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
-    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
     public static final String LevelOne = "data/CSV configurations/Dinosaur_Level.csv";
     public static final double OBJECT_VIEW_SIZE = 70;
     private Player myPlayer;
@@ -125,7 +125,7 @@ public class DinoGameWorld extends GameWorld {
         tutorialstring.add(tutorialResources.getString("DINO1-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("DINO2-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("DINO3-MESSAGE"));
-        tutorialtext = myTutorial.createTutorialText(tutorialstring);
+        tutorialtext = myTutorial.createTutorialText(tutorialstring, true);
         root.getChildren().add(tutorialtext.get(0));
     }
 
@@ -145,7 +145,7 @@ public class DinoGameWorld extends GameWorld {
             enemy.move();
         }
         if(tutorialcheck){
-            myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
+            myTutorial.tutorialObstacles(myPlayer, enemies, root, tutorialtext);
             if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));

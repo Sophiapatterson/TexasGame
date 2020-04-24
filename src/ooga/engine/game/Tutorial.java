@@ -1,8 +1,11 @@
 package ooga.engine.game;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,16 +20,20 @@ public class Tutorial {
     public Tutorial(){
 
     }
-    public List<Text> createTutorialText(List<String> messages){
+    public List<Text> createTutorialText(List<String> messages, boolean blacktext){
         List<Text> tutorialtext = new ArrayList<>();
         for(int i = 0; i<messages.size(); i++){
             Text message = new Text(TEXT_X, TEXT_Y, messages.get(i));
+            message.setId("message"+i);
+            if(!blacktext){
+                message.setFill(Color.WHITE);
+            }
             tutorialtext.add(message);
         }
         return tutorialtext;
     }
 
-    public void tutorialAddRemoveText(Player myPlayer, List<Enemy> enemies, Group root, List<Text> tutorialtext){
+    public void tutorialObstacles(Player myPlayer, List<Enemy> enemies, Group root, List<Text> tutorialtext){
         if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
             if(root.getChildren().contains(tutorialtext.get(FIRST_TEXT))){
                 root.getChildren().remove(tutorialtext.get(FIRST_TEXT));
@@ -41,6 +48,16 @@ public class Tutorial {
             }
             if(!root.getChildren().contains(tutorialtext.get(THIRD_TEXT))){
                 root.getChildren().add(tutorialtext.get(THIRD_TEXT));
+            }
+        }
+    }
+    public void tutorialPowerUps(Player myPlayer, List<Powerup> powerups, Group root, List<Text> tutorialtext){
+        if(myPlayer.getXPos()>powerups.get(0).getXPos() ){
+            if(root.getChildren().contains(tutorialtext.get(THIRD_TEXT))) {
+                root.getChildren().remove(tutorialtext.get(THIRD_TEXT));
+            }
+            if(!root.getChildren().contains(tutorialtext.get(tutorialtext.size()-1))){
+                root.getChildren().add(tutorialtext.get(tutorialtext.size()-1));
             }
         }
     }

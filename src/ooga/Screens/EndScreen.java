@@ -18,8 +18,6 @@ public class EndScreen extends Screen {
     private ChangeScreen changescreen;
     private Text title;
     private Button quit;
-    public static final int SCREEN_WIDTH = 850;
-    public static final int SCREEN_HEIGHT = 600;
     public static final int POPUP_WIDTH = 500;
     public static final int POPUP_HEIGHT = 475;
     private ResourceBundle endResources;

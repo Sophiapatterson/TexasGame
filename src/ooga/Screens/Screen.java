@@ -10,6 +10,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -17,11 +18,14 @@ public abstract class Screen {
 
     public static final String DEFAULT_STYLING = "Styling/Screen.css";
     public static final String DARK_STYLING = "Styling/dark-theme.css";
+    public static final int SCREEN_WIDTH = 850;
+    public static final int SCREEN_HEIGHT = 600;
     public static final int DEFAULT_NODE_SPACING = 25;
     public static final int DEFAULT_TOP_PADDING = 10;
     public static final int DEFAULT_BOTTOM_PADDING = 50;
     public static final int DEFAULT_LEFT_PADDING = 50;
     public static final int DEFAULT_RIGHT_PADDING = 50;
+    public static final Paint BACKGROUND = Color.AZURE;
     public static final Color SCREEN_COLOR = Color.GOLD;
     private static boolean isDarkMode;
 
