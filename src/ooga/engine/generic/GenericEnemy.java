@@ -67,6 +67,7 @@ public class GenericEnemy extends Enemy {
     public String getImage() {
         Random r = new Random();
         int pngNum = r.nextInt(rules.COUNT_OF_ENEMY);
+
         if(pngNum == 0) {
             return rules.ENEMY_PNG;
         } else if(pngNum == 1) {
