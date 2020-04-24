@@ -26,8 +26,17 @@ public class FlappyGameConfiguration extends GameConfiguration {
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
-        List<String> lines = getLines(path);
-        length = getLength(lines);
+        List<String> lines = null;
+
+        try {
+            lines = Files.readAllLines(path);
+        } catch (IOException e){
+            throw new LevelFileException(e);
+        }
+
+        String[] array;
+        length = Integer.parseInt(lines.get(0));
+        lines.remove(0);
         parseCSV(lines);
     }
 
