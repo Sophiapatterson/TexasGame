@@ -191,7 +191,7 @@ public class ScreensTest extends DukeApplicationTest{
 
     private void showLeaderboards(){
         endscreen = new EndScreen("Dinosaur");
-        Scene leaderboards = endscreen.createLeaderboard(myStage, 500);
+        Scene leaderboards = endscreen.createLeaderboard(myStage);
         myStage.setScene(leaderboards);
         //myStage.show();
     }

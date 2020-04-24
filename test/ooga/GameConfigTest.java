@@ -71,6 +71,7 @@ public class GameConfigTest {
         assertEquals(coinLocations.get(81), powerups.get(80).getXPos(), 0.1);
     }
 
+
     @Test
     void testGenericConfig(){
         config = new GenericGameConfiguration("ooga.engine.generic.DINO_GameRules");

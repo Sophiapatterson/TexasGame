@@ -48,6 +48,9 @@ public class EndScreen extends Screen {
     }
 
     public Scene createEndScreen(Stage currentstage, int gamescore){
+        score = gamescore;
+        highscores = new HighScores(version);
+        myStage = currentstage;
         VBox layout = new VBox();
         initLayout(layout);
         Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
@@ -65,7 +68,7 @@ public class EndScreen extends Screen {
         Button scores = new Button(endResources.getString("LEADERBOARD-MESSAGE"));
         scores.setId("scores");
         scores.setOnAction( e -> {
-            myStage.setScene(createLeaderboard(myStage, gamescore));
+            myStage.setScene(createLeaderboard(myStage));
         });
         title.setText(endResources.getString("GAME-OVER"));
         title.getStyleClass().add("titletxt");
@@ -74,10 +77,7 @@ public class EndScreen extends Screen {
         return EndScreen;
     }
 
-    public Scene createLeaderboard(Stage currentstage, int gamescore) {
-        score = gamescore;
-        highscores = new HighScores(version);
-        myStage = currentstage;
+    public Scene createLeaderboard(Stage currentstage) {
         VBox layout = new VBox();
         initLayout(layout);
         title.setText(endResources.getString("LEADERBOARD-MESSAGE"));
@@ -129,7 +129,7 @@ public class EndScreen extends Screen {
             highscores.saveHighScores();
             enterData.close();
             allowSubmissions = false;
-            myStage.setScene(createLeaderboard(myStage, 0));
+            myStage.setScene(createLeaderboard(myStage));
         });
         dataBox.getChildren().addAll(name, nameTextField, submit);
         Scene scene = new Scene(dataBox, POPUP_WIDTH, POPUP_HEIGHT);
