@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
 import ooga.data.Score;
+import ooga.engine.generic.GenericGameWorld;
 
 import java.util.ResourceBundle;
 
@@ -41,8 +42,8 @@ public class EndScreen extends Screen {
 
     public Scene createEndScreen(Stage currentstage, int gamescore){
         score = gamescore;
-        myStage = currentstage;
         highscores = new HighScores(version);
+        myStage = currentstage;
         VBox layout = new VBox();
         initLayout(layout);
         Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));

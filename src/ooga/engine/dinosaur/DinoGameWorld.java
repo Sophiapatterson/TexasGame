@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.Screens.*;
+import ooga.view.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.engine.game.*;
@@ -30,13 +31,13 @@ public class DinoGameWorld extends GameWorld {
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
     public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
     public static final String LevelOne = "data/CSV configurations/Dinosaur_Level.csv";
-    public static final double OBJECT_VIEW_SIZE = 50;
+    public static final double OBJECT_VIEW_SIZE = 70;
     private Player myPlayer;
-    private DinoPlayerView myPlayerView;
+    private PlayerView myPlayerView;
     private List<Enemy> enemies;
-    private List<EnemyView> enemiesView;
+    private List<View> enemiesView;
     private List<Powerup> powerups;
-    private List<PowerupView> powerupsView;
+    private List<View> powerupsView;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -89,11 +90,11 @@ public class DinoGameWorld extends GameWorld {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
         for (Enemy cactus : enemies){
-            EnemyView tempCacView = new EnemyView(new Image(cactus.getImage()), cactus.getXPos(), FLOOR_HEIGHT);
-            tempCacView.setProperties(cactus);
+            View tempCacView = new EnemyView(new Image(cactus.getImage()), cactus.getXPos(), FLOOR_HEIGHT);
+            tempCacView.setEnemyProperties(cactus);
             tempCacView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             enemiesView.add(tempCacView);
-            root.getChildren().add(tempCacView.getEnemyImage());
+            root.getChildren().add(tempCacView.getView());
         }
     }
 
@@ -101,20 +102,21 @@ public class DinoGameWorld extends GameWorld {
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
         for (Powerup coin : powerups){
-            PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
-            tempCoinView.setProperties(coin);
+            View tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
+            tempCoinView.setPowerupProperties(coin);
             tempCoinView.setWidthAndHeight(OBJECT_VIEW_SIZE, OBJECT_VIEW_SIZE);
             powerupsView.add(tempCoinView);
-            root.getChildren().add(tempCoinView.getPowerupImage());
+            root.getChildren().add(tempCoinView.getView());
         }
     }
 
     private void addDino(Group root) {
         Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         myPlayer = new DinoPlayer(INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
-        myPlayerView = new DinoPlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
-        myPlayerView.setProperties((DinoPlayer) myPlayer);
-        root.getChildren().add(myPlayerView.getPlayerImage());
+        myPlayerView = new PlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
+        myPlayerView.setPlayerProperties(myPlayer);
+        System.out.println(myPlayer.getXPos());
+        root.getChildren().add(myPlayerView.getView());
     }
 
     private void addText(Group root){
