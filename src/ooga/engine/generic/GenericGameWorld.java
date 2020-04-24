@@ -58,7 +58,7 @@ public class GenericGameWorld extends GameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         root = new Group(imageView);
-        gameConfig = new GenericGameConfiguration(rulesPath);
+        gameConfig = new GenericGameConfiguration(Paths.get(rules.LEVEL_CSV), rulesPath);
         addPlayer(root);
         addEnemies(root);
         addPowerups(root);
@@ -115,9 +115,7 @@ public class GenericGameWorld extends GameWorld {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(rules.BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(rules.BACKGROUND_HEIGHT);
-        if(rules.STRETCH_BACKGROUND)
-            imageView.setFitHeight(rules.SCREEN_HEIGHT);
-            imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
+        imageView.setPreserveRatio(true);
         return imageView;
     }
 
