@@ -15,9 +15,9 @@ public class GenericEnemy extends Enemy {
     private double standardY;
     private GameRules rules;
 
-    public GenericEnemy() {
+    public GenericEnemy(String rulesPath) {
         super();
-        rules = new GameRules();
+        rules = new GameRules(rulesPath);
         standardY = rules.ENEMY_STANDARD_Y;
     }
 

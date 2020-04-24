@@ -49,7 +49,7 @@ public class ChangeScreen extends Screen {
         dinogame = new DinoGameWorld();
         flappygame = new FlappyGameWorld();
         jetpackgame = new JetpackGameWorld();
-        genericgame = new GenericGameWorld();
+        genericgame = new GenericGameWorld("ooga.engine.generic.DINO_GameRules");
         changeResources = ResourceBundle.getBundle("ooga.Screens.Properties.ChangeScreen");
         title = initTitle();
     }
@@ -85,7 +85,6 @@ public class ChangeScreen extends Screen {
         });
         Button generic = new Button(changeResources.getString("GENERIC-MESSAGE"));
         generic.setId("generic");
-        //Image dinoimage2 = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         generic.setGraphic(makeStar());
         generic.setOnAction(e -> {
             myStage.setScene(genericgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));

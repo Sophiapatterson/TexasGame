@@ -14,6 +14,10 @@ import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.GenericGameConfiguration;
 import ooga.engine.game.*;
+import ooga.view.EnemyView;
+import ooga.view.PlayerView;
+import ooga.view.PowerupView;
+import ooga.view.View;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -28,11 +32,11 @@ public class GenericGameWorld extends GameWorld {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
     private Player myPlayer;
-    private GenericPlayerView myPlayerView;
+    private PlayerView myPlayerView;
     private List<Enemy> enemies;
-    private List<EnemyView> enemiesView;
+    private List<View> enemiesView;
     private List<Powerup> powerups;
-    private List<PowerupView> powerupsView;
+    private List<View> powerupsView;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -41,22 +45,24 @@ public class GenericGameWorld extends GameWorld {
     private Stage myStage;
     private Group root;
     private GameRules rules;
+    private String rulesPath;
 
-    public GenericGameWorld() {
+    public GenericGameWorld(String rulesPath) {
         super();
+        this.rulesPath = rulesPath;
     }
 
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean t) throws RuntimeException {
-        rules = new GameRules();
+        rules = new GameRules(rulesPath);
         endScreen = new EndScreen(rules.VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
         root = new Group(imageView);
-        gameConfig = new GenericGameConfiguration(Paths.get(rules.LEVEL_CSV));
+        gameConfig = new GenericGameConfiguration(rulesPath);
         addPlayer(root);
         addEnemies(root);
         addPowerups(root);
-        gameManager = new GenericGameManager(myPlayer, enemies, powerups);
+        gameManager = new GenericGameManager(myPlayer, enemies, powerups, rulesPath);
         myScoreText = new Text(rules.SCORE_X, rules.SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(rules.SCORE_TEXT_SIZE));
         root.getChildren().add(myScoreText);
@@ -74,10 +80,10 @@ public class GenericGameWorld extends GameWorld {
         enemiesView = new ArrayList<>();
         for (Enemy enemy : enemies){
             EnemyView tempView = new EnemyView(new Image(enemy.getImage()), enemy.getXPos(), rules.FLOOR_HEIGHT);
-            tempView.setProperties(enemy);
+            tempView.setEnemyProperties(enemy);
             tempView.setWidthAndHeight(rules.OBJECT_VIEW_SIZE, rules.OBJECT_VIEW_SIZE);
             enemiesView.add(tempView);
-            root.getChildren().add(tempView.getEnemyImage());
+            root.getChildren().add(tempView.getView());
         }
     }
 
@@ -86,19 +92,19 @@ public class GenericGameWorld extends GameWorld {
         powerupsView = new ArrayList<>();
         for (Powerup coin : powerups){
             PowerupView tempCoinView = new PowerupView(new Image(coin.getImage()), coin.getXPos(), coin.getYPos());
-            tempCoinView.setProperties(coin);
+            tempCoinView.setPowerupProperties(coin);
             tempCoinView.setWidthAndHeight(rules.OBJECT_VIEW_SIZE, rules.OBJECT_VIEW_SIZE);
             powerupsView.add(tempCoinView);
-            root.getChildren().add(tempCoinView.getPowerupImage());
+            root.getChildren().add(tempCoinView.getView());
         }
     }
 
     private void addPlayer(Group root) {
         Image playerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(rules.PLAYER_IMAGE));
-        myPlayer = new GenericPlayer(rules.INITIAL_X_POS, rules.FLOOR_HEIGHT);
-        myPlayerView = new GenericPlayerView(playerImage, rules.INITIAL_X_POS, rules.FLOOR_HEIGHT);
-        myPlayerView.setProperties((GenericPlayer) myPlayer);
-        root.getChildren().add(myPlayerView.getPlayerImage());
+        myPlayer = new GenericPlayer(rules.INITIAL_X_POS, rules.FLOOR_HEIGHT, rulesPath);
+        myPlayerView = new PlayerView(playerImage, rules.INITIAL_X_POS, rules.FLOOR_HEIGHT);
+        myPlayerView.setPlayerProperties((GenericPlayer) myPlayer);
+        root.getChildren().add(myPlayerView.getView());
     }
 
     private void addText(Group root){
