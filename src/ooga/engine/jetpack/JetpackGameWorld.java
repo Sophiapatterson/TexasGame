@@ -15,10 +15,7 @@ import ooga.data.config.JetpackGameConfiguration;
 import ooga.engine.game.*;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JetpackGameWorld extends GameWorld {
 
@@ -32,7 +29,7 @@ public class JetpackGameWorld extends GameWorld {
     public static final int SMALL_COIN_SIZE = 35;
     public static final String BARRY_IMAGE  = "Sprites/jetpack_normalBarry.png";
     public static final String LevelOne = "data/CSV configurations/Jetpack_Level.csv";
-    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String TutorialCSV = "data/CSV configurations/jetpackTutorial.csv";
     public static final String VERSION_NAME = "Jetpack";
     public static final int ENEMY_WIDTH = 40;
     public static final int ENEMY_HEIGHT = 180;
@@ -67,6 +64,7 @@ public class JetpackGameWorld extends GameWorld {
         myRoot = new Group(imageView);
         if(tutorialcheck){
             gameConfig = new JetpackGameConfiguration(Paths.get(TutorialCSV));
+            addText(myRoot);
         }
         else{
             gameConfig = new JetpackGameConfiguration(Paths.get(LevelOne));
@@ -112,7 +110,8 @@ public class JetpackGameWorld extends GameWorld {
             tempCoinView.setProperties(coin);
             powerupsView.add(tempCoinView);
             root.getChildren().add(tempCoinView.getPowerupImage());
-        }    }
+        }
+    }
 
     private void addBarry(Group root) {
         Image barryImage = new Image(this.getClass().getClassLoader().getResourceAsStream(AIRBORNE_BARRY_IMAGE));
@@ -131,6 +130,17 @@ public class JetpackGameWorld extends GameWorld {
         return imageView;
     }
 
+    private void addText(Group root){
+        List<String> tutorialstring = new ArrayList<>();
+        ResourceBundle tutorialResources = ResourceBundle.getBundle("Properties.JET-TUTORIAL");
+        tutorialstring.add(tutorialResources.getString("JET1-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("JET2-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("JET3-MESSAGE"));
+        tutorialstring.add(tutorialResources.getString("JET4-MESSAGE"));
+        tutorialtext = myTutorial.createTutorialText(tutorialstring, false);
+        root.getChildren().add(tutorialtext.get(0));
+    }
+
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
 
@@ -144,6 +154,14 @@ public class JetpackGameWorld extends GameWorld {
         //move the powerups
         for(Powerup pu: powerups) {
             pu.move();
+        }
+        if(tutorialcheck){
+            myTutorial.tutorialObstacles(myPlayer, enemies,myRoot, tutorialtext);
+            myTutorial.tutorialPowerUps(myPlayer, powerups, myRoot, tutorialtext);
+            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+                stopAnimation();
+                myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
+            }
         }
 
         //increment score
@@ -164,7 +182,6 @@ public class JetpackGameWorld extends GameWorld {
             if(tutorialcheck){
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
-
             else{
                 myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
             }

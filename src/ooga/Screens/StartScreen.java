@@ -15,9 +15,6 @@ public class StartScreen extends Screen {
     private ChangeScreen changescreen;
     private TutorialScreen tutorialscreen;
     private ResourceBundle startResources;
-    public static final int SCREEN_WIDTH = 850;
-    public static final int SCREEN_HEIGHT = 600;
-    public static final Color SCREEN_COLOR = Color.GOLD;
     private Stage myStage;
     private Text title;
     private Button darkMode;

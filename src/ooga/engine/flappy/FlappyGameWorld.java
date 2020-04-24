@@ -30,7 +30,7 @@ public class FlappyGameWorld extends GameWorld {
     public static final int IMAGE_HEIGHT = 695;
     public static final String VERSION_NAME = "Flappy";
     public static final String LevelOne = "data/CSV configurations/Flappy_Level.csv";
-    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
     public static final int INITIAL_PLAYER_YPOS = 250;
     public static final int PIPE_WIDTH = 100;
     public static final int PIPE_HEIGHT = 550;
@@ -122,7 +122,7 @@ public class FlappyGameWorld extends GameWorld {
         tutorialstring.add(tutorialResources.getString("FLAPPY1-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("FLAPPY2-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("FLAPPY3-MESSAGE"));
-        tutorialtext = myTutorial.createTutorialText(tutorialstring);
+        tutorialtext = myTutorial.createTutorialText(tutorialstring, true);
         root.getChildren().add(tutorialtext.get(0));
     }
 
@@ -148,7 +148,7 @@ public class FlappyGameWorld extends GameWorld {
         }
 
         if(tutorialcheck){
-            myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
+            myTutorial.tutorialObstacles(myPlayer, enemies, root, tutorialtext);
             if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));

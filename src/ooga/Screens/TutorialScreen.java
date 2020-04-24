@@ -20,9 +20,6 @@ import static ooga.engine.jetpack.JetpackGameWorld.BARRY_IMAGE;
 
 public class TutorialScreen extends Screen {
 
-    public static final int SCREEN_WIDTH = 850;
-    public static final int SCREEN_HEIGHT = 600;
-    public static final Paint BACKGROUND = Color.AZURE;
     private Stage myStage;
     private Text title;
     private DinoGameWorld dinogame;
