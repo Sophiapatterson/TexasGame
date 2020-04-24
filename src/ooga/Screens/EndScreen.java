@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
@@ -24,13 +26,16 @@ public class EndScreen extends Screen {
     public static final int POPUP_HEIGHT = 475;
     private ResourceBundle endResources;
     private ResourceBundle creditsResources;
+    private GenericGameWorld creditsgame;
     private boolean allowSubmissions;
     private Stage myStage;
     private int score;
     private String version;
     private HighScores highscores;
+    public static final Paint BACKGROUND = Color.AZURE;
 
     public EndScreen(String version){
+        creditsgame = new GenericGameWorld("ooga.engine.generic.CREDITS_GameRules");
         this.version = version;
         allowSubmissions = true;
         myStage = new Stage();
@@ -43,9 +48,6 @@ public class EndScreen extends Screen {
     }
 
     public Scene createEndScreen(Stage currentstage, int gamescore){
-        score = gamescore;
-        myStage = currentstage;
-        highscores = new HighScores(version);
         VBox layout = new VBox();
         initLayout(layout);
         Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
@@ -56,12 +58,14 @@ public class EndScreen extends Screen {
         Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
         credits.setId("credits");
         credits.setOnAction( e -> {
-            myStage.setScene(createCredits(myStage));
+            //myStage.setScene(createCredits(myStage));
+            myStage.setScene(creditsgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
+            creditsgame.setUpAnimation();
         });
         Button scores = new Button(endResources.getString("LEADERBOARD-MESSAGE"));
         scores.setId("scores");
         scores.setOnAction( e -> {
-            myStage.setScene(createLeaderboard(myStage));
+            myStage.setScene(createLeaderboard(myStage, gamescore));
         });
         title.setText(endResources.getString("GAME-OVER"));
         title.getStyleClass().add("titletxt");
@@ -70,7 +74,9 @@ public class EndScreen extends Screen {
         return EndScreen;
     }
 
-    public Scene createLeaderboard(Stage currentstage) {
+    public Scene createLeaderboard(Stage currentstage, int gamescore) {
+        score = gamescore;
+        highscores = new HighScores(version);
         myStage = currentstage;
         VBox layout = new VBox();
         initLayout(layout);
@@ -123,7 +129,7 @@ public class EndScreen extends Screen {
             highscores.saveHighScores();
             enterData.close();
             allowSubmissions = false;
-            myStage.setScene(createLeaderboard(myStage));
+            myStage.setScene(createLeaderboard(myStage, 0));
         });
         dataBox.getChildren().addAll(name, nameTextField, submit);
         Scene scene = new Scene(dataBox, POPUP_WIDTH, POPUP_HEIGHT);

@@ -54,7 +54,7 @@ public class GenericGameWorld extends GameWorld {
         myStage = currentstage;
         ImageView imageView = getImageView();
         root = new Group(imageView);
-        gameConfig = new GenericGameConfiguration(Paths.get(rules.LEVEL_CSV), rulesPath);
+        gameConfig = new GenericGameConfiguration(rulesPath);
         addPlayer(root);
         addEnemies(root);
         addPowerups(root);
@@ -98,7 +98,7 @@ public class GenericGameWorld extends GameWorld {
     private void addPlayer(Group root) {
         Image playerImage = new Image(this.getClass().getClassLoader().getResourceAsStream(rules.PLAYER_IMAGE));
         myPlayer = new GenericPlayer(rules.INITIAL_X_POS, rules.FLOOR_HEIGHT, rulesPath);
-        myPlayerView = new GenericPlayerView(playerImage, rules.INITIAL_X_POS, rules.FLOOR_HEIGHT);
+        myPlayerView = new GenericPlayerView(playerImage, rules.INITIAL_X_POS, rules.FLOOR_HEIGHT, rulesPath);
         myPlayerView.setProperties((GenericPlayer) myPlayer);
         root.getChildren().add(myPlayerView.getPlayerImage());
     }
@@ -111,7 +111,9 @@ public class GenericGameWorld extends GameWorld {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(rules.BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(rules.BACKGROUND_HEIGHT);
-        imageView.setPreserveRatio(true);
+        if(rules.STRETCH_BACKGROUND)
+            imageView.setFitHeight(rules.SCREEN_HEIGHT);
+            imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
         return imageView;
     }
 

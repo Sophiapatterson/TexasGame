@@ -184,6 +184,7 @@ public class ScreensTest extends DukeApplicationTest{
                 assertEquals("Add your score",newscore.getText());
                 assertEquals("Back",back.getText());
                 assertEquals("Leaderboard",title.getText());
+
             }
         });
     }

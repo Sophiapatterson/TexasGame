@@ -12,6 +12,7 @@ import ooga.engine.generic.GenericGameWorld;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,24 +24,14 @@ public class GenericGameConfiguration extends GameConfiguration {
     private GameRules rules;
     private String rulesPath;
 
-    public GenericGameConfiguration(Path path, String rulesPath) throws LevelFileException {
+    public GenericGameConfiguration(String rulesPath) throws LevelFileException {
         this.rulesPath = rulesPath;
+        rules = new GameRules(rulesPath);
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
-        List<String> lines = null;
-        rules = new GameRules(rulesPath);
-
-        try {
-            lines = Files.readAllLines(path);
-        } catch (IOException e){
-            throw new LevelFileException(e);
-        }
-
-        String[] array;
-        length = Integer.parseInt(lines.get(0));
-        lines.remove(0);
-
+        List<String> lines = getLines(Paths.get(rules.LEVEL_CSV));
+        length = getLength(lines);
         parseCSV(lines);
     }
 
