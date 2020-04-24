@@ -7,6 +7,10 @@ import javafx.scene.image.ImageView;
 import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
 
+/**
+ * EnemyView extends parent View class. Initializes View for Enemy
+ * objects and binds EnemyView to Enemy objects.
+ */
 public class EnemyView extends View{
     private ImageView myImage;
     private DoubleProperty x = new SimpleDoubleProperty();

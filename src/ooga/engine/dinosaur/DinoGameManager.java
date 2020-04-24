@@ -7,6 +7,9 @@ import ooga.engine.game.Powerup;
 
 import java.util.List;
 
+/**
+ * DinoGameManager extends parents GameManager Class.
+ */
 public class DinoGameManager extends GameManager {
     private Player dino;
     private List<Enemy> enemies;

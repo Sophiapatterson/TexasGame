@@ -26,8 +26,8 @@ public class Score {
     }
 
     /**
-     * Score constructor?
-     * @param scoreString
+     * Score constructor.
+     * @param scoreString which is the player's score represented as a string.
      */
     public Score(String scoreString) {
         String[] array = scoreString.split(SCORE_RADIX);

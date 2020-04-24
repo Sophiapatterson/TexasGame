@@ -2,6 +2,12 @@ package ooga.engine.game;
 
 import java.util.List;
 
+/**
+ * GameManager is a public parent class.
+ * Initializes the initial score value to be zero and score increment value to be 5.
+ * Includes abstract methods to handle end of game, collisions,
+ * powerups, jumps, and score increments as well as a score getter method.
+ */
 public abstract class GameManager {
 
     public static final int INIT_SCORE = 0;
