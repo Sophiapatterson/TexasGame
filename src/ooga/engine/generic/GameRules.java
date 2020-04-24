@@ -26,6 +26,8 @@ public class GameRules {
     public double OBJECT_VIEW_SIZE;
     public double PLAYER_X_OFFSET;
     public double PLAYER_Y_OFFSET;
+    public double PLAYER_HEIGHT;
+    public double PLAYER_WIDTH;
     public double ENEMY_X_OFFSET;
     public double ENEMY_Y_OFFSET;
     public double ENEMY_STANDARD_Y;
@@ -35,6 +37,7 @@ public class GameRules {
     public boolean PROPULSION;
     public boolean ALLOW_COINS;
     public boolean IMMORTAL;
+    public boolean STRETCH_BACKGROUND;
 
     public GameRules(String path){
         props = ResourceBundle.getBundle(path);
@@ -60,6 +63,8 @@ public class GameRules {
         ENEMY_SPEED = Double.parseDouble(props.getString("ENEMY-SPEED"));
         PLAYER_X_OFFSET = Double.parseDouble(props.getString("PLAYER-X-OFFSET"));
         PLAYER_Y_OFFSET = Double.parseDouble(props.getString("PLAYER-Y-OFFSET"));
+        PLAYER_HEIGHT = Double.parseDouble(props.getString("PLAYER-HEIGHT"));
+        PLAYER_WIDTH = Double.parseDouble(props.getString("PLAYER-WIDTH"));
         ENEMY_X_OFFSET = Double.parseDouble(props.getString("ENEMY-X-OFFSET"));
         ENEMY_Y_OFFSET = Double.parseDouble(props.getString("ENEMY-Y-OFFSET"));
         ENEMY_STANDARD_Y = Double.parseDouble(props.getString("ENEMY-STANDARD-Y"));
@@ -69,6 +74,7 @@ public class GameRules {
         PROPULSION = Boolean.parseBoolean(props.getString("PROPULSION"));
         ALLOW_COINS = Boolean.parseBoolean(props.getString("ALLOW-COINS"));
         IMMORTAL = Boolean.parseBoolean(props.getString("IMMORTAL"));
+        STRETCH_BACKGROUND = Boolean.parseBoolean(props.getString("STRETCH-BACKGROUND"));
     }
 
 }
