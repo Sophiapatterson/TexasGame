@@ -7,7 +7,10 @@ import javafx.scene.image.ImageView;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
-
+/**
+ * PlayerView extends parent View class. Initializes View for Player
+ * objects and binds PlayerView to Player objects.
+ */
 public class PlayerView extends View{
     public static final double PLAYER_SIZE = 50;
     private ImageView myImage;

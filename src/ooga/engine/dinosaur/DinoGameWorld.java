@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+/**
+ * DinoGameWorld extends GameWorld, initializes all scenes in DinoGame and includes step function.
+ */
 public class DinoGameWorld extends GameWorld {
     public static final double FLOOR_HEIGHT = 275;
     public static final int FRAMES_PER_SECOND = 30;
@@ -51,10 +53,25 @@ public class DinoGameWorld extends GameWorld {
     private Group root;
     private Tutorial myTutorial;
 
+    /**
+     * DinoGameWorld constructor. Inherits animation from abstract GameWorld.
+     */
     public DinoGameWorld() {
         super();
     }
 
+    /**
+     * setupScene method creates scenes for new instance of DinoGame. Initializes game by creating new instances of Tutorial, Screens, Group, GameManager.
+     * Creates scene by creating Group given background image and by adding Player, Enemy, Powerup, ScoreText to the scene.
+     * to the scene.
+     * @param width scene's width.
+     * @param height scene's height.
+     * @param background background color.
+     * @param currentstage stage used previously for start and change screen.
+     * @param tutorial boolean determining whether to cue tutorial or actual game.
+     * @return myScene, scene that includes all aspects of a new DinoGame, created via getScene.
+     * @throws RuntimeException
+     */
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
         myTutorial = new Tutorial();
@@ -82,12 +99,25 @@ public class DinoGameWorld extends GameWorld {
         return getScene(width, height, background, root);
     }
 
+    /**
+     * helper method for setupScene. Initializes the DinoGame's scene.
+     * @param width scene'swidth
+     * @param height scene's height
+     * @param background Game's background color
+     * @param root Group where all game objects are added.
+     * @return myScene, scene that includes all aspects of a new DinoGame.
+     */
     private Scene getScene(int width, int height, Paint background, Group root) {
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
         return myScene;
     }
 
+    /**
+     * helper method for setupScene. Creates new list of cactus/cactus views based on data
+     * from DinoGameConfiguration. Binds cactus to cactus views, adds these cacti to the scene.
+     * @param root Game scene's Group.
+     */
     private void addEnemies(Group root) {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
@@ -99,7 +129,11 @@ public class DinoGameWorld extends GameWorld {
             root.getChildren().add(tempCacView.getView());
         }
     }
-
+    /**
+     * helper method for setupScene. Creates new list of coins/coin views based on data
+     * from DinoGameConfiguration. Binds coin to coin views, adds these coins to the scene.
+     * @param root Game scene's Group.
+     */
     private void addPowerups(Group root) {
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
@@ -111,7 +145,11 @@ public class DinoGameWorld extends GameWorld {
             root.getChildren().add(tempCoinView.getView());
         }
     }
-
+    /**
+     * helper method for setupScene. Creates new Player and PlayerView.
+     * Binds Player to PlayerView, adds this Player to the scene.
+     * @param root Game scene's Group.
+     */
     private void addDino(Group root) {
         Image dinoImage = new Image(this.getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
         myPlayer = new DinoPlayer(INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
@@ -120,6 +158,10 @@ public class DinoGameWorld extends GameWorld {
         root.getChildren().add(myPlayerView.getView());
     }
 
+    /**
+     * helper method for setupScene. Creates tutorial messages from properties file, adds tutorial text to the screen.
+     * @param root Game scene's Group.
+     */
     private void addText(Group root){
         List<String> tutorialstring = new ArrayList<>();
         ResourceBundle tutorialResources = ResourceBundle.getBundle("Properties.DINO-TUTORIAL");
@@ -130,6 +172,10 @@ public class DinoGameWorld extends GameWorld {
         root.getChildren().add(tutorialtext.get(0));
     }
 
+    /**
+     * helper method for setupScene. Creates and initializes background ImageView from image.
+     * @return imageView to be applied as background.
+     */
     private ImageView getImageView() {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(HORIZON_IMAGE));
         ImageView imageView = new ImageView(image);
@@ -138,6 +184,10 @@ public class DinoGameWorld extends GameWorld {
         return imageView;
     }
 
+    /**
+     * step function handles game activity over time.
+     * @param elapsedTime standardizes time for all devices.
+     */
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
         gameManager.handleJump(FLOOR_HEIGHT);
@@ -174,6 +224,10 @@ public class DinoGameWorld extends GameWorld {
         }
     }
 
+    /**
+     * handle's key input and cues Player jump when space bar is pressed.
+     * @param code represents the code of the key pressed.
+     */
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
             myPlayer.jump();

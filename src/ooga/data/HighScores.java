@@ -3,11 +3,18 @@ package ooga.data;
 import java.io.*;
 import java.util.*;
 
+/**
+ * HighScores class stores old and creates new game high scores.
+ */
 public class HighScores {
     private ResourceBundle scores;
     private List<Score> list;
     private String version;
 
+    /**
+     * HighScores constructor/
+     * @param version is the game type for which the high scores are applicable.
+     */
     public HighScores(String version) {
         this.version = version;
 
@@ -44,21 +51,42 @@ public class HighScores {
         list.sort(Score.SCORE_COMPARATOR);
     }
 
+    /**
+     * addScore method adds a new score to the list of stored scores and
+     * sorts the new score list using the SCORE_COMPARATOR to determine
+     * the new score order.
+     * @param newScore is the new score being added.
+     */
     public void addScore(Score newScore){
         list.add(newScore);
         list.sort(Score.SCORE_COMPARATOR);
     }
 
+    /**
+     * removeScore method removes a score from the list of stored scores
+     * and sorts the new list of scores using the SCORE_COMPARATOR.
+     * @param zeroIndex
+     */
     public void removeScore(int zeroIndex){
         list.sort(Score.SCORE_COMPARATOR);
         list.remove(zeroIndex);
         list.sort(Score.SCORE_COMPARATOR);
     }
 
+    /**
+     * getHighScores is a getter method for the list of
+     * stored high scores for a given game.
+     * @return list which is the current list of high scores.
+     */
     public List<Score> getHighScores(){
         return list;
     }
 
+    /**
+     * getHighScoresAsStrings method returns the list of high scores
+     * as a string list.
+     * @return stringList which is the high scores list converted to a string list.
+     */
     public List<String> getHighScoresAsStrings(){
         List<String> stringList = new ArrayList();
         for(int i = 0; i<list.size(); i++){
@@ -67,6 +95,10 @@ public class HighScores {
         return stringList;
     }
 
+    /**
+     * saveHighScores method saves the high scores into a Properties file that is
+     * stored in the data folder. This data may be retrieved at a later time.
+     */
     public void saveHighScores(){
         try {
             PrintWriter output = new PrintWriter("data/Properties/"+this.version.toUpperCase()+"-SCORES.properties");

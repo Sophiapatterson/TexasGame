@@ -1,6 +1,5 @@
 package ooga;
 
-import ooga.data.HighScores;
 import ooga.data.LevelFileException;
 import ooga.data.config.*;
 import ooga.engine.game.Enemy;

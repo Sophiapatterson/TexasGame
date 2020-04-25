@@ -10,7 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
+/**
+ * GameConfiguration is the parent GameConfiguration class.
+ * Reads in CSV file.
+ * Includes abstract methods to initialize enemies, powerups, scrolling objects.
+ */
 public abstract class GameConfiguration {
 
     public static final String ENEMY_VALUE = "1";
@@ -92,7 +96,10 @@ public abstract class GameConfiguration {
     public abstract void makeCoin(double xCoef, double yCoef);
 
     public abstract void makeEnemy(double xCoef, double yCoef);
-
+    /**
+     * getScrollers method returns list of scrolling objects in game.
+     * @return list of scrollers.
+     */
     public abstract List<Scrolling> getScrollers();
 
     public abstract List<Enemy> getEnemies();

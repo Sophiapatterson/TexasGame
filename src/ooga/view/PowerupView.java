@@ -7,7 +7,10 @@ import javafx.scene.image.ImageView;
 import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
-
+/**
+ * PowerupView extends parent View class. Initializes View for Powerup
+ * objects and binds PowerupView to Powerup objects.
+ */
 public class PowerupView extends View {
     private ImageView myImage;
     private DoubleProperty x = new SimpleDoubleProperty();

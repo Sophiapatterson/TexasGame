@@ -1,16 +1,17 @@
 package ooga.view;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ooga.engine.game.Enemy;
 import ooga.engine.game.Player;
 import ooga.engine.game.Powerup;
 
+/**
+ * View is an abstract parent class which includes
+ * generic methods to intitialize View, setWidthAndHeight, and getView.
+ */
 public abstract class View {
-//    private DoubleProperty x = new SimpleDoubleProperty();
-//    private DoubleProperty y = new SimpleDoubleProperty();
+
     private ImageView myImage;
 
     public abstract ImageView getView();
@@ -31,6 +32,6 @@ public abstract class View {
 
     public abstract void setPowerupProperties(Powerup powerup);
 
-    public abstract void setEnemyProperties(ooga.engine.game.Enemy enemy);
+    public abstract void setEnemyProperties(Enemy enemy);
 
 }

@@ -5,11 +5,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ooga.screens.StartScreen;
 
-
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
-
+/**
+ * Main class begins running application.
+ * */
 public class Main extends Application {
 
     private Stage myStage;
@@ -19,6 +19,11 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * start method initializes the first scene in the game.
+     * @param primaryStage
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         myStage = primaryStage;
