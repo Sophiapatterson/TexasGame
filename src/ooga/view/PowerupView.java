@@ -15,7 +15,12 @@ public class PowerupView extends View {
     private ImageView myImage;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
-
+    /**
+     * PowerupView constructor used to create View for any type of Powerup.
+     * @param powerupImage image of Powerup object's sprite.
+     * @param x double value to initialize x DoubleProperty
+     * @param y double value to initialize y DoubleProperty
+     */
     public PowerupView(Image powerupImage, double x, double y) {
         super();
         this.myImage = initializeView(powerupImage);
@@ -23,6 +28,10 @@ public class PowerupView extends View {
         this.myImage.yProperty().bind(this.y);
     }
 
+    /**
+     * setPowerupProperties used to bind X and Y DoubleProperties of this PowerupView to those of respective backend powerup.
+     * @param powerup Powerup object that an instance of PowerupView will bind to.
+     */
     public void setPowerupProperties(Powerup powerup) {
         x.bindBidirectional(powerup.getXProperty());
         y.bindBidirectional(powerup.getYProperty());
@@ -30,7 +39,10 @@ public class PowerupView extends View {
 
     @Override
     public void setEnemyProperties(Enemy enemy) { }
-
+    /**
+     * getter method for this instance of view
+     * @return ImageView myImage
+     */
     @Override
     public ImageView getView() {
         return myImage;
