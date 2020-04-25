@@ -21,6 +21,11 @@ public class JetpackGameConfiguration extends GameConfiguration {
     private List<Powerup> allPU;
     private int length;
 
+    /**
+     * JetpackGameConfiguration constructor.
+     * @param path
+     * @throws LevelFileException
+     */
     public JetpackGameConfiguration(Path path) throws LevelFileException {
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
@@ -29,14 +34,22 @@ public class JetpackGameConfiguration extends GameConfiguration {
         length = getLength(lines);
         parseCSV(lines);
     }
-
+    /**
+     * makeCoin method initializes Coins in JetpackGame.
+     * @param xCoef double X value used to initialize position.
+     * @param yCoef double Y value used to initialize position.
+     */
     @Override
     public void makeCoin(double xCoef, double yCoef) {
         Coin pu = new Coin(xCoef*length, yCoef*600);
         scrollers.add(pu);
         allPU.add(pu);
     }
-
+    /**
+     * makeEnemy method initializes Zappers in JetpackGame.
+     * @param xCoef double X value used to initialize position.
+     * @param yCoef double Y value used to initialize position.
+     */
     @Override
     public void makeEnemy(double xCoef, double yCoef){
         Zapper z = new Zapper();
@@ -45,15 +58,24 @@ public class JetpackGameConfiguration extends GameConfiguration {
         scrollers.add(z);
         allEnemies.add(z);
     }
-
+    /**
+     * getScrollers method returns list of scrolling objects in game.
+     * @return list of scrollers.
+     */
     public List<Scrolling> getScrollers() {
         return scrollers;
     }
-
+    /**
+     * getEnemies method returns list of enemies in game.
+     * @return list of enemies.
+     */
     public List<Enemy> getEnemies() {
         return allEnemies;
     }
-
+    /**
+     * getPowerups method returns list of powerups in game.
+     * @return list of powerups.
+     */
     public List<Powerup> getPowerups() {
         return allPU;
     }

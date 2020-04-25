@@ -24,6 +24,11 @@ public class FlappyGameConfiguration extends GameConfiguration {
     private int length;
     private final int COUNT_OF_PIPES = 3;
 
+    /**
+     * FlappyGameConfiguration constructor.
+     * @param path
+     * @throws LevelFileException
+     */
     public FlappyGameConfiguration(Path path) throws LevelFileException{
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
@@ -32,7 +37,11 @@ public class FlappyGameConfiguration extends GameConfiguration {
         length = getLength(lines);
         parseCSV(lines);
     }
-
+    /**
+     * makeCoin method initializes Coins in FlappyGame.
+     * @param xCoef double X value used to initialize position.
+     * @param yCoef double Y value used to initialize position.
+     */
     @Override
     public void makeCoin(double xCoef, double yCoef) {
         //commented out coins because we don't need coins in flappy game
@@ -41,7 +50,11 @@ public class FlappyGameConfiguration extends GameConfiguration {
 //        scrollers.add(pu);
 //        allPU.add(pu);
     }
-
+    /**
+     * makeEnemy method initializes Pipes in FlappyGame.
+     * @param xCoef double X value used to initialize position.
+     * @param yCoef double Y value used to initialize position.
+     */
     @Override
     public void makeEnemy(double xCoef, double yCoef){
         Random rand = new Random();
@@ -61,15 +74,24 @@ public class FlappyGameConfiguration extends GameConfiguration {
         scrollers.add(p);
         allEnemies.add(p);
     }
-
+    /**
+     * getScrollers method returns list of scrolling objects in game.
+     * @return list of scrollers.
+     */
     public List<Scrolling> getScrollers() {
         return scrollers;
     }
-
+    /**
+     * getEnemies method returns list of enemies in game.
+     * @return list of enemies.
+     */
     public List<Enemy> getEnemies() {
         return allEnemies;
     }
-
+    /**
+     * getPowerups method returns list of powerups in game.
+     * @return list of powerups.
+     */
     public List<Powerup> getPowerups() {
         return allPU;
     }

@@ -25,6 +25,11 @@ public class GenericGameConfiguration extends GameConfiguration {
     private GameRules rules;
     private String rulesPath;
 
+    /**
+     * GenericGameConfiguration constructor.
+     * @param rulesPath
+     * @throws LevelFileException
+     */
     public GenericGameConfiguration(String rulesPath) throws LevelFileException {
         this.rulesPath = rulesPath;
         rules = new GameRules(rulesPath);
@@ -35,7 +40,11 @@ public class GenericGameConfiguration extends GameConfiguration {
         length = getLength(lines);
         parseCSV(lines);
     }
-
+    /**
+     * makeCoin method initializes Coins in GenericGame.
+     * @param xCoef double X value used to initialize position.
+     * @param yCoef double Y value used to initialize position.
+     */
     @Override
     public void makeCoin(double xCoef, double yCoef) {
         if(rules.ALLOW_COINS) {
@@ -45,7 +54,11 @@ public class GenericGameConfiguration extends GameConfiguration {
             allPU.add(pu);
         }
     }
-
+    /**
+     * makeEnemy method initializes Enemy in GenericGame.
+     * @param xCoef double X value used to initialize position.
+     * @param yCoef double Y value used to initialize position.
+     */
     @Override
     public void makeEnemy(double xCoef, double yCoef){
         GenericEnemy c = new GenericEnemy(rulesPath);
@@ -54,15 +67,24 @@ public class GenericGameConfiguration extends GameConfiguration {
         scrollers.add(c);
         allEnemies.add(c);
     }
-
+    /**
+     * getScrollers method returns list of scrolling objects in game.
+     * @return list of scrollers.
+     */
     public List<Scrolling> getScrollers() {
         return scrollers;
     }
-
+    /**
+     * getEnemies method returns list of enemies in game.
+     * @return list of enemies.
+     */
     public List<Enemy> getEnemies() {
         return allEnemies;
     }
-
+    /**
+     * getPowerups method returns list of powerups in game.
+     * @return list of powerups.
+     */
     public List<Powerup> getPowerups() {
         return allPU;
     }
