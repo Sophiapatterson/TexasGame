@@ -100,8 +100,8 @@ public class ScreensTest extends DukeApplicationTest{
                 Button tutorial = lookup("#tutorial").query();
                 Button gamechooser = lookup("#gamechooser").query();
                 Text title = lookup("#Title").query();
-                assertEquals("Go back to tutorials",tutorial.getText());
-                assertEquals("Go to game chooser",gamechooser.getText());
+                assertEquals("Return to Tutorials",tutorial.getText());
+                assertEquals("Choose a Game",gamechooser.getText());
                 assertEquals("Are you ready to play, or do you need another tutorial?",title.getText());
             }
         });
@@ -176,28 +176,6 @@ public class ScreensTest extends DukeApplicationTest{
         endscreen = new EndScreen("Dinosaur");
         Scene leaderboards = endscreen.createLeaderboard(myStage);
         myStage.setScene(leaderboards);
-    }
-
-    @Test
-    void testCreditScreen(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                showCreditsScreen();
-                Text producers = lookup("#producers").query();
-                Text luke = lookup("#luke").query();
-                Text jeff = lookup("#jeff").query();
-                Text sophia = lookup("#sophia").query();
-                Text justin = lookup("#justin").query();
-                Text title = lookup("#Title").query();
-                assertEquals("Credits",title.getText());
-                assertEquals("Producers/Designers",producers.getText());
-                assertEquals("Luke Evans",luke.getText());
-                assertEquals("Jeffrey Luo",jeff.getText());
-                assertEquals("Sophia Patterson",sophia.getText());
-                assertEquals("Justin Wu",justin.getText());
-            }
-        });
     }
 
     private void showCreditsScreen(){
