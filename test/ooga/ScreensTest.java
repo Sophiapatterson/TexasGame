@@ -177,7 +177,7 @@ public class ScreensTest extends DukeApplicationTest{
         Scene leaderboards = endscreen.createLeaderboard(myStage);
         myStage.setScene(leaderboards);
     }
-    
+
 
     private void showCreditsScreen(){
         endscreen = new EndScreen("Dinosaur");
