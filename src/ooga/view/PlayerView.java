@@ -16,7 +16,12 @@ public class PlayerView extends View{
     private ImageView myImage;
     private DoubleProperty x = new SimpleDoubleProperty();
     private DoubleProperty y = new SimpleDoubleProperty();
-
+    /**
+     * PlayerView constructor used to create View for any type of player.
+     * @param playerImage image of player object's sprite.
+     * @param x double value to initialize x DoubleProperty
+     * @param y double value to initialize y DoubleProperty
+     */
     public PlayerView(Image playerImage, double x, double y){
         super();
         this.myImage = initializeView(playerImage);
@@ -24,7 +29,10 @@ public class PlayerView extends View{
         this.myImage.xProperty().bind(this.x);
         this.myImage.yProperty().bind(this.y);
     }
-
+    /**
+     * setPlayerProperties used to bind X and Y DoubleProperties of this PlaeyrView to those of respective backend Player.
+     * @param player Player object that an instance of PlayerView will bind to.
+     */
     public void setPlayerProperties(Player player) {
         x.bindBidirectional(player.getXProperty());
         y.bindBidirectional(player.getYProperty());
@@ -35,7 +43,10 @@ public class PlayerView extends View{
 
     @Override
     public void setEnemyProperties(Enemy enemy) { }
-
+    /**
+     * getter method for this instance of view
+     * @return ImageView myImage
+     */
     @Override
     public ImageView getView() {
         return myImage;
