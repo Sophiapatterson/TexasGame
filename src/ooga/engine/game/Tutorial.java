@@ -14,7 +14,7 @@ public class Tutorial {
 
     public static final int TEXT_X = 50;
     public static final int TEXT_Y = 100;
-    public static int GAMEOVERDISTANCE = 700;
+    public static int GAMEOVERDISTANCE = 500;
     public static final int FIRST_TEXT = 0;
     public static final int SECOND_TEXT = 1;
     public static final int THIRD_TEXT = 2;
@@ -41,25 +41,9 @@ public class Tutorial {
         return tutorialtext;
     }
 
-    public void tutorialObstacles(Player myPlayer, List<Enemy> enemies, Group root, List<Text> tutorialtext){
-        /*if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
-            if(root.getChildren().contains(tutorialtext.get(FIRST_TEXT))){
-                root.getChildren().remove(tutorialtext.get(FIRST_TEXT));
-            }
-            if(!root.getChildren().contains(tutorialtext.get(SECOND_TEXT))){
-                root.getChildren().add(tutorialtext.get(SECOND_TEXT));
-            }
-        }
-        else if(myPlayer.getXPos()>enemies.get(1).getXPos()){
-            if(root.getChildren().contains(tutorialtext.get(SECOND_TEXT))){
-                root.getChildren().remove(tutorialtext.get(SECOND_TEXT));
-            }
-            if(!root.getChildren().contains(tutorialtext.get(THIRD_TEXT))){
-                root.getChildren().add(tutorialtext.get(THIRD_TEXT));
-            }
-        }*/
+    public void tutorialObstacles(Player myPlayer, List<Scrolling> enemies, Group root, List<Text> tutorialtext){
 
-        for(int i =0; i<tutorialtext.size() || i<enemies.size() ; i++){
+        for(int i =0; i<tutorialtext.size()-1 && i<enemies.size()-1 ; i++){
             if(myPlayer.getXPos()>enemies.get(i).getXPos()&& myPlayer.getXPos()<enemies.get(i+1).getXPos()){
                 root.getChildren().remove(tutorialtext.get(i));
                 if(!root.getChildren().contains(tutorialtext.get(i+1))){
@@ -69,14 +53,4 @@ public class Tutorial {
         }
     }
 
-    public void tutorialPowerUps(Player myPlayer, List<Powerup> powerups, Group root, List<Text> tutorialtext){
-        if(myPlayer.getXPos()>powerups.get(0).getXPos() ){
-            if(root.getChildren().contains(tutorialtext.get(THIRD_TEXT))) {
-                root.getChildren().remove(tutorialtext.get(THIRD_TEXT));
-            }
-            if(!root.getChildren().contains(tutorialtext.get(tutorialtext.size()-1))){
-                root.getChildren().add(tutorialtext.get(tutorialtext.size()-1));
-            }
-        }
-    }
 }

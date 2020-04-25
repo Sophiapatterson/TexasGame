@@ -38,6 +38,7 @@ public class DinoGameWorld extends GameWorld {
     private List<View> enemiesView;
     private List<Powerup> powerups;
     private List<View> powerupsView;
+    private List<Scrolling> scrollers;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -73,6 +74,7 @@ public class DinoGameWorld extends GameWorld {
         addDino(root);
         addEnemies(root);
         addPowerups(root);
+        scrollers = gameConfig.getScrollers();
         gameManager = new DinoGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
@@ -115,7 +117,6 @@ public class DinoGameWorld extends GameWorld {
         myPlayer = new DinoPlayer(INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView = new PlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setPlayerProperties(myPlayer);
-        System.out.println(myPlayer.getXPos());
         root.getChildren().add(myPlayerView.getView());
     }
 
@@ -145,8 +146,8 @@ public class DinoGameWorld extends GameWorld {
             enemy.move();
         }
         if(tutorialcheck){
-            myTutorial.tutorialObstacles(myPlayer, enemies, root, tutorialtext);
-            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+            myTutorial.tutorialObstacles(myPlayer, scrollers, root, tutorialtext);
+            if(myPlayer.getXPos()>scrollers.get(scrollers.size()-1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
