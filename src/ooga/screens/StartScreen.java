@@ -31,13 +31,11 @@ public class StartScreen extends Screen {
         myStage = currentStage;
         VBox startlayout = new VBox();
         initLayout(startlayout);
-        Button start = new Button(startResources.getString("START-MESSAGE"));
-        start.setId("startbutton");
+        Button start = createButton(startResources.getString("START-MESSAGE"), "startbutton");
         start.setOnAction(e -> {
             myStage.setScene(changescreen.createMainScreen(myStage));
         });
-        Button tutorial = new Button(startResources.getString("TUTORIAL-MESSAGE"));
-        tutorial.setId("tutorial");
+        Button tutorial = createButton(startResources.getString("TUTORIAL-MESSAGE"), "tutorial");
         tutorial.setOnAction(e -> {
             myStage.setScene(tutorialscreen.createMainScreen(myStage));
         });

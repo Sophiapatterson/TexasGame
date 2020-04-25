@@ -70,4 +70,10 @@ public abstract class Screen {
         return createdbutton;
     }
 
+    public Button createButton(String buttontext, String id){
+        Button createdbutton = new Button(buttontext);
+        createdbutton.setId(id);
+        return createdbutton;
+    }
+
 }

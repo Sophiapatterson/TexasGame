@@ -70,13 +70,11 @@ public class TutorialScreen extends Screen {
         myStage = currentstage;
         VBox tutoriallayout = new VBox();
         initLayout(tutoriallayout);
-        Button tutorial = new Button(tutorialResources.getString("GO-TUTORIAL"));
-        tutorial.setId("tutorial");
+        Button tutorial = createButton(tutorialResources.getString("GO-TUTORIAL"), "tutorial");
         tutorial.setOnAction(e -> {
             myStage.setScene(createMainScreen(myStage));
         });
-        Button gamechooser = new Button(tutorialResources.getString("GO-GAMECHOOSER"));
-        gamechooser.setId("gamechooser");
+        Button gamechooser = createButton(tutorialResources.getString("GO-GAMECHOOSER"), "gamechooser");
         gamechooser.setOnAction(e -> {
             myStage.setScene(changescreen.createMainScreen(myStage));
         });
