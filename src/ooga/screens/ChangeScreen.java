@@ -50,32 +50,27 @@ public class ChangeScreen extends Screen {
         myStage = currentstage;
         VBox changerlayout = new VBox();
         initLayout(changerlayout);
-        Button dinosaur = new Button(changeResources.getString("DINO-MESSAGE"));
-        dinosaur.setId("dino");
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-        dinosaur.setGraphic(createButtonImage(dinoimage));
+        Button dinosaur = createButtonWithImage(changeResources.getString("DINO-MESSAGE"), "dino", dinoimage);
         dinosaur.setOnAction(e -> {
             myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             dinogame.setUpAnimation();
         });
-        Button flappy = new Button(changeResources.getString("FLAPPY-MESSAGE"));
-        flappy.setId("flappybird");
         Image flappyimage = new Image(getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        flappy.setGraphic(createButtonImage(flappyimage));
+        Button flappy = createButtonWithImage(changeResources.getString("FLAPPY-MESSAGE"), "flappybird", flappyimage);
         flappy.setOnAction(e -> {
             myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             flappygame.setUpAnimation();
         });
-        Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
-        jetpack.setId("jet");
+        //Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
-        jetpack.setGraphic(createButtonImage(jetimage));
+        Button jetpack = createButtonWithImage(changeResources.getString("JET-MESSAGE"), "jet", jetimage);
         jetpack.setOnAction(e -> {
             myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             jetpackgame.setUpAnimation();
         });
-        Button generic = new Button(changeResources.getString("GENERIC-MESSAGE"));
-        generic.setId("generic");
+        //Button generic = new Button(changeResources.getString("GENERIC-MESSAGE"));
+        Button generic = createButton(changeResources.getString("GENERIC-MESSAGE"), "generic");
         generic.setGraphic(makeStar());
         generic.setOnAction(e -> {
             myStage.setScene(genericgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));

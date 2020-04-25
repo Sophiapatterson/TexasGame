@@ -48,20 +48,20 @@ public class EndScreen extends Screen {
         myStage = currentstage;
         VBox layout = new VBox();
         initLayout(layout);
-        Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
-        playagain.setId("again");
+        //Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
+        Button playagain = createButton(endResources.getString("AGAIN-MESSAGE"), "again");
         playagain.setOnAction(e -> {
             myStage.setScene(changescreen.createMainScreen(myStage));
         });
-        Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
-        credits.setId("credits");
+        //Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
+        Button credits = createButton(endResources.getString("CREDITS-MESSAGE"), "credits");
         credits.setOnAction( e -> {
             //myStage.setScene(createCredits(myStage));
             myStage.setScene(creditsgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             creditsgame.setUpAnimation();
         });
-        Button scores = new Button(endResources.getString("LEADERBOARD-MESSAGE"));
-        scores.setId("scores");
+        //Button scores = new Button(endResources.getString("LEADERBOARD-MESSAGE"));
+        Button scores = createButton(endResources.getString("LEADERBOARD-MESSAGE"), "scores");
         scores.setOnAction( e -> {
             myStage.setScene(createLeaderboard(myStage));
         });
@@ -88,8 +88,7 @@ public class EndScreen extends Screen {
             i++;
             layout.getChildren().add(currScore);
         }
-        Button newScore = new Button(endResources.getString("ADD-SCORE"));
-        newScore.setId("newscore");
+        Button newScore = createButton(endResources.getString("ADD-SCORE"), "newscore");
         newScore.setOnAction( e -> {
             submitScore();
         });
@@ -118,8 +117,7 @@ public class EndScreen extends Screen {
         Label name = new Label(endResources.getString("NAME-PROMPT"));
         name.getStyleClass().add("medtxt");
         TextField nameTextField = new TextField();
-        Button submit = new Button(endResources.getString("SUBMIT-SCORE"));
-        submit.setId("submit");
+        Button submit = createButton(endResources.getString("SUBMIT-SCORE"), "submit");
         submit.setOnAction( f -> {
             highscores.addScore(new Score(nameTextField.getText(), score));
             highscores.saveHighScores();
@@ -143,23 +141,20 @@ public class EndScreen extends Screen {
         producers.setId("producers");
         producers.setText(creditsResources.getString("PRODUCERS-MESSAGE"));
         producers.getStyleClass().add("medtxt");
-        Text luke = createCreditText("LUKE-MESSAGE");
-        luke.setId("luke");
-        Text jeff = createCreditText("JEFF-MESSAGE");
-        jeff.setId("jeff");
-        Text sophia = createCreditText("SOPHIA-MESSAGE");
-        sophia.setId("sophia");
-        Text justin = createCreditText("JUSTIN-MESSAGE");
-        justin.setId("justin");
+        Text luke = createCreditText("LUKE-MESSAGE", "luke");
+        Text jeff = createCreditText("JEFF-MESSAGE", "jeff");
+        Text sophia = createCreditText("SOPHIA-MESSAGE", "sophia");
+        Text justin = createCreditText("JUSTIN-MESSAGE", "justin");
         Button back = makeBackButton();
         layout.getChildren().addAll(title, producers, luke, jeff, sophia, justin, back);
         Scene Credits = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return Credits;
     }
 
-    public Text createCreditText(String message){
+    public Text createCreditText(String message, String id){
         Text returnedtext = new Text();
         returnedtext.setText(creditsResources.getString(message));
+        returnedtext.setId(id);
         returnedtext.getStyleClass().add("smalltxt");
         return returnedtext;
     }

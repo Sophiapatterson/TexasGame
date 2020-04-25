@@ -73,7 +73,7 @@ public class ScreensTest extends DukeApplicationTest{
                 showTutorialScreen();
                 tutorialscreen = new TutorialScreen();
                 Button dinosaur = lookup("#dino").query();
-                Button flappy = lookup("#flappybird").query();
+                Button flappy = lookup("#flappy").query();
                 Button jetpack = lookup("#jet").query();
                 Text title = lookup("#Title").query();
                 assertEquals("Dinosaur Tutorial",dinosaur.getText());
@@ -172,27 +172,10 @@ public class ScreensTest extends DukeApplicationTest{
         myStage.show();
     }
 
-    @Test
-    void testLeaderboards(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-               /* showLeaderboards();
-                Button newscore = lookup("#newscore").query();
-                Button back = lookup("#back").query();
-                Text title = lookup("#Title").query();
-                assertEquals("Add your score",newscore.getText());
-                assertEquals("Back",back.getText());
-                assertEquals("Leaderboard",title.getText());*/
-            }
-        });
-    }
-
     private void showLeaderboards(){
         endscreen = new EndScreen("Dinosaur");
         Scene leaderboards = endscreen.createLeaderboard(myStage);
         myStage.setScene(leaderboards);
-        //myStage.show();
     }
 
     @Test
