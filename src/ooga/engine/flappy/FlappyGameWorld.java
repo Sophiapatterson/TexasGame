@@ -41,6 +41,7 @@ public class FlappyGameWorld extends GameWorld {
     private List<View> enemiesView;
     private List<Powerup> powerups;
     private List<View> powerupsView;
+    private List<Scrolling> scrollers;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -72,6 +73,7 @@ public class FlappyGameWorld extends GameWorld {
         addBird(root);
         addEnemies(root);
         addPowerups(root);
+        scrollers = gameConfig.getScrollers();
         gameManager = new FlappyGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
@@ -149,8 +151,8 @@ public class FlappyGameWorld extends GameWorld {
         }
 
         if(tutorialcheck){
-            myTutorial.tutorialObstacles(myPlayer, enemies, root, tutorialtext);
-            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+            myTutorial.tutorialObstacles(myPlayer, scrollers, root, tutorialtext);
+            if(myPlayer.getXPos()>scrollers.get(scrollers.size()-1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }

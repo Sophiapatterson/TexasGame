@@ -40,6 +40,7 @@ public class JetpackGameWorld extends GameWorld {
     private List<View> enemiesView;
     private List<Powerup> powerups;
     private List<View> powerupsView;
+    private List<Scrolling> scrollers;
     private GameManager gameManager;
     private Text myScoreText = new Text();
     private PlayerView myPlayerView;
@@ -53,6 +54,7 @@ public class JetpackGameWorld extends GameWorld {
     private Tutorial myTutorial;
     private List<Text> tutorialtext;
     private boolean tutorialcheck;
+    private List<Text> tutorialtext;
 
     @Override
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
@@ -73,6 +75,7 @@ public class JetpackGameWorld extends GameWorld {
         addBarry(myRoot);
         addEnemies(myRoot);
         addPowerups(myRoot);
+        scrollers = gameConfig.getScrollers();
         gameManager = new JetpackGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
@@ -155,9 +158,9 @@ public class JetpackGameWorld extends GameWorld {
             pu.move();
         }
         if(tutorialcheck){
-            myTutorial.tutorialObstacles(myPlayer, enemies,myRoot, tutorialtext);
-            myTutorial.tutorialPowerUps(myPlayer, powerups, myRoot, tutorialtext);
-            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+            myTutorial.tutorialObstacles(myPlayer, scrollers, myRoot, tutorialtext);
+
+            if(myPlayer.getXPos()>scrollers.get(scrollers.size()-1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
