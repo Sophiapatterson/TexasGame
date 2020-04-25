@@ -1,11 +1,9 @@
-package ooga.Screens;
+package ooga.screens;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
@@ -43,26 +41,20 @@ public class TutorialScreen extends Screen {
         myStage = currentstage;
         VBox tutoriallayout = new VBox();
         initLayout(tutoriallayout);
-        Button dinosaur = new Button(tutorialResources.getString("DINO-TUTORIAL"));
-        dinosaur.setId("dino");
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-        dinosaur.setGraphic(createButtonImage(dinoimage));
+        Button dinosaur = createButtonWithImage(tutorialResources.getString("DINO-TUTORIAL"), "dino", dinoimage);
         dinosaur.setOnAction(e -> {
             myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             dinogame.setUpAnimation();
         });
-        Button flappy = new Button(tutorialResources.getString("FLAPPY-TUTORIAL"));
-        flappy.setId("flappybird");
         Image flappyimage = new Image(getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        flappy.setGraphic(createButtonImage(flappyimage));
+        Button flappy = createButtonWithImage(tutorialResources.getString("FLAPPY-TUTORIAL"), "flappy", flappyimage);
         flappy.setOnAction(e -> {
             myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             flappygame.setUpAnimation();
         });
-        Button jetpack = new Button(tutorialResources.getString("JET-TUTORIAL"));
-        jetpack.setId("jet");
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
-        jetpack.setGraphic(createButtonImage(jetimage));
+        Button jetpack = createButtonWithImage(tutorialResources.getString("JET-TUTORIAL"), "jet", jetimage);
         jetpack.setOnAction(e -> {
             myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             jetpackgame.setUpAnimation();

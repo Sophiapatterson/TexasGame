@@ -1,4 +1,4 @@
-package ooga.Screens;
+package ooga.screens;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,7 +9,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.data.HighScores;
 import ooga.data.Score;
-import ooga.engine.generic.GenericGameWorld;
 
 import java.util.ResourceBundle;
 

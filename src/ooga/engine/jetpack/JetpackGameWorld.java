@@ -9,7 +9,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.*;
+import ooga.screens.*;
 import ooga.view.*;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.JetpackGameConfiguration;
@@ -51,6 +51,7 @@ public class JetpackGameWorld extends GameWorld {
     private Group myRoot;
     private Map<Powerup, View> myPowerupMap;
     private Tutorial myTutorial;
+    private List<Text> tutorialtext;
     private boolean tutorialcheck;
 
     @Override

@@ -9,7 +9,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.*;
+import ooga.screens.*;
 import ooga.view.*;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;

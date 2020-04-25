@@ -1,4 +1,4 @@
-package ooga.Screens;
+package ooga.screens;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;

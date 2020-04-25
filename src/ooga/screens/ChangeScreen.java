@@ -1,30 +1,21 @@
-package ooga.Screens;
+package ooga.screens;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
-import ooga.data.LevelFileException;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.FlappyGameWorld;
 import ooga.engine.generic.GenericGameWorld;
 import ooga.engine.jetpack.JetpackGameWorld;
 
-import java.awt.*;
-import java.io.IOException;
 import java.util.ResourceBundle;
 
 import static ooga.engine.dinosaur.DinoGameWorld.DINO_IMAGE;

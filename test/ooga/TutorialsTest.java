@@ -1,20 +1,14 @@
 package ooga;
 
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.StartScreen;
-import ooga.Screens.TutorialScreen;
 import ooga.engine.dinosaur.DinoGameWorld;
 import ooga.engine.flappy.FlappyGameWorld;
 import ooga.engine.jetpack.JetpackGameWorld;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.util.ResourceBundle;
-
-import static ooga.Screens.Screen.BACKGROUND;
+import static ooga.screens.Screen.BACKGROUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TutorialsTest extends DukeApplicationTest{

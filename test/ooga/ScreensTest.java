@@ -6,10 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.ChangeScreen;
-import ooga.Screens.EndScreen;
-import ooga.Screens.StartScreen;
-import ooga.Screens.TutorialScreen;
+import ooga.screens.ChangeScreen;
+import ooga.screens.EndScreen;
+import ooga.screens.StartScreen;
+import ooga.screens.TutorialScreen;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

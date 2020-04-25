@@ -1,8 +1,9 @@
-package ooga.Screens;
+package ooga.screens;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -60,6 +61,13 @@ public abstract class Screen {
 
     public void setDarkModeTrue() {
         isDarkMode = true;
+    }
+
+    public Button createButtonWithImage(String buttontext, String id, Image buttonimage){
+        Button createdbutton = new Button(buttontext);
+        createdbutton.setId(id);
+        createdbutton.setGraphic(createButtonImage(buttonimage));
+        return createdbutton;
     }
 
 }

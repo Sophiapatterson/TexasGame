@@ -3,7 +3,7 @@ package ooga;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ooga.Screens.StartScreen;
+import ooga.screens.StartScreen;
 
 
 import java.io.IOException;

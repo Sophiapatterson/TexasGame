@@ -9,8 +9,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.*;
-import ooga.data.config.DinoGameConfiguration;
+import ooga.screens.*;
 import ooga.data.config.GameConfiguration;
 import ooga.data.config.GenericGameConfiguration;
 import ooga.engine.game.*;
@@ -19,11 +18,8 @@ import ooga.view.PlayerView;
 import ooga.view.PowerupView;
 import ooga.view.View;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 
 public class GenericGameWorld extends GameWorld {
