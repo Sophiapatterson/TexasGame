@@ -31,7 +31,7 @@ public class DinoGameWorld extends GameWorld {
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
     public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
     public static final String LevelOne = "data/CSV configurations/Dinosaur_Level.csv";
-    public static final double OBJECT_VIEW_SIZE = 70;
+    public static final double OBJECT_VIEW_SIZE = 72;
     private Player myPlayer;
     private PlayerView myPlayerView;
     private List<Enemy> enemies;

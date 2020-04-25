@@ -42,7 +42,7 @@ public class Tutorial {
     }
 
     public void tutorialObstacles(Player myPlayer, List<Enemy> enemies, Group root, List<Text> tutorialtext){
-        if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
+        /*if(myPlayer.getXPos()>enemies.get(0).getXPos() && myPlayer.getXPos()<enemies.get(1).getXPos()){
             if(root.getChildren().contains(tutorialtext.get(FIRST_TEXT))){
                 root.getChildren().remove(tutorialtext.get(FIRST_TEXT));
             }
@@ -56,6 +56,15 @@ public class Tutorial {
             }
             if(!root.getChildren().contains(tutorialtext.get(THIRD_TEXT))){
                 root.getChildren().add(tutorialtext.get(THIRD_TEXT));
+            }
+        }*/
+
+        for(int i =0; i<tutorialtext.size() || i<enemies.size() ; i++){
+            if(myPlayer.getXPos()>enemies.get(i).getXPos()&& myPlayer.getXPos()<enemies.get(i+1).getXPos()){
+                root.getChildren().remove(tutorialtext.get(i));
+                if(!root.getChildren().contains(tutorialtext.get(i+1))){
+                    root.getChildren().add(tutorialtext.get(i+1));
+                }
             }
         }
     }
