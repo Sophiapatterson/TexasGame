@@ -30,6 +30,13 @@ public class GenericGameConfiguration extends GameConfiguration {
         scrollers = new ArrayList<>();
         allEnemies = new ArrayList<>();
         allPU = new ArrayList<>();
+        if(rules.TUTORIAL){
+            List<String> lines = getLines(Paths.get(rules.TUTORIAL_CSV));
+
+        }
+        else{
+            List<String> lines = getLines(Paths.get(rules.LEVEL_CSV));
+        }
         List<String> lines = getLines(Paths.get(rules.LEVEL_CSV));
         length = getLength(lines);
         parseCSV(lines);

@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 public class EndScreen extends Screen {
     private StartScreen startscreen;
     private ChangeScreen changescreen;
+    private GenericGameWorld creditsgame;
     private Text title;
     private Button quit;
     public static final int POPUP_WIDTH = 500;
@@ -32,6 +33,7 @@ public class EndScreen extends Screen {
         this.version = version;
         allowSubmissions = true;
         myStage = new Stage();
+        creditsgame = new GenericGameWorld("ooga.engine.generic.CREDITS_GameRules");
         endResources = ResourceBundle.getBundle("ooga.Screens.Properties.EndScreen");
         creditsResources = ResourceBundle.getBundle("ooga.Screens.Properties.Credits");
         startscreen = new StartScreen();
@@ -54,7 +56,9 @@ public class EndScreen extends Screen {
         Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
         credits.setId("credits");
         credits.setOnAction( e -> {
-            myStage.setScene(createCredits(myStage));
+            //myStage.setScene(createCredits(myStage));
+            myStage.setScene(creditsgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
+            creditsgame.setUpAnimation();
         });
         Button scores = new Button(endResources.getString("LEADERBOARD-MESSAGE"));
         scores.setId("scores");

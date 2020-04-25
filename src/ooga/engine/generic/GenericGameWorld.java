@@ -46,6 +46,9 @@ public class GenericGameWorld extends GameWorld {
     private Group root;
     private GameRules rules;
     private String rulesPath;
+    private String VERSION_NAME;
+    private Tutorial myTutorial;
+    private List<Text> tutorialtext;
 
     public GenericGameWorld(String rulesPath) {
         super();
@@ -54,11 +57,16 @@ public class GenericGameWorld extends GameWorld {
 
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean t) throws RuntimeException {
         rules = new GameRules(rulesPath);
+        myTutorial = new Tutorial();
+        VERSION_NAME = rules.VERSION_NAME;
         endScreen = new EndScreen(rules.VERSION_NAME);
         myStage = currentstage;
         ImageView imageView = getImageView();
         root = new Group(imageView);
         gameConfig = new GenericGameConfiguration(rulesPath);
+        if(rules.TUTORIAL){
+            addText(root);
+        }
         addPlayer(root);
         addEnemies(root);
         addPowerups(root);
@@ -108,7 +116,13 @@ public class GenericGameWorld extends GameWorld {
     }
 
     private void addText(Group root){
-
+        List<String> tutorialstrings = new ArrayList<>();
+        ResourceBundle tutorialResources = ResourceBundle.getBundle(rules.TUTORIAL_TEXT);
+        for(String key: tutorialResources.keySet()){
+            tutorialstrings.add(tutorialResources.getString(key));
+        }
+        tutorialtext = myTutorial.createTutorialText(tutorialstrings, true);
+        root.getChildren().add(tutorialtext.get(0));
     }
 
     private ImageView getImageView() {
@@ -125,6 +139,14 @@ public class GenericGameWorld extends GameWorld {
         // move the enemies
         for(Enemy enemy: enemies) {
             enemy.move();
+        }
+        //manages tutorial functions
+        if(rules.TUTORIAL){
+            myTutorial.tutorialObstacles(myPlayer, enemies, root, tutorialtext);
+            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+                stopAnimation();
+                myStage.setScene(endScreen.createEndScreen(myStage, gameManager.getScore()));
+            }
         }
 //      move the powerups
         for(Powerup pu: powerups) {

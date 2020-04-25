@@ -14,6 +14,8 @@ public class GameRules {
     public String PLAYER_IMAGE;
     public String BACKGROUND_IMAGE;
     public String LEVEL_CSV;
+    public String TUTORIAL_CSV;
+    public String TUTORIAL_TEXT;
     public String ENEMY_PNG;
     public String ENEMY_PNG2;
     public String ENEMY_PNG3;
@@ -38,6 +40,7 @@ public class GameRules {
     public boolean ALLOW_COINS;
     public boolean IMMORTAL;
     public boolean STRETCH_BACKGROUND;
+    public boolean TUTORIAL;
 
     public GameRules(String path){
         props = ResourceBundle.getBundle(path);
@@ -75,6 +78,9 @@ public class GameRules {
         ALLOW_COINS = Boolean.parseBoolean(props.getString("ALLOW-COINS"));
         IMMORTAL = Boolean.parseBoolean(props.getString("IMMORTAL"));
         STRETCH_BACKGROUND = Boolean.parseBoolean(props.getString("STRETCH-BACKGROUND"));
+        TUTORIAL = Boolean.parseBoolean(props.getString("TUTORIAL"));
+        TUTORIAL_CSV = props.getString("VERSION-NAME");
+        TUTORIAL_TEXT = props.getString("TUTORIAL-TEXT");
     }
 
 }
