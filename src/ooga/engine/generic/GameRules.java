@@ -24,6 +24,7 @@ public class GameRules {
     public int COUNT_OF_ENEMY;
     public int TICK_SCORE_AMOUNT;
     public int BACKGROUND_HEIGHT;
+    public int TUTORIAL_LENGTH;
     public double ENEMY_SPEED;
     public double OBJECT_VIEW_SIZE;
     public double PLAYER_X_OFFSET;
@@ -81,6 +82,7 @@ public class GameRules {
         TUTORIAL = Boolean.parseBoolean(props.getString("TUTORIAL"));
         TUTORIAL_CSV = props.getString("VERSION-NAME");
         TUTORIAL_TEXT = props.getString("TUTORIAL-TEXT");
+        TUTORIAL_LENGTH = Integer.parseInt(props.getString("TUTORIAL-LENGTH"));
     }
 
 }

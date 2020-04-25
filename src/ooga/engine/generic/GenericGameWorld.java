@@ -65,6 +65,7 @@ public class GenericGameWorld extends GameWorld {
         root = new Group(imageView);
         gameConfig = new GenericGameConfiguration(rulesPath);
         if(rules.TUTORIAL){
+            myTutorial.setFinalDistance(rules.TUTORIAL_LENGTH);
             addText(root);
         }
         addPlayer(root);
@@ -112,6 +113,7 @@ public class GenericGameWorld extends GameWorld {
         myPlayer = new GenericPlayer(rules.INITIAL_X_POS, rules.FLOOR_HEIGHT, rulesPath);
         myPlayerView = new PlayerView(playerImage, rules.INITIAL_X_POS, rules.FLOOR_HEIGHT);
         myPlayerView.setPlayerProperties((GenericPlayer) myPlayer);
+        myPlayerView.setWidthAndHeight(rules.PLAYER_WIDTH, rules.PLAYER_HEIGHT);
         root.getChildren().add(myPlayerView.getView());
     }
 
@@ -129,7 +131,9 @@ public class GenericGameWorld extends GameWorld {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(rules.BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
         imageView.setY(rules.BACKGROUND_HEIGHT);
-        imageView.setPreserveRatio(true);
+        if(rules.STRETCH_BACKGROUND)
+            imageView.setFitHeight(rules.SCREEN_HEIGHT);
+        imageView.setFitWidth(StartScreen.SCREEN_WIDTH);
         return imageView;
     }
 
