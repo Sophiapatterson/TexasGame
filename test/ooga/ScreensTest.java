@@ -100,7 +100,7 @@ public class ScreensTest extends DukeApplicationTest{
                 Button tutorial = lookup("#tutorial").query();
                 Button gamechooser = lookup("#gamechooser").query();
                 Text title = lookup("#Title").query();
-                assertEquals("Go back to tutorials",tutorial.getText());
+                assertEquals("Return to Tutorials",tutorial.getText());
                 assertEquals("Go to game chooser",gamechooser.getText());
                 assertEquals("Are you ready to play, or do you need another tutorial?",title.getText());
             }
@@ -177,7 +177,7 @@ public class ScreensTest extends DukeApplicationTest{
         Scene leaderboards = endscreen.createLeaderboard(myStage);
         myStage.setScene(leaderboards);
     }
-    
+
 
     private void showCreditsScreen(){
         endscreen = new EndScreen("Dinosaur");
