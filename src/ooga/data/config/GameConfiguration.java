@@ -90,6 +90,7 @@ public abstract class GameConfiguration {
     }
 
     public abstract void makeCoin(double xCoef, double yCoef);
+
     public abstract void makeEnemy(double xCoef, double yCoef);
 
     public abstract List<Scrolling> getScrollers();

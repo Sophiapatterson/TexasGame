@@ -24,6 +24,13 @@ public class GenericGameConfiguration extends GameConfiguration {
     private GameRules rules;
     private String rulesPath;
 
+    /**
+     * this class provides a flexible implementation of the GameConfiguration superclass where all
+     * relevant details are drawn from properties files. It parses the CSV file to create the different elements of
+     * the game. The constructor access the CSV file and the superclass performs the abstracted parsing
+     * @param rulesPath - a String that represents the filepath to the appropriate properties file
+     * @throws LevelFileException - from the call to getLines when the requested file and the default can't be found
+     */
     public GenericGameConfiguration(String rulesPath) throws LevelFileException {
         this.rulesPath = rulesPath;
         rules = new GameRules(rulesPath);
@@ -61,14 +68,17 @@ public class GenericGameConfiguration extends GameConfiguration {
         allEnemies.add(c);
     }
 
+    @Override
     public List<Scrolling> getScrollers() {
         return scrollers;
     }
 
+    @Override
     public List<Enemy> getEnemies() {
         return allEnemies;
     }
 
+    @Override
     public List<Powerup> getPowerups() {
         return allPU;
     }

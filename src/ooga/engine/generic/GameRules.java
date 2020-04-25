@@ -43,6 +43,11 @@ public class GameRules {
     public boolean STRETCH_BACKGROUND;
     public boolean TUTORIAL;
 
+    /**
+     * This class facilitates access to properties files across classes. The values are loaded into
+     * constants with the keys below
+     * @param path - a String that represents the filepath to the appropriate properties file
+     */
     public GameRules(String path){
         props = ResourceBundle.getBundle(path);
 
