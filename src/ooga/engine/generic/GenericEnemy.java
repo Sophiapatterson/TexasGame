@@ -15,24 +15,34 @@ public class GenericEnemy extends Enemy {
     private double standardY;
     private GameRules rules;
 
+    /**
+     * This class is a flexible implementation of the Enemy to be paired with the GenericGameWorld. Most methods
+     * are simple getters or implementations of superclass methods.
+     * @param rulesPath - a String that represents the filepath to the appropriate properties file
+     */
     public GenericEnemy(String rulesPath) {
         super();
         rules = new GameRules(rulesPath);
         standardY = rules.ENEMY_STANDARD_Y;
     }
 
+    /**
+     * Method implementation of Collidable interface method that employs two helper methods to calculate collisions.
+     * @param player - the GenericGameWorld's player
+     * @return - a boolean that represents whether or not the Enemy collided with the Player
+     */
+    @Override
     public boolean collide(Player player) {
         if(rules.IMMORTAL) return false;
         return (inXBounds(player) && inYBounds(player));
     }
 
-    public boolean inXBounds(Player p){
+    private boolean inXBounds(Player p){
         return ((p.getXPos() >= this.getXPos() && p.getXPos() <= this.getXPos()+ rules.ENEMY_X_OFFSET) ||
                 (p.getXPos()+ rules.ENEMY_X_OFFSET >= this.getXPos() && p.getXPos() <= this.getXPos()+ rules.ENEMY_X_OFFSET));
     }
 
-    public boolean inYBounds(Player p){
-
+    private boolean inYBounds(Player p){
         return ((p.getYPos() >= this.getYPos() && p.getYPos() <= this.getYPos()+ rules.ENEMY_Y_OFFSET) ||
                 (p.getYPos()+ rules.PLAYER_X_OFFSET >= this.getYPos() && p.getYPos() <= this.getYPos()+ rules.ENEMY_Y_OFFSET));
     }

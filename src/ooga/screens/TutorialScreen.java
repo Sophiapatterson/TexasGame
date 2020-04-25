@@ -1,11 +1,9 @@
-package ooga.Screens;
+package ooga.screens;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.engine.dinosaur.DinoGameWorld;
@@ -18,11 +16,11 @@ import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.dinosaur.DinoGameWorld.DINO_IMAGE;
 import static ooga.engine.jetpack.JetpackGameWorld.BARRY_IMAGE;
 
+/**
+ * This class is used to display the scene where the user chooses which tutorial to play, as well as all of the buttons and text that goes with the scene. It depends on the different game worlds that are implemented to show the tutorial, as well as the ChangeScreen class when the user is redirected to it.
+ */
 public class TutorialScreen extends Screen {
 
-    public static final int SCREEN_WIDTH = 850;
-    public static final int SCREEN_HEIGHT = 600;
-    public static final Paint BACKGROUND = Color.AZURE;
     private Stage myStage;
     private Text title;
     private DinoGameWorld dinogame;
@@ -41,31 +39,30 @@ public class TutorialScreen extends Screen {
         tutorialResources = ResourceBundle.getBundle("ooga.Screens.Properties.TutorialScreen");
     }
 
+    /**
+     * Creates the main scene for the tutorial screen.
+     * @param currentstage
+     * @return
+     */
     @Override
     public Scene createMainScreen(Stage currentstage){
         myStage = currentstage;
         VBox tutoriallayout = new VBox();
         initLayout(tutoriallayout);
-        Button dinosaur = new Button(tutorialResources.getString("DINO-TUTORIAL"));
-        dinosaur.setId("dino");
         Image dinoimage = new Image(getClass().getClassLoader().getResourceAsStream(DINO_IMAGE));
-        dinosaur.setGraphic(createButtonImage(dinoimage));
+        Button dinosaur = createButtonWithImage(tutorialResources.getString("DINO-TUTORIAL"), "dino", dinoimage);
         dinosaur.setOnAction(e -> {
             myStage.setScene(dinogame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             dinogame.setUpAnimation();
         });
-        Button flappy = new Button(tutorialResources.getString("FLAPPY-TUTORIAL"));
-        flappy.setId("flappybird");
         Image flappyimage = new Image(getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
-        flappy.setGraphic(createButtonImage(flappyimage));
+        Button flappy = createButtonWithImage(tutorialResources.getString("FLAPPY-TUTORIAL"), "flappy", flappyimage);
         flappy.setOnAction(e -> {
             myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             flappygame.setUpAnimation();
         });
-        Button jetpack = new Button(tutorialResources.getString("JET-TUTORIAL"));
-        jetpack.setId("jet");
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
-        jetpack.setGraphic(createButtonImage(jetimage));
+        Button jetpack = createButtonWithImage(tutorialResources.getString("JET-TUTORIAL"), "jet", jetimage);
         jetpack.setOnAction(e -> {
             myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, true));
             jetpackgame.setUpAnimation();
@@ -77,17 +74,20 @@ public class TutorialScreen extends Screen {
         return TutorialScreen;
     }
 
+    /**
+     * Creates the scene for the tutorial game chooser
+     * @param currentstage
+     * @return
+     */
     public Scene TutorialorGameChooser(Stage currentstage){
         myStage = currentstage;
         VBox tutoriallayout = new VBox();
         initLayout(tutoriallayout);
-        Button tutorial = new Button(tutorialResources.getString("GO-TUTORIAL"));
-        tutorial.setId("tutorial");
+        Button tutorial = createButton(tutorialResources.getString("GO-TUTORIAL"), "tutorial");
         tutorial.setOnAction(e -> {
             myStage.setScene(createMainScreen(myStage));
         });
-        Button gamechooser = new Button(tutorialResources.getString("GO-GAMECHOOSER"));
-        gamechooser.setId("gamechooser");
+        Button gamechooser = createButton(tutorialResources.getString("GO-GAMECHOOSER"), "gamechooser");
         gamechooser.setOnAction(e -> {
             myStage.setScene(changescreen.createMainScreen(myStage));
         });

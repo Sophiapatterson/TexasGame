@@ -3,7 +3,7 @@ package ooga;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ooga.Screens.StartScreen;
+import ooga.screens.StartScreen;
 
 import java.io.IOException;
 
@@ -32,12 +32,6 @@ public class Main extends Application {
         Scene firstscene = startScreen.createMainScreen(myStage);
         myStage.setScene(firstscene);
         myStage.show();
-
-//        startScreen.setOnDarkMode(e -> {
-//            Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-//            com.sun.javafx.css.StyleManager.getInstance().addUserAgentStylesheet(getClass().getResource("/dark-theme.css").toString());
-//        });}
-
     }
 }
 

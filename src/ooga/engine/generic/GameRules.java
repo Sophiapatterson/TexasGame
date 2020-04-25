@@ -14,6 +14,8 @@ public class GameRules {
     public String PLAYER_IMAGE;
     public String BACKGROUND_IMAGE;
     public String LEVEL_CSV;
+    public String TUTORIAL_CSV;
+    public String TUTORIAL_TEXT;
     public String ENEMY_PNG;
     public String ENEMY_PNG2;
     public String ENEMY_PNG3;
@@ -22,6 +24,7 @@ public class GameRules {
     public int COUNT_OF_ENEMY;
     public int TICK_SCORE_AMOUNT;
     public int BACKGROUND_HEIGHT;
+    public int TUTORIAL_LENGTH;
     public double ENEMY_SPEED;
     public double OBJECT_VIEW_SIZE;
     public double PLAYER_X_OFFSET;
@@ -38,7 +41,13 @@ public class GameRules {
     public boolean ALLOW_COINS;
     public boolean IMMORTAL;
     public boolean STRETCH_BACKGROUND;
+    public boolean TUTORIAL;
 
+    /**
+     * This class facilitates access to properties files across classes. The values are loaded into
+     * constants with the keys below
+     * @param path - a String that represents the filepath to the appropriate properties file
+     */
     public GameRules(String path){
         props = ResourceBundle.getBundle(path);
 
@@ -75,6 +84,10 @@ public class GameRules {
         ALLOW_COINS = Boolean.parseBoolean(props.getString("ALLOW-COINS"));
         IMMORTAL = Boolean.parseBoolean(props.getString("IMMORTAL"));
         STRETCH_BACKGROUND = Boolean.parseBoolean(props.getString("STRETCH-BACKGROUND"));
+        TUTORIAL = Boolean.parseBoolean(props.getString("TUTORIAL"));
+        TUTORIAL_CSV = props.getString("VERSION-NAME");
+        TUTORIAL_TEXT = props.getString("TUTORIAL-TEXT");
+        TUTORIAL_LENGTH = Integer.parseInt(props.getString("TUTORIAL-LENGTH"));
     }
 
 }

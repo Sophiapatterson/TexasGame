@@ -6,10 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.ChangeScreen;
-import ooga.Screens.EndScreen;
-import ooga.Screens.StartScreen;
-import ooga.Screens.TutorialScreen;
+import ooga.screens.ChangeScreen;
+import ooga.screens.EndScreen;
+import ooga.screens.StartScreen;
+import ooga.screens.TutorialScreen;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -73,7 +73,7 @@ public class ScreensTest extends DukeApplicationTest{
                 showTutorialScreen();
                 tutorialscreen = new TutorialScreen();
                 Button dinosaur = lookup("#dino").query();
-                Button flappy = lookup("#flappybird").query();
+                Button flappy = lookup("#flappy").query();
                 Button jetpack = lookup("#jet").query();
                 Text title = lookup("#Title").query();
                 assertEquals("Dinosaur Tutorial",dinosaur.getText());
@@ -172,27 +172,10 @@ public class ScreensTest extends DukeApplicationTest{
         myStage.show();
     }
 
-    @Test
-    void testLeaderboards(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-               /* showLeaderboards();
-                Button newscore = lookup("#newscore").query();
-                Button back = lookup("#back").query();
-                Text title = lookup("#Title").query();
-                assertEquals("Add your score",newscore.getText());
-                assertEquals("Back",back.getText());
-                assertEquals("Leaderboard",title.getText());*/
-            }
-        });
-    }
-
     private void showLeaderboards(){
         endscreen = new EndScreen("Dinosaur");
         Scene leaderboards = endscreen.createLeaderboard(myStage);
         myStage.setScene(leaderboards);
-        //myStage.show();
     }
 
     @Test

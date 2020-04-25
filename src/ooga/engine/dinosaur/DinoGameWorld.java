@@ -9,7 +9,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.*;
+import ooga.screens.*;
 import ooga.view.*;
 import ooga.data.config.DinoGameConfiguration;
 import ooga.data.config.GameConfiguration;
@@ -31,15 +31,16 @@ public class DinoGameWorld extends GameWorld {
     private static final String VERSION_NAME = "Dinosaur";
     public static final String DINO_IMAGE  = "Sprites/dino_trexx.png";
     public static final String HORIZON_IMAGE = "Sprites/dino_horizon.png";
-    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
     public static final String LevelOne = "data/CSV configurations/Dinosaur_Level.csv";
-    public static final double OBJECT_VIEW_SIZE = 70;
+    public static final double OBJECT_VIEW_SIZE = 72;
     private Player myPlayer;
     private PlayerView myPlayerView;
     private List<Enemy> enemies;
     private List<View> enemiesView;
     private List<Powerup> powerups;
     private List<View> powerupsView;
+    private List<Scrolling> scrollers;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -90,6 +91,7 @@ public class DinoGameWorld extends GameWorld {
         addDino(root);
         addEnemies(root);
         addPowerups(root);
+        scrollers = gameConfig.getScrollers();
         gameManager = new DinoGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
@@ -153,7 +155,6 @@ public class DinoGameWorld extends GameWorld {
         myPlayer = new DinoPlayer(INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView = new PlayerView(dinoImage, INITIAL_PLAYER_XPOS, FLOOR_HEIGHT);
         myPlayerView.setPlayerProperties(myPlayer);
-        System.out.println(myPlayer.getXPos());
         root.getChildren().add(myPlayerView.getView());
     }
 
@@ -167,7 +168,7 @@ public class DinoGameWorld extends GameWorld {
         tutorialstring.add(tutorialResources.getString("DINO1-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("DINO2-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("DINO3-MESSAGE"));
-        tutorialtext = myTutorial.createTutorialText(tutorialstring);
+        tutorialtext = myTutorial.createTutorialText(tutorialstring, true);
         root.getChildren().add(tutorialtext.get(0));
     }
 
@@ -195,8 +196,8 @@ public class DinoGameWorld extends GameWorld {
             enemy.move();
         }
         if(tutorialcheck){
-            myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
-            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+            myTutorial.tutorialObstacles(myPlayer, scrollers, root, tutorialtext);
+            if(myPlayer.getXPos()>scrollers.get(scrollers.size()-1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }

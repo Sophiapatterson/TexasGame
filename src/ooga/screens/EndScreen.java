@@ -1,4 +1,4 @@
-package ooga.Screens;
+package ooga.screens;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,13 +13,15 @@ import ooga.engine.generic.GenericGameWorld;
 
 import java.util.ResourceBundle;
 
+/**
+ * This class is used to display the scene after a user loses the game. It's used for the end of every game, but the scores used are different. It depends on the classes that have to do with the scores and the leaderboard, as well as the other screens that it redirects the user to.
+ */
 public class EndScreen extends Screen {
     private StartScreen startscreen;
     private ChangeScreen changescreen;
+    private GenericGameWorld creditsgame;
     private Text title;
     private Button quit;
-    public static final int SCREEN_WIDTH = 850;
-    public static final int SCREEN_HEIGHT = 600;
     public static final int POPUP_WIDTH = 500;
     public static final int POPUP_HEIGHT = 475;
     private ResourceBundle endResources;
@@ -34,6 +36,7 @@ public class EndScreen extends Screen {
         this.version = version;
         allowSubmissions = true;
         myStage = new Stage();
+        creditsgame = new GenericGameWorld("ooga.engine.generic.CREDITS_GameRules");
         endResources = ResourceBundle.getBundle("ooga.Screens.Properties.EndScreen");
         creditsResources = ResourceBundle.getBundle("ooga.Screens.Properties.Credits");
         startscreen = new StartScreen();
@@ -42,24 +45,29 @@ public class EndScreen extends Screen {
         quit = startscreen.quitButton();
     }
 
+    /**
+     * Creates the end screen, which shows buttons to redirect the user to the game chooser, the credits minigame, or the leaderboard.
+     * @param currentstage
+     * @param gamescore
+     * @return
+     */
     public Scene createEndScreen(Stage currentstage, int gamescore){
         score = gamescore;
         highscores = new HighScores(version);
         myStage = currentstage;
         VBox layout = new VBox();
         initLayout(layout);
-        Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
-        playagain.setId("again");
+        Button playagain = createButton(endResources.getString("AGAIN-MESSAGE"), "again");
         playagain.setOnAction(e -> {
             myStage.setScene(changescreen.createMainScreen(myStage));
         });
-        Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
-        credits.setId("credits");
+        Button credits = createButton(endResources.getString("CREDITS-MESSAGE"), "credits");
         credits.setOnAction( e -> {
-            myStage.setScene(createCredits(myStage));
+            //myStage.setScene(createCredits(myStage));
+            myStage.setScene(creditsgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
+            creditsgame.setUpAnimation();
         });
-        Button scores = new Button(endResources.getString("LEADERBOARD-MESSAGE"));
-        scores.setId("scores");
+        Button scores = createButton(endResources.getString("LEADERBOARD-MESSAGE"), "scores");
         scores.setOnAction( e -> {
             myStage.setScene(createLeaderboard(myStage));
         });
@@ -70,6 +78,11 @@ public class EndScreen extends Screen {
         return EndScreen;
     }
 
+    /**
+     * Creates the leaderboard that is shown when the scores are displayed.
+     * @param currentstage
+     * @return
+     */
     public Scene createLeaderboard(Stage currentstage) {
         myStage = currentstage;
         VBox layout = new VBox();
@@ -86,8 +99,7 @@ public class EndScreen extends Screen {
             i++;
             layout.getChildren().add(currScore);
         }
-        Button newScore = new Button(endResources.getString("ADD-SCORE"));
-        newScore.setId("newscore");
+        Button newScore = createButton(endResources.getString("ADD-SCORE"), "newscore");
         newScore.setOnAction( e -> {
             submitScore();
         });
@@ -116,8 +128,7 @@ public class EndScreen extends Screen {
         Label name = new Label(endResources.getString("NAME-PROMPT"));
         name.getStyleClass().add("medtxt");
         TextField nameTextField = new TextField();
-        Button submit = new Button(endResources.getString("SUBMIT-SCORE"));
-        submit.setId("submit");
+        Button submit = createButton(endResources.getString("SUBMIT-SCORE"), "submit");
         submit.setOnAction( f -> {
             highscores.addScore(new Score(nameTextField.getText(), score));
             highscores.saveHighScores();
@@ -131,6 +142,11 @@ public class EndScreen extends Screen {
         enterData.show();
     }
 
+    /**
+     * Creates the scene with the credits.
+     * @param currentstage
+     * @return
+     */
     public Scene createCredits(Stage currentstage){
         myStage = currentstage;
         VBox layout = new VBox();
@@ -141,23 +157,21 @@ public class EndScreen extends Screen {
         producers.setId("producers");
         producers.setText(creditsResources.getString("PRODUCERS-MESSAGE"));
         producers.getStyleClass().add("medtxt");
-        Text luke = createCreditText("LUKE-MESSAGE");
-        luke.setId("luke");
-        Text jeff = createCreditText("JEFF-MESSAGE");
-        jeff.setId("jeff");
-        Text sophia = createCreditText("SOPHIA-MESSAGE");
-        sophia.setId("sophia");
-        Text justin = createCreditText("JUSTIN-MESSAGE");
-        justin.setId("justin");
+        Text luke = createCreditText("LUKE-MESSAGE", "luke");
+        Text jeff = createCreditText("JEFF-MESSAGE", "jeff");
+        Text sophia = createCreditText("SOPHIA-MESSAGE", "sophia");
+        Text justin = createCreditText("JUSTIN-MESSAGE", "justin");
         Button back = makeBackButton();
         layout.getChildren().addAll(title, producers, luke, jeff, sophia, justin, back);
         Scene Credits = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return Credits;
     }
 
-    public Text createCreditText(String message){
+
+    private Text createCreditText(String message, String id){
         Text returnedtext = new Text();
         returnedtext.setText(creditsResources.getString(message));
+        returnedtext.setId(id);
         returnedtext.getStyleClass().add("smalltxt");
         return returnedtext;
     }

@@ -9,7 +9,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.Screens.*;
+import ooga.screens.*;
 import ooga.view.*;
 import ooga.data.config.FlappyGameConfiguration;
 import ooga.data.config.GameConfiguration;
@@ -34,7 +34,7 @@ public class FlappyGameWorld extends GameWorld {
     public static final int IMAGE_HEIGHT = 695;
     public static final String VERSION_NAME = "Flappy";
     public static final String LevelOne = "data/CSV configurations/Flappy_Level.csv";
-    public static final String TutorialCSV = "data/CSV configurations/dinoTutorial.csv";
+    public static final String TutorialCSV = "data/CSV configurations/dinoflappyTutorial.csv";
     public static final int INITIAL_PLAYER_YPOS = 250;
     public static final int PIPE_WIDTH = 100;
     public static final int PIPE_HEIGHT = 550;
@@ -44,6 +44,7 @@ public class FlappyGameWorld extends GameWorld {
     private List<View> enemiesView;
     private List<Powerup> powerups;
     private List<View> powerupsView;
+    private List<Scrolling> scrollers;
     private Scene myScene;
     private GameManager gameManager;
     private GameConfiguration gameConfig;
@@ -87,6 +88,7 @@ public class FlappyGameWorld extends GameWorld {
         addBird(root);
         addEnemies(root);
         addPowerups(root);
+        scrollers = gameConfig.getScrollers();
         gameManager = new FlappyGameManager(myPlayer, enemies, powerups);
         myScoreText = new Text(SCORE_X, SCORE_Y, "" + gameManager.getScore());
         myScoreText.setFont(new Font(SCORE_TEXT_SIZE));
@@ -161,7 +163,7 @@ public class FlappyGameWorld extends GameWorld {
         tutorialstring.add(tutorialResources.getString("FLAPPY1-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("FLAPPY2-MESSAGE"));
         tutorialstring.add(tutorialResources.getString("FLAPPY3-MESSAGE"));
-        tutorialtext = myTutorial.createTutorialText(tutorialstring);
+        tutorialtext = myTutorial.createTutorialText(tutorialstring, true);
         root.getChildren().add(tutorialtext.get(0));
     }
 
@@ -195,8 +197,8 @@ public class FlappyGameWorld extends GameWorld {
         }
 
         if(tutorialcheck){
-            myTutorial.tutorialAddRemoveText(myPlayer, enemies, root, tutorialtext);
-            if(myPlayer.getXPos()>enemies.get(1).getXPos()+myTutorial.GAMEOVERDISTANCE){
+            myTutorial.tutorialObstacles(myPlayer, scrollers, root, tutorialtext);
+            if(myPlayer.getXPos()>scrollers.get(scrollers.size()-1).getXPos()+myTutorial.GAMEOVERDISTANCE){
                 stopAnimation();
                 myStage.setScene(tutorialscreen.TutorialorGameChooser(myStage));
             }
