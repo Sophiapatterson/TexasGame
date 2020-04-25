@@ -20,7 +20,7 @@ public class Main extends Application {
     }
 
     /**
-     * start method initializes the first scene so thta
+     * start method initializes the first scene in the game.
      * @param primaryStage
      * @throws IOException
      */

@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * FlappyGameWorld extends GameWorld, initializes all scenes in FlappyGame and includes step function.
+ */
 public class FlappyGameWorld extends GameWorld {
 
     public static final double FLOOR_HEIGHT = 450;
@@ -53,6 +56,18 @@ public class FlappyGameWorld extends GameWorld {
     private Group root;
     private Tutorial myTutorial;
 
+    /**
+     * setupScene method creates scenes for new instance of FlappyGame. Initializes game by creating new instances of Tutorial, Screens, Group, GameManager.
+     * Creates scene by creating Group given background image and by adding Player, Enemy, Powerup, ScoreText to the scene.
+     * to the scene.
+     * @param width scene's width.
+     * @param height scene's height.
+     * @param background background color.
+     * @param currentstage stage used previously for start and change screen.
+     * @param tutorial boolean determining whether to cue tutorial or actual game.
+     * @return myScene, scene that includes all aspects of a new FlappyGame, created via getScene.
+     * @throws RuntimeException
+     */
     // Create the game's "scene": what shapes will be in the game and their starting properties
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
         tutorialcheck = tutorial;
@@ -78,13 +93,24 @@ public class FlappyGameWorld extends GameWorld {
         root.getChildren().add(myScoreText);
         return getScene(width, height, background, root);
     }
-
+    /**
+     * helper method for setupScene. Initializes the FlappyGame's scene.
+     * @param width scene'swidth
+     * @param height scene's height
+     * @param background Game's background color
+     * @param root Group where all game objects are added.
+     * @return myScene, scene that includes all aspects of a new FlappyGame.
+     */
     private Scene getScene(int width, int height, Paint background, Group root) {
         myScene = new Scene(root, width, height, background);
         myScene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
         return myScene;
     }
-
+    /**
+     * helper method for setupScene. Creates new list of pipes/pipe views based on data
+     * from FlappyGameConfiguration. Binds pipe to pipe views, adds these pipes to the scene.
+     * @param root Game scene's Group.
+     */
     private void addEnemies(Group root) {
         enemies = new ArrayList<>(gameConfig.getEnemies());
         enemiesView = new ArrayList<>();
@@ -96,7 +122,11 @@ public class FlappyGameWorld extends GameWorld {
             root.getChildren().add(tempPipeView.getView());
         }
     }
-
+    /**
+     * helper method for setupScene. Creates new list of coins/coin views based on data
+     * from FlappyGameConfiguration. Binds coin to coin views, adds these coins to the scene.
+     * @param root Game scene's Group.
+     */
     private void addPowerups(Group root) {
         powerups = new ArrayList<>(gameConfig.getPowerups());
         powerupsView = new ArrayList<>();
@@ -108,7 +138,11 @@ public class FlappyGameWorld extends GameWorld {
             root.getChildren().add(tempCoinView.getView());
         }
     }
-
+    /**
+     * helper method for setupScene. Creates new Player and PlayerView.
+     * Binds Player to PlayerView, adds this Player to the scene.
+     * @param root Game scene's Group.
+     */
     private void addBird(Group root) {
         Image birdImage = new Image(this.getClass().getClassLoader().getResourceAsStream(BIRD_IMAGE));
         myPlayer = new BirdPlayer(DinoGameWorld.INITIAL_PLAYER_XPOS, INITIAL_PLAYER_YPOS);
@@ -117,6 +151,10 @@ public class FlappyGameWorld extends GameWorld {
         root.getChildren().add(myPlayerView.getView());
     }
 
+    /**
+     * helper method for setupScene. Creates tutorial messages from properties file, adds tutorial text to the screen.
+     * @param root Game scene's Group.
+     */
     private void addText(Group root){
         List<String> tutorialstring = new ArrayList<>();
         ResourceBundle tutorialResources = ResourceBundle.getBundle("Properties.FLAPPY-TUTORIAL");
@@ -127,6 +165,10 @@ public class FlappyGameWorld extends GameWorld {
         root.getChildren().add(tutorialtext.get(0));
     }
 
+    /**
+     * helper method for setupScene. Creates and initializes background ImageView from image.
+     * @return imageView to be applied as background.
+     */
     private ImageView getImageView() {
         Image image = new Image(this.getClass().getClassLoader().getResourceAsStream(BACKGROUND_IMAGE));
         ImageView imageView = new ImageView(image);
@@ -136,6 +178,10 @@ public class FlappyGameWorld extends GameWorld {
         return imageView;
     }
 
+    /**
+     * step function handles game activity over time.
+     * @param elapsedTime standardizes time for all devices.
+     */
     // Change properties of shapes to animate them
     public void step (double elapsedTime) {
         gameManager.handleJump(FLOOR_HEIGHT);
@@ -176,7 +222,11 @@ public class FlappyGameWorld extends GameWorld {
             }
         }
     }
-
+    
+    /**
+     * handle's key input and cues Player jump when space bar is pressed.
+     * @param code represents the code of the key pressed.
+     */
     private void handleKeyInput (KeyCode code) {
         if(code == KeyCode.SPACE) {
             myPlayer.resetJumpStrength();
