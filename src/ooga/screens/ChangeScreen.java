@@ -22,6 +22,9 @@ import static ooga.engine.dinosaur.DinoGameWorld.DINO_IMAGE;
 import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.jetpack.JetpackGameWorld.BARRY_IMAGE;
 
+/**
+ * This class is used to display the scene where the user chooses which game to play, as well as all of the buttons and text that goes with the scene. This class depends on the different game worlds that are used to implement the different games.
+ */
 public class ChangeScreen extends Screen {
     private ResourceBundle changeResources;
     public static final int SCREEN_WIDTH = 850;
@@ -35,7 +38,6 @@ public class ChangeScreen extends Screen {
     private GenericGameWorld genericgame;
 
     public ChangeScreen(){
-
         myStage = new Stage();
         dinogame = new DinoGameWorld();
         flappygame = new FlappyGameWorld();
@@ -45,6 +47,12 @@ public class ChangeScreen extends Screen {
         title = initTitle();
     }
 
+    /**
+     * Creates the scene with which the user chooses which game to play.
+     * @param currentstage
+     * @return
+     * @throws RuntimeException
+     */
     @Override
     public Scene createMainScreen(Stage currentstage) throws RuntimeException {
         myStage = currentstage;
@@ -62,14 +70,12 @@ public class ChangeScreen extends Screen {
             myStage.setScene(flappygame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             flappygame.setUpAnimation();
         });
-        //Button jetpack = new Button(changeResources.getString("JET-MESSAGE"));
         Image jetimage = new Image(getClass().getClassLoader().getResourceAsStream(BARRY_IMAGE));
         Button jetpack = createButtonWithImage(changeResources.getString("JET-MESSAGE"), "jet", jetimage);
         jetpack.setOnAction(e -> {
             myStage.setScene(jetpackgame.setupScene(SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND, currentstage, false));
             jetpackgame.setUpAnimation();
         });
-        //Button generic = new Button(changeResources.getString("GENERIC-MESSAGE"));
         Button generic = createButton(changeResources.getString("GENERIC-MESSAGE"), "generic");
         generic.setGraphic(makeStar());
         generic.setOnAction(e -> {
@@ -81,10 +87,6 @@ public class ChangeScreen extends Screen {
         changerlayout.getChildren().addAll(title, dinosaur, flappy, jetpack, generic);
         Scene ChangeScreen = new Scene(changerlayout, SCREEN_WIDTH, SCREEN_HEIGHT);
         return ChangeScreen;
-    }
-
-    public ImageView createButtonImage(Image gameimage){
-        return super.createButtonImage(gameimage);
     }
 
     private Polygon makeStar(){

@@ -12,6 +12,9 @@ import ooga.data.Score;
 
 import java.util.ResourceBundle;
 
+/**
+ * This class is used to display the scene after a user loses the game. It's used for the end of every game, but the scores used are different. It depends on the classes that have to do with the scores and the leaderboard, as well as the other screens that it redirects the user to.
+ */
 public class EndScreen extends Screen {
     private StartScreen startscreen;
     private ChangeScreen changescreen;
@@ -39,23 +42,26 @@ public class EndScreen extends Screen {
         quit = startscreen.quitButton();
     }
 
+    /**
+     * Creates the end screen, which shows buttons to redirect the user to the game chooser, the credits minigame, or the leaderboard.
+     * @param currentstage
+     * @param gamescore
+     * @return
+     */
     public Scene createEndScreen(Stage currentstage, int gamescore){
         score = gamescore;
         highscores = new HighScores(version);
         myStage = currentstage;
         VBox layout = new VBox();
         initLayout(layout);
-        //Button playagain = new Button(endResources.getString("AGAIN-MESSAGE"));
         Button playagain = createButton(endResources.getString("AGAIN-MESSAGE"), "again");
         playagain.setOnAction(e -> {
             myStage.setScene(changescreen.createMainScreen(myStage));
         });
-        //Button credits = new Button(endResources.getString("CREDITS-MESSAGE"));
         Button credits = createButton(endResources.getString("CREDITS-MESSAGE"), "credits");
         credits.setOnAction( e -> {
             myStage.setScene(createCredits(myStage));
         });
-        //Button scores = new Button(endResources.getString("LEADERBOARD-MESSAGE"));
         Button scores = createButton(endResources.getString("LEADERBOARD-MESSAGE"), "scores");
         scores.setOnAction( e -> {
             myStage.setScene(createLeaderboard(myStage));
@@ -67,6 +73,11 @@ public class EndScreen extends Screen {
         return EndScreen;
     }
 
+    /**
+     * Creates the leaderboard that is shown when the scores are displayed.
+     * @param currentstage
+     * @return
+     */
     public Scene createLeaderboard(Stage currentstage) {
         myStage = currentstage;
         VBox layout = new VBox();
@@ -126,6 +137,11 @@ public class EndScreen extends Screen {
         enterData.show();
     }
 
+    /**
+     * Creates the scene with the credits.
+     * @param currentstage
+     * @return
+     */
     public Scene createCredits(Stage currentstage){
         myStage = currentstage;
         VBox layout = new VBox();
@@ -146,7 +162,8 @@ public class EndScreen extends Screen {
         return Credits;
     }
 
-    public Text createCreditText(String message, String id){
+
+    private Text createCreditText(String message, String id){
         Text returnedtext = new Text();
         returnedtext.setText(creditsResources.getString(message));
         returnedtext.setId(id);
