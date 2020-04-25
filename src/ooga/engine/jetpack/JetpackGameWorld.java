@@ -54,7 +54,6 @@ public class JetpackGameWorld extends GameWorld {
     private Tutorial myTutorial;
     private List<Text> tutorialtext;
     private boolean tutorialcheck;
-    private List<Text> tutorialtext;
 
     @Override
     public Scene setupScene(int width, int height, Paint background, Stage currentstage, Boolean tutorial) throws RuntimeException {
