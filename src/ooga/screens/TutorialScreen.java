@@ -16,6 +16,9 @@ import static ooga.engine.flappy.FlappyGameWorld.BIRD_IMAGE;
 import static ooga.engine.dinosaur.DinoGameWorld.DINO_IMAGE;
 import static ooga.engine.jetpack.JetpackGameWorld.BARRY_IMAGE;
 
+/**
+ * This class is used to display the scene where the user chooses which tutorial to play, as well as all of the buttons and text that goes with the scene. It depends on the different game worlds that are implemented to show the tutorial, as well as the ChangeScreen class when the user is redirected to it.
+ */
 public class TutorialScreen extends Screen {
 
     private Stage myStage;
@@ -36,6 +39,11 @@ public class TutorialScreen extends Screen {
         tutorialResources = ResourceBundle.getBundle("ooga.Screens.Properties.TutorialScreen");
     }
 
+    /**
+     * Creates the main scene for the tutorial screen.
+     * @param currentstage
+     * @return
+     */
     @Override
     public Scene createMainScreen(Stage currentstage){
         myStage = currentstage;
@@ -66,6 +74,11 @@ public class TutorialScreen extends Screen {
         return TutorialScreen;
     }
 
+    /**
+     * Creates the scene for the tutorial game chooser
+     * @param currentstage
+     * @return
+     */
     public Scene TutorialorGameChooser(Stage currentstage){
         myStage = currentstage;
         VBox tutoriallayout = new VBox();

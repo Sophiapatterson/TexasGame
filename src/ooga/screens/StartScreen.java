@@ -18,6 +18,9 @@ public class StartScreen extends Screen {
     private Text title;
     private Button darkMode;
 
+    /**
+     * This class is used to display the start scene. Here the user gets to choose if they want to go to the game chooser, if they want to play the tutorial first, or quit the game. It depends on the other screens that it redirects the user to.
+     */
     public StartScreen(){
         changescreen = new ChangeScreen();
         tutorialscreen = new TutorialScreen();
@@ -26,6 +29,11 @@ public class StartScreen extends Screen {
         title = initTitle();
     }
 
+    /**
+     * Create the starting screen where the player chooses to go to the game chooser, the tutorial chooser, or to quit the game.
+     * @param currentStage
+     * @return
+     */
     @Override
     public Scene createMainScreen(Stage currentStage) {
         myStage = currentStage;
@@ -53,6 +61,10 @@ public class StartScreen extends Screen {
         return StartScreen;
     }
 
+    /**
+     * Creates the quit button, which when pressed, quits the game.
+     * @return
+     */
     public Button quitButton(){
         Button quit = new Button(startResources.getString("QUIT-MESSAGE"));
         quit.setId("quitbutton");
@@ -62,6 +74,10 @@ public class StartScreen extends Screen {
         return quit;
     }
 
+    /**
+     * Creates the dark mode button, which when pressed, changes the scenes' coloring.
+     * @return
+     */
     public Button darkModeButton(){
         darkMode = new Button(startResources.getString("DARKMODE-MESSAGE"));
         darkMode.setId("darkmodebutton");
