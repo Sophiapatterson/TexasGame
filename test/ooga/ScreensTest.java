@@ -177,29 +177,7 @@ public class ScreensTest extends DukeApplicationTest{
         Scene leaderboards = endscreen.createLeaderboard(myStage);
         myStage.setScene(leaderboards);
     }
-
-//commented out because new credits screen
-//    @Test
-//    void testCreditScreen(){
-//        Platform.runLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                showCreditsScreen();
-//                Text producers = lookup("#producers").query();
-//                Text luke = lookup("#luke").query();
-//                Text jeff = lookup("#jeff").query();
-//                Text sophia = lookup("#sophia").query();
-//                Text justin = lookup("#justin").query();
-//                Text title = lookup("#Title").query();
-//                assertEquals("Credits",title.getText());
-//                assertEquals("Producers/Designers",producers.getText());
-//                assertEquals("Luke Evans",luke.getText());
-//                assertEquals("Jeffrey Luo",jeff.getText());
-//                assertEquals("Sophia Patterson",sophia.getText());
-//                assertEquals("Justin Wu",justin.getText());
-//            }
-//        });
-//    }
+    
 
     private void showCreditsScreen(){
         endscreen = new EndScreen("Dinosaur");
