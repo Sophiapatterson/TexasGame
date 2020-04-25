@@ -101,7 +101,7 @@ public class ScreensTest extends DukeApplicationTest{
                 Button gamechooser = lookup("#gamechooser").query();
                 Text title = lookup("#Title").query();
                 assertEquals("Return to Tutorials",tutorial.getText());
-                assertEquals("Go to game chooser",gamechooser.getText());
+                assertEquals("Choose a Game",gamechooser.getText());
                 assertEquals("Are you ready to play, or do you need another tutorial?",title.getText());
             }
         });
