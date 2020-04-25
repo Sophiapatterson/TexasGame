@@ -11,6 +11,13 @@ public class GenericPlayer extends Player {
     private DoubleProperty y = new SimpleDoubleProperty();
     private GameRules rules;
 
+    /**
+     * The character of the GenericGameWorld that implements the Player superclass and its methods where all
+     * relevant details are drawn from a properties file
+     * @param x - the X coordinate of the player
+     * @param y - the starting Y coordinate of the player
+     * @param rulesPath - a String that represents the filepath to the appropriate properties file
+     */
     public GenericPlayer(double x, double y, String rulesPath) {
         super();
         rules = new GameRules(rulesPath);
@@ -35,6 +42,7 @@ public class GenericPlayer extends Player {
         jumpStrength -= rules.GRAVITY;
     }
 
+    @Override
     public void resetJumpStrength() {
         jumpStrength = rules.DEFAULT_JUMP_STRENGTH;
     }
@@ -58,15 +66,20 @@ public class GenericPlayer extends Player {
         this.y.setValue(y);
     }
 
+    @Override
     public DoubleProperty getXProperty(){
         return x;
     }
 
+    @Override
     public DoubleProperty getYProperty(){
         return y;
     }
 
+    @Override
     public double getXPos(){ return this.x.getValue(); }
+
+    @Override
     public double getYPos(){ return this.y.getValue(); }
 
 }

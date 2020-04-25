@@ -48,6 +48,11 @@ public class GenericGameWorld extends GameWorld {
     private Tutorial myTutorial;
     private List<Text> tutorialtext;
 
+    /**
+     * This class is a flexible implementation of the GameWorld superclass where all relevant details are drawn
+     * from a properties file. It has support for tutorial functionalities.
+     * @param rulesPath - a String that represents the filepath to the appropriate properties file
+     */
     public GenericGameWorld(String rulesPath) {
         super();
         this.rulesPath = rulesPath;

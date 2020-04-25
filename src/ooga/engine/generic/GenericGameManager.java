@@ -15,6 +15,15 @@ public class GenericGameManager extends GameManager {
     private int score;
     private GameRules rules;
 
+    /**
+     * this class is a helper class for the GameWorld that extends GameManager
+     * it simply fulfills all GameManager classes while drawing all relevant details from a
+     * properties file
+     * @param player - the Player instance that is the game's Barry/Dino/etc
+     * @param enemies - a List containing all Enemies created for the game
+     * @param powerups - a List containing all Powerups (coins) created for the game
+     * @param rulesPath - a String that represents the filepath to the appropriate properties file
+     */
     public GenericGameManager(Player player, List<Enemy> enemies, List<Powerup> powerups, String rulesPath) {
         rules = new GameRules(rulesPath);
         this.player = player;
