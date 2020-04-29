@@ -37,6 +37,13 @@ The view package handles the front-end for all the game elements in the engine. 
 view classes, we utilized binding.
 
 ##Assumptions or Decisions
+Using this program successfully relies on several assumptions. To run an instance of the generic
+(data-driven) game, the properties file must contain all 36 key/value pairs with correct spelling on the keys. 
+For proper functionality of the leaderboard, a user should not enter their name containing a "-" or
+the parsing of the name may be disrupted. CSV level files are parsed robustly to overcome formatting errors,
+but a user should follow this format to ensure their files are used correctly in the game:
+the first line should only have one integer that represents the total length of the level, 
+the following lines should be comma separated.
 
 
 ##How to Add New Feature
