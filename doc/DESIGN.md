@@ -6,7 +6,7 @@ Sophia Patterson, Luke Evans, Justin Wu, Jeffrey Luo
 
 ##Roles
 
-Sophia:
+Sophia: My role was to implement all aspects of the game's View. More specifically, I implemented the abstract View class, which is inherited by EnemyView, PlayerView, PowerupView, and GenericPlayerView. Via these classes, I worked to design code that could be flexibly used in any future games. I implemented binding to connect backend and frontend objects.
 
 Luke: My role was to implement the data package API, which managed reading the CSV data for the game levels, the properties files for the leaderboard scores, and the error handling for the IO of the game. These classes include HighScores, Score, GameConfiguration, each implementation of the GameConfiguration abstract class, and the custom LevelFileException. I also implemented the generic game package, which is the highly data-driven version of our game where game rules and GUI elements are drawn from a properties file.
 
