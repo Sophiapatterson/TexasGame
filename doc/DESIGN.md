@@ -8,7 +8,7 @@ Sophia Patterson, Luke Evans, Justin Wu, Jeffrey Luo
 
 Sophia:
 
-Luke:
+Luke: My role was to implement the data package API, which managed reading the CSV data for the game levels, the properties files for the leaderboard scores, and the error handling for the IO of the game. These classes include HighScores, Score, GameConfiguration, each implementation of the GameConfiguration abstract class, and the custom LevelFileException. I also implemented the generic game package, which is the highly data-driven version of our game where game rules and GUI elements are drawn from a properties file.
 
 Justin: My role was to implement all of the classes in the "screens" package, which included classes such as "ChangeScreen", "EndScreen", etc. These classes were in charge of creating the javafx scenes that would make up the game. For instance, these classes created the start screen from which the user could choose to go to the tutorial chooser or the game chooser, or the end screen that would be displayed after losing in any of the games. I was also in charge of implementing the tutorials for these games, which I did by using the "GameWorld" classes for each game, as well as the "Tutorial" class in the "game" package inside of the "engine" package. 
 
